@@ -1,0 +1,159 @@
+<?php
+
+class dossier {
+
+  function contenu_dossier($chemin,$data){
+    $liste ='';
+    $listefichiers = scandir($data.$chemin);
+    return $listefichiers;
+  }
+
+  function infos_fichier($data,$chemin,$fichier){
+    $type_fichier[0] = filetype($data.$chemin.$fichier);
+
+    #si ce n'est pas un dossier on donne son extension
+    if($type_fichier[0] == 'file'){
+      $extension = pathinfo($data.$chemin.$fichier);
+      $type_fichier[1] = $extension['extension'];
+    }
+
+    return $type_fichier;
+  }
+
+
+  function affiche_contenu($listefichiers){
+
+    global $data;
+    global $chemin;
+    $retour='';
+    $compteur_images=0;
+    $items = '';
+    #en cas de retour à la racine on retire le trailing slash
+    if($chemin == '//'){
+      $chemin='/';
+    }
+
+    foreach($listefichiers as $ligne){
+
+      global $partages;
+
+      $type = $this->infos_fichier($data,$chemin,$ligne);
+
+
+      if($type[0] == 'dir' || $type[0] == 'link'){
+        #différentes conditions pour le type $dossier
+        switch ($ligne){
+          case '..':
+          //rien
+          break;
+
+          case '.':
+          //rien
+          break;
+
+          default :
+          $items .= '<li class="list-group-item">';
+          $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="?page=dossiers&chemin='.$chemin.$ligne.'/">'.$ligne.'</a>';
+          $items .= '</li>';
+          break;
+        }
+
+      }
+      else{
+        #conditions d'affichage
+        #si vidéo
+        if($type[1] == 'mp4' || $type[1] == 'MP4'){
+          $items .= '<li class="list-group-item">';
+
+          $items .= '<div class="row">';
+
+          $items .= '<div class="col-md-4">';
+          $items .= '<i class="fas fa-video"></i>&nbsp;<a href="?page=video&video='.$chemin.$ligne.'">'.$ligne.'</a>&nbsp;';
+          if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
+          $items .= '<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span>';
+          $items .= '</div>';
+
+          $items .= '<div class="col-md-4 offset-md-4">';
+          $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
+          $items .= '<div class="form-group">';
+          $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
+          $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
+          $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
+          $items .= '</div>';
+          $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-share-alt"></i>&nbsp;Partager</button>';
+
+          $items .= '</form>';
+          $items .= '</div>';
+
+          $items .= '</li>';
+
+        }
+        #si image
+        if($type[1] == 'jpg' || $type[1] == 'JPG'){
+          $compteur_images++;
+        }
+
+      }
+
+    }
+    if($compteur_images > 1){
+      $retour .= 'Il y a <strong>'.$compteur_images.'</strong> photos dans ce dossier <a class="btn btn-sm btn-primary" href="?page=photos&photos='.$chemin.'"><i class="fas fa-eye"></i>&nbsp;voir</a>';
+      $retour .= '&nbsp;<button type="button" class="btn btn-sm btn-danger"><i class="fas fa-share-alt"></i>&nbsp;Partager</button>';
+    }
+
+    //rendu de la liste
+    $retour .= '<ul class="list-group list-group-flush">';
+    $retour .= $items;
+    $retour .='</ul>';
+    return $retour;
+  }//fin affiche contenu
+
+
+  function diapo_photos($liste){
+
+    global $data;
+    global $chemin;
+    $retour='';
+    $compteur_images=0;
+    #en cas de retour à la racine on retire le trailing slash
+
+    foreach($liste as $ligne){
+
+      $type = $this->infos_fichier($data,$chemin,$ligne);
+
+      if($type[0] != 'dir' && $type[0] != 'link'){
+        #conditions d'affichage
+        #si image
+        if($type[1] == 'jpg' || $type[1] == 'JPG'){
+          $retour .= '<div><img class="owl-lazy" data-src="/data'.$chemin.$ligne.'"></img></div>';
+        }
+
+      }
+    }
+    if($compteur_images > 1){$retour .= 'Il y a '.$compteur_images.' photos dans ce dossier <a href="./?photos='.$chemin.'">voir</a><br>';}
+    return $retour;
+  }
+
+  function breadcrumb($chemin){
+    $lien = '';
+    $retour = '<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">';
+
+    $bread = trim($chemin, '/');
+    $bread = explode('/', $bread);
+
+    $retour .= '<li class="breadcrumb-item"><a href="?page=dossiers&chemin=/">Racine</a></li>';
+
+    foreach($bread as $ligne){
+      $lien  .= '/'.$ligne;
+      $retour .= '<li class="breadcrumb-item"><a href="?page=dossiers&chemin='.$lien.'/">'.$ligne.'</a></li>';
+    }
+
+    $retour .= '</ol></nav>';
+    return $retour;
+  }
+
+
+
+
+}
