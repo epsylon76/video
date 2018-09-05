@@ -10,9 +10,6 @@ if(!isset($_POST['email']) && !isset($_POST['chemin'])){
   $chemin_retour = $_POST['chemin_retour'];
 }
 
-$cle = rand(1,4545454545);
-$cle = sha1($cle);
-
-$partage->set_partage($chemin,$email,$cle);
-echo $chemin;
+$partage->set_partage($chemin,$email);
+//echo $chemin;
 header('Location: /?page=dossiers&chemin='.$chemin_retour);

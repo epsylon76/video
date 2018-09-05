@@ -23,7 +23,12 @@ class partage {
   }
 
   function liste_partages($email){
-
+    global $DB_con;
+    $requete="SELECT * from `partage` where `email` = '".$email."'";
+    $query=$DB_con->prepare($requete);
+    $query->execute();
+    $results = $query->fetchAll();
+    return $results;
   }
 
   function nb_partages($chemin){
