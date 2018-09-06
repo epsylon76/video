@@ -11,11 +11,10 @@ include_once('mdl/partage.php');
 include_once('vue/head.php');
 
 
-if(isset($_GET['action'])){
-  if($_GET['action']=="deco"){
+if(isset($_GET['action']) && $_GET['action']=="deco"){
     include('./ctrl/deconnecter.php');
   }
-}
+
 
 
 if (isset($_SESSION['login'])){
@@ -37,13 +36,20 @@ if (isset($_SESSION['login'])){
 }else{ //pas de variable de session"login" = pas admin
   if(isset($_GET['email']) && isset($_GET['cle'])) {
     $partage = new partage();
-
     if($partage->check_cle_email($_GET['cle'],$_GET['email'])){
 
       if(isset($_GET['id']))
       {  //on accède à un partage en particulier
+        //on détermine si ce sont des photos ou une vidéo
+        
+        if($partage->get_type_partage($_GET['id']) == "video"){
+          include('./ctrl/video.php');
+        }elseif($partage->get_type_partage($_GET['id']) == "photos"){
+          include('./ctrl/photos.php');
+        }
 
       }else { // on accède à la liste des partages
+
         include('./ctrl/partage.php');
       }
     }else{//check cle email failed

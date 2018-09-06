@@ -10,9 +10,14 @@
   <div class="row">
     <div class="col-sm">
       <h3>Liste des partages</h3>
+      <?php
+      foreach($liste as $ligne){
+        echo '<a href=/?email='.$_GET['email'].'&cle='.$_GET['cle'].'&id='.$ligne['id'].'>'.basename($ligne['chemin']).'</a>';
+        echo '<br>';
+        }
+
+       ?>
     </div>
-    <div class="col-sm">
-      espace de partage
-    </div>
+
   </div>
 </div>

@@ -24,7 +24,7 @@ class partage {
 
   function liste_partages($email){
     global $DB_con;
-    $requete="SELECT * from `partage` where `email` = '".$email."'";
+    $requete="SELECT `id`,`chemin` from `partage` where `email` = '".$email."'";
     $query=$DB_con->prepare($requete);
     $query->execute();
     $results = $query->fetchAll();
@@ -44,12 +44,33 @@ class partage {
     global $DB_con;
     $cle = $email.'42';
     $cle = sha1($cle);
-    $requete="INSERT INTO `partage` (`chemin`,`email`,`cle`) VALUES ('".$chemin."', '".$email."', '".$cle."')";
+    $requete="INSERT INTO `partage` (`chemin`,`email`,`cle`,`date`) VALUES ('".$chemin."', '".$email."', '".$cle."', NOW())";
     $query=$DB_con->prepare($requete);
     $query->execute();
   }
 
-  function get_partage($chemin,$email,$cle){
+  function get_partage($id){
+    global $DB_con;
+    $requete="SELECT * from `partage` where `id` = '".$id."'";
+    $query=$DB_con->prepare($requete);
+    $query->execute();
+    $result = $query->fetch();
+    return $result;
+  }
 
+  function get_type_partage($id){
+    global $DB_con;
+    $requete="SELECT `chemin` from `partage` where `id` = '".$id."'";
+    $query=$DB_con->prepare($requete);
+    $query->execute();
+    $result = $query->fetch();
+    $fichier = pathinfo($result['chemin']);
+
+    if(isset($fichier['extension']) && $fichier['extension'] == "mp4" || isset($fichier['extension']) && $fichier['extension'] == "MP4")
+    {
+      return "video";
+    }else{
+      return "photos";
+    }
   }
 }

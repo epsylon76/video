@@ -4,16 +4,13 @@
 
 <div class="container">
 
-  <div class="text-center" style="margin-top:50px; margin-bottom:50px;"><a class="btn btn-primary btn-lg" id="dl_photos" href="?dl_photos=<?php echo $_GET['photos'];?>"><i class="fas fa-download"></i> Télécharger toutes les photos</a></div>
+<h1>Vos Photos</h1>
 
 
-  <div class="owl-carousel" id="diapo">
-
+  <div class="diapo" id="diapo" style="width:90%; margin:0 auto;">
     <?php echo $diaporama; ?>
-
-
   </div>
-
+<div class="text-center" style="margin-top:50px; margin-bottom:50px;"><a class="btn btn-primary btn-lg" id="dl_photos" href="?dl_photos=<?php echo $_GET['photos'];?>"><i class="fas fa-download"></i> Télécharger toutes les photos</a></div>
 </div>
 
 
@@ -26,15 +23,15 @@ $("#dl_photos").click(function(){
   $("#diapo").css('visibility','hidden');
 });
 
-$('.owl-carousel').owlCarousel({
-  lazyLoad:true,
-  lazyLoadEager:true,
-  loop:true,
-  margin:10,
-  items:2,
-  center:true,
-  loop:true,
-  startPosition :3,
-  nav : true
+$(document).ready(function(){
+  $('.diapo').slick({
+    lazyLoad: 'ondemand',
+    autoplay: true,
+    autoplaySpeed: 1500,
+    fade: true,
+
+  });
 });
+
+
 </script>

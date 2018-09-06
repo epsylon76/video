@@ -1,6 +1,13 @@
 <?php
 
-$chemin=$_GET['photos'];
+
+if(!isset($_GET['email'])){
+  $chemin=$_GET['photos'];
+}elseif(isset($_GET['email']) && isset($_GET['id'])){
+  //retrouver le chemin via l'id
+  $chemin = $partage->get_partage($_GET['id']);
+  $chemin = $chemin['chemin'];
+}
 
 include('vue/head.php');
 //ops
