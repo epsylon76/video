@@ -9,8 +9,7 @@ if(!isset($_GET['email'])){
   $chemin = $chemin['chemin'];
 }
 
-include('vue/head.php');
-//ops
+
 
 $diapo = new dossier();
 $liste_photos = $diapo->contenu_dossier($chemin,$data);

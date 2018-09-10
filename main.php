@@ -32,6 +32,10 @@ if (isset($_SESSION['login'])){
     case "dl_photos":
     include('./ctrl/dl_photos.php');
     break;
+
+    case "liste":
+    include('./ctrl/liste.php');
+    break;
   }
 }else{ //pas de variable de session"login" = pas admin
   if(isset($_GET['email']) && isset($_GET['cle'])) {
@@ -41,7 +45,7 @@ if (isset($_SESSION['login'])){
       if(isset($_GET['id']))
       {  //on accède à un partage en particulier
         //on détermine si ce sont des photos ou une vidéo
-        
+
         if($partage->get_type_partage($_GET['id']) == "video"){
           include('./ctrl/video.php');
         }elseif($partage->get_type_partage($_GET['id']) == "photos"){
