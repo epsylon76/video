@@ -4,13 +4,19 @@
 
 <div class="container">
 
-<h1>Vos Photos</h1>
+  <h1>Vos Photos</h1>
 
 
   <div class="diapo" id="diapo" style="width:90%; margin:0 auto;">
     <?php echo $diaporama; ?>
   </div>
-<div class="text-center" style="margin-top:50px; margin-bottom:50px;"><a class="btn btn-primary btn-lg" id="dl_photos" href="?dl_photos=<?php echo $_GET['photos'];?>"><i class="fas fa-download"></i> Télécharger toutes les photos</a></div>
+  <?php
+  if(isset($_GET['id'])){
+    ?>
+    <div class="text-center" style="margin-top:50px; margin-bottom:50px;"><a class="btn btn-primary btn-lg" id="dl_photos" href="?dl_photos=<?php echo $_GET['id'];?>"><i class="fas fa-download"></i> Télécharger toutes les photos</a></div>
+    <?php
+  }
+  ?>
 </div>
 
 
