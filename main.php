@@ -52,8 +52,9 @@ if (isset($_SESSION['login'])){
           include('./ctrl/photos.php');
         }
 
-      }else { // on accède à la liste des partages
-
+      }elseif(isset($_GET['dl_photos'])){//on accède à la page de dl
+        include('./ctrl/dl_photos.php');
+      }else{ // on accède à la liste des partages
         include('./ctrl/partage.php');
       }
     }else{//check cle email failed
