@@ -1,0 +1,6 @@
+{
+    "require": {
+        "maennchen/zipstream-php": "^0.5.2",
+        "phpmailer/phpmailer": "^6.0"
+    }
+}

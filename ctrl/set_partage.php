@@ -10,6 +10,10 @@ if(!isset($_POST['email']) && !isset($_POST['chemin'])){
   $chemin_retour = $_POST['chemin_retour'];
 }
 
-$partage->set_partage($chemin,$email);
-//echo $chemin;
+$cle = $partage->set_partage($chemin,$email);
+
+//envoi du mail
+include('ctrl/sendemail.php');
+
+
 header('Location: /?page=dossiers&chemin='.$chemin_retour);

@@ -3,12 +3,16 @@ session_start();
 #le controlleur principal contient
 #la connexion à la DB
 #le chargement du controlleur
+require('vendor/autoload.php');
 
 include_once('./config/config.php');
 include_once('mdl/admin.php');
 include_once('mdl/dossier.php');
 include_once('mdl/partage.php');
-include_once('vue/head.php');
+if(!isset($_GET['dl_photos'])){
+  include_once('vue/head.php'); //ne pas afficher sur dl_photos car casse le stream
+}
+
 
 
 if(isset($_GET['action']) && $_GET['action']=="deco"){
@@ -16,27 +20,11 @@ if(isset($_GET['action']) && $_GET['action']=="deco"){
   }
 
 
-
 if (isset($_SESSION['login'])){
+
   include('./ctrl/admin.php');
+  //mode admin
 
-  switch ($_GET['page']){
-    case "video" :
-    include('./ctrl/video.php');
-    break;
-
-    case "photos" :
-    include('./ctrl/photos.php');
-    break;
-
-    case "dl_photos":
-    include('./ctrl/dl_photos.php');
-    break;
-
-    case "liste":
-    include('./ctrl/liste.php');
-    break;
-  }
 }else{ //pas de variable de session"login" = pas admin
   if(isset($_GET['email']) && isset($_GET['cle'])) {
     $partage = new partage();

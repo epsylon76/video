@@ -9,10 +9,14 @@ $results = $query->fetchAll();
 
 $i=0;
 foreach($results as $ligne){
+  $date= new DateTime($ligne['date']);
+  $date_aff = $date->format('d/m/Y H:i');
+
   $items[$i][0] = $ligne['id'];
-  $items[$i][1] = $ligne['date'];
+  $items[$i][1] = $date_aff;
   $items[$i][2] = $ligne['chemin'];
-  $items[$i][3] = $ligne['email'];
+  $items[$i][3] = $ligne['email'].' <a href="?page=renvoi_mail&email='.$ligne['email'].'">renvoi</a>';
+  $items[$i][4] = '<a href="?page=unset_partage&id='.$ligne['id'].'&cle='.$ligne['cle'].'">x</a>';
 
   $i++;
 }

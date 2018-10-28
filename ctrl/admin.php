@@ -10,6 +10,7 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
 
     switch($_GET['page']){
 
+      //dossiers
       case "dossiers":
       if (!isset($_GET['chemin'])){
         $chemin="/";
@@ -27,8 +28,34 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
       include('vue/admin.php');
       break;
 
+      case "video" :
+      include('./ctrl/video.php');
+      break;
+
+      case "photos" :
+      include('./ctrl/photos.php');
+      break;
+
+      case "dl_photos":
+      include('./ctrl/dl_photos.php');
+      break;
+
+      case "liste":
+      include('./ctrl/liste.php');
+      break;
+
+      case "historique":
+      include('./ctrl/historique.php');
+      break;
+
+      //set partage
       case "set_partage":
       include('ctrl/set_partage.php');
+      break;
+
+      //unset partage
+      case "unset_partage":
+      include('ctrl/unset_partage.php');
       break;
     }
 

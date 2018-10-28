@@ -3,6 +3,7 @@
   <div class="row">
 
     <h1>Navigation dans les dossiers</h1>
+    <p>Le partage fonctionne par nom de dossier, si les noms des dossiers sont modifiés le partage devient inaccessible</p>
   </div>
 
     <?php echo $breadcrumb; ?>

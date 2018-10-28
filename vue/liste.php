@@ -9,6 +9,7 @@
         <th>date</th>
         <th>chemin</th>
         <th>email</th>
+        <th>actions</th>
       </tr>
     </thead>
   </table>

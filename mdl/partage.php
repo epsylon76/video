@@ -47,6 +47,14 @@ class partage {
     $requete="INSERT INTO `partage` (`chemin`,`email`,`cle`,`date`) VALUES ('".$chemin."', '".$email."', '".$cle."', NOW())";
     $query=$DB_con->prepare($requete);
     $query->execute();
+    return $cle;
+  }
+
+  function unset_partage($id,$cle){
+    global $DB_con;
+    $requete="DELETE FROM `partage`  WHERE `id` = '".$id."' AND `cle` = '".$cle."'";
+    $query=$DB_con->prepare($requete);
+    $query->execute();
   }
 
   function get_partage($id){

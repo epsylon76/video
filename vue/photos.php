@@ -1,6 +1,5 @@
 
 
-<div id="loader" style="width:100%; height:100%; visibility:hidden; position: fixed; top: 50%; margin: 0 auto; text-align:center;">Veuillez patienter, compression des photos en cours &nbsp; &nbsp;<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
 <br><a class="btn btn-success" href="?email=<?php echo $_GET['email'] ?>&cle=<?php echo $_GET['cle'] ?>"><i class="fas fa-arrow-left">&nbsp;</i>retour</a>
 
 </div>
@@ -16,8 +15,10 @@
   <?php
   if(isset($_GET['id'])){
     ?>
-    <div class="text-center" style="margin-top:50px; margin-bottom:50px;"><a class="btn btn-primary btn-lg" id="dl_photos"
-      href="?email=<?php echo $_GET['email'] ?>&cle=<?php echo $_GET['cle'] ?>&dl_photos=<?php echo $_GET['id'];?>"><i class="fas fa-download"></i> Télécharger toutes les photos</a>
+    <div class="text-center" style="margin-top:50px; margin-bottom:50px;">
+      <a class="btn btn-primary btn-lg" id="dl_photos" href="?email=<?php echo $_GET['email'] ?>&cle=<?php echo $_GET['cle'] ?>&dl_photos=<?php echo $_GET['id'];?>">
+        <i class="fas fa-download"></i> Télécharger toutes les photos
+      </a>
     </div>
     <?php
   }
@@ -28,11 +29,6 @@
 
 
 <script>
-$("#dl_photos").click(function(){
-  $("#loader").css('visibility','visible');
-  $("#dl_photos").css('visibility','hidden');
-  $("#diapo").css('visibility','hidden');
-});
 
 $(document).ready(function(){
   $('.diapo').slick({
