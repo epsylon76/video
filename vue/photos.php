@@ -1,6 +1,6 @@
 
 
-<br><a class="btn btn-success" href="?email=<?php echo $_GET['email'] ?>&cle=<?php echo $_GET['cle'] ?>"><i class="fas fa-arrow-left">&nbsp;</i>retour</a>
+<br><a class="btn btn-success" href="?cle=<?php echo $_GET['cle'] ?>"><i class="fas fa-arrow-left">&nbsp;</i>retour</a>
 
 </div>
 
@@ -16,7 +16,7 @@
   if(isset($_GET['id'])){
     ?>
     <div class="text-center" style="margin-top:50px; margin-bottom:50px;">
-      <a class="btn btn-primary btn-lg" id="dl_photos" href="?email=<?php echo $_GET['email'] ?>&cle=<?php echo $_GET['cle'] ?>&dl_photos=<?php echo $_GET['id'];?>">
+      <a class="btn btn-primary btn-lg" id="dl_photos" href="?cle=<?php echo $_GET['cle'] ?>&dl_photos=<?php echo $_GET['id'];?>">
         <i class="fas fa-download"></i> Télécharger toutes les photos
       </a>
     </div>

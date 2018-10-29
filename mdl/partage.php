@@ -12,19 +12,19 @@ class partage {
     if($res >= 1){return true;}else{return false;}
   }
 
-  function check_partage($chemin,$email){
-    //vérifie que le partage demandé est bien partagé avec cet $email
+  function check_partage($cle,$id){
+    //vérifie que le partage demandé a bien la bonne clé (empeche de mettre un id au hasard)
     global $DB_con;
-    $requete="SELECT * from `partage` where `chemin` = '".$chemin."' AND `email` = '".$email."'";
+    $requete="SELECT * from `partage` where `id` = '".$id."' AND `cle` = '".$cle."'";
     $query=$DB_con->prepare($requete);
     $query->execute();
     $res=$query->rowCount();
     if($res >= 1){return true;}else{return false;}
   }
 
-  function liste_partages($email){
+  function liste_partages($cle){
     global $DB_con;
-    $requete="SELECT `id`,`chemin` from `partage` where `email` = '".$email."'";
+    $requete="SELECT `id`,`chemin` from `partage` where `cle` = '".$cle."'";
     $query=$DB_con->prepare($requete);
     $query->execute();
     $results = $query->fetchAll();
@@ -47,6 +47,7 @@ class partage {
     $requete="INSERT INTO `partage` (`chemin`,`email`,`cle`,`date`) VALUES ('".$chemin."', '".$email."', '".$cle."', NOW())";
     $query=$DB_con->prepare($requete);
     $query->execute();
+
     return $cle;
   }
 

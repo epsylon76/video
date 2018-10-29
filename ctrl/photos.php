@@ -1,13 +1,11 @@
 <?php
 
 
-if(!isset($_GET['email'])){
-  $chemin=$_GET['photos'];
-}elseif(isset($_GET['email']) && isset($_GET['id'])){
+if(isset($_GET['id']) && $partage->check_partage($_GET['cle'], $_GET['id'])){
   //retrouver le chemin via l'id
   $chemin = $partage->get_partage($_GET['id']);
   $chemin = $chemin['chemin'];
-}
+
 
 
 
@@ -19,3 +17,7 @@ $diaporama = $diapo->diapo_photos($liste_photos);
 
 //fin ops
 include('vue/photos.php');
+
+}else{
+  header('Location: /');
+}

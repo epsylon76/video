@@ -12,7 +12,7 @@
       <h3>Liste des partages</h3>
       <?php
       foreach($liste as $ligne){
-        echo '<a href=/?email='.$_GET['email'].'&cle='.$_GET['cle'].'&id='.$ligne['id'].'>'.basename($ligne['chemin']).'</a>';
+        echo '<a href=/?cle='.$_GET['cle'].'&id='.$ligne['id'].'>'.basename($ligne['chemin']).'</a>';
         echo '<br>';
         }
 
