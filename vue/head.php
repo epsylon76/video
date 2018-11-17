@@ -9,7 +9,7 @@
   <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="includes/slick/slick.css"/>
   <link rel="stylesheet" type="text/css" href="includes/slick/slick-theme.css"/>
-  <link rel="stylesheet" href="/includes/css/custom.css">
+  <link rel="stylesheet" href="includes/css/custom.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="includes/slick/slick.min.js"></script>
