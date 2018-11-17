@@ -8,7 +8,7 @@
 <footer class="footer">
   <div class="container">
     <div id="loginform">
-      <form class="form-inline" action="/" method="post">
+      <form class="form-inline" action="./" method="post">
         <div class="form-group">
           <label for="login" style="margin-right:20px;color:black;">Accès administration </label>
           <input type="text" class="form-control" id="login" name="login">

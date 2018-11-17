@@ -1,8 +1,7 @@
-
 <?php
 
-include('config/mail_config.php');
-include('config/email_template.php');
+include('./config/mail_config.php');
+include('./config/email_template.php');
 
 $mail->Subject = "Partage";
 $mail->Body = $corps;
