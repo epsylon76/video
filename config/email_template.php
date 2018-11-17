@@ -322,7 +322,7 @@ $corps ='<!doctype html>
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="http://192.168.1.194/?cle='.$cle.'" target="_blank">Espace de téléchargement</a> </td>
+                                      <td> <a href="'.$domain_url.'?cle='.$cle.'" target="_blank">Espace de téléchargement</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>

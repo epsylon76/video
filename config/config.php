@@ -1,6 +1,6 @@
 <?php
 
-$data='/var/www/html/tr/';
-$zip_folder='/var/www/html/zip/';
+$domain_url='http://epsytech.fr/lakke/';
+$data='/var/www/html/lakke/data'; //doit pointer vers le dossier data contenant les liens symboliques 
 
 include_once('dbconn.php');

@@ -17,4 +17,4 @@ $cle = $partage->set_partage($chemin,$email,$type_partage);
 include('ctrl/sendemail.php');
 
 
-header('Location: /?page=dossiers&chemin='.$chemin_retour);
+header('Location: '.$domain_url.'?page=dossiers&chemin='.$chemin_retour);
