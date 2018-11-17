@@ -69,17 +69,11 @@ class partage {
 
   function get_type_partage($id){
     global $DB_con;
-    $requete="SELECT `chemin` from `partage` where `id` = '".$id."'";
+    $requete="SELECT `type_partage` from `partage` where `id` = '".$id."'";
     $query=$DB_con->prepare($requete);
     $query->execute();
     $result = $query->fetch();
-    $fichier = pathinfo($result['chemin']);
-
-    if(isset($fichier['extension']) && $fichier['extension'] == "mp4" || isset($fichier['extension']) && $fichier['extension'] == "MP4")
-    {
-      return "video";
-    }else{
-      return "photos";
-    }
+    return $result['type_partage'];
   }
-}
+
+}//class partage

@@ -6,11 +6,11 @@ session_start();
 require('vendor/autoload.php');
 
 include_once('./config/config.php');
-include_once('mdl/admin.php');
-include_once('mdl/dossier.php');
-include_once('mdl/partage.php');
+include_once('./mdl/admin.php');
+include_once('./mdl/dossier.php');
+include_once('./mdl/partage.php');
 if(!isset($_GET['dl_photos'])){
-  include_once('vue/head.php'); //ne pas afficher sur dl_photos car casse le stream
+  include_once('./vue/head.php'); //ne pas afficher sur dl_photos car casse le stream
 }
 
 

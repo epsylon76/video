@@ -7,4 +7,4 @@ $partage = new partage();
 
 $partage->unset_partage($id,$cle);
 
-header('Location: /?page=liste');
+header('Location: ./?page=liste');

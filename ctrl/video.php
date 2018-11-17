@@ -2,10 +2,12 @@
 if(isset($_GET['id']) && $partage->check_partage($_GET['cle'], $_GET['id'])){
   //retrouver le chemin via l'id
   $chemin = $partage->get_partage($_GET['id']);
-  $chemin = '.'.$chemin['chemin'];
 
+  $chemin = './data'.$chemin['chemin'];
+
+}else{
+  $chemin='./data'.$_GET['video'];
+}
 
 //fin ops
 include('vue/video.php');
-
-}

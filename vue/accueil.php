@@ -1,6 +1,6 @@
 <main role="main" class="container">
-  <h1 class="mt-5">video.abeilleparachutisme.fr</h1>
-  <p class="lead">Vous êtes sur la page d'accueil du système de partage des vidéos d'Abeille Parachutisme</p>
+  <h1 class="mt-5"><?php echo $titre_accueil; ?></h1>
+  <p class="lead">Vous êtes sur la page d'accueil du système de partage de fichiers</p>
   <p class="lead">Vous avez reçu un email contenant le lien vers votre espace de partage,</p>
   <p class="lead">Dans le cas contraire, cliquez <a href="#">içi</a> pour reçevoir à nouveau le lien</p>
 </main>

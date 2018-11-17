@@ -20,6 +20,15 @@ class dossier {
     return $type_fichier;
   }
 
+  function folderSize ($dir)
+  {
+    $size = 0;
+    foreach (glob(rtrim($dir, '/').'/*', GLOB_NOSORT) as $each) {
+      $size += is_file($each) ? filesize($each) : folderSize($each);
+    }
+    return $size;
+  }
+
 
   function affiche_contenu($listefichiers){
 
@@ -39,7 +48,7 @@ class dossier {
 
       $type = $this->infos_fichier($data,$chemin,$ligne);
 
-
+      //TYPE DOSSIER
       if($type[0] == 'dir' || $type[0] == 'link'){
         #différentes conditions pour le type $dossier
         switch ($ligne){
@@ -52,24 +61,38 @@ class dossier {
           break;
 
           default :
+          //CALCUL TAILLE Dossier
+          $nom_chemin_linux=str_replace(' ','\ ',$data.$chemin.$ligne);
+          $nom_chemin_linux=str_replace('(','\(',$nom_chemin_linux);
+          $nom_chemin_linux=str_replace(')','\)',$nom_chemin_linux);
+          $commande = 'du -s --block-size=1G '.$nom_chemin_linux;
+          $taille = shell_exec($commande);
+          $taillebits = explode('	',$taille); //RUSE ! içi l'output ne sortait pas un espace mais un caractère blanc bien spécifique qu'il a fallu copier coller depuis la sortie d'un echo pour pouvoir le définir correctement
+          $taille = $taillebits[0];
+        
+
+
           $items .= '<li class="list-group-item">';
           $items .= '<div class="row">';//ligne
-          $items .= '<div class="col-md-4">';//colonne 4
+          $items .= '<div class="col-md-6">';//colonne 4
           $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="?page=dossiers&chemin='.$chemin.$ligne.'/">'.$ligne.'</a>';
           if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
           $items .= '</div>';//fin colonne gauche
 
-          $items .= '<div class="col-md-4 offset-md-4">';//colonne droite
-          $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
-          $items .= '<div class="form-group">';
-          $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
-          $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
-          $items .= '<input type="hidden" name="type_partage" value="dossier">';
-          $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
-          $items .= '</div>';
-          $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-share-alt"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
-          $items .= '</form>';
-          $items .= '</div>';
+          if($taille <= 2 && $taille != 0){
+
+            $items .= '<div class="col-md-4 offset-md-2">';//colonne droite
+            $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
+            $items .= '<div class="form-group">';
+            $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
+            $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
+            $items .= '<input type="hidden" name="type_partage" value="dossier">';
+            $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
+            $items .= '</div>';
+            $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-share-alt"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
+            $items .= '</form>';
+            $items .= '</div>';
+          }
 
           $items .= '</li>';
           break;
@@ -79,17 +102,29 @@ class dossier {
       else{
         #conditions d'affichage
         #si vidéo
-        if($type[1] == 'mp4' || $type[1] == 'MP4'){
+        if($type[1] == 'mp4' || $type[1] == 'MP4' || $type[1] == 'mkv' || $type[1] == 'MKV'){
+
+          //CALCUL TAILLE Fichier
+          $nom_chemin_linux=str_replace(' ','\ ',$data.$chemin.$ligne);
+          $nom_chemin_linux=str_replace('(','\(',$nom_chemin_linux);
+          $nom_chemin_linux=str_replace(')','\)',$nom_chemin_linux);
+
+          $commande = 'du -s --block-size=1G '.$nom_chemin_linux;
+          $taille = shell_exec($commande);
+          $taillebits = explode('	',$taille); //RUSE ! içi l'output ne sortait pas un espace mais un caractère blanc bien spécifique qu'il a fallu copier coller depuis la sortie d'un echo pour pouvoir le définir correctement
+          $taille = $taillebits[0];
+
+
           $items .= '<li class="list-group-item">';
 
           $items .= '<div class="row">';//ligne
 
-          $items .= '<div class="col-md-4">';//colonne 4
-          $items .= '<i class="fas fa-video"></i>&nbsp;<a href="?page=video&video='.$chemin.$ligne.'">'.$ligne.'</a>&nbsp;';
+          $items .= '<div class="col-md-6">';//colonne 4
+          $items .= '<i class="fas fa-video"></i>&nbsp;<a href="?page=video&video='.$chemin.$ligne.'">'.$ligne.'</a>';
           if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
           $items .= '</div>';
 
-          $items .= '<div class="col-md-4 offset-md-4">';
+          $items .= '<div class="col-md-4 offset-md-2">';
           $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
           $items .= '<div class="form-group">';
           $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
@@ -178,6 +213,14 @@ class dossier {
 
     $retour .= '</ol></nav>';
     return $retour;
+  }
+
+  function formatBytes($size, $precision = 2)
+  {
+    $base = log($size, 1024);
+    $suffixes = array('', 'K', 'M', 'G', 'T');
+
+    return round(pow(1024, $base - floor($base)), $precision) .' '. $suffixes[floor($base)];
   }
 
 

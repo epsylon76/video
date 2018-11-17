@@ -15,5 +15,10 @@
   <script type="text/javascript" src="includes/slick/slick.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
 
+  <!--video JS -->
+  <link href="https://vjs.zencdn.net/7.3.0/video-js.css" rel="stylesheet">
+  <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+  <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 </head>
