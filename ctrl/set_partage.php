@@ -8,9 +8,10 @@ if(!isset($_POST['email']) && !isset($_POST['chemin'])){
   $email=$_POST['email'];
   $chemin = $_POST['chemin'];
   $chemin_retour = $_POST['chemin_retour'];
+  $type_partage = $_POST['type_partage'];
 }
 
-$cle = $partage->set_partage($chemin,$email);
+$cle = $partage->set_partage($chemin,$email,$type_partage);
 
 //envoi du mail
 include('ctrl/sendemail.php');

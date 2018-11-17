@@ -53,7 +53,24 @@ class dossier {
 
           default :
           $items .= '<li class="list-group-item">';
+          $items .= '<div class="row">';//ligne
+          $items .= '<div class="col-md-4">';//colonne 4
           $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="?page=dossiers&chemin='.$chemin.$ligne.'/">'.$ligne.'</a>';
+          if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
+          $items .= '</div>';//fin colonne gauche
+
+          $items .= '<div class="col-md-4 offset-md-4">';//colonne droite
+          $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
+          $items .= '<div class="form-group">';
+          $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
+          $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
+          $items .= '<input type="hidden" name="type_partage" value="dossier">';
+          $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
+          $items .= '</div>';
+          $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-share-alt"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
+          $items .= '</form>';
+          $items .= '</div>';
+
           $items .= '</li>';
           break;
         }
@@ -65,9 +82,9 @@ class dossier {
         if($type[1] == 'mp4' || $type[1] == 'MP4'){
           $items .= '<li class="list-group-item">';
 
-          $items .= '<div class="row">';
+          $items .= '<div class="row">';//ligne
 
-          $items .= '<div class="col-md-4">';
+          $items .= '<div class="col-md-4">';//colonne 4
           $items .= '<i class="fas fa-video"></i>&nbsp;<a href="?page=video&video='.$chemin.$ligne.'">'.$ligne.'</a>&nbsp;';
           if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
           $items .= '</div>';
@@ -77,10 +94,10 @@ class dossier {
           $items .= '<div class="form-group">';
           $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
           $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
+          $items .= '<input type="hidden" name="type_partage" value="video">';
           $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
           $items .= '</div>';
           $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-share-alt"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
-
           $items .= '</form>';
           $items .= '</div>';
 
@@ -102,6 +119,7 @@ class dossier {
       $retour .= '<form method="post" action="?page=set_partage" class="form-inline">';
       $retour .= '<input type="hidden" name="chemin" value="'.$chemin.'">';
       $retour .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
+      $items .= '<input type="hidden" name="type_partage" value="photos">';
       $retour .= 'Il y a <strong>'.$compteur_images.'</strong> photos dans ce dossier <a class="btn btn-sm btn-primary" href="?page=photos&photos='.$chemin.'"><i class="fas fa-eye"></i>&nbsp;voir</a>';
       if($partages->nb_partages($chemin) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
       $retour .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';

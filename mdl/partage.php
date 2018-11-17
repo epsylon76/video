@@ -40,11 +40,11 @@ class partage {
     return $res;
   }
 
-  function set_partage($chemin,$email){
+  function set_partage($chemin,$email,$type_partage){
     global $DB_con;
     $cle = $email.'42';
     $cle = sha1($cle);
-    $requete="INSERT INTO `partage` (`chemin`,`email`,`cle`,`date`) VALUES ('".$chemin."', '".$email."', '".$cle."', NOW())";
+    $requete="INSERT INTO `partage` (`chemin`,`email`,`cle`,`date`,`type_partage`) VALUES ('".$chemin."', '".$email."', '".$cle."', NOW(), '".$type_partage."')";
     $query=$DB_con->prepare($requete);
     $query->execute();
 
