@@ -15,8 +15,8 @@ foreach($results as $ligne){
   $items[$i][0] = $ligne['id'];
   $items[$i][1] = $date_aff;
   $items[$i][2] = $ligne['chemin'];
-  $items[$i][3] = $ligne['email'].' <a href="?page=renvoi_mail&email='.$ligne['email'].'">renvoi</a>';
-  $items[$i][4] = '<a href="?page=unset_partage&id='.$ligne['id'].'&cle='.$ligne['cle'].'">x</a>';
+  $items[$i][3] = $ligne['email'];
+  $items[$i][4] = '<a href="?page=unset_partage&id='.$ligne['id'].'&cle='.$ligne['cle'].'"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;<a href="?page=renvoi_mail&email='.$ligne['email'].'"><i class="fas fa-reply-all"></i></a>';
 
   $i++;
 }

@@ -24,7 +24,7 @@ class partage {
 
   function liste_partages($cle){
     global $DB_con;
-    $requete="SELECT `id`,`chemin` from `partage` where `cle` = '".$cle."'";
+    $requete="SELECT `id`,`chemin`,`type_partage` from `partage` where `cle` = '".$cle."'";
     $query=$DB_con->prepare($requete);
     $query->execute();
     $results = $query->fetchAll();
