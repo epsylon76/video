@@ -57,6 +57,12 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
       case "unset_partage":
       include('ctrl/unset_partage.php');
       break;
+
+      //renvoi mail
+      case "renvoi_mail":
+      include('ctrl/renvoi_mail.php');
+      break;
+
     }
 
 

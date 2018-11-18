@@ -7,6 +7,8 @@ if(isset($_POST['login']) && isset($_POST['pass'])){
 
     $_SESSION['login'] = $_POST['login'];
     $_SESSION['pass'] = sha1($_POST['pass']);
+    $id_admin = $login->get_id_admin($_SESSION['login']);
+    $_SESSION['id_admin'] = $id_admin;
 
     header('Location: ?page=dossiers');
   }

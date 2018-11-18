@@ -9,6 +9,8 @@ include_once('./config/config.php');
 include_once('./mdl/admin.php');
 include_once('./mdl/dossier.php');
 include_once('./mdl/partage.php');
+include_once('./mdl/historique.php');
+
 if(!isset($_GET['dl_photos'])){
   include_once('./vue/head.php'); //ne pas afficher sur dl_photos car casse le stream
 }
@@ -40,7 +42,7 @@ if (isset($_SESSION['login'])){
       }elseif($partage->get_type_partage($_GET['id']) == "dossier"){
         include('./ctrl/dossier_zip.php');//on lance le téléchargement du zip dossier
       }
-      
+
     }elseif(isset($_GET['dl_photos'])){//on lance le téléchargement du zip photos
       include('./ctrl/dl_photos.php');
     }else{ // on accède à la liste des partages

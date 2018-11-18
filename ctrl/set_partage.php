@@ -1,6 +1,7 @@
 <?php
 
 $partage = new partage();
+$historique = new historique();
 
 if(!isset($_POST['email']) && !isset($_POST['chemin'])){
   //rejeter
@@ -11,8 +12,10 @@ if(!isset($_POST['email']) && !isset($_POST['chemin'])){
   $type_partage = $_POST['type_partage'];
 }
 
-$cle = $partage->set_partage($chemin,$email,$type_partage);
-
+$retour = $partage->set_partage($chemin,$email,$type_partage);
+$cle=$retour['cle'];
+//ajout à l'historique ($id_admin,$id_partage,$action)
+$historique->admin_partage($_SESSION['id_admin'],$retour['id'],'partage crée');
 //envoi du mail
 include('ctrl/sendemail.php');
 

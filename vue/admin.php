@@ -8,7 +8,6 @@
 
     <?php echo $breadcrumb; ?>
 
-
     <p class="lead"><?php echo $dossier->affiche_contenu($listefichiers);?></p>
 
 </main><!-- /.container -->

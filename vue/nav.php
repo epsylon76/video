@@ -19,6 +19,6 @@
         </li>
 
       </ul>
-      <a class="nav-link" href="?action=deco">Déconnecter</a>
+      <a class="nav-link btn btn-danger btn-sm" href="?action=deco">Déconnecter</a>
     </div>
   </nav>

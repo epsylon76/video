@@ -20,14 +20,6 @@ class dossier {
     return $type_fichier;
   }
 
-  function folderSize ($dir)
-  {
-    $size = 0;
-    foreach (glob(rtrim($dir, '/').'/*', GLOB_NOSORT) as $each) {
-      $size += is_file($each) ? filesize($each) : folderSize($each);
-    }
-    return $size;
-  }
 
 
   function affiche_contenu($listefichiers){
@@ -69,7 +61,7 @@ class dossier {
           $taille = shell_exec($commande);
           $taillebits = explode('	',$taille); //RUSE ! içi l'output ne sortait pas un espace mais un caractère blanc bien spécifique qu'il a fallu copier coller depuis la sortie d'un echo pour pouvoir le définir correctement
           $taille = $taillebits[0];
-        
+
 
 
           $items .= '<li class="list-group-item">';

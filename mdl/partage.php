@@ -47,8 +47,9 @@ class partage {
     $requete="INSERT INTO `partage` (`chemin`,`email`,`cle`,`date`,`type_partage`) VALUES ('".$chemin."', '".$email."', '".$cle."', NOW(), '".$type_partage."')";
     $query=$DB_con->prepare($requete);
     $query->execute();
-
-    return $cle;
+    $return['id'] = $DB_con->lastInsertId();
+    $return['cle'] = $cle;
+    return $return;
   }
 
   function unset_partage($id,$cle){
