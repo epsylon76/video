@@ -19,7 +19,7 @@
 $(document).ready(function() {
   $('#liste').DataTable( {
     "ajax": {
-      "url" :"mdl/ajax_load_liste.php",
+      "url" :"./ajax/ajax_load_liste.php",
       "type": "POST"},
 
       language: {

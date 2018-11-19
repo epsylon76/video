@@ -1,8 +1,8 @@
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-  background-color:#0B2538;
-  color:white;
+  background-color:#ececf9;
+  color:black;
 }
 .footer {
   position: absolute;

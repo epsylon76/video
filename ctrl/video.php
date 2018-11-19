@@ -1,13 +1,25 @@
 <?php
-if(isset($_GET['id']) && $partage->check_partage($_GET['cle'], $_GET['id'])){
+if(isset($_GET['id']) && $partage->check_partage($_GET['cle'], $_GET['id'])){ //mode utilisateur
   //retrouver le chemin via l'id
   $chemin = $partage->get_partage($_GET['id']);
-
   $chemin = './data'.$chemin['chemin'];
+  $mode = "user";
 
-}else{
+}else{ //mode admin
   $chemin='./data'.$_GET['video'];
+  $mode = "admin";
 }
 
-//fin ops
-include('vue/video.php');
+//condition selon le format de la vidéo
+$extension = pathinfo($data.$chemin);
+$ext =  $extension['extension'];
+if($ext == "mp4" || $ext == "MP4"){
+  include('./vue/video.php');
+}else{
+  include('./vue/video_dl.php');
+}
+
+//ajout du script DL si user
+if(isset($_GET['id'])){
+  include('./scripts/script_button_dl.php');
+}

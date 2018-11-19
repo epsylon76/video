@@ -94,7 +94,7 @@ class dossier {
       else{
         #conditions d'affichage
         #si vidéo
-        if($type[1] == 'mp4' || $type[1] == 'MP4' || $type[1] == 'mkv' || $type[1] == 'MKV'){
+        if($type[1] == 'mp4' || $type[1] == 'MP4' || $type[1] == 'mkv' || $type[1] == 'MKV' || $type[1] == 'avi' || $type[1] == 'AVI'){
 
           //CALCUL TAILLE Fichier
           $nom_chemin_linux=str_replace(' ','\ ',$data.$chemin.$ligne);
