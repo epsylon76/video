@@ -19,6 +19,11 @@
         </li>
 
       </ul>
-      <a class="nav-link btn btn-danger btn-sm" href="?action=deco">Déconnecter</a>
+      <span class="nav-link" style="color:white">
+        <?php echo $_SESSION['login']; ?>
+      </span>
+      <a class="nav-link btn btn-warning btn-sm" href="?page=parametres"><i class="fas fa-cog"></i></a>
+      &nbsp;
+      <a class="nav-link btn btn-danger btn-sm" href="?action=deco"><i class="fas fa-power-off"></i></a>
     </div>
   </nav>

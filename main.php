@@ -6,10 +6,14 @@ session_start();
 require('vendor/autoload.php');
 
 include_once('./config/config.php');
+//parametres titre, email....
+$params = get_params();
+
 include_once('./mdl/admin.php');
 include_once('./mdl/dossier.php');
 include_once('./mdl/partage.php');
 include_once('./mdl/historique.php');
+
 
 if(!isset($_GET['dl_photos'])){
   include_once('./vue/head.php'); //ne pas afficher sur dl_photos car casse le stream

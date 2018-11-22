@@ -63,6 +63,11 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
       include('ctrl/renvoi_mail.php');
       break;
 
+      //renvoi mail
+      case "parametres":
+      include('ctrl/parametres.php');
+      break;
+
     }
 
 
