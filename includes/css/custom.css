@@ -1,7 +1,7 @@
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-  background-color:#ececf9;
+  background-color:#8cb3d9;
   color:black;
 }
 .footer {
@@ -25,4 +25,7 @@ ul{
 }
 .owl-prev{
   margin-right:20%;
+}
+#logo{
+  height:200px;
 }

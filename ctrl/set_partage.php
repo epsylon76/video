@@ -15,7 +15,7 @@ if(!isset($_POST['email']) && !isset($_POST['chemin'])){
 $retour = $partage->set_partage($chemin,$email,$type_partage);
 $cle=$retour['cle'];
 //ajout à l'historique ($id_admin,$id_partage,$action)
-$historique->admin_partage($_SESSION['id_admin'],$retour['id'],'set_partage');
+$historique->set_partage($_SESSION['login'],$chemin,$email);
 //envoi du mail
 include('ctrl/sendemail.php');
 

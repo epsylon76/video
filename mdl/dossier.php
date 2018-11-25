@@ -81,7 +81,7 @@ class dossier {
             $items .= '<input type="hidden" name="type_partage" value="dossier">';
             $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
             $items .= '</div>';
-            $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-share-alt"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
+            $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-folder-plus"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
             $items .= '</form>';
             $items .= '</div>';
           }
@@ -124,7 +124,7 @@ class dossier {
           $items .= '<input type="hidden" name="type_partage" value="video">';
           $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
           $items .= '</div>';
-          $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-share-alt"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
+          $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-info"><i class="fas fa-video"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
           $items .= '</form>';
           $items .= '</div>';
 
@@ -150,7 +150,7 @@ class dossier {
       $retour .= 'Il y a <strong>'.$compteur_images.'</strong> photos dans ce dossier <a class="btn btn-sm btn-primary" href="?page=photos&photos='.$chemin.'"><i class="fas fa-eye"></i>&nbsp;voir</a>';
       if($partages->nb_partages($chemin) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
       $retour .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
-      $retour .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-share-alt"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin).'</span></button>';
+      $retour .= '&nbsp;<button type="submit" class="btn btn-sm btn-info"><i class="fas fa-camera"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin).'</span></button>';
       $retour .= '</form>';
     }
 

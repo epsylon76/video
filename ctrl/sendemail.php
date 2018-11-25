@@ -3,7 +3,7 @@
 include('./config/mail_config.php');
 include('./config/email_template.php');
 
-$mail->Subject = "Partage";
+$mail->Subject = $params['email_sujet'];
 $mail->Body = $corps;
 $mail->AddAddress($email);
 

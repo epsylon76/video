@@ -44,7 +44,7 @@ if (isset($_SESSION['login'])){
       }elseif($partage->get_type_partage($_GET['id']) == "photos"){
         include('./ctrl/photos.php');
       }elseif($partage->get_type_partage($_GET['id']) == "dossier"){
-        include('./ctrl/dossier_zip.php');//on lance le téléchargement du zip dossier
+        include('./ctrl/dossier_zip.php');//on lance le téléchargement du zip dossier --> passer par une page explicative
       }
 
     }elseif(isset($_GET['dl_photos'])){//on lance le téléchargement du zip photos

@@ -1,6 +1,7 @@
 <?php
 $target_dir = "../vue/img/";
-unlink($target_dir."/logo.png");
+
+unlink("../vue/img/logo.png");
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -31,7 +32,7 @@ if ($uploadOk == 0) {
     echo "Votre fichier n'a pas été envoyé.";
 // if everything is ok, try to upload file
 } else {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], 'logo.png')) {
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir.'logo.png')) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
     } else {
         echo "Sorry, there was an error uploading your file.";

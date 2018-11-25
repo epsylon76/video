@@ -1,5 +1,5 @@
 <div class="container">
-  <h5>Tableau historique</h5>
+  <h3>Tableau historique</h3>
   <p> historique sur 500 évènements</p>
 
 
@@ -23,7 +23,7 @@ if($ligne['action'] == "unset_partage"){$couleur = "alert-danger"; $icone = '<i 
   echo ' | ';
   echo $ligne['email'];
   echo ' | ';
-  echo $ligne['chemin'];
+  echo $ligne['partage_chemin'];
 
   echo '</div>';
 }

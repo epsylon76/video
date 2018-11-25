@@ -1,5 +1,5 @@
 <main role="main" class="container" style="margin-top:100px;">
-  
+  <img src="./vue/img/logo.png" id="logo"/>
   <?php echo $params['accueil_texte']; ?>
 </main>
 

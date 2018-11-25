@@ -2,9 +2,17 @@
 
 class historique{
 
-  function admin_partage($id_admin,$id_partage,$action){
+  function set_partage($admin_login,$partage_chemin,$email){ //à placer apres l'appel d'insert du partage
     global $DB_con;
-    $requete="INSERT INTO `historique` (`id_admin`,`id_partage`,`date`,`action`) VALUES ('".$id_admin."', '".$id_partage."', NOW(), '".$action."')";
+    $requete="INSERT INTO `historique` (`admin_login`,`partage_chemin`,`date`,`action`,`email`) VALUES ('".$admin_login."', '".$partage_chemin."', NOW(), 'set_partage', '".$email."')";
+    $query=$DB_con->prepare($requete);
+    $query->execute();
+    return $cle;
+  }
+
+  function unset_partage($admin_login,$partage_chemin,$email){ //à placer avant l'appel du drop partage
+    global $DB_con;
+    $requete="INSERT INTO `historique` (`admin_login`,`partage_chemin`,`date`,`action`,`email`) VALUES ('".$admin_login."', '".$partage_chemin."', NOW(), 'unset_partage', '".$email."')";
     $query=$DB_con->prepare($requete);
     $query->execute();
     return $cle;
@@ -15,9 +23,8 @@ class historique{
 
     function liste_historique(){
       global $DB_con;
-      $requete = "SELECT `historique`.`id_admin`, `historique`.`id_partage`, `historique`.`date`, `historique`.`action`, `partage`.`chemin`, `partage`.`email`, `partage`.`type_partage`
+      $requete = "SELECT *
       FROM `historique`
-      LEFT JOIN `partage` ON `historique`.`id_partage` = `partage`.`id`
       ORDER BY `historique`.`date` DESC
       LIMIT 500
       ";

@@ -16,9 +16,11 @@ function set_params($input){
   $email_sujet = $DB_con->quote($input['email_sujet']);
   $email_corps = $DB_con->quote($input['email_corps']);
   $email_texte_bouton = $DB_con->quote($input['email_texte_bouton']);
+  $email_corps_2 = $DB_con->quote($input['email_corps_2']);
+  $email_footer = $DB_con->quote($input['email_footer']);
 
-  $set_params = "INSERT INTO `parametres` (`page_titre`,`accueil_texte`,`email_expediteur`,`email_sujet`,`email_corps`,`email_texte_bouton`)
-  VALUES ( ".$page_titre.", ".$accueil_texte.", ".$email_expediteur.", ".$email_sujet.", ".$email_corps.", ".$email_texte_bouton.")";
+  $set_params = "INSERT INTO `parametres` (`page_titre`,`accueil_texte`,`email_expediteur`,`email_sujet`,`email_corps`,`email_texte_bouton`,`email_corps_2`,`email_footer`)
+  VALUES ( ".$page_titre.", ".$accueil_texte.", ".$email_expediteur.", ".$email_sujet.", ".$email_corps.", ".$email_texte_bouton.",".$email_corps_2.",".$email_footer.")";
   $query=$DB_con->prepare($set_params);
   $query->execute();
 }

@@ -311,10 +311,7 @@ $corps ='<!doctype html>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Bonjour,</p>
-                        <p>Voiçi votre accès à votre espace de téléchargement</p>
-                        <p>Vous y trouverez vos vidéos et photos</p>
-                        <p>N\'oubliez pas de les télécharger et de les conserver</p>
+                      '.$params['email_corps'].'
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -322,7 +319,7 @@ $corps ='<!doctype html>
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="'.$domain_url.'?cle='.$cle.'" target="_blank">Espace de téléchargement</a> </td>
+                                      <td> <a href="'.$domain_url.'?cle='.$cle.'" target="_blank">'.$params['email_texte_bouton'].'</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -330,8 +327,7 @@ $corps ='<!doctype html>
                             </tr>
                           </tbody>
                         </table>
-                        <p>This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>
-                        <p>Good luck! Hope it works.</p>
+                        '.$params['email_corps_2'].'
                       </td>
                     </tr>
                   </table>
@@ -346,13 +342,7 @@ $corps ='<!doctype html>
               <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
-                    <span class="apple-link">Company Inc, 3 Abbey Road, San Francisco CA 94102</span>
-                    <br> Don\'t like these emails? <a href="http://i.imgur.com/CScmqnj.gif">Unsubscribe</a>.
-                  </td>
-                </tr>
-                <tr>
-                  <td class="content-block powered-by">
-                    Powered by <a href="http://htmlemail.io">HTMLemail</a>.
+                    '.$params['email_footer'].'
                   </td>
                 </tr>
               </table>
