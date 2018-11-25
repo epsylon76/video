@@ -1,8 +1,9 @@
 <?php
 if(isset($_GET['id']) && $partage->check_partage($_GET['cle'], $_GET['id'])){ //mode utilisateur
   //retrouver le chemin via l'id
-  $chemin = $partage->get_partage($_GET['id']);
-  $chemin = './data'.$chemin['chemin'];
+  $infos = $partage->get_partage($_GET['id']);
+  $chemin = './data'.$infos['chemin'];
+  $email = $infos['email'];
   $mode = "user";
 
 }else{ //mode admin

@@ -1,5 +1,5 @@
-
 <div class="container">
+  <img src="./vue/img/logo.png" id="logo"/>
   <div class="row">
     <div class="col-sm">
     <h1>Votre Espace Vidéo et Photos</h1><br/>

@@ -19,20 +19,22 @@ class historique{
   }
 
 
-  function admin_login($id){}
-
-    function liste_historique(){
-      global $DB_con;
-      $requete = "SELECT *
-      FROM `historique`
-      ORDER BY `historique`.`date` DESC
-      LIMIT 500
-      ";
-      $query=$DB_con->prepare($requete);
-      $query->execute();
-      $resultat = $query->fetchAll();
-      return $resultat;
-    }
-
-
+  function admin_login($id){
+    
   }
+
+  function liste_historique(){
+    global $DB_con;
+    $requete = "SELECT *
+    FROM `historique`
+    ORDER BY `historique`.`date` DESC
+    LIMIT 500
+    ";
+    $query=$DB_con->prepare($requete);
+    $query->execute();
+    $resultat = $query->fetchAll();
+    return $resultat;
+  }
+
+
+}
