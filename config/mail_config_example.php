@@ -14,4 +14,4 @@ $mail->Port = 465; // or 587
 $mail->IsHTML(true);
 $mail->Username = "";
 $mail->Password = "";
-$mail->SetFrom("");
+$mail->SetFrom($params['email_expediteur']);

@@ -53,14 +53,6 @@ class dossier {
           break;
 
           default :
-          //CALCUL TAILLE Dossier
-          $nom_chemin_linux=str_replace(' ','\ ',$data.$chemin.$ligne);
-          $nom_chemin_linux=str_replace('(','\(',$nom_chemin_linux);
-          $nom_chemin_linux=str_replace(')','\)',$nom_chemin_linux);
-          $commande = 'du -s --block-size=1G '.$nom_chemin_linux;
-          $taille = shell_exec($commande);
-          $taillebits = explode('	',$taille); //RUSE ! içi l'output ne sortait pas un espace mais un caractère blanc bien spécifique qu'il a fallu copier coller depuis la sortie d'un echo pour pouvoir le définir correctement
-          $taille = $taillebits[0];
 
 
 
@@ -71,20 +63,19 @@ class dossier {
           if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
           $items .= '</div>';//fin colonne gauche
 
-          if($taille <= 2 && $taille != 0){
 
-            $items .= '<div class="col-md-4 offset-md-2">';//colonne droite
-            $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
-            $items .= '<div class="form-group">';
-            $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
-            $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
-            $items .= '<input type="hidden" name="type_partage" value="dossier">';
-            $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
-            $items .= '</div>';
-            $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-folder-plus"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
-            $items .= '</form>';
-            $items .= '</div>';
-          }
+          $items .= '<div class="col-md-4 offset-md-2">';//colonne droite
+          $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
+          $items .= '<div class="form-group">';
+          $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
+          $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
+          $items .= '<input type="hidden" name="type_partage" value="dossier">';
+          $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
+          $items .= '</div>';
+          $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-folder-plus"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
+          $items .= '</form>';
+          $items .= '</div>';
+
 
           $items .= '</li>';
           break;
@@ -95,17 +86,7 @@ class dossier {
         #conditions d'affichage
         #si vidéo
         if($type[1] == 'mp4' || $type[1] == 'MP4' || $type[1] == 'mkv' || $type[1] == 'MKV' || $type[1] == 'avi' || $type[1] == 'AVI'){
-
-          //CALCUL TAILLE Fichier
-          $nom_chemin_linux=str_replace(' ','\ ',$data.$chemin.$ligne);
-          $nom_chemin_linux=str_replace('(','\(',$nom_chemin_linux);
-          $nom_chemin_linux=str_replace(')','\)',$nom_chemin_linux);
-
-          $commande = 'du -s --block-size=1G '.$nom_chemin_linux;
-          $taille = shell_exec($commande);
-          $taillebits = explode('	',$taille); //RUSE ! içi l'output ne sortait pas un espace mais un caractère blanc bien spécifique qu'il a fallu copier coller depuis la sortie d'un echo pour pouvoir le définir correctement
-          $taille = $taillebits[0];
-
+          
 
           $items .= '<li class="list-group-item">';
 
