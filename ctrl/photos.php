@@ -5,7 +5,7 @@ if(isset($_GET['id']) && $partage->check_partage($_GET['cle'], $_GET['id'])){
   $chemin = $chemin['chemin'];
 }
 else{ //mode admin
-  $chemin='./data'.$_GET['photos'];
+  $chemin = $_GET['photos'];
   $mode = "admin";
 }
 
