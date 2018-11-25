@@ -33,6 +33,7 @@ class partage {
 
   function nb_partages($chemin){
     global $DB_con;
+    $chemin = $DB_con->quote($chemin);
     $requete="SELECT * from `partage` where `chemin` = '".$chemin."'";
     $query=$DB_con->prepare($requete);
     $query->execute();
