@@ -34,7 +34,7 @@ $(document).ready(function(){
   $('.diapo').slick({
     lazyLoad: 'ondemand',
     autoplay: true,
-    autoplaySpeed: 1500,
+    autoplaySpeed: 3000,
     fade: true,
 
   });
