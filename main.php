@@ -8,6 +8,7 @@ require('vendor/autoload.php');
 include_once('./config/config.php');
 //parametres titre, email....
 $params = get_params();
+$data = $params['dossier_data'];
 
 include_once('./mdl/admin.php');
 include_once('./mdl/dossier.php');

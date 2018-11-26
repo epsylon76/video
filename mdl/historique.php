@@ -7,7 +7,6 @@ class historique{
     $requete="INSERT INTO `historique` (`admin_login`,`partage_chemin`,`date`,`action`,`email`) VALUES ('".$admin_login."', '".$partage_chemin."', NOW(), 'set_partage', '".$email."')";
     $query=$DB_con->prepare($requete);
     $query->execute();
-    return $cle;
   }
 
   function unset_partage($admin_login,$partage_chemin,$email){ //à placer avant l'appel du drop partage
@@ -15,12 +14,11 @@ class historique{
     $requete="INSERT INTO `historique` (`admin_login`,`partage_chemin`,`date`,`action`,`email`) VALUES ('".$admin_login."', '".$partage_chemin."', NOW(), 'unset_partage', '".$email."')";
     $query=$DB_con->prepare($requete);
     $query->execute();
-    return $cle;
   }
 
 
   function admin_login($id){
-    
+
   }
 
   function liste_historique(){

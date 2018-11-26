@@ -301,8 +301,6 @@ $corps ='<!doctype html>
         <td class="container">
           <div class="content">
 
-            <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
             <table role="presentation" class="main">
 
               <!-- START MAIN CONTENT AREA -->
@@ -319,7 +317,7 @@ $corps ='<!doctype html>
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="'.$domain_url.'?cle='.$cle.'" target="_blank">'.$params['email_texte_bouton'].'</a> </td>
+                                      <td> <a href="'.$params['url_domaine'].'?cle='.$cle.'" target="_blank">'.$params['email_texte_bouton'].'</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>

@@ -25,7 +25,7 @@
         }
 
 
-        echo '<a href='.$domain_url.'?cle='.$_GET['cle'].'&id='.$ligne['id'].'>'.basename($ligne['chemin']).'</a>';
+        echo '<a href=?cle='.$_GET['cle'].'&id='.$ligne['id'].'>'.basename($ligne['chemin']).'</a>';
         echo '<br>';
         }
 

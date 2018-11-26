@@ -20,4 +20,4 @@ $historique->set_partage($_SESSION['login'],$chemin,$email);
 include('ctrl/sendemail.php');
 
 
-header('Location: '.$domain_url.'?page=dossiers&chemin='.$chemin_retour);
+header('Location: ./?page=dossiers&chemin='.$chemin_retour);

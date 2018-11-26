@@ -1,7 +1,7 @@
 
-
+<?php  if(isset($_GET['id'])){ ?>
 <br><a class="btn btn-success" href="?cle=<?php echo $_GET['cle'] ?>"><i class="fas fa-arrow-left">&nbsp;</i>retour</a>
-
+<?php } ?>
 </div>
 
 <div class="container">
@@ -33,10 +33,9 @@
 $(document).ready(function(){
   $('.diapo').slick({
     lazyLoad: 'ondemand',
-    autoplay: true,
-    autoplaySpeed: 3000,
-    fade: true,
-
+    autoplay: false,
+    fade: false,
+    draggable: true,
   });
 });
 

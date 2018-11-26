@@ -1,10 +1,6 @@
 <?php
 include_once('dbconn.php');
 
-$domain_url='http://epsytech.fr/lakke/';
-$data='/var/www/html/lakke/data'; //doit pointer vers le dossier data contenant les liens symboliques
-$email="johan.pupin@gmail.com";
-
 
 //fonctions des Paramètres
 function set_params($input){
@@ -18,9 +14,12 @@ function set_params($input){
   $email_texte_bouton = $DB_con->quote($input['email_texte_bouton']);
   $email_corps_2 = $DB_con->quote($input['email_corps_2']);
   $email_footer = $DB_con->quote($input['email_footer']);
+  $couleur_fond = $DB_con->quote($input['couleur_fond']);
+  $dossier_data = $DB_con->quote($input['dossier_data']);
+  $url_domaine = $DB_con->quote($input['url_domaine']);
 
-  $set_params = "INSERT INTO `parametres` (`page_titre`,`accueil_texte`,`email_expediteur`,`email_sujet`,`email_corps`,`email_texte_bouton`,`email_corps_2`,`email_footer`)
-  VALUES ( ".$page_titre.", ".$accueil_texte.", ".$email_expediteur.", ".$email_sujet.", ".$email_corps.", ".$email_texte_bouton.",".$email_corps_2.",".$email_footer.")";
+  $set_params = "INSERT INTO `parametres` (`page_titre`,`accueil_texte`,`email_expediteur`,`email_sujet`,`email_corps`,`email_texte_bouton`,`email_corps_2`,`email_footer`,`couleur_fond`,`dossier_data`,`url_domaine`)
+  VALUES ( ".$page_titre.", ".$accueil_texte.", ".$email_expediteur.", ".$email_sujet.", ".$email_corps.", ".$email_texte_bouton.",".$email_corps_2.",".$email_footer.",".$couleur_fond.",".$dossier_data.",".$url_domaine.")";
   $query=$DB_con->prepare($set_params);
   $query->execute();
 }

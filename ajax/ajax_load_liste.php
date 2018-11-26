@@ -3,6 +3,9 @@
 include_once('../config/dbconn.php');
 include_once('../config/config.php');
 
+$params = get_params();
+$data = $params['dossier_data'];
+
 $requete="SELECT * from `partage` ";
 $query=$DB_con->prepare($requete);
 $query->execute();

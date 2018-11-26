@@ -2,3 +2,4 @@ zip/*
 data/*
 config/dbconn.php
 config/mail_config.php
+vue/img/logo.png

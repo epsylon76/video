@@ -74,12 +74,12 @@ class dossier {
           $items .= '</div>';//fin colonne gauche
 
           if($nb_sous_dossiers <= 2){
-            $items .= '<div class="col-md-4 offset-md-2">';//colonne droite
+            $items .= '<div class="col-md-5 offset-md-1">';//colonne droite
             $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
             $items .= '<div class="form-group">';
             $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
             $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
-            $items .= '<input type="hidden" name="type_partage" value="dossier">';          
+            $items .= '<input type="hidden" name="type_partage" value="dossier">';
             $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
             $items .= '</div>';
             $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-folder-plus"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
@@ -107,7 +107,7 @@ class dossier {
           if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
           $items .= '</div>';
 
-          $items .= '<div class="col-md-4 offset-md-2">';
+          $items .= '<div class="col-md-5 offset-md-1">';
           $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
           $items .= '<div class="form-group">';
           $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
@@ -137,7 +137,7 @@ class dossier {
       $retour .= '<form method="post" action="?page=set_partage" class="form-inline">';
       $retour .= '<input type="hidden" name="chemin" value="'.$chemin.'">';
       $retour .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
-      $items .= '<input type="hidden" name="type_partage" value="photos">';
+      $retour .= '<input type="hidden" name="type_partage" value="photos">';
       $retour .= 'Il y a <strong>'.$compteur_images.'</strong> photos dans ce dossier <a class="btn btn-sm btn-primary" href="?page=photos&photos='.$chemin.'"><i class="fas fa-eye"></i>&nbsp;voir</a>';
       if($partages->nb_partages($chemin) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
       $retour .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
