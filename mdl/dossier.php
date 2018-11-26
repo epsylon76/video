@@ -54,7 +54,17 @@ class dossier {
 
           default :
 
-          $nb_sous_doissiers = count( glob($chemin.'/*', GLOB_ONLYDIR) );
+          $nb_sous_dossiers = 0;
+          $sous_dossiers = scandir($data.$chemin.$ligne);
+          foreach($sous_dossiers as $sous){
+
+            if($sous != "." && $sous != ".."){
+              $type = $this->infos_fichier($data,$chemin,$ligne.'/'.$sous);
+              if($type[0] == 'dir'){
+                $nb_sous_dossiers ++;
+              }
+            }
+          }
 
           $items .= '<li class="list-group-item">';
           $items .= '<div class="row">';//ligne
@@ -70,10 +80,12 @@ class dossier {
           $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
           $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
           $items .= '<input type="hidden" name="type_partage" value="dossier">';
-          $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
-          $items .= '</div>';
-          $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-folder-plus"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>'.$nb_sous_doissiers;
-          $items .= '</form>';
+          if($nb_sous_dossiers <= 2){
+            $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
+            $items .= '</div>';
+            $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-folder-plus"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';            
+            $items .= '</form>';
+          }
           $items .= '</div>';
 
 
