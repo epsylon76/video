@@ -54,7 +54,7 @@ class dossier {
 
           default :
 
-
+          $nb_sous_doissiers = count( glob($chemin.'/*', GLOB_ONLYDIR) );
 
           $items .= '<li class="list-group-item">';
           $items .= '<div class="row">';//ligne
@@ -72,7 +72,7 @@ class dossier {
           $items .= '<input type="hidden" name="type_partage" value="dossier">';
           $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required>';
           $items .= '</div>';
-          $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-folder-plus"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
+          $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-folder-plus"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>'.$nb_sous_doissiers;
           $items .= '</form>';
           $items .= '</div>';
 
@@ -86,7 +86,7 @@ class dossier {
         #conditions d'affichage
         #si vidéo
         if($type[1] == 'mp4' || $type[1] == 'MP4' || $type[1] == 'mkv' || $type[1] == 'MKV' || $type[1] == 'avi' || $type[1] == 'AVI'){
-          
+
 
           $items .= '<li class="list-group-item">';
 
