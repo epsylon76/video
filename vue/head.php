@@ -18,8 +18,9 @@
   <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css"/>
   <script src="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.js"></script>
 
-  <script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
+  
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 </head>
+<body style="background-color:<?php echo $params['couleur_fond']; ?>">

@@ -56,6 +56,8 @@
 
 </div>
 
+<script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
+
 <script>
 ClassicEditor
 .create( document.querySelector( '#email_corps' ) )
