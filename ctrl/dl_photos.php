@@ -28,7 +28,7 @@ require './vendor/autoload.php';
 
 
 # create a new zipstream object
-$zip = new ZipStream('example.zip');
+$zip = new ZipStream('dossier.zip'); // à changer
 
 # create a file named 'hello.txt'
 //$zip->addFile('hello.txt', 'This is the contents of hello.txt');

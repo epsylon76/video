@@ -53,9 +53,9 @@ class partage {
     return $return;
   }
 
-  function unset_partage($id,$cle){
+  function unset_partage($id){
     global $DB_con;
-    $requete="DELETE FROM `partage`  WHERE `id` = '".$id."' AND `cle` = '".$cle."'";
+    $requete="DELETE FROM `partage`  WHERE `id` = '".$id."'";
     $query=$DB_con->prepare($requete);
     $query->execute();
   }

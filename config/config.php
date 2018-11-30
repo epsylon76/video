@@ -17,9 +17,11 @@ function set_params($input){
   $couleur_fond = $DB_con->quote($input['couleur_fond']);
   $dossier_data = $DB_con->quote($input['dossier_data']);
   $url_domaine = $DB_con->quote($input['url_domaine']);
+  $analytics = $DB_con->quote($input['analytics']);
 
-  $set_params = "INSERT INTO `parametres` (`page_titre`,`accueil_texte`,`email_expediteur`,`email_sujet`,`email_corps`,`email_texte_bouton`,`email_corps_2`,`email_footer`,`couleur_fond`,`dossier_data`,`url_domaine`)
-  VALUES ( ".$page_titre.", ".$accueil_texte.", ".$email_expediteur.", ".$email_sujet.", ".$email_corps.", ".$email_texte_bouton.",".$email_corps_2.",".$email_footer.",".$couleur_fond.",".$dossier_data.",".$url_domaine.")";
+
+  $set_params = "INSERT INTO `parametres` (`page_titre`,`accueil_texte`,`email_expediteur`,`email_sujet`,`email_corps`,`email_texte_bouton`,`email_corps_2`,`email_footer`,`couleur_fond`,`dossier_data`,`url_domaine`,`analytics`)
+  VALUES ( ".$page_titre.", ".$accueil_texte.", ".$email_expediteur.", ".$email_sujet.", ".$email_corps.", ".$email_texte_bouton.",".$email_corps_2.",".$email_footer.",".$couleur_fond.",".$dossier_data.",".$url_domaine.",".$analytics.")";
   $query=$DB_con->prepare($set_params);
   $query->execute();
 }

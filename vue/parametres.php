@@ -47,8 +47,8 @@
     <h5>footer email</h5>
     <textarea name="email_footer" id="email_footer"><?php echo $params['email_footer']; ?></textarea>
 
-    <h2>Logo Bannière</h2>
-
+    <h2>Code Tracking analytics</h2>
+    <textarea name="analytics" id="analytics" style="width:100%"><?php echo $params['analytics']; ?></textarea>
 
 
     <input type="submit" class="btn btn-success" value="Enregistrer"/>

@@ -1,17 +1,12 @@
-
-<?php  if(isset($_GET['id'])){ ?>
-<br><a class="btn btn-success" href="?cle=<?php echo $_GET['cle'] ?>"><i class="fas fa-arrow-left">&nbsp;</i>retour</a>
-<?php } ?>
-</div>
-
 <div class="container">
 
+
+
   <h1>Vos Photos</h1>
+  <?php  if(isset($_GET['id'])){ ?>
+  <a class="btn btn-success" href="?cle=<?php echo $_GET['cle'] ?>"><i class="fas fa-arrow-left">&nbsp;</i>retour</a>
+  <?php } ?>
 
-
-  <div class="diapo" id="diapo" style="width:90%; margin:0 auto;">
-    <?php echo $diaporama; ?>
-  </div>
   <?php
   if(isset($_GET['id'])){
     ?>
@@ -23,21 +18,22 @@
     <?php
   }
   ?>
-</div>
+
+    <div class="diapo" id="diapo" style="width:90%; margin:0 auto;">
+      <?php echo $diaporama; ?>
+    </div>
 
 
+</div> <!--container -->
 
 
 <script>
-
 $(document).ready(function(){
   $('.diapo').slick({
     lazyLoad: 'ondemand',
-    autoplay: false,
+    autoplay: true,
     fade: false,
     draggable: true,
   });
 });
-
-
 </script>

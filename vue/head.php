@@ -2,6 +2,11 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
+
+<?php echo $params['analytics']; ?>
+
+
+
   <title><?php echo $params['page_titre']; ?></title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -18,7 +23,7 @@
   <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css"/>
   <script src="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.js"></script>
 
-  
+
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />

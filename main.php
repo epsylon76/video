@@ -26,14 +26,18 @@ if(isset($_GET['action']) && $_GET['action']=="deco"){
   include('./ctrl/deconnecter.php');
 }
 
+//accès via clé detruit la session avant toutes
+if(isset($_GET['cle'])) {unset($_SESSION['login']);session_destroy();}
+//
+
+
 
 if (isset($_SESSION['login'])){
-
   include('./ctrl/admin.php');
   //mode admin
-
 }else{ //pas de variable de session"login" = pas admin
   if(isset($_GET['cle'])) {
+
     $partage = new partage();
 
     if(isset($_GET['id']))

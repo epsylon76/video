@@ -13,6 +13,8 @@
       <?php
       foreach($liste as $ligne){
 
+        echo '<div class="alert alert-secondary">';
+
         if($ligne['type_partage'] == "video"){
           //icone vidéo
           echo '<i class="fas fa-video"></i>&nbsp;&nbsp;';
@@ -26,7 +28,7 @@
 
 
         echo '<a href=?cle='.$_GET['cle'].'&id='.$ligne['id'].'>'.basename($ligne['chemin']).'</a>';
-        echo '<br>';
+        echo '</div>';
         }
 
        ?>
