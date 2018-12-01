@@ -18,10 +18,10 @@ function set_params($input){
   $dossier_data = $DB_con->quote($input['dossier_data']);
   $url_domaine = $DB_con->quote($input['url_domaine']);
   $analytics = $DB_con->quote($input['analytics']);
+  $partage_dossier = $input['partage_dossier'];
 
-
-  $set_params = "INSERT INTO `parametres` (`page_titre`,`accueil_texte`,`email_expediteur`,`email_sujet`,`email_corps`,`email_texte_bouton`,`email_corps_2`,`email_footer`,`couleur_fond`,`dossier_data`,`url_domaine`,`analytics`)
-  VALUES ( ".$page_titre.", ".$accueil_texte.", ".$email_expediteur.", ".$email_sujet.", ".$email_corps.", ".$email_texte_bouton.",".$email_corps_2.",".$email_footer.",".$couleur_fond.",".$dossier_data.",".$url_domaine.",".$analytics.")";
+  $set_params = "INSERT INTO `parametres` (`page_titre`,`accueil_texte`,`email_expediteur`,`email_sujet`,`email_corps`,`email_texte_bouton`,`email_corps_2`,`email_footer`,`couleur_fond`,`dossier_data`,`url_domaine`,`analytics`,`partage_dossier`)
+  VALUES ( ".$page_titre.", ".$accueil_texte.", ".$email_expediteur.", ".$email_sujet.", ".$email_corps.", ".$email_texte_bouton.",".$email_corps_2.",".$email_footer.",".$couleur_fond.",".$dossier_data.",".$url_domaine.",".$analytics.",".$partage_dossier.")";
   $query=$DB_con->prepare($set_params);
   $query->execute();
 }

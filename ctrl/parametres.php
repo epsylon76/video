@@ -1,4 +1,5 @@
 <?php
+header('X-XSS-Protection:0');
 include('./vue/nav.php');
 
 //s'il y a un POST, enregistrer les données dans la table

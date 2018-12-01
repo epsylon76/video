@@ -1,7 +1,7 @@
 <div class="container" style="margin-top:30px;">
   <h1>Paramètres</h1>
   <h2>Logo</h2>
-  <img src="./vue/img/logo.png" id="logo"/>
+  <img src="./vue/img/logo.png" id="logo" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px;"/>
 
   <form action="./ctrl/upload_logo.php" method="post" enctype="multipart/form-data">
     Selectionnez un logo :
@@ -50,6 +50,16 @@
     <h2>Code Tracking analytics</h2>
     <textarea name="analytics" id="analytics" style="width:100%"><?php echo $params['analytics']; ?></textarea>
 
+    <h3>Activer partage dossier zip</h3>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="partage_dossier" id="inlineRadio1" value="true" <?php if($params['partage_dossier']){echo "checked";} ?>>
+      <label class="form-check-label" for="inlineRadio1">activer</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="partage_dossier" id="inlineRadio2" value="false" <?php if(!$params['partage_dossier']){echo "checked";} ?>>
+      <label class="form-check-label" for="inlineRadio2">désactiver</label>
+    </div>
+    <br/>
 
     <input type="submit" class="btn btn-success" value="Enregistrer"/>
   </form>
