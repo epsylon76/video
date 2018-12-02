@@ -81,9 +81,9 @@ class dossier {
             $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
             $items .= '<input type="hidden" name="type_partage" value="dossier">';
             $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">';
-            $items .= '</div>';
             $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-folder-plus"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
             $items .= '</form>';
+            $items .= '</div>';
             $items .= '</div>';
           }
 
@@ -103,16 +103,16 @@ class dossier {
           $items .= '<i class="fas fa-video"></i>&nbsp;<a href="?page=video&video='.$chemin.$ligne.'">'.$ligne.'</a>';
           if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
           $items .= '</div>';
-          $items .= '<div class="col-md-5">';
+          $items .= '<div class="col-md-6">';
           $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
           $items .= '<div class="form-group">';
           $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
           $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
           $items .= '<input type="hidden" name="type_partage" value="video">';
           $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">';
-          $items .= '</div>';
           $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-info"><i class="fas fa-video"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
           $items .= '</form>';
+          $items .= '</div>';
           $items .= '</div>';
           $items .= '</li>';
 
