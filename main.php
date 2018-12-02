@@ -16,7 +16,7 @@ include_once('./mdl/partage.php');
 include_once('./mdl/historique.php');
 
 
-if(!isset($_GET['dl_photos'])){
+if(!isset($_GET['dl_photos']) && !isset($_GET['dl_dossier'])){
   include_once('./vue/head.php'); //ne pas afficher sur dl_photos car casse le stream
 }
 
@@ -54,6 +54,8 @@ if (isset($_SESSION['login'])){
 
     }elseif(isset($_GET['dl_photos'])){//on lance le téléchargement du zip photos
       include('./ctrl/dl_photos.php');
+    }elseif(isset($_GET['dl_dossier'])){//on lance le téléchargement du zip dossier
+        include('./ctrl/dl_dossier_zip.php');
     }else{ // on accède à la liste des partages
       include('./ctrl/partage.php');
     }

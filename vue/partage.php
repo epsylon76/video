@@ -26,9 +26,9 @@
           echo '<i class="fas fa-file-archive"></i>&nbsp;&nbsp;';
         }
 
-
         echo '<a href=?cle='.$_GET['cle'].'&id='.$ligne['id'].'>'.basename($ligne['chemin']).'</a>';
         echo '</div>';
+
         }
 
        ?>
