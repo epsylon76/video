@@ -1,5 +1,5 @@
 <?php
-ini_set('max_execution_time', 300);
+ini_set('max_execution_time', 1000);
 $folder = $partage->get_partage($_GET['dl_dossier']);
 
 $folder = $folder['chemin'];
@@ -22,7 +22,6 @@ if ($handle = opendir($folder)) {
 use ZipStream\ZipStream;
 # Autoload the dependencies
 require './vendor/autoload.php';
-
 
 
 # create a new zipstream object
