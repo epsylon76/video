@@ -103,7 +103,7 @@ class dossier {
           $items .= '<i class="fas fa-video"></i>&nbsp;<a href="?page=video&video='.$chemin.$ligne.'">'.$ligne.'</a>';
           if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
           $items .= '</div>';
-          $items .= '<div class="col-md-6">';
+          $items .= '<div class="col-md-5">';
           $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
           $items .= '<div class="form-group">';
           $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
