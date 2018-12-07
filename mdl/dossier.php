@@ -92,11 +92,9 @@ class dossier {
         }
 
       }
-      else{
-        #conditions d'affichage
-        #si vidéo on affiche le partage
-        if($type[1] == 'mp4' || $type[1] == 'MP4' || $type[1] == 'mkv' || $type[1] == 'MKV' || $type[1] == 'avi' || $type[1] == 'AVI'){
+      elseif($type[1] == 'mp4' || $type[1] == 'MP4' || $type[1] == 'mkv' || $type[1] == 'MKV' || $type[1] == 'avi' || $type[1] == 'AVI'){
 
+          //si vidéo on affiche le partage
           $items .= '<li class="list-group-item">';
           $items .= '<div class="row justify-content-between">';//ligne
           $items .= '<div class="col-md-6">';//colonne 4
@@ -116,11 +114,18 @@ class dossier {
           $items .= '</div>';
           $items .= '</li>';
 
+        }elseif($type[1] == 'jpg' || $type[1] == 'JPG'){
+          $compteur_images++; //si photo on compte mais on affiche pas
+        }else{
+          //autre fichier
+          $items .= '<li class="list-group-item">';
+          $items .= '<div class="row justify-content-between">';//ligne
+          $items .= '<div class="col-md-6">';//colonne 4
+          $items .= '<i class="fas fa-file"></i>&nbsp;'.$ligne;
+          $items .= '</div>';
+          $items .= '</div>';
+          $items .= '</li>';
         }
-        #si photos on compte
-        if($type[1] == 'jpg' || $type[1] == 'JPG'){$compteur_images++;}
-
-      }//fin else
 
     }// for each (on a fini d'itérer les fichiers contenu dans le chemin en cours)
 

@@ -2,8 +2,8 @@
 ini_set('max_execution_time', 1000);
 ini_set('memory_limit', '20000000M'); //à modifier
 
-//il faudra lui donner le nom de l'id de la BDD
-$zip_name=$_GET['dl_dossier']."_test.zip";
+
+$zip_name=$_GET['dl_dossier']."_dossier.zip";
 
 $folder = $partage->get_partage($_GET['dl_dossier']);
 
