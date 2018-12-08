@@ -22,7 +22,7 @@ foreach($results as $ligne){
   $items[$i][1] = $date_aff;
   $items[$i][2] = $exist.$ligne['chemin'];
   $items[$i][3] = $ligne['email'];
-  $items[$i][4] = '<a href="?page=renvoi_mail&email='.$ligne['email'].'"><i class="fas fa-reply-all"></i></a>&nbsp;&nbsp;<a href="?page=unset_partage&id='.$ligne['id'].'"><i class="fas fa-trash-alt"></i></a>';
+  $items[$i][4] = '<a href="?page=renvoi_mail&email='.$ligne['email'].'"><i class="fas fa-reply-all"></i></a>&nbsp;&nbsp;<a href="?page=unset_partage&id='.$ligne['id'].'"><i class="fas fa-trash-alt" style="color:red;"></i></a>';
 
   $i++;
 }

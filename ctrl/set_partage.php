@@ -3,6 +3,10 @@
 $partage = new partage();
 $historique = new historique();
 
+//date du dernier partage pour comparer et savoir si on envoie l'email
+$max_partage = $partage->last_partage($_POST['email']);
+//
+
 if(!isset($_POST['email']) && !isset($_POST['chemin'])){
   //rejeter
 }else{
@@ -16,16 +20,20 @@ $retour = $partage->set_partage($chemin,$email,$type_partage);
 $cle=$retour['cle'];
 //ajout à l'historique ($id_admin,$id_partage,$action)
 $historique->set_partage($_SESSION['login'],$chemin,$email);
+
 //vérifions si on doit envoyer l'email_sujet
 //si le dernier partage a été fait il y a moins de 6h
 
-//liste des partages de cet email (clé)
-$liste_partage = $partage->liste_partages($cle);
 
 
-
-//envoi du mail
-include('ctrl/sendemail.php');
-
+$now = new DateTime();
+$max_partage = new DateTime($max_partage[0]);
+$interval = $max_partage->diff($now);
+if($interval->format('%a') >= 1){
+  //envoi du mail si la différence est de un jour
+  include('ctrl/sendemail.php');
+}else{
+  //on envoie pas de mail
+}
 
 header('Location: ./?page=dossiers&chemin='.$chemin_retour);
