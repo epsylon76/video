@@ -3,8 +3,8 @@
 class dossier {
 
   function contenu_dossier($chemin,$data){
-    $liste ='';
     $listefichiers = scandir($data.$chemin);
+    natsort($listefichiers);
     return $listefichiers;
   }
 
@@ -54,10 +54,9 @@ class dossier {
 
           default :
 
-
+          //calcul du nombre de sous dossiers
           $sous_dossiers = scandir($data.$chemin.$ligne);
           foreach($sous_dossiers as $sous){
-
             if($sous != "." && $sous != ".."){
               $type = $this->infos_fichier($data,$chemin,$ligne.'/'.$sous);
               if($type[0] == 'dir'){
@@ -65,6 +64,7 @@ class dossier {
               }
             }
           }
+          //
 
           $items .= '<li class="list-group-item">';
           $items .= '<div class=" row justify-content-between">';//ligne
@@ -116,7 +116,7 @@ class dossier {
 
         }elseif($type[1] == 'jpg' || $type[1] == 'JPG'){
           $compteur_images++; //si photo on compte mais on affiche pas
-        }else{
+        }elseif($ligne != '.DS_Store'){
           //autre fichier
           $items .= '<li class="list-group-item">';
           $items .= '<div class="row justify-content-between">';//ligne
