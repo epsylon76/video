@@ -20,8 +20,8 @@ if(file_exists('./zip/'.$zip_name) == "1"){
   $folder=str_replace(' ', '\ ', $folder);
   $folder=str_replace('(', '\(', $folder);
   $folder=str_replace(')', '\)', $folder);
-  $commande='nice zip -r -j -0 '.$data.'/../zip/'.$zip_name.' '.$data.$folder;
-
+  $commande='cd '.$data.$folder.' && nice zip -r -0 '.$data.'/../zip/'.$zip_name.' ./*';
+  //echo $commande;
   $commande = shell_exec($commande);
   //echo $commande; //debug
   header("Location: ./zip/".$zip_name);
