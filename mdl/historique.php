@@ -17,8 +17,11 @@ class historique{
   }
 
 
-  function admin_login($id){
-
+  function admin_login($login){
+    global $DB_con;
+    $requete="INSERT INTO `historique` (`admin_login`,`partage_chemin`,`date`,`action`,`email`) VALUES ('".$login."', 'login admin', NOW(), 'login_admin', '')";
+    $query=$DB_con->prepare($requete);
+    $query->execute();
   }
 
   function liste_historique(){

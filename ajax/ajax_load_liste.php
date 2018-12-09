@@ -18,12 +18,16 @@ foreach($results as $ligne){
 
   if (file_exists($data.$ligne['chemin'])) {$exist = "";}else{$exist = "introuvable ";};
 
+  $date_c = date ("F d Y H:i:s.", filectime($data.$ligne['chemin']));
+  $date_c = new DateTime($date_c);
+  $date_creation = $date_c->format('d/m/Y');
+
   $items[$i][0] = $ligne['id'];
   $items[$i][1] = $date_aff;
-  $items[$i][2] = $exist.$ligne['chemin'];
-  $items[$i][3] = $ligne['email'];
-  $items[$i][4] = '<a href="?page=renvoi_mail&email='.$ligne['email'].'"><i class="fas fa-reply-all"></i></a>&nbsp;&nbsp;<a href="?page=unset_partage&id='.$ligne['id'].'"><i class="fas fa-trash-alt" style="color:red;"></i></a>';
-
+  $items[$i][2] = '<strong>'.$exist.$ligne['chemin'].'</strong>';
+  $items[$i][3] = $date_creation;
+  $items[$i][4] = '<a href="?cle='.$ligne['cle'].'">'.$ligne['email'].'</a>';
+  $items[$i][5] = '<a href="?page=renvoi_mail&email='.$ligne['email'].'"><i class="fas fa-reply-all"></i></a>&nbsp;&nbsp;<a href="?page=unset_partage&id='.$ligne['id'].'"><i class="fas fa-trash-alt" style="color:red;"></i></a>';
   $i++;
 }
 $data = array("data" => $items); // l'array doit etre un array data []: puis les données

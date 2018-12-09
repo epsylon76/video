@@ -6,8 +6,9 @@
     <thead>
       <tr>
         <th>id</th>
-        <th>date</th>
+        <th>date partage</th>
         <th>chemin</th>
+        <th>date fichier</th>
         <th>email</th>
         <th>actions</th>
       </tr>
