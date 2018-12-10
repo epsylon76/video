@@ -22,5 +22,6 @@ if($ext == "mp4" || $ext == "MP4"){
 
 //ajout du script DL si user
 if(isset($_GET['id'])){
+  $action = 'dl_video';
   include('./scripts/script_button_dl.php');
 }

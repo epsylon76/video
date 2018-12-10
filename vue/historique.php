@@ -7,7 +7,9 @@
     <?php
     foreach ($liste_historique as $ligne) {
       //couleur
-      if($ligne['action'] == "dl"){$couleur = "alert-primary"; $icone= '<i class="fas fa-download"></i>';}
+      if($ligne['action'] == "dl_video"){$couleur = "alert-primary"; $icone= '<i class="fas fa-download"></i><i class="fas fa-video"></i>';}
+      if($ligne['action'] == "dl_photos"){$couleur = "alert-primary"; $icone= '<i class="fas fa-download"></i><i class="fas fa-camera"></i>';}
+      if($ligne['action'] == "dl_dossier"){$couleur = "alert-primary"; $icone= '<i class="fas fa-download"></i><i class="fas fa-folder"></i>';}
       if($ligne['action'] == "set_partage"){$couleur = "alert-success"; $icone = '<i class="fas fa-share-alt"></i>';}
       if($ligne['action'] == "unset_partage"){$couleur = "alert-danger"; $icone = '<i class="fas fa-trash"></i>';}
       if($ligne['action'] == "login_admin"){$couleur = "alert-warning"; $icone = '<i class="fas fa-sign-in-alt"></i>';}
