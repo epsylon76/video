@@ -6,7 +6,7 @@ include_once('../config/config.php');
 $params = get_params();
 $data = $params['dossier_data'];
 
-$requete="SELECT * from `partage` ";
+$requete="SELECT * from `partage` ORDER BY `id` DESC";
 $query=$DB_con->prepare($requete);
 $query->execute();
 $results = $query->fetchAll();

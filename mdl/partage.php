@@ -79,12 +79,22 @@ class partage {
   }
 
   function last_partage($email){
-      global $DB_con;
-      $requete="SELECT MAX(`date`) from `partage` where `email` = '".$email."'";
-      $query=$DB_con->prepare($requete);
-      $query->execute();
-      $result = $query->fetch();
-      return $result;
+    global $DB_con;
+    $requete="SELECT MAX(`date`) from `partage` where `email` = '".$email."'";
+    $query=$DB_con->prepare($requete);
+    $query->execute();
+    $last = $query->fetch();
+    $last = $last[0];
+    if($last == ''){$last = '1970-01-01 12:00:00';}
+
+    $now = new DateTime();
+    $max_partage = new DateTime($last);
+
+    $interval = $max_partage->diff($now);
+    $hours = $interval->h;
+    $hours = $hours + ($interval->days*24);
+
+    return $hours;
   }
 
 }//class partage

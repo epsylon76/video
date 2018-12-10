@@ -21,7 +21,8 @@ $(document).ready(function() {
   $('#liste').DataTable( {
     "ajax": {
       "url" :"./ajax/ajax_load_liste.php",
-      "type": "POST"},
+      "type": "POST"
+    },
 
       language: {
         processing:     "Traitement en cours...",
