@@ -10,6 +10,7 @@
         <th>chemin</th>
         <th>date fichier</th>
         <th>email</th>
+        <th>admin</th>
         <th>actions</th>
       </tr>
     </thead>
@@ -23,6 +24,8 @@ $(document).ready(function() {
       "url" :"./ajax/ajax_load_liste.php",
       "type": "POST"
     },
+    "ordering": true,
+    "order": [[ 0, 'desc' ]],
 
       language: {
         processing:     "Traitement en cours...",

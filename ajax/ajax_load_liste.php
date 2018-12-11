@@ -6,7 +6,7 @@ include_once('../config/config.php');
 $params = get_params();
 $data = $params['dossier_data'];
 
-$requete="SELECT * from `partage` ORDER BY `id` DESC";
+$requete="SELECT * from `partage`";
 $query=$DB_con->prepare($requete);
 $query->execute();
 $results = $query->fetchAll();
@@ -27,7 +27,8 @@ foreach($results as $ligne){
   $items[$i][2] = '<strong>'.$exist.$ligne['chemin'].'</strong>';
   $items[$i][3] = $date_creation;
   $items[$i][4] = '<a href="?cle='.$ligne['cle'].'">'.$ligne['email'].'</a>';
-  $items[$i][5] = '<a href="?page=renvoi_mail&email='.$ligne['email'].'"><i class="fas fa-reply-all"></i></a>&nbsp;&nbsp;<a href="?page=unset_partage&id='.$ligne['id'].'"><i class="fas fa-trash-alt" style="color:red;"></i></a>';
+  $items[$i][5] = $ligne['admin_login'];
+  $items[$i][6] = '<a href="?page=renvoi_mail&email='.$ligne['email'].'"><i class="fas fa-reply-all"></i></a>&nbsp;&nbsp;<a href="?page=unset_partage&id='.$ligne['id'].'"><i class="fas fa-trash-alt" style="color:red;"></i></a>';
   $i++;
 }
 $data = array("data" => $items); // l'array doit etre un array data []: puis les données
