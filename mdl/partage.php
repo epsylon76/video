@@ -78,6 +78,16 @@ class partage {
     return $result['type_partage'];
   }
 
+  function cle_from_email($email){
+    global $DB_con;
+    $requete="SELECT `cle` from `partage` where `email` = '".$email."'";
+    $query=$DB_con->prepare($requete);
+    $query->execute();
+    $cle = $query->fetch();
+    $cle = $cle[0];
+    return $cle;
+  }
+
   function last_partage($email){
     global $DB_con;
     $requete="SELECT MAX(`date`) from `partage` where `email` = '".$email."'";

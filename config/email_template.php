@@ -1,5 +1,5 @@
 <?php
-
+iconv_set_encoding("internal_encoding", "UTF-8");
 //ici on prépare le mail html en l'insérant dans une variable
 
 $corps ='<!doctype html>
@@ -160,7 +160,6 @@ $corps ='<!doctype html>
           margin: 0;
           padding: 12px 25px;
           text-decoration: none;
-          text-transform: capitalize;
       }
       .btn-primary table td {
         background-color: #3498db;
@@ -317,7 +316,7 @@ $corps ='<!doctype html>
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="'.$params['url_domaine'].'?cle='.$cle.'" target="_blank">'.$params['email_texte_bouton'].'</a> </td>
+                                      <td> <a href="http://'.$params['url_domaine'].'?cle='.$cle.'" target="_blank">'.$params['email_texte_bouton'].'</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
