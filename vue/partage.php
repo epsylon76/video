@@ -19,13 +19,13 @@
 
         if($ligne['type_partage'] == "video"){
           //icone vidéo
-          echo '<i class="fas fa-video"></i>&nbsp;Vidéo&nbsp;';
+          echo '<i class="fas fa-video"></i>&nbsp;';
         }elseif($ligne['type_partage'] == "photos"){
           //icone photos
-          echo '<i class="fas fa-camera"></i>&nbsp;Photos&nbsp;';
+          echo '<i class="fas fa-camera"></i>&nbsp;';
         }elseif($ligne['type_partage'] == "dossier"){
           //icone dossier zip
-          echo '<i class="fas fa-file-archive"></i>&nbsp;Fichier&nbsp;';
+          echo '<i class="fas fa-file-archive"></i>&nbsp;';
         }
 
         echo basename($ligne['chemin']).'</a>';

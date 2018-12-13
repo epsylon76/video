@@ -11,12 +11,16 @@ else{ //mode admin
   $mode = "admin";
 }
 
-
-
-$diapo = new dossier();
-$liste_photos = $diapo->contenu_dossier($chemin,$data);
-$diaporama = $diapo->diapo_photos($liste_photos);
-
+$dossier = new dossier($data,$chemin);
+$listefichiers = $dossier->contenu_dossier($chemin,$data);
+$taille = 0;
+$date ='';
+$nb = 0;
+foreach ($listefichiers as $item) {
+  $date = filectime($data.$chemin.$item);
+  $taille = ($taille + filesize($data.$chemin.$item));
+  $nb++;
+}
 
 //fin ops
 include('vue/photos.php');

@@ -11,14 +11,11 @@ if(isset($_GET['id']) && $partage->check_partage($_GET['cle'], $_GET['id'])){ //
   $mode = "admin";
 }
 
-//condition selon le format de la vidéo
-$extension = pathinfo($data.$chemin);
-$ext =  $extension['extension'];
-if($ext == "mp4" || $ext == "MP4"){
-  include('./vue/video.php');
-}else{
-  include('./vue/video_dl.php');
-}
+$nom_fichier = explode("/", $chemin);
+$nom_fichier = array_reverse($nom_fichier);
+$nom_fichier = $nom_fichier[0];
+
+include('./vue/video.php');
 
 //ajout du script DL si user
 if(isset($_GET['id'])){
