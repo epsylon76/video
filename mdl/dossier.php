@@ -107,7 +107,7 @@ class dossier {
           $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
           $items .= '<input type="hidden" name="type_partage" value="video">';
           $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">';
-          $items .= '&nbsp;<a class="btn btn-sm btn-primary" href="?page=preview&video='.$chemin.'"><i class="fas fa-eye"></i></a>&nbsp;<button type="submit" class="btn btn-sm btn-info"><i class="fas fa-video"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
+          $items .= '&nbsp;<a class="btn btn-sm btn-primary" href="?page=preview&video='.$chemin.$ligne.'"><i class="fas fa-eye"></i></a>&nbsp;<button type="submit" class="btn btn-sm btn-info"><i class="fas fa-video"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
           $items .= '</form>';
           $items .= '</div>';
           $items .= '</div>';

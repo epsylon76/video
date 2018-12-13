@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h1>Diaporama</h1>
+  <h1>Diaporama de prévisualisation</h1>
   <p><strong>Date</strong> : <?php echo date('d/m/Y', $date); ?></p>
   <p><strong>Nombre de photos</strong> : <?php echo $nb; ?> </p>
   <p><strong>Taille</strong> : <?php echo number_format($taille / 1048576, 2); ?> Mo</p>
