@@ -107,7 +107,7 @@ class dossier {
           $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
           $items .= '<input type="hidden" name="type_partage" value="video">';
           $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">';
-          $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-info"><i class="fas fa-video"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
+          $items .= '&nbsp;<a class="btn btn-sm btn-primary" href="?page=preview&video='.$chemin.'"><i class="fas fa-eye"></i></a>&nbsp;<button type="submit" class="btn btn-sm btn-info"><i class="fas fa-video"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
           $items .= '</form>';
           $items .= '</div>';
           $items .= '</div>';
@@ -131,12 +131,12 @@ class dossier {
 
     if($compteur_images > 2 && $nb_sous_dossiers == 0){//mode dossier photos
       $retour .= '<h1> Photos </h1>';
-      $retour .= '<p><strong>Note : </strong>s\'il y a autre chose que des photos dans ce dossier, ces fichiers n\'apparaitront pas</p>';
+      $retour .= '<p><strong>Note : </strong>s\'il y a autre chose que des photos dans ce dossier, ces fichiers ne seront pas partagés</p>';
       $retour .= '<form method="post" action="?page=set_partage" class="form-inline">';
       $retour .= '<input type="hidden" name="chemin" value="'.$chemin.'">';
       $retour .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
       $retour .= '<input type="hidden" name="type_partage" value="photos">';
-      $retour .= 'Il y a <strong>&nbsp;'.$compteur_images.'</strong>&nbsp;photos dans ce dossier&nbsp;<a class="btn btn-sm btn-primary" href="?page=photos&photos='.$chemin.'"><i class="fas fa-eye"></i>&nbsp;voir</a>';
+      $retour .= 'Il y a <strong>&nbsp;'.$compteur_images.'</strong>&nbsp;photos dans ce dossier&nbsp;<a class="btn btn-sm btn-primary" href="?page=diapo&photos='.$chemin.'"><i class="fas fa-eye"></i></a>';
       if($partages->nb_partages($chemin) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
       $retour .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">';
       $retour .= '&nbsp;<button type="submit" class="btn btn-sm btn-info"><i class="fas fa-camera"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin).'</span></button>';
@@ -167,7 +167,7 @@ class dossier {
         #conditions d'affichage
         #si image
         if($type[1] == 'jpg' || $type[1] == 'JPG'){
-          $retour .= '<div><img data-lazy="/data'.$chemin.$ligne.'" style="max-width: 100%;"></img></div>';
+          $retour .= '<img class="owl-lazy" data-src="/data'.$chemin.$ligne.'" style="max-width: 100%;">';
           $compteur_images++;
         }
 

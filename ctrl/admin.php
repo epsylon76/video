@@ -36,6 +36,14 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
       include('./ctrl/photos.php');
       break;
 
+      case "diapo" :
+      include('./ctrl/diapo.php');
+      break;
+
+      case "preview" :
+      include('./ctrl/preview.php');
+      break;
+
       case "dl_photos":
       include('./ctrl/dl_photos.php');
       break;
