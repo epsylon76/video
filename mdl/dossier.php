@@ -21,7 +21,6 @@ class dossier {
   }
 
 
-
   function affiche_contenu($listefichiers){
 
     global $data;

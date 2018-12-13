@@ -15,18 +15,20 @@
 
         echo '<div class="alert alert-secondary">';
 
+        echo '<a href=?cle='.$_GET['cle'].'&id='.$ligne['id'].'>';
+
         if($ligne['type_partage'] == "video"){
           //icone vidéo
-          echo '<i class="fas fa-video"></i>&nbsp;&nbsp;';
+          echo '<i class="fas fa-video"></i>&nbsp;Vidéo&nbsp;';
         }elseif($ligne['type_partage'] == "photos"){
           //icone photos
-          echo '<i class="fas fa-camera"></i>&nbsp;&nbsp;';
+          echo '<i class="fas fa-camera"></i>&nbsp;Photos&nbsp;';
         }elseif($ligne['type_partage'] == "dossier"){
           //icone dossier zip
-          echo '<i class="fas fa-file-archive"></i>&nbsp;&nbsp;';
+          echo '<i class="fas fa-file-archive"></i>&nbsp;Fichier&nbsp;';
         }
 
-        echo '<a href=?cle='.$_GET['cle'].'&id='.$ligne['id'].'>'.basename($ligne['chemin']).'</a>';
+        echo basename($ligne['chemin']).'</a>';
         echo '</div>';
 
         }
