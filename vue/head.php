@@ -25,7 +25,8 @@
 
   <link href="https://vjs.zencdn.net/7.3.0/video-js.css" rel="stylesheet">
 
-
+  <link rel="stylesheet" type="text/css" href="includes/css/loading.css"/>
+  <link rel="stylesheet" type="text/css" href="includes/css/loading-btn.css"/>
 
 
 

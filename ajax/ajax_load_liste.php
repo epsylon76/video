@@ -16,7 +16,11 @@ foreach($results as $ligne){
   $date= new DateTime($ligne['date']);
   $date_aff = $date->format('d/m/Y H:i');
 
-  if (file_exists($data.$ligne['chemin'])) {$exist = "";}else{$exist = "introuvable ";};
+  if (file_exists($data.$ligne['chemin'])) {$exist = "";}else{$exist = "introuvable : ";}
+
+  if($ligne['type_partage'] == "video"){$icone = '<i class="fas fa-video"></i>&nbsp;';}
+  elseif($ligne['type_partage'] == "photos"){$icone = '<i class="fas fa-camera"></i>&nbsp;';}
+  elseif($ligne['type_partage'] == "dossier"){$icone = '<i class="fas fa-file-archive"></i>&nbsp;';}
 
   $date_c = date ("F d Y H:i:s.", filectime($data.$ligne['chemin']));
   $date_c = new DateTime($date_c);
@@ -24,7 +28,7 @@ foreach($results as $ligne){
 
   $items[$i][0] = $ligne['id'];
   $items[$i][1] = $date_aff;
-  $items[$i][2] = '<strong>'.$exist.$ligne['chemin'].'</strong>';
+  $items[$i][2] = $icone.'<strong>'.$exist.$ligne['chemin'].'</strong>';
   $items[$i][3] = $date_creation;
   $items[$i][4] = '<a href="?cle='.$ligne['cle'].'">'.$ligne['email'].'</a>';
   $items[$i][5] = $ligne['admin_login'];

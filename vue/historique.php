@@ -20,15 +20,7 @@
       $date= new DateTime($ligne['date']);
       $date_aff = $date->format('d/m/Y H:i');
 
-      echo $icone;
-      echo '&nbsp;';
-      echo $date_aff;
-      echo '<br>';
-      echo $ligne['partage_chemin'];
-      echo '<br>';
-      echo $ligne['email'];
-      echo ' | ';
-      echo $ligne['admin_login'];
+      echo $date_aff.' - '.$icone.' - '.$ligne['partage_chemin'].' - '.$ligne['email'].' - '.$ligne['admin_login'];
 
       echo '</div>';
     }

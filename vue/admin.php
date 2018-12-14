@@ -6,11 +6,11 @@
     <p>
       Le partage fonctionne par nom de dossier, si les noms des dossiers sont modifiés le partage devient inaccessible<br>
       <u>Les dossiers trop volumineux ne sont pas partageables</u>
-    </p>
+    </p><br>
 
-    <p><i class="fas fa-camera"></i> -> Le partage est de type photos et affichera un diaporama et le bouton de téléchargement</p>
-    <p><i class="fas fa-video"></i> -> Le partage est de type vidéo et affichera un lecteur vidéo et le bouton de téléchargement</p>
-    <p><i class="fas fa-folder-plus"></i> -> Le partage est de type dossier compréssé !!! attention à n'utiliser que rarement !!!</p>
+    <p><i class="fas fa-camera"></i> -> Le partage est de type photos</p><br>
+    <p><i class="fas fa-video"></i> -> Le partage est de type vidéo</p><br>
+    <p><i class="fas fa-folder-plus"></i> -> Le partage est de type dossier compréssé <u>attention à n'utiliser que rarement</u></p><br>
   </div>
 
   <?php echo $breadcrumb; ?>

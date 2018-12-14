@@ -11,26 +11,22 @@
     <div class="col-sm">
       <h3>Liste des partages</h3>
       <?php
+      $i=1;
       foreach($liste as $ligne){
 
         echo '<div class="alert alert-secondary">';
 
-        echo '<a href=?cle='.$_GET['cle'].'&id='.$ligne['id'].'>';
+        echo '<a href=?cle='.$_GET['cle'].'&id='.$ligne['id'].'><strong>'.$i.' - </strong>';
 
-        if($ligne['type_partage'] == "video"){
-          //icone vidéo
-          echo '<i class="fas fa-video"></i>&nbsp;';
-        }elseif($ligne['type_partage'] == "photos"){
-          //icone photos
-          echo '<i class="fas fa-camera"></i>&nbsp;';
-        }elseif($ligne['type_partage'] == "dossier"){
-          //icone dossier zip
-          echo '<i class="fas fa-file-archive"></i>&nbsp;';
-        }
+        if($ligne['type_partage'] == "video"){$icone = '<i class="fas fa-video"></i>&nbsp;';}
+        elseif($ligne['type_partage'] == "photos"){$icone = '<i class="fas fa-camera"></i>&nbsp;';}
+        elseif($ligne['type_partage'] == "dossier"){$icone = '<i class="fas fa-file-archive"></i>&nbsp;';}
+
+        echo $icone;
 
         echo basename($ligne['chemin']).'</a>';
         echo '</div>';
-
+        $i++;
         }
 
        ?>

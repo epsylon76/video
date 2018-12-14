@@ -1,7 +1,7 @@
 
 
 <div class="container">
-  <h2>Liste des partages</h2>
+  <h2>Partages</h2>
   <table id="liste"  class="table table-striped" style="width:100%">
     <thead>
       <tr>

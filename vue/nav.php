@@ -12,7 +12,7 @@
           <a class="nav-link" href="?page=dossiers">Dossiers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="?page=historique">historique</a>
+          <a class="nav-link" href="?page=historique">Historique</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="?page=liste">Partages</a>
