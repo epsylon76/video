@@ -9,7 +9,7 @@
       //couleur
       if($ligne['action'] == "dl_video"){$couleur = "alert-primary"; $icone= '<i class="fas fa-download">&nbsp;</i><i class="fas fa-video"></i>';}
       if($ligne['action'] == "dl_photos"){$couleur = "alert-primary"; $icone= '<i class="fas fa-download">&nbsp;</i><i class="fas fa-camera"></i>';}
-      if($ligne['action'] == "dl_dossier"){$couleur = "alert-primary"; $icone= '<i class="fas fa-download">&nbsp;</i><i class="fas fa-folder"></i>';}
+      if($ligne['action'] == "dl_dossier"){$couleur = "alert-primary"; $icone= '<i class="fas fa-download">&nbsp;</i><i class="fas fa-file-archive"></i>';}
       if($ligne['action'] == "set_partage"){$couleur = "alert-success"; $icone = '<i class="fas fa-share-alt"></i>';}
       if($ligne['action'] == "unset_partage"){$couleur = "alert-danger"; $icone = '<i class="fas fa-trash"></i>';}
       if($ligne['action'] == "login_admin"){$couleur = "alert-warning"; $icone = '<i class="fas fa-sign-in-alt"></i>';}
@@ -20,7 +20,7 @@
       $date= new DateTime($ligne['date']);
       $date_aff = $date->format('d/m/Y H:i');
 
-      echo $date_aff.' - '.$icone.' - '.$ligne['partage_chemin'].' - '.$ligne['email'].' - '.$ligne['admin_login'];
+      echo '<strong>'.$date_aff.'</strong> - '.$icone.' - '.$ligne['partage_chemin'].' - '.$ligne['email'].' - '.$ligne['admin_login'];
 
       echo '</div>';
     }
