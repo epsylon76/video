@@ -15,6 +15,10 @@ $nom_fichier = explode("/", $chemin);
 $nom_fichier = array_reverse($nom_fichier);
 $nom_fichier = $nom_fichier[0];
 
+$date = date('d/m/Y', filectime($chemin));
+
+$taille = number_format(filesize($chemin) / 1048576, 2);
+
 include('./vue/video.php');
 
 //ajout du script DL si user

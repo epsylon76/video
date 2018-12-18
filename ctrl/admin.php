@@ -18,7 +18,7 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
         $chemin = $_GET['chemin'];
       }
       $partages = new partage();
-      $dossier = new dossier($data,$chemin);
+      $dossier = new dossier();
 
       $listefichiers = $dossier->contenu_dossier($chemin,$data);
 
@@ -71,9 +71,13 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
       include('ctrl/renvoi_mail.php');
       break;
 
-      //renvoi mail
+
       case "parametres":
       include('ctrl/parametres.php');
+      break;
+
+      case "stats":
+      include('ctrl/stats.php');
       break;
 
     }

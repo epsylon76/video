@@ -3,8 +3,8 @@
 
 
 	<p><strong>Nom</strong> : <?php echo $nom_fichier; ?></p>
-	<p><strong>Date</strong> : <?php echo date('d/m/Y', filectime($chemin)); ?></p>
-	<p><strong>Taille</strong> : <?php echo  number_format(filesize($chemin) / 1048576, 2); ?>Mo</p>
+	<p><strong>Date</strong> : <?php echo $date; ?></p>
+	<p><strong>Taille</strong> : <?php echo $taille; ?>Mo</p>
 	<p>N'oubliez pas de <strong>sauvegarder la vidéo</strong></p>
 	<div class="text-center" style="margin-top:50px; margin-bottom:50px;">
 		<a class="btn btn-primary btn-lg" id="dl_button" href="<?php echo $chemin ?>" download="<?php echo $nom_fichier; ?>" ><i class="fas fa-download"></i>&nbsp;Télécharger la vidéo</a>

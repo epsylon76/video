@@ -17,6 +17,9 @@
         <li class="nav-item">
           <a class="nav-link" href="?page=liste">Partages</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="?page=stats">Stats</a>
+        </li>
 
       </ul>
       <span class="nav-link" style="color:white">

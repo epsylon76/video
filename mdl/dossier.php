@@ -93,38 +93,38 @@ class dossier {
       }
       elseif($type[1] == 'mp4' || $type[1] == 'MP4' || $type[1] == 'mkv' || $type[1] == 'MKV' || $type[1] == 'avi' || $type[1] == 'AVI'){
 
-          //si vidéo on affiche le partage
-          $items .= '<li class="list-group-item">';
-          $items .= '<div class="row justify-content-between">';//ligne
-          $items .= '<div class="col-md-6">';//colonne 4
-          $items .= '<i class="fas fa-video"></i>&nbsp;<a href="?page=video&video='.$chemin.$ligne.'">'.$ligne.'</a>';
-          if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
-          $items .= '</div>';
-          $items .= '<div class="col-md-5">';
-          $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
-          $items .= '<div class="form-group">';
-          $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
-          $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
-          $items .= '<input type="hidden" name="type_partage" value="video">';
-          $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">';
-          $items .= '&nbsp;<a class="btn btn-sm btn-primary" href="?page=preview&video='.$chemin.$ligne.'"><i class="fas fa-eye"></i></a>&nbsp;<button type="submit" class="btn btn-sm btn-info"><i class="fas fa-video"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
-          $items .= '</form>';
-          $items .= '</div>';
-          $items .= '</div>';
-          $items .= '</li>';
+        //si vidéo on affiche le partage
+        $items .= '<li class="list-group-item">';
+        $items .= '<div class="row justify-content-between">';//ligne
+        $items .= '<div class="col-md-6">';//colonne 4
+        $items .= '<i class="fas fa-video"></i>&nbsp;<a href="?page=video&video='.$chemin.$ligne.'">'.$ligne.'</a>';
+        if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
+        $items .= '</div>';
+        $items .= '<div class="col-md-5">';
+        $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
+        $items .= '<div class="form-group">';
+        $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
+        $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
+        $items .= '<input type="hidden" name="type_partage" value="video">';
+        $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">';
+        $items .= '&nbsp;<a class="btn btn-sm btn-primary" href="?page=preview&video='.$chemin.$ligne.'"><i class="fas fa-eye"></i></a>&nbsp;<button type="submit" class="btn btn-sm btn-info"><i class="fas fa-video"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
+        $items .= '</form>';
+        $items .= '</div>';
+        $items .= '</div>';
+        $items .= '</li>';
 
-        }elseif($type[1] == 'jpg' || $type[1] == 'JPG'){
-          $compteur_images++; //si photo on compte mais on affiche pas
-        }elseif($ligne != '.DS_Store'){
-          //autre fichier
-          $items .= '<li class="list-group-item">';
-          $items .= '<div class="row justify-content-between">';//ligne
-          $items .= '<div class="col-md-6">';//colonne 4
-          $items .= '<i class="fas fa-file"></i>&nbsp;'.$ligne;
-          $items .= '</div>';
-          $items .= '</div>';
-          $items .= '</li>';
-        }
+      }elseif($type[1] == 'jpg' || $type[1] == 'JPG'){
+        $compteur_images++; //si photo on compte mais on affiche pas
+      }elseif($ligne != '.DS_Store'){
+        //autre fichier
+        $items .= '<li class="list-group-item">';
+        $items .= '<div class="row justify-content-between">';//ligne
+        $items .= '<div class="col-md-6">';//colonne 4
+        $items .= '<i class="fas fa-file"></i>&nbsp;'.$ligne;
+        $items .= '</div>';
+        $items .= '</div>';
+        $items .= '</li>';
+      }
 
     }// for each (on a fini d'itérer les fichiers contenu dans le chemin en cours)
 
@@ -194,6 +194,44 @@ class dossier {
 
     $retour .= '</ol></nav>';
     return $retour;
+  }
+
+  function HumanSize($Bytes)
+  {
+    $Type=array("o", "Ko", "Mo", "Go", "To", "Po", "Exa", "Zetta", "Yotta");
+    $Index=0;
+    while($Bytes>=1024)
+    {
+      $Bytes/=1024;
+      $Index++;
+    }
+    return("".floor($Bytes)." ".$Type[$Index]);
+  }
+
+  function espace_disque($data){
+    $montages = scandir($data);
+    $m = 0;
+    foreach($montages as $volume){
+      if($volume != '.' && $volume != '..'){
+        $vol[$m]['nom'] = $volume;
+        $free = disk_free_space($data.$volume);
+        $vol[$m]['free'] = $free;
+        $vol[$m]['free_human'] = $this->HumanSize($free);
+        $total = disk_total_space($data.$volume);
+        $vol[$m]['total'] = $total;
+        $vol[$m]['total_human'] = $this->HumanSize($vol[$m]['total']);
+
+        $vol[$m]['occupe'] = $total - $free;
+
+        $percent_space = 100 / $total;
+        $percent_space = $percent_space * ($total - $free);
+        $vol[$m]['percent'] = $percent_space;
+
+        $m++;
+      }
+    }
+
+    return $vol;
   }
 
 
