@@ -16,15 +16,19 @@ foreach($results as $ligne){
   $date= new DateTime($ligne['date']);
   $date_aff = $date->format('d/m/Y H:i');
 
-  if (file_exists($data.$ligne['chemin'])) {$exist = "";}else{$exist = "introuvable : ";}
+  if (file_exists($data.$ligne['chemin'])) {$exist = true;}else{$exist = false;}
 
   if($ligne['type_partage'] == "video"){$icone = '<i class="fas fa-video"></i>&nbsp;';}
   elseif($ligne['type_partage'] == "photos"){$icone = '<i class="fas fa-camera"></i>&nbsp;';}
   elseif($ligne['type_partage'] == "dossier"){$icone = '<i class="fas fa-file-archive"></i>&nbsp;';}
 
-  $date_c = date ("F d Y H:i:s.", filectime($data.$ligne['chemin']));
-  $date_c = new DateTime($date_c);
-  $date_creation = $date_c->format('d/m/Y');
+  if($exist){
+    $date_c = date ("F d Y H:i:s.", filectime($data.$ligne['chemin']));
+    $date_c = new DateTime($date_c);
+    $date_creation = $date_c->format('d/m/Y');
+  }else{
+    $date_creation = '<i class="fas fa-times" style="color:red"></i> fichier introuvable';
+  }
 
   $items[$i][0] = $ligne['id'];
   $items[$i][1] = $date_aff;
