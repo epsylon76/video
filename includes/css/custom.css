@@ -30,4 +30,8 @@ ul{
 }
 #logo{
   height:200px;
+  margin-bottom:50px;
+}
+h2, h1{
+  margin-top:40px;
 }

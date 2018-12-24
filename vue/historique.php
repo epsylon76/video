@@ -1,5 +1,5 @@
 <div class="container">
-  <h3>Tableau historique</h3>
+  <h2>Tableau historique</h2>
   <p> historique sur 500 évènements</p>
 
 

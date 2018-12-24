@@ -10,18 +10,19 @@
   </form>
 
   <form action="./?page=parametres" method="post" >
+    
     <h2>Core</h2>
     <h5>Dossier data</h5>
-    <input type="text" name="dossier_data" size="100" value="<?php echo $params['dossier_data']; ?>"></input>
+    <input type="text" name="dossier_data" size="70" value="<?php echo $params['dossier_data']; ?>"></input>
 
     <h5>Url site</h5>
-    <input type="text" name="url_domaine" size="200" value="<?php echo $params['url_domaine']; ?>"></input>
+    <input type="text" name="url_domaine" size="100" value="<?php echo $params['url_domaine']; ?>"></input>
 
     <h2>Design</h2>
     <h5>couleur fond</h5>
-    <input type="color" name="couleur_fond" value="<?php echo $params['couleur_fond']; ?>"></input>
+    <input type="color" name="couleur_fond" style="height:50px; width:50px; border:3px solid black; border-radius:10px;" value="<?php echo $params['couleur_fond']; ?>"></input>
 
-    <h5>Titre Page</h5>
+    <h5>Titre Site</h5>
     <input type="text" name="page_titre" value="<?php echo $params['page_titre']; ?>"></input>
 
     <h5>Texte d'accueil</h5>
@@ -30,7 +31,7 @@
     <h2>Email</h2>
 
     <h5>Email</h5>
-    <input type="text" name="email_expediteur" id="email_expediteur" value="<?php echo $params['email_expediteur']; ?>" size="30"></input>
+    <input type="text" name="email_expediteur" id="email_expediteur" value="<?php echo $params['email_expediteur']; ?>" size="50"></input>
 
     <h5>Objet Email</h5>
     <input type="text" name="email_sujet" id="email_sujet" value="<?php echo $params['email_sujet']; ?>"  size="100"></input>
@@ -48,7 +49,7 @@
     <textarea name="email_footer" id="email_footer"><?php echo $params['email_footer']; ?></textarea>
 
     <h2>Code Tracking analytics</h2>
-    <textarea name="analytics" id="analytics" style="width:100%"><?php echo $params['analytics']; ?></textarea>
+    <textarea name="analytics" id="analytics" style="width:100%; height:200px;"><?php echo $params['analytics']; ?></textarea>
 
     <h3>Activer partage dossier zip</h3>
     <div class="form-check form-check-inline">

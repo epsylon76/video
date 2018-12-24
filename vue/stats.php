@@ -13,9 +13,7 @@
       </div>
     </div>
 
-    <div class="col">
-      <a href="#">Vider</a>
-    </div>
+
   </div>
 
   <?php  foreach($vol as $item_vol){ ?>
@@ -33,8 +31,6 @@
         </div>
       </div>
 
-      <div class="col">
-      </div>
 
     </div>
 
