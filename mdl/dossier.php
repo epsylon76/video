@@ -20,6 +20,24 @@ class dossier {
     return $type_fichier;
   }
 
+  function detect_photos($sousdossier){
+
+  }
+
+  function nb_sous_dossiers($sousdossier){
+    $nb_sous_dossiers = 0;
+    $sous_dossiers = scandir($sousdossier);
+    foreach($sous_dossiers as $sous){
+      if($sous != "." && $sous != ".."){
+        $type = filetype($sousdossier.'/'.$sous);
+        if($type == 'dir'){
+          $nb_sous_dossiers ++;
+        }
+      }
+    }
+    return $nb_sous_dossiers;
+  }
+
 
   function affiche_contenu($listefichiers){
 
@@ -54,16 +72,9 @@ class dossier {
           default :
 
           //calcul du nombre de sous dossiers
-          $sous_dossiers = scandir($data.$chemin.$ligne);
-          foreach($sous_dossiers as $sous){
-            if($sous != "." && $sous != ".."){
-              $type = $this->infos_fichier($data,$chemin,$ligne.'/'.$sous);
-              if($type[0] == 'dir'){
-                $nb_sous_dossiers ++;
-              }
-            }
-          }
-          //
+          $nb_sous_dossiers = $this->nb_sous_dossiers($data.$chemin.$ligne);
+          //calcul du nombre de Photos
+          $nb_photos = $this->detect_photos($data.$chemin.$ligne);
 
           $items .= '<li class="list-group-item">';
           $items .= '<div class=" row justify-content-between">';//ligne
@@ -74,14 +85,16 @@ class dossier {
 
           if($nb_sous_dossiers <= 2 && $params['partage_dossier']==true){
             $items .= '<div class="col-md-5">';//colonne droite
-            $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
-            $items .= '<div class="form-group">';
-            $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
-            $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
-            $items .= '<input type="hidden" name="type_partage" value="dossier">';
-            $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">';
-            $items .= '&nbsp;<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-folder-plus"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
-            $items .= '</form>';
+            $items .= '<button type="button" class="btn btn-danger btn-sm"
+            data-typepartage="dossier"
+            data-chemin="'.$chemin.$ligne.'"
+            data-retour="'.$chemin.'"
+            data-toggle="modal"
+            data-target="#partageModal">
+            <i class="fas fa-folder-plus"></i>
+            &nbsp;Partager&nbsp;&nbsp;
+            <span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span>
+            </button>';
             $items .= '</div>';
             $items .= '</div>';
           }
@@ -90,25 +103,29 @@ class dossier {
           break;
         }
 
-      }
+      }//fin type dossier
       elseif($type[1] == 'mp4' || $type[1] == 'MP4' || $type[1] == 'mkv' || $type[1] == 'MKV' || $type[1] == 'avi' || $type[1] == 'AVI'){
 
         //si vidéo on affiche le partage
         $items .= '<li class="list-group-item">';
         $items .= '<div class="row justify-content-between">';//ligne
         $items .= '<div class="col-md-6">';//colonne 4
+
         $items .= '<i class="fas fa-video"></i>&nbsp;<a href="?page=video&video='.$chemin.$ligne.'">'.$ligne.'</a>';
         if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
         $items .= '</div>';
+
         $items .= '<div class="col-md-5">';
-        $items .= '<form method="post" action="?page=set_partage" class="form-inline">';
-        $items .= '<div class="form-group">';
-        $items .= '<input type="hidden" name="chemin" value="'.$chemin.$ligne.'">';
-        $items .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
-        $items .= '<input type="hidden" name="type_partage" value="video">';
-        $items .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">';
-        $items .= '&nbsp;<a class="btn btn-sm btn-primary" href="?page=preview&video='.$chemin.$ligne.'"><i class="fas fa-eye"></i></a>&nbsp;<button type="submit" class="btn btn-sm btn-info"><i class="fas fa-video"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span></button>';
-        $items .= '</form>';
+        $items .= '<button type="button" class="btn btn-primary btn-sm"
+        data-typepartage="video"
+        data-chemin="'.$chemin.$ligne.'"
+        data-retour="'.$chemin.'"
+        data-toggle="modal"
+        data-target="#partageModal">
+        <i class="fas fa-video"></i>
+        &nbsp;Partager&nbsp;&nbsp;
+        <span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span>
+        </button>';
         $items .= '</div>';
         $items .= '</div>';
         $items .= '</li>';
