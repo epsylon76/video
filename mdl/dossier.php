@@ -121,6 +121,7 @@ class dossier {
         $items .= '<div class="row justify-content-between">';//ligne
         $items .= '<div class="col-md-6">';//colonne 4
         $items .= '<i class="fas fa-file"></i>&nbsp;'.$ligne;
+        $items .= '<a href='.$chemin.$ligne.'>dl</a>';
         $items .= '</div>';
         $items .= '</div>';
         $items .= '</li>';
