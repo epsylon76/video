@@ -17,9 +17,11 @@ $taille = 0;
 $date ='';
 $nb = 0;
 foreach ($listefichiers as $item) {
-  $date = filectime($data.$chemin.$item);
-  $taille = ($taille + filesize($data.$chemin.$item));
-  $nb++;
+  if($item != '.' && $item != '..'){
+    $date = filectime($data.$chemin.'/'.$item);
+    $taille = ($taille + filesize($data.$chemin.'/'.$item));
+    $nb++;
+  }
 }
 
 //fin ops

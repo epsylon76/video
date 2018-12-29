@@ -21,7 +21,21 @@ class dossier {
   }
 
   function detect_photos($sousdossier){
-
+    global $data;
+    $liste = scandir($sousdossier);
+    $nb = 0;
+    foreach($liste as $item){
+      if($item != '.' && $item != '..'){
+        $type = filetype($sousdossier.'/'.$item);
+        if($type == 'file'){
+          $ext = pathinfo($sousdossier.'/'.$item);
+          if($ext['extension'] == "jpg" || $ext['extension'] == "JPG"){
+            $nb++;
+          }
+        }
+      }
+    }
+    return $nb;
   }
 
   function nb_sous_dossiers($sousdossier){
@@ -31,7 +45,7 @@ class dossier {
       if($sous != "." && $sous != ".."){
         $type = filetype($sousdossier.'/'.$sous);
         if($type == 'dir'){
-          $nb_sous_dossiers ++;
+          $nb_sous_dossiers++;
         }
       }
     }
@@ -74,7 +88,7 @@ class dossier {
           //calcul du nombre de sous dossiers
           $nb_sous_dossiers = $this->nb_sous_dossiers($data.$chemin.$ligne);
           //calcul du nombre de Photos
-          $nb_photos = $this->detect_photos($data.$chemin.$ligne);
+          $nb_photos = $this->detect_photos(rtrim($data, '/').$chemin.$ligne);
 
           $items .= '<li class="list-group-item">';
           $items .= '<div class=" row justify-content-between">';//ligne
@@ -83,8 +97,26 @@ class dossier {
           if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
           $items .= '</div>';//fin colonne gauche
 
+          $items .= '<div class="col-md-5">';//colonne droite
+
+          //bouton de partage des photos
+          if($nb_photos >= 4){
+            $items .= '<a class="btn btn-sm btn-primary" href="?page=diapo&photos='.$chemin.$ligne.'/"><i class="fas fa-eye"></i>&nbsp;'.$nb_photos.'</a>';
+            $items .= '<button type="button" class="btn btn-success btn-sm"
+            data-typepartage="photos"
+            data-chemin="'.$chemin.$ligne.'"
+            data-retour="'.$chemin.'"
+            data-toggle="modal"
+            data-target="#partageModal">
+            <i class="fas fa-camera"></i>
+            &nbsp;Partager&nbsp;&nbsp;
+            <span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span>
+            </button>';
+          }
+
+          //bouton de partage des dossiers zip
           if($nb_sous_dossiers <= 2 && $params['partage_dossier']==true){
-            $items .= '<div class="col-md-5">';//colonne droite
+
             $items .= '<button type="button" class="btn btn-danger btn-sm"
             data-typepartage="dossier"
             data-chemin="'.$chemin.$ligne.'"
@@ -95,16 +127,18 @@ class dossier {
             &nbsp;Partager&nbsp;&nbsp;
             <span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin.$ligne).'</span>
             </button>';
-            $items .= '</div>';
-            $items .= '</div>';
           }
 
+          $items .= '</div>';//col droite
+          $items .= '</div>';//row
           $items .= '</li>';
           break;
         }
 
       }//fin type dossier
       elseif($type[1] == 'mp4' || $type[1] == 'MP4' || $type[1] == 'mkv' || $type[1] == 'MKV' || $type[1] == 'avi' || $type[1] == 'AVI'){
+
+        //type VIDEO
 
         //si vidéo on affiche le partage
         $items .= '<li class="list-group-item">';
@@ -116,6 +150,7 @@ class dossier {
         $items .= '</div>';
 
         $items .= '<div class="col-md-5">';
+        $items .= '&nbsp;<a class="btn btn-sm btn-primary" href="?page=preview&video='.$chemin.$ligne.'"><i class="fas fa-eye"></i></a>&nbsp;';
         $items .= '<button type="button" class="btn btn-primary btn-sm"
         data-typepartage="video"
         data-chemin="'.$chemin.$ligne.'"
@@ -138,7 +173,7 @@ class dossier {
         $items .= '<div class="row justify-content-between">';//ligne
         $items .= '<div class="col-md-6">';//colonne 4
         $items .= '<i class="fas fa-file"></i>&nbsp;'.$ligne;
-        $items .= '&nbsp;<a href="./data'.$chemin.$ligne.'">‌‌<i class="fas fa-file-download"></i></a>'; 
+        $items .= '&nbsp;<a href="./data'.$chemin.$ligne.'">‌‌<i class="fas fa-file-download"></i></a>';
         $items .= '</div>';
         $items .= '</div>';
         $items .= '</li>';
@@ -148,17 +183,8 @@ class dossier {
 
 
     if($compteur_images > 2 && $nb_sous_dossiers == 0){//mode dossier photos
-      $retour .= '<h1> Photos </h1>';
-      $retour .= '<p><strong>Note : </strong>s\'il y a autre chose que des photos dans ce dossier, ces fichiers ne seront pas partagés</p>';
-      $retour .= '<form method="post" action="?page=set_partage" class="form-inline">';
-      $retour .= '<input type="hidden" name="chemin" value="'.$chemin.'">';
-      $retour .= '<input type="hidden" name="chemin_retour" value="'.$chemin.'">';
-      $retour .= '<input type="hidden" name="type_partage" value="photos">';
+      $retour .= '<h3> Photos </h3>';
       $retour .= 'Il y a <strong>&nbsp;'.$compteur_images.'</strong>&nbsp;photos dans ce dossier&nbsp;<a class="btn btn-sm btn-primary" href="?page=diapo&photos='.$chemin.'"><i class="fas fa-eye"></i></a>';
-      if($partages->nb_partages($chemin) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
-      $retour .= '&nbsp;<input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">';
-      $retour .= '&nbsp;<button type="submit" class="btn btn-sm btn-info"><i class="fas fa-camera"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge '.$badge_color.'">'.$partages->nb_partages($chemin).'</span></button>';
-      $retour .= '</form>';
     }
 
     //rendu de la liste
@@ -185,7 +211,7 @@ class dossier {
         #conditions d'affichage
         #si image
         if($type[1] == 'jpg' || $type[1] == 'JPG'){
-          $retour .= '<img class="owl-lazy" data-src="/data'.$chemin.$ligne.'" style="max-width: 100%;">';
+          $retour .= '<img class="owl-lazy" data-src="./data'.$chemin.$ligne.'" style="max-width: 100%;">';
           $compteur_images++;
         }
 

@@ -30,15 +30,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <div id="chemin"></div>
-        <form action="?page=set_partage" method="post">
+        <div id="chemin" style="font-weight:800;"></div>
+        <br>
+        <form action="?page=set_partage" method="post" class="form-inline">
           <!-- hidden -->
           <input type="hidden" name="chemin" id="hiddenchemin">
           <input type="hidden" name="chemin_retour" id="hiddenretour">
           <input type="hidden" name="type_partage" id="hiddentype">
           <!-- hidden -->
           <div class="form-group">
-            <label for="email" class="col-form-label">Email :</label>
+            <label for="email" class="col-form-label">Email :&nbsp;</label>
             <input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">
           </div>
       </div>

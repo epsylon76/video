@@ -7,7 +7,7 @@ $folder = $folder['chemin'];
 $data=rtrim($data, '/');
 
 //on concatene
-$folder=$data.$folder;
+$folder=$data.$folder.'/';
 
 
 $i=0;
@@ -25,14 +25,8 @@ use ZipStream\ZipStream;
 # Autoload the dependencies
 require './vendor/autoload.php';
 
-
-
 # create a new zipstream object
 $zip = new ZipStream('photos.zip'); // à changer
-
-# create a file named 'hello.txt'
-//$zip->addFile('hello.txt', 'This is the contents of hello.txt');
-
 
 foreach($liste as $file){
   $zip->addFileFromPath($file, $folder.$file);
