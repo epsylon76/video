@@ -32,7 +32,7 @@ foreach($results as $ligne){
 
   $items[$i][0] = $ligne['id'];
   $items[$i][1] = $date_aff;
-  $items[$i][2] = $icone.'<strong>'.$exist.$ligne['chemin'].'</strong>';
+  $items[$i][2] = $icone.'<strong>'.$ligne['chemin'].'</strong>';
   $items[$i][3] = $date_creation;
   $items[$i][4] = '<a href="?cle='.$ligne['cle'].'">'.$ligne['email'].'</a>';
   $items[$i][5] = $ligne['admin_login'];
