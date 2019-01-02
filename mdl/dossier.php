@@ -97,7 +97,7 @@ class dossier {
           if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
           $items .= '</div>';//fin colonne gauche
 
-          $items .= '<div class="col-md-5">';//colonne droite
+          $items .= '<div class="col-md-6"  style="text-align:right">';//colonne droite
 
           //bouton de partage des photos
           if($nb_photos >= 4){
@@ -140,16 +140,17 @@ class dossier {
 
         //type VIDEO
 
-        //si vidéo on affiche le partage
+        //si partage vidéo
         $items .= '<li class="list-group-item">';
         $items .= '<div class="row justify-content-between">';//ligne
-        $items .= '<div class="col-md-6">';//colonne 4
-
+        //colonne gauche
+        $items .= '<div class="col-md-6">';
         $items .= '<i class="fas fa-video"></i>&nbsp;<a href="?page=video&video='.$chemin.$ligne.'">'.$ligne.'</a>';
         if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
         $items .= '</div>';
 
-        $items .= '<div class="col-md-5">';
+         //colonne droite
+        $items .= '<div class="col-md-6" style="text-align:right">';
         $items .= '&nbsp;<a class="btn btn-sm btn-primary" href="?page=preview&video='.$chemin.$ligne.'"><i class="fas fa-eye"></i></a>&nbsp;';
         $items .= '<button type="button" class="btn btn-primary btn-sm"
         data-typepartage="video"
@@ -171,7 +172,7 @@ class dossier {
         //autre fichier
         $items .= '<li class="list-group-item">';
         $items .= '<div class="row justify-content-between">';//ligne
-        $items .= '<div class="col-md-6">';//colonne 4
+        $items .= '<div class="col-md-6">'; //colonne droite
         $items .= '<i class="fas fa-file"></i>&nbsp;'.$ligne;
         $items .= '&nbsp;<a href="./data'.$chemin.$ligne.'">‌‌<i class="fas fa-file-download"></i></a>';
         $items .= '</div>';
