@@ -36,4 +36,11 @@
 
   <?php } ?>
 
+  <!-- graph-->
+  <div class="row">
+      <div id="graph" style="width:100%"></div>
+  </div>
 </div> <!-- container -->
+
+
+<?php include('./scripts/graph.php'); ?>

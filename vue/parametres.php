@@ -10,7 +10,7 @@
   </form>
 
   <form action="./?page=parametres" method="post" >
-    
+
     <h2>Core</h2>
     <h5>Dossier data</h5>
     <input type="text" name="dossier_data" size="70" value="<?php echo $params['dossier_data']; ?>"></input>
@@ -61,6 +61,11 @@
       <label class="form-check-label" for="inlineRadio2">désactiver</label>
     </div>
     <br/>
+
+    <h3>Interface réseau</h3>
+    <input type="text" name="net_iface" id="net_iface" value="<?php echo $params['net_iface']; ?>" size="10"></input>
+    <p>attention paramètre sensible</p>
+    <br />
 
     <input type="submit" class="btn btn-success" value="Enregistrer"/>
   </form>
