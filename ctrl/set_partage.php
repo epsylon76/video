@@ -12,9 +12,10 @@ if(!isset($_POST['email']) && !isset($_POST['chemin'])){
   $chemin = $_POST['chemin'];
   $chemin_retour = $_POST['chemin_retour'];
   $type_partage = $_POST['type_partage'];
+  $np_post = $_POST['np_post_status'];
 }
 
-$retour = $partage->set_partage($chemin,$email,$type_partage,$_SESSION['login']);
+$retour = $partage->set_partage($chemin,$email,$type_partage,$_SESSION['login'],$np_post);
 $cle=$retour['cle'];
 //ajout à l'historique ($id_admin,$id_partage,$action)
 $historique->set_partage($_SESSION['login'],$chemin,$email);

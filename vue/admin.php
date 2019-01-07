@@ -14,9 +14,9 @@
     </ul>
   </div>
 
-    <?php echo $breadcrumb; ?>
+  <?php echo $breadcrumb; ?>
 
-    <p class="lead"><?php echo $dossier->affiche_contenu($listefichiers);?></p>
+  <p class="lead"><?php echo $dossier->affiche_contenu($listefichiers);?></p>
 
 </main><!-- /.container -->
 
@@ -42,12 +42,28 @@
             <label for="email" class="col-form-label">Email :&nbsp;</label>
             <input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">
           </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="submit" class="btn btn-success">partager</button>
-      </div>
-    </form>
+
+          <div class="form-group">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="np_post_status_normal" name="np_post_status" class="custom-control-input" value="1" checked>
+              <label class="custom-control-label" for="np_post_status_normal">Prevue</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="np_post_status_np_jour" name="np_post_status" class="custom-control-input" value="2">
+              <label class="custom-control-label" for="np_post_status_np_jour">NP Jour même</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="np_post_status_np_post" name="np_post_status" class="custom-control-input" value="3">
+              <label class="custom-control-label" for="np_post_status_np_post">NP Vente POST RDV</label>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          <button type="submit" class="btn btn-success">partager</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
