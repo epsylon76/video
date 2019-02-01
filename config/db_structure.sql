@@ -53,11 +53,11 @@ CREATE TABLE `partage` (
   `email` varchar(60) NOT NULL,
   `type_partage` varchar(20) NOT NULL,
   `cle` varchar(40) NOT NULL,
-  `date` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `date` datetime NOT NULL,
   `admin_login` varchar(50) NOT NULL,
   `np_post` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
--- 2019-01-07 07:36:06
+-- 2019-02-01 07:22:34
