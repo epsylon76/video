@@ -3,6 +3,7 @@
 class dossier {
 
   function contenu_dossier($chemin,$data){
+
     $listefichiers = scandir($data.$chemin);
     natsort($listefichiers);
     return $listefichiers;
@@ -85,6 +86,10 @@ class dossier {
 
           default :
 
+          //clean les url
+          $ligneurl = urlencode($ligne);
+          $cheminurl = urlencode($chemin);
+
           //calcul du nombre de sous dossiers
           $nb_sous_dossiers = $this->nb_sous_dossiers($data.$chemin.$ligne);
           //calcul du nombre de Photos
@@ -93,7 +98,7 @@ class dossier {
           $items .= '<li class="list-group-item">';
           $items .= '<div class=" row justify-content-between">';//ligne
           $items .= '<div class="col-md-6">';//colonne 4
-          $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="?page=dossiers&chemin='.$chemin.$ligne.'/">'.$ligne.'</a>';
+          $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="?page=dossiers&chemin='.$cheminurl.$ligneurl.'/">'.$ligne.'</a>';
           if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
           $items .= '</div>';//fin colonne gauche
 
@@ -140,12 +145,16 @@ class dossier {
 
         //type VIDEO
 
+        //clean les url
+        $ligneurl = urlencode($ligne);
+        $cheminurl = urlencode($chemin);
+
         //si partage vidéo
         $items .= '<li class="list-group-item">';
         $items .= '<div class="row justify-content-between">';//ligne
         //colonne gauche
         $items .= '<div class="col-md-6">';
-        $items .= '<i class="fas fa-video"></i>&nbsp;<a href="?page=video&video='.$chemin.$ligne.'">'.$ligne.'</a>';
+        $items .= '<i class="fas fa-video"></i>&nbsp;<a href="?page=video&video='.$cheminurl.$ligneurl.'">'.$ligne.'</a>';
         if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
         $items .= '</div>';
 

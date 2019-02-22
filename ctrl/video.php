@@ -7,13 +7,16 @@ if(isset($_GET['id']) && $partage->check_partage($_GET['cle'], $_GET['id'])){ //
   $mode = "user";
 
 }else{ //mode admin
+
   $chemin='./data'.$_GET['video'];
+
   $mode = "admin";
 }
 
 $nom_fichier = explode("/", $chemin);
 $nom_fichier = array_reverse($nom_fichier);
 $nom_fichier = $nom_fichier[0];
+
 
 $date = date('d/m/Y', filectime($chemin));
 
