@@ -120,7 +120,7 @@ class dossier {
           }
 
           //bouton de partage des dossiers zip
-          if($nb_sous_dossiers <= 2 && $params['partage_dossier']==true){
+          if($nb_sous_dossiers <= 4 && $params['partage_dossier']==true){
 
             $items .= '<button type="button" class="btn btn-danger btn-sm"
             data-typepartage="dossier"
