@@ -177,7 +177,7 @@ class dossier {
 
       }elseif($type[1] == 'jpg' || $type[1] == 'JPG'){
         $compteur_images++; //si photo on compte mais on affiche pas
-      }elseif($ligne != '.DS_Store' && $ligne != '._.DS_Store'){
+      }elseif($ligne != '.DS_Store' && $ligne != '._.DS_Store' && $ligne != 'Thumbs.db' ){
         //autre fichier
         $items .= '<li class="list-group-item">';
         $items .= '<div class="row justify-content-between">';//ligne
