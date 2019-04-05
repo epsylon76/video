@@ -8,7 +8,7 @@ $zip_folder="./zip/";
 $listefichiers = scandir($zip_folder);
 $taille = 0;
 foreach($listefichiers as $fichier){
-  if($fichier != '.' && $fichier != '..'){
+  if($fichier != '.' && $fichier != '..' && $fichier != '.placeholder'){
     $temp = floor(filesize($data.'../zip/'.$fichier) / 1048576);
     $taille = $taille + $temp;
   }
