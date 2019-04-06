@@ -11,3 +11,5 @@ Il permet de partager des vidéos
 Il permet de partager un dossier compressé directement en zip streamé
 
 Le système donne un accès a ses partage via un email contenant un lien clé
+
+ne pas oublier de faire un link dans le dossier racine de l'app s'appelant /data/ vers le stockage

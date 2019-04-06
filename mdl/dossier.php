@@ -4,7 +4,7 @@ class dossier {
 
   function contenu_dossier($chemin,$data){
 
-    $listefichiers = scandir($data.$chemin);
+    $listefichiers = preg_grep('/^([^.])/', scandir($data.$chemin)); //exclut les fichiers commençant par un point
     natsort($listefichiers);
     return $listefichiers;
   }
@@ -160,7 +160,7 @@ class dossier {
 
          //colonne droite
         $items .= '<div class="col-md-6" style="text-align:right">';
-        $items .= '&nbsp;<a class="btn btn-sm btn-primary" href="?page=preview&video='.$chemin.$ligne.'"><i class="fas fa-eye"></i></a>&nbsp;';
+        //$items .= '&nbsp;<a class="btn btn-sm btn-primary" href="?page=preview&video='.$chemin.$ligne.'"><i class="fas fa-eye"></i></a>&nbsp;';
         $items .= '<button type="button" class="btn btn-primary btn-sm"
         data-typepartage="video"
         data-chemin="'.$chemin.$ligne.'"
