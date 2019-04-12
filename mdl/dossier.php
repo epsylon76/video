@@ -20,6 +20,7 @@ class dossier {
 
     return $type_fichier;
   }
+  
 
   function detect_photos($sousdossier){
     global $data;
