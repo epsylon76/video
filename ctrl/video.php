@@ -17,6 +17,8 @@ $nom_fichier = explode("/", $chemin);
 $nom_fichier = array_reverse($nom_fichier);
 $nom_fichier = $nom_fichier[0];
 
+$dossier = new dossier();
+$taille_fichier = $dossier->HumanSize(filesize($chemin));
 
 
 include('./vue/video.php');
