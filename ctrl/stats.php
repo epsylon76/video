@@ -19,6 +19,6 @@ $percent = $percent * $taille;
 
 $vol = $dossier->espace_disque($data);
 
-$net_iface = $params['net_iface'];
+
 
 include('vue/stats.php');

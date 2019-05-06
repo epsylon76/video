@@ -36,12 +36,5 @@
 
   <?php } ?>
 
-  <!-- graph-->
-  <div class="row">
-    <h2>Vitesse Envoi</h2>
-      <div id="graph" style="width:100%"></div>
-  </div>
+
 </div> <!-- container -->
-
-
-<?php include('./scripts/graph.php'); ?>
