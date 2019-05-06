@@ -20,7 +20,7 @@ class dossier {
 
     return $type_fichier;
   }
-  
+
 
   function detect_photos($sousdossier){
     global $data;
@@ -107,7 +107,7 @@ class dossier {
 
           //bouton de partage des photos
           if($nb_photos >= 4){
-            $items .= '<a class="btn btn-sm btn-primary" href="?page=diapo&photos='.$chemin.$ligne.'/"><i class="fas fa-eye"></i>&nbsp;'.$nb_photos.'</a>';
+          
             $items .= '<button type="button" class="btn btn-success btn-sm"
             data-typepartage="photos"
             data-chemin="'.$chemin.$ligne.'"

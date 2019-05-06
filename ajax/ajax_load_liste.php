@@ -30,13 +30,13 @@ foreach($results as $ligne){
     $date_creation = '<i class="fas fa-times" style="color:red"></i> fichier introuvable';
   }
 
-  $items[$i][0] = $ligne['id'];
-  $items[$i][1] = $date_aff;
-  $items[$i][2] = $icone.'<strong>'.$ligne['chemin'].'</strong>';
-  $items[$i][3] = $date_creation;
-  $items[$i][4] = '<a href="?cle='.$ligne['cle'].'">'.$ligne['email'].'</a>';
-  $items[$i][5] = $ligne['admin_login'];
-  $items[$i][6] = '<a href="?page=renvoi_mail&email='.$ligne['email'].'"><i class="fas fa-reply-all"></i></a>&nbsp;&nbsp;<a href="?page=unset_partage&id='.$ligne['id'].'"><i class="fas fa-trash-alt" style="color:red;"></i></a>';
+
+  $items[$i][0] = $date_aff;
+  $items[$i][1] = $icone.'<strong>'.$ligne['chemin'].'</strong>';
+  $items[$i][2] = $date_creation;
+  $items[$i][3] = '<a href="?cle='.$ligne['cle'].'">'.$ligne['email'].'</a>';
+  $items[$i][4] = $ligne['admin_login'];
+  $items[$i][5] = '<a href="?page=renvoi_mail&email='.$ligne['email'].'"><i class="fas fa-reply-all"></i></a>&nbsp;&nbsp;<a href="?page=unset_partage&id='.$ligne['id'].'"><i class="fas fa-trash-alt" style="color:red;"></i></a>';
   $i++;
 }
 $data = array("data" => $items); // l'array doit etre un array data []: puis les données

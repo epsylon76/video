@@ -5,7 +5,7 @@
   <table id="liste"  class="table table-striped" style="width:100%">
     <thead>
       <tr>
-        <th>id</th>
+        
         <th>date partage</th>
         <th>chemin</th>
         <th>date fichier</th>
