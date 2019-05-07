@@ -107,7 +107,7 @@ class dossier {
 
           //bouton de partage des photos
           if($nb_photos >= 4){
-          
+            //$items .= '<a class="btn btn-sm btn-primary" href="?page=admin_dl_photos&dl_photos='.$chemin.$ligne.'">Télécharger <i class="fas fa-download"></i></a>';
             $items .= '<button type="button" class="btn btn-success btn-sm"
             data-typepartage="photos"
             data-chemin="'.$chemin.$ligne.'"
@@ -159,9 +159,9 @@ class dossier {
         if($partages->nb_partages($chemin.$ligne) >= 1){$badge_color = "badge-success";}else{$badge_color="badge-warning";}
         $items .= '</div>';
 
-         //colonne droite
+        //colonne droite
         $items .= '<div class="col-md-6" style="text-align:right">';
-        //$items .= '&nbsp;<a class="btn btn-sm btn-primary" href="?page=preview&video='.$chemin.$ligne.'"><i class="fas fa-eye"></i></a>&nbsp;';
+
         $items .= '<button type="button" class="btn btn-primary btn-sm"
         data-typepartage="video"
         data-chemin="'.$chemin.$ligne.'"
@@ -195,7 +195,7 @@ class dossier {
 
     if($compteur_images > 2 && $nb_sous_dossiers == 0){//mode dossier photos
       $retour .= '<h3> Photos </h3>';
-      $retour .= 'Il y a <strong>&nbsp;'.$compteur_images.'</strong>&nbsp;photos dans ce dossier&nbsp;<a class="btn btn-sm btn-primary" href="?page=diapo&photos='.$chemin.'"><i class="fas fa-eye"></i></a>';
+      $retour .= 'Il y a <strong>&nbsp;'.$compteur_images.'</strong>&nbsp;photos dans ce dossier&nbsp;<a class="btn btn-sm btn-primary" href="?page=admin_dl_photos&dl_photos='.$chemin.'">Télécharger <i class="fas fa-download"></i></a>';
     }
 
     //rendu de la liste

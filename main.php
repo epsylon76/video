@@ -16,7 +16,7 @@ include_once('./mdl/partage.php');
 include_once('./mdl/historique.php');
 
 
-if(!isset($_GET['dl_photos']) && !isset($_GET['dl_dossier'])){
+if(!isset($_GET['dl_photos']) && !isset($_GET['dl_dossier']) ){
   include_once('./vue/head.php'); //ne pas afficher sur dl_photos car casse le stream
 }
 
@@ -32,10 +32,10 @@ if(isset($_GET['cle'])) {unset($_SESSION['login']);session_destroy();}
 
 
 
-if (isset($_SESSION['login'])){
+if (isset($_SESSION['login'])){//MODE ADMIN
   include('./ctrl/admin.php');
-  //mode admin
-}else{ //pas de variable de session"login" = pas admin
+
+}else{ //MODE CLIENT
   if(isset($_GET['cle'])) {
 
     $partage = new partage();

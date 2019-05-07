@@ -73,6 +73,10 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
       include('ctrl/parametres.php');
       break;
 
+      case "admin_dl_photos" : //inclut le dl
+      include('./ctrl/admin_dl_photos.php');
+      break;
+
       case "stats":
       include('ctrl/stats.php');
       break;
