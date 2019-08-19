@@ -30,11 +30,22 @@
           </div>
         </div>
       </div>
-
-
     </div>
 
+
   <?php } ?>
+
+  <div class="row">
+
+    <div class="col">
+      Nombre partages "Prévue" : <?php echo $npstat['prevues']; ?><br>
+      Nombre partages "NP jour même" : <?php echo $npstat['npjour']; ?><br>
+      Nombre partages "NP Post-jour" : <?php echo $npstat['nppost']; ?><br>
+    </div>
+
+  </div>
+
+
 
 
 </div> <!-- container -->

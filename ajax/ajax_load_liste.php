@@ -30,7 +30,7 @@ foreach($results as $ligne){
     $date_creation = '<i class="fas fa-times" style="color:red"></i> fichier introuvable';
   }
 
-$items[$i][0] = $ligne['id'];
+  $items[$i][0] = $ligne['id'];
   $items[$i][1] = $date_aff;
   $items[$i][2] = $icone.'<strong>'.$ligne['chemin'].'</strong>';
   $items[$i][3] = $date_creation;

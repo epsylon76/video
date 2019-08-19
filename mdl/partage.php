@@ -107,4 +107,27 @@ class partage {
     return $hours;
   }
 
+  function comptenp(){
+    global $DB_con;
+    $requete="SELECT COUNT(np_post) from `partage` where `np_post` = 1";
+    $query=$DB_con->prepare($requete);
+    $query->execute();
+    $stat = $query->fetch();
+    $retour['prevues'] = $stat[0];
+
+    $requete="SELECT COUNT(np_post) from `partage` where `np_post` = 2";
+    $query=$DB_con->prepare($requete);
+    $query->execute();
+    $stat = $query->fetch();
+    $retour['npjour'] = $stat[0];
+
+    $requete="SELECT COUNT(np_post) from `partage` where `np_post` = 3";
+    $query=$DB_con->prepare($requete);
+    $query->execute();
+    $stat = $query->fetch();
+    $retour['nppost'] = $stat[0];
+
+    return $retour;
+  }
+
 }//class partage

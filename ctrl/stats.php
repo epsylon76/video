@@ -1,6 +1,7 @@
 <?php
 include('vue/nav.php');
 $dossier = new dossier();
+$partage = new partage();
 $limite = 100000;
 $percent = 0;
 
@@ -18,6 +19,9 @@ $percent=100 / $limite;
 $percent = $percent * $taille;
 
 $vol = $dossier->espace_disque($data);
+
+$npstat = $partage->comptenp();
+
 
 
 
