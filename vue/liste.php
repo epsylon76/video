@@ -8,7 +8,7 @@
         <th>ID</th>
         <th>date partage</th>
         <th>chemin</th>
-        <th>date fichier</th>
+      <!--  <th>date fichier</th> -->
         <th>email</th>
         <th>admin</th>
         <th>actions</th>
