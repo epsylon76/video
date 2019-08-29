@@ -45,6 +45,29 @@
 
   </div>
 
+  <br>
+
+  <?php
+  if($introuvable){
+    foreach($introuvable as $ligne){
+      ?>
+      <h5>Partages introuvables</h5>
+      <div class="row">
+        <div class="col">
+          <?php echo $ligne['id']; ?>
+          &nbsp;
+          <?php echo $ligne['chemin']; ?>
+          &nbsp;
+          <a href="?page=unset_partage&id=<?php echo $ligne['id']; ?>&retour=stats"><i class="fas fa-trash-alt" style="color:red;"></i></a>
+        </div>
+      </div>
+
+      <?php
+    }
+  }
+  ?>
+
+
 
 
 
