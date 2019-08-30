@@ -18,3 +18,9 @@
     <?php } ?>
 
 </div> <!--container -->
+
+<style>
+body{
+  background-color:white!important;
+}
+</style>

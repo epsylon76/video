@@ -49,9 +49,10 @@
 
   <?php
   if($introuvable){
+    echo '<h5>Partages introuvables</h5>';
     foreach($introuvable as $ligne){
       ?>
-      <h5>Partages introuvables</h5>
+
       <div class="row">
         <div class="col">
           <?php echo $ligne['id']; ?>

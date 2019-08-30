@@ -13,3 +13,8 @@
 		<a class="btn btn-success" href="?cle=<?php echo $_GET['cle'] ?>"><i class="fas fa-arrow-left">&nbsp;</i>retour</a>
 	<?php } ?>
 </div>
+<style>
+body{
+  background-color:white!important;
+}
+</style>

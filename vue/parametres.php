@@ -1,6 +1,6 @@
 <div class="container" style="margin-top:30px;">
   <h1>Paramètres</h1>
-  <h2>Logo</h2>
+  <h2 class="text-center">Logo</h2>
   <img src="./vue/img/logo.png" id="logo" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px;"/>
 
   <form action="./ctrl/upload_logo.php" method="post" enctype="multipart/form-data">
@@ -11,26 +11,51 @@
 
   <form action="./?page=parametres" method="post" >
 
-    <h2>Core</h2>
+    <h2 class="text-center">Core</h2>
     <h5>Dossier data</h5>
     <input type="text" name="dossier_data" size="70" value="<?php echo $params['dossier_data']; ?>"></input>
 
     <h5>Url site</h5>
     <input type="text" name="url_domaine" size="100" value="<?php echo $params['url_domaine']; ?>"></input>
 
-    <h2>Design</h2>
+    <hr>
+    <h2 class="text-center">Design</h2>
     <h5>couleur fond</h5>
     <input type="color" name="couleur_fond" style="height:50px; width:50px; border:3px solid black; border-radius:10px;" value="<?php echo $params['couleur_fond']; ?>"></input>
 
+    <hr>
+    <h2 class="text-center">Accueil</h2>
     <h5>Titre Site</h5>
     <input type="text" name="page_titre" value="<?php echo $params['page_titre']; ?>"></input>
 
     <h5>Texte d'accueil</h5>
     <textarea name="accueil_texte" id="accueil_texte" ><?php echo $params['accueil_texte']; ?></textarea>
 
-    <h2>Email</h2>
+    <hr>
+    <h2 class="text-center">Espace de Téléchargement</h2>
+    <h5>Vidéo bannière</h5>
+    Vous devez fournir un lien vers une vidéo youtube
+    <input type="text" name="url_banniere" value="<?php echo $params['url_banniere']; ?>"></input>
 
-    <h5>Email</h5>
+    <h5>logo présentation du texte d'accueil</h5>
+
+
+    <h5>Texte Accueil</h5>
+    <textarea name="texte_espace" id="texte_espace"><?php echo $params['texte_espace']; ?></textarea>
+
+    <h5>boutons de partage sociaux</h5>
+    Facebook : <input type="text" name="partage_fb" value="<?php echo $params['partage_fb']; ?>"></input><br>
+    Twitter : <input type="text" name="partage_twitter" value="<?php echo $params['partage_twitter']; ?>"></input><br>
+
+    <h5>Titre invitation autre site</h5>
+    <input type="text" name="titre_invitation" value="<?php echo $params['titre_invitation']; ?>"></input>
+    <h5>Image invitation autre site</h5>
+
+
+    <hr>
+    <h2 class="text-center">Email</h2>
+
+    <h5>Email expediteur</h5>
     <input type="text" name="email_expediteur" id="email_expediteur" value="<?php echo $params['email_expediteur']; ?>" size="50"></input>
 
     <h5>Objet Email</h5>
@@ -47,8 +72,8 @@
 
     <h5>footer email</h5>
     <textarea name="email_footer" id="email_footer"><?php echo $params['email_footer']; ?></textarea>
-
-    <h2>Code Tracking analytics</h2>
+    <hr>
+    <h2 class="text-center">Code Tracking analytics</h2>
     <textarea name="analytics" id="analytics" style="width:100%; height:200px;"><?php echo $params['analytics']; ?></textarea>
 
     <h3>Activer partage dossier zip</h3>
@@ -61,11 +86,8 @@
       <label class="form-check-label" for="inlineRadio2">désactiver</label>
     </div>
     <br/>
-
-    <h3>Interface réseau</h3>
-    <input type="text" name="net_iface" id="net_iface" value="<?php echo $params['net_iface']; ?>" size="10"></input>
-    <p>attention paramètre sensible</p>
-    <br />
+    <hr>
+    <h2>ENREGISTRER</h2>
 
     <input type="submit" class="btn btn-success" value="Enregistrer"/>
   </form>
@@ -105,3 +127,17 @@ ClassicEditor
   console.error( error );
 } );
 </script>
+
+<script>
+ClassicEditor
+.create( document.querySelector( '#texte_espace' ) )
+.catch( error => {
+  console.error( error );
+} );
+</script>
+
+<style>
+hr{
+  border-top:4px solid black;
+}
+</style>
