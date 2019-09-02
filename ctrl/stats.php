@@ -21,6 +21,15 @@ $percent = $percent * $taille;
 $vol = $dossier->espace_disque($data);
 
 $npstat = $partage->comptenp();
+//nombre de clics sur télécharger dans les dernieres 24h
+
+$clics= $DB_con->prepare(
+  "SELECT COUNT('id') FROM `historique`
+  WHERE `action` LIKE '%dl_%'
+  AND `date` > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
+$clics->execute();
+$clics = $clics->fetch();
+$clics = $clics[0];
 
 //les partages introuvables
 

@@ -1,6 +1,6 @@
-<div style="width: 100%; height: 30vw;"
-data-vide-bg="vue/img/video" data-vide-options="loop: true, muted: true, position: 0% 50%">
-<h1 style="text-align:center; text-transform:uppercase; color:white; font-size:4vw; font-weight:800; margin-top:0; padding-top:13vw">votre espace vidéo et photos</h1>
+<div style="width: 100%; height: 28vw;"
+data-vide-bg="vue/img/banniere" data-vide-options="loop: true, muted: true, position: 0% 50%">
+<h1 style="text-align:center; text-transform:uppercase; color:white; font-size:4vw; font-weight:800; margin-top:0; padding-top:12vw">votre espace vidéo et photos</h1>
 </div>
 
 <div class="container">
@@ -16,9 +16,7 @@ data-vide-bg="vue/img/video" data-vide-options="loop: true, muted: true, positio
                 <img src="vue/img/logo.png" style="width:100px; height:100px">
               </div>
               <div class="col-sm-10">
-                <h3>Votre Espace Vidéo et Photos</h3><br/>
-                <p>Nous éspérons que vous avez passé un bon moment avec nous</p>
-                <p>En cas de réclamation, veuillez envoyer un mail à videoabeilleparachutisme@gmail.com</p>
+              <?php echo $params['texte_espace']; ?>
               </div>
             </div>
           </div>
@@ -32,8 +30,8 @@ data-vide-bg="vue/img/video" data-vide-options="loop: true, muted: true, positio
 
           foreach($liste as $ligne){
 
-            echo '<div class="row">';
-            echo '<div class="col-md-6">';
+            echo '<div class="row" style="display: flex;  justify-content: space-between;">';
+            echo '<span style="overflow:hidden">';
             echo '<a href=?cle='.$_GET['cle'].'&id='.$ligne['id'].'>';
 
             if($ligne['type_partage'] == "video"){$icone = '<i class="fas fa-video icone_ligne"></i>&nbsp;';}
@@ -45,11 +43,11 @@ data-vide-bg="vue/img/video" data-vide-options="loop: true, muted: true, positio
             echo basename($ligne['chemin']);
 
 
-            echo '</div>'; //fin col 6
+            echo '</span>';
 
-            echo '<div class="col-md-6 pull-right"><i class="fa fa-download icone_dl" aria-hidden="true"></i></div></a>';
+            echo '<span><i class="fa fa-download icone_dl" aria-hidden="true"></i></div></a>';
 
-            echo '</div>'; //fin row
+            echo '</span>';
 
           }
 
@@ -60,6 +58,7 @@ data-vide-bg="vue/img/video" data-vide-options="loop: true, muted: true, positio
     </div>
     <div class="col-md-4" style="margin-top:20px;">
       <h4>Partagez votre expérience</h4>
+      <h4 style="text-transform:uppercase"><?php echo $params['titre_invitation']; ?></h4>
     </div>
   </div>
 </div>

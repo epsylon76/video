@@ -41,6 +41,7 @@
       Nombre partages "Prévue" : <?php echo $npstat['prevues']; ?><br>
       Nombre partages "NP jour même" : <?php echo $npstat['npjour']; ?><br>
       Nombre partages "NP Post-jour" : <?php echo $npstat['nppost']; ?><br>
+      Nombre de téléchargements en 24h : <?php echo $clics; ?><br>
     </div>
 
   </div>
