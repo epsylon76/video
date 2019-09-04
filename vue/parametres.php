@@ -31,12 +31,12 @@
     <textarea name="texte_espace" id="texte_espace"><?php echo $params['texte_espace']; ?></textarea>
 
     <h5>boutons de partage sociaux</h5>
+    <p>Laisser vide pour désactiver</p>
     Facebook : <input type="text" name="partage_fb" value="<?php echo $params['partage_fb']; ?>"></input><br>
     Twitter : <input type="text" name="partage_twitter" value="<?php echo $params['partage_twitter']; ?>"></input><br>
 
     <h5>Titre invitation autre site</h5>
     <input type="text" name="titre_invitation" value="<?php echo $params['titre_invitation']; ?>"></input>
-    <h5>Image invitation autre site</h5>
 
 
     <hr>
@@ -73,12 +73,13 @@
       <label class="form-check-label" for="inlineRadio2">désactiver</label>
     </div>
     <br/>
-    <hr>
-    <h2>ENREGISTRER LES PARAMETRES</h2>
 
-    <input type="submit" class="btn btn-success" value="Enregistrer"/>
+<br><br><br>
+    <input type="submit" class="btn btn-success btn-lg" value="Enregistrer les paramètres"/>
   </form>
-
+  <br><br><br>
+  <hr><hr>
+  <br><br><br>
   <h1 class="text-center">MEDIAS</h1>
 
   <h2 class="text-center">Logo principal</h2>
@@ -91,10 +92,10 @@
   </form>
 
   <h2 class="text-center">Image Encart invitation (Espace de téléchargement)</h2>
-  <img src="./vue/img/invitation.jpg" id="invitation" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px;"/>
+  <img src="./vue/img/invitation.jpg" id="invitation" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px; max-width:300px;"/>
 
   <form action="./ctrl/upload_invitation.php" method="post" enctype="multipart/form-data">
-    Selectionnez une image au <u>format PNG</u> :
+    Selectionnez une image au <u>format JPG</u> :
     <input type="file" name="invitation" id="invitation">
     <input type="submit" value="Envoyer Image" name="submit">
   </form>

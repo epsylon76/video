@@ -1,28 +1,25 @@
-<div style="width: 100%; height: 28vw;"
+<div style="width: 100%; height: 22vw;"
 data-vide-bg="vue/img/banniere" data-vide-options="loop: true, muted: true, position: 0% 50%">
-<h1 style="text-align:center; text-transform:uppercase; color:white; font-size:4vw; font-weight:800; margin-top:0; padding-top:12vw">votre espace vidéo et photos</h1>
+<h1 style="text-align:center; text-transform:uppercase; color:white; font-size:4vw; font-weight:800; margin-top:0; padding-top:8vw">votre espace vidéo et photos</h1>
 </div>
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-8">
+  <div class="row justify-content-between">
+    <div class="col-md-6">
+
       <div class="row" style="margin-top:20px;">
-
-        <div class="col">
-
           <div class=" alert alert-secondary">
             <div class="row">
-              <div class="col-sm-2">
+              <div class="col-sm-3">
                 <img src="vue/img/logo.png" style="width:100px; height:100px">
               </div>
-              <div class="col-sm-10">
+              <div class="col-sm-9">
               <?php echo $params['texte_espace']; ?>
               </div>
             </div>
           </div>
-        </div>
-
       </div>
+
       <div class="row">
         <div class="col-sm">
           <h3>Liste des partages</h3>
@@ -58,7 +55,17 @@ data-vide-bg="vue/img/banniere" data-vide-options="loop: true, muted: true, posi
     </div>
     <div class="col-md-4" style="margin-top:20px;">
       <h4>Partagez votre expérience</h4>
+      <?php if($params['partage_fb'] != '')
+      {
+        echo '<a href="'.$params['partage_fb'].'" class="icone_partage"><i class="fab fa-facebook-square"></i></a>';
+      }
+      if($params['partage_twitter'] != '')
+      {
+        echo '<a href="'.$params['partage_twitter'].'" class="icone_partage"><i class="fab fa-twitter-square"></i></a>';
+      }
+      ?>
       <h4 style="text-transform:uppercase"><?php echo $params['titre_invitation']; ?></h4>
+      <a href="<?php echo $params['url_invitation']; ?>"><img src="vue/img/invitation.jpg" style="max-width:300px;"></a>
     </div>
   </div>
 </div>
