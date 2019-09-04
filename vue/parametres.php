@@ -29,14 +29,19 @@
 
     <h5>Texte Accueil</h5>
     <textarea name="texte_espace" id="texte_espace"><?php echo $params['texte_espace']; ?></textarea>
-
+    <br>
     <h5>boutons de partage sociaux</h5>
-    <p>Laisser vide pour désactiver</p>
-    Facebook : <input type="text" name="partage_fb" value="<?php echo $params['partage_fb']; ?>"></input><br>
-    Twitter : <input type="text" name="partage_twitter" value="<?php echo $params['partage_twitter']; ?>"></input><br>
 
+    <p><u>Laisser vide pour désactiver</u></p>
+
+    Facebook : <input type="text" name="partage_fb" value="<?php echo $params['partage_fb']; ?>" style="width:500px;"></input><br>
+    Twitter : <input type="text" name="partage_twitter" value="<?php echo $params['partage_twitter']; ?>" style="width:500px;"></input><br>
+    <br>
     <h5>Titre invitation autre site</h5>
-    <input type="text" name="titre_invitation" value="<?php echo $params['titre_invitation']; ?>"></input>
+    <input type="text" name="titre_invitation" value="<?php echo $params['titre_invitation']; ?>" style="width:500px;"></input>
+    <h5>Lien invitation autre site</h5>
+    https://
+    <input type="text" name="url_invitation" value="<?php echo $params['url_invitation']; ?>" style="width:500px;"></input>
 
 
     <hr>

@@ -65,7 +65,7 @@ data-vide-bg="vue/img/banniere" data-vide-options="loop: true, muted: true, posi
       }
       ?>
       <h4 style="text-transform:uppercase"><?php echo $params['titre_invitation']; ?></h4>
-      <a href="<?php echo $params['url_invitation']; ?>"><img src="vue/img/invitation.jpg" style="max-width:300px;"></a>
+      <a href="https://<?php echo $params['url_invitation']; ?>"><img src="vue/img/invitation.jpg" style="max-width:300px;"></a>
     </div>
   </div>
 </div>

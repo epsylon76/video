@@ -23,6 +23,7 @@ function set_params($input){
   $partage_fb = $DB_con->quote($input['partage_fb']);
   $partage_twitter = $DB_con->quote($input['partage_twitter']);
   $titre_invitation = $DB_con->quote($input['titre_invitation']);
+  $url_invitation = $DB_con->quote($input['url_invitation']);
 
 
   $set_params = "INSERT INTO `parametres` ( `page_titre`,
@@ -42,7 +43,8 @@ function set_params($input){
                                             `texte_espace`,
                                             `partage_fb`,
                                             `partage_twitter`,
-                                            `titre_invitation`
+                                            `titre_invitation`,
+                                            `url_invitation`
                                             )
   VALUES (                                ".$page_titre.",
                                           ".$accueil_texte.",
@@ -57,11 +59,12 @@ function set_params($input){
                                           ".$url_domaine.",
                                           ".$analytics.",
                                           ".$partage_dossier.",
-                              
+
                                           ".$texte_espace.",
                                           ".$partage_fb.",
                                           ".$partage_twitter.",
-                                          ".$titre_invitation."
+                                          ".$titre_invitation.",
+                                          ".$url_invitation."
                                         )";
   $query=$DB_con->prepare($set_params);
   $query->execute();
