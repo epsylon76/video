@@ -263,31 +263,7 @@ class dossier {
     return("".floor($Bytes)." ".$Type[$Index]);
   }
 
-  function espace_disque($data){
-    $montages = scandir($data);
-    $m = 0;
-    foreach($montages as $volume){
-      if($volume != '.' && $volume != '..'){
-        $vol[$m]['nom'] = $volume;
-        $free = disk_free_space($data.$volume);
-        $vol[$m]['free'] = $free;
-        $vol[$m]['free_human'] = $this->HumanSize($free);
-        $total = disk_total_space($data.$volume);
-        $vol[$m]['total'] = $total;
-        $vol[$m]['total_human'] = $this->HumanSize($vol[$m]['total']);
 
-        $vol[$m]['occupe'] = $total - $free;
-
-        $percent_space = 100 / $total;
-        $percent_space = $percent_space * ($total - $free);
-        $vol[$m]['percent'] = $percent_space;
-
-        $m++;
-      }
-    }
-
-    return $vol;
-  }
 
 
 

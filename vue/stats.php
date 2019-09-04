@@ -16,24 +16,6 @@
 
   </div>
 
-  <?php  foreach($vol as $item_vol){ ?>
-    <div class="row">
-
-      <div class="col">
-        <?php echo $item_vol['nom'].' -> Libre : '.$item_vol['free_human'].' , Total : '.$item_vol['total_human'];?>
-      </div>
-
-      <div class="col">
-        <div class="progress">
-          <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar"  style="width:<?php echo $item_vol['percent']; ?>%" aria-valuenow="<?php echo $item_vol['occupe']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $item_vol['total']; ?>">
-            <?php echo floor($item_vol['percent']).' %'; ?>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-  <?php } ?>
 
   <div class="row">
 

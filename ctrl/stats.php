@@ -18,11 +18,11 @@ foreach($listefichiers as $fichier){
 $percent=100 / $limite;
 $percent = $percent * $taille;
 
-$vol = $dossier->espace_disque($data);
+
 
 $npstat = $partage->comptenp();
-//nombre de clics sur télécharger dans les dernieres 24h
 
+//nombre de clics sur télécharger dans les dernieres 24h
 $clics= $DB_con->prepare(
   "SELECT COUNT('id') FROM `historique`
   WHERE `action` LIKE '%dl_%'
