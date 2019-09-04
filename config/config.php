@@ -22,7 +22,6 @@ function set_params($input){
   $texte_espace = $DB_con->quote($input['texte_espace']);
   $partage_fb = $DB_con->quote($input['partage_fb']);
   $partage_twitter = $DB_con->quote($input['partage_twitter']);
-  $url_banniere = $DB_con->quote($input['url_banniere']);
   $titre_invitation = $DB_con->quote($input['titre_invitation']);
 
 
@@ -39,7 +38,7 @@ function set_params($input){
                                             `url_domaine`,
                                             `analytics`,
                                             `partage_dossier`,
-                                            `url_banniere`,
+
                                             `texte_espace`,
                                             `partage_fb`,
                                             `partage_twitter`,
@@ -58,7 +57,7 @@ function set_params($input){
                                           ".$url_domaine.",
                                           ".$analytics.",
                                           ".$partage_dossier.",
-                                          ".$url_banniere.",
+                              
                                           ".$texte_espace.",
                                           ".$partage_fb.",
                                           ".$partage_twitter.",

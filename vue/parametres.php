@@ -26,12 +26,6 @@
 
     <hr>
     <h2 class="text-center">Espace de Téléchargement</h2>
-    <h5>Vidéo bannière</h5>
-    Vous devez fournir un lien vers une vidéo youtube
-    <input type="text" name="url_banniere" value="<?php echo $params['url_banniere']; ?>"></input>
-
-    <h5>logo présentation du texte d'accueil</h5>
-
 
     <h5>Texte Accueil</h5>
     <textarea name="texte_espace" id="texte_espace"><?php echo $params['texte_espace']; ?></textarea>
