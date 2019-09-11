@@ -29,24 +29,24 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
       break;
 
       case "video" :
-      include('./ctrl/video.php');
+      include('ctrl/video.php');
       break;
 
       case "photos" :
-      include('./ctrl/photos.php');
+      include('ctrl/photos.php');
       break;
 
 
       case "preview" :
-      include('./ctrl/preview.php');
+      include('ctrl/preview.php');
       break;
 
       case "dl_photos":
-      include('./ctrl/dl_photos.php');
+      include('ctrl/dl_photos.php');
       break;
 
       case "liste":
-      include('./ctrl/liste.php');
+      include('ctrl/liste.php');
       break;
 
       case "historique":
@@ -55,34 +55,34 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
 
       //set partage
       case "set_partage":
-      include('./ctrl/set_partage.php');
+      include('ctrl/set_partage.php');
       break;
 
       //unset partage
       case "unset_partage":
-      include('./ctrl/unset_partage.php');
+      include('ctrl/unset_partage.php');
       break;
 
       //renvoi mail
       case "renvoi_mail":
-      include('./ctrl/renvoi_mail.php');
+      include('ctrl/renvoi_mail.php');
       break;
 
 
       case "parametres":
-      include('/ctrl/parametres.php');
+      include('ctrl/parametres.php');
       break;
 
       case "admin_dl_photos" : //inclut le dl
-      include('./ctrl/admin_dl_photos.php');
+      include('ctrl/admin_dl_photos.php');
       break;
 
       case "stats":
-      include('./ctrl/stats.php');
+      include('ctrl/stats.php');
       break;
 
       case "users":
-      include('./ctrl/users.php');
+      include('ctrl/users.php');
       break;
 
     }
