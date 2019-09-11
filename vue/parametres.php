@@ -1,7 +1,7 @@
 <div class="container" style="margin-top:30px;">
   <h1>Paramètres</h1>
 
-  <a href="/?page=users">Gestion Utilisateurs</a>
+  <a href="./?page=users">Gestion Utilisateurs</a>
 
 
   <form action="./?page=parametres" method="post" >
