@@ -31,4 +31,19 @@ class admin{
     return $result[0];
   }
 
+  function liste_users(){
+    global $DB_con;
+    $requete=$DB_con->prepare("SELECT `id`, `login`, `last_login` FROM `admin` ORDER BY `last_login` DESC");
+    $requete->execute();
+    $resultats = $requete->fetchAll();
+    return $resultats;
+  }
+
+  function update_last_login($id){
+    global $DB_con;
+    $requete=$DB_con->prepare("UPDATE `admin` SET `last_login`= now() WHERE `id` = :id");
+    $requete->bindParam('id', $id);
+    $requete->execute();
+  }
+
 }

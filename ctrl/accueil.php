@@ -10,6 +10,7 @@ if(isset($_POST['login']) && isset($_POST['pass'])){
     $_SESSION['pass'] = sha1($_POST['pass']);
     $id_admin = $login->get_id_admin($_SESSION['login']);
     $_SESSION['id_admin'] = $id_admin;
+    $login->update_last_login($id_admin);
   //  $historique->admin_login($_SESSION['login']);
     header('Location: ?page=dossiers');
   }

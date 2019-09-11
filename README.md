@@ -12,4 +12,6 @@ Il permet de partager un dossier compressé directement en zip streamé
 
 Le système donne un accès a ses partage via un email contenant un lien clé
 
-ne pas oublier de faire un link dans le dossier racine de l'app s'appelant /data/ vers le stockage
+il faut donner le dossier dans les paramètres, içi /stockage_video/
+exemple :
+//192.168.1.224/videos_venturizone /stockage_video      cifs    auto,username=abeille,password=$$$$$$$,vers=3.0,iocharset=utf8,file_mode=0777,dir_mode=0777        0       0                 
