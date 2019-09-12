@@ -34,7 +34,7 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["invitation"]["tmp_name"], $target_dir.'invitation.jpg')) {
         echo "Le fichier ". basename( $_FILES["invitation"]["name"]). " a été envoyé.";
-        header('location: ./?page=parametres');
+        header('location: ../?page=parametres');
     } else {
         echo "Désolé, il y a eu une erreur";
     }
