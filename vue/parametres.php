@@ -89,6 +89,9 @@
   <br><br><br>
   <h1 class="text-center">MEDIAS</h1>
 
+  <h3>MAX UPLOAD : <?php echo $max_upload ?></h3>
+
+
   <h2 class="text-center">Logo principal</h2>
   <img src="./vue/img/logo.png" id="logo" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px;"/>
 

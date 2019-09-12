@@ -81,3 +81,14 @@ function get_params(){
   $params = $query->fetch();
   return $params;
 }
+
+function max_file_upload() {
+    //select maximum upload size
+    $max_upload = ini_get('upload_max_filesize');
+    //select post limit
+    $max_post = ini_get('post_max_size');
+    //select memory limit
+    $memory_limit = ini_get('memory_limit');
+    // return the smallest of them, this defines the real limit
+    return min($max_upload, $max_post, $memory_limit);
+}
