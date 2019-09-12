@@ -1,3 +1,6 @@
+
+<?php echo $params['analytics']; //analytics seulement sur la vue client ?>
+
 <div style="width: 100%; height: 22vw;"
 data-vide-bg="vue/img/banniere" data-vide-options="loop: true, muted: true, position: 0% 50%">
 <h1 style="text-align:center; text-transform:uppercase; color:white; font-size:4vw; font-weight:800; margin-top:0; padding-top:8vw">votre espace vidéo et photos</h1>

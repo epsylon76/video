@@ -1,3 +1,5 @@
+<?php echo $params['analytics']; //analytics seulement sur la vue client ?>
+
 <div class="container">
 	<h1>Vidéo</h1>
 

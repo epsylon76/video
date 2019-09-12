@@ -3,9 +3,6 @@
 <head>
   <meta charset="utf-8">
 
-<?php echo $params['analytics']; ?>
-
-
 
   <title><?php echo $params['page_titre']; ?></title>
 

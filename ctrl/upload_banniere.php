@@ -33,7 +33,7 @@ if(isset($_POST)){
 
       if (move_uploaded_file($_FILES['file']["tmp_name"], '../vue/img/banniere.mp4')) {
         echo "Le fichier a été envoyé.";
-        header('location: /?page=parametres');
+        header('location: ./?page=parametres');
       } else {
         echo "Not uploaded because of error #".$_FILES["file"]["error"];
         /*
@@ -42,7 +42,7 @@ if(isset($_POST)){
         UPLOAD_ERR_PARTIAL = Value: 3; The uploaded file was only partially uploaded.
         UPLOAD_ERR_NO_FILE = Value: 4; No file was uploaded.
         UPLOAD_ERR_NO_TMP_DIR = Value: 6; Missing a temporary folder. Introduced in PHP 5.0.3.
-        UPLOAD_ERR_CANT_WRITE = Value: 7; Failed to write file to disk. Introduced in PHP 5.1.0.        
+        UPLOAD_ERR_CANT_WRITE = Value: 7; Failed to write file to disk. Introduced in PHP 5.1.0.
         UPLOAD_ERR_EXTENSION = Value: 8; A PHP extension stopped the file upload. PHP does not provide a way to ascertain which extension caused the file upload to stop; examining the list of loaded extensions with phpinfo() may help.
         */
 
