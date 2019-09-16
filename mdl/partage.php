@@ -130,4 +130,37 @@ class partage {
     return $retour;
   }
 
+  function clic_24h(){
+    global $DB_con;
+    $clics= $DB_con->prepare(
+      "SELECT COUNT('id') FROM `historique`
+      WHERE `action` LIKE '%dl_%'
+      AND `date` > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
+    $clics->execute();
+    $clics = $clics->fetch();
+    $clics = $clics[0];
+    return $clics;
+  }
+
+  function introuvables($data){
+    global $DB_con;
+    $requete="SELECT * from `partage`";
+    $query=$DB_con->prepare($requete);
+    $query->execute();
+    $results = $query->fetchAll();
+    $i=0;
+    $introuvable=false;
+    foreach($results as $ligne){
+      $date= new DateTime($ligne['date']);
+      $date_aff = $date->format('d/m/Y H:i');
+
+      if (file_exists($data.$ligne['chemin'])) {$exist = true;}else{
+        $introuvable[$i]['id'] = $ligne['id'];
+        $introuvable[$i]['chemin'] = $ligne['chemin'];
+        $i++;
+      }
+    }
+    return $introuvable;
+  }
+
 }//class partage

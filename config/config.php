@@ -59,7 +59,6 @@ function set_params($input){
                                           ".$url_domaine.",
                                           ".$analytics.",
                                           ".$partage_dossier.",
-
                                           ".$texte_espace.",
                                           ".$partage_fb.",
                                           ".$partage_twitter.",

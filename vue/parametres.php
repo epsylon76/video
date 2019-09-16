@@ -71,12 +71,13 @@
     <textarea name="analytics" id="analytics" style="width:100%; height:200px;"><?php echo $params['analytics']; ?></textarea>
 
     <h3>Activer partage dossier zip</h3>
+
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="partage_dossier" id="inlineRadio1" value="true" <?php if($params['partage_dossier']){echo "checked";} ?>>
+      <input class="form-check-input" type="radio" name="partage_dossier" id="inlineRadio1" value="1" <?php if($params['partage_dossier']){echo "checked";} ?>>
       <label class="form-check-label" for="inlineRadio1">activer</label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="partage_dossier" id="inlineRadio2" value="false" <?php if(!$params['partage_dossier']){echo "checked";} ?>>
+      <input class="form-check-input" type="radio" name="partage_dossier" id="inlineRadio2" value="0" <?php if(!$params['partage_dossier']){echo "checked";} ?>>
       <label class="form-check-label" for="inlineRadio2">désactiver</label>
     </div>
     <br/>

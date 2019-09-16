@@ -18,37 +18,13 @@ foreach($listefichiers as $fichier){
 $percent=100 / $limite;
 $percent = $percent * $taille;
 
-
-
 $npstat = $partage->comptenp();
 
 //nombre de clics sur télécharger dans les dernieres 24h
-$clics= $DB_con->prepare(
-  "SELECT COUNT('id') FROM `historique`
-  WHERE `action` LIKE '%dl_%'
-  AND `date` > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
-$clics->execute();
-$clics = $clics->fetch();
-$clics = $clics[0];
+$clics = $partage->clic_24h();
 
 //les partages introuvables
 
-$requete="SELECT * from `partage`";
-$query=$DB_con->prepare($requete);
-$query->execute();
-$results = $query->fetchAll();
-$i=0;
-$introuvable=false;
-foreach($results as $ligne){
-  $date= new DateTime($ligne['date']);
-  $date_aff = $date->format('d/m/Y H:i');
-
-if (file_exists($data.$ligne['chemin'])) {$exist = true;}else{
-  $introuvable[$i]['id'] = $ligne['id'];
-  $introuvable[$i]['chemin'] = $ligne['chemin'];
-  $i++;
-}
-
-}
+$introuvable = $partage->introuvables($data);
 
 include('vue/stats.php');

@@ -13,7 +13,7 @@ $folder=$data.$folder.'/';
 $i=0;
 if ($handle = opendir($folder)) {
     while (false !== ($entry = readdir($handle))) {
-        if ($entry != "." && $entry != "..") {
+        if ($entry != "." && $entry != ".." && $entry != "Thumbs.db") {
             $liste[$i]=$entry;
             $i++;
         }

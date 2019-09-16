@@ -17,7 +17,7 @@ $taille = 0;
 $date ='';
 $nb = 0;
 foreach ($listefichiers as $item) {
-  if($item != '.' && $item != '..'){
+  if($item != '.' && $item != '..' && $item != 'Thumbs.db'){
     $date = filectime($data.$chemin.'/'.$item);
     $taille = ($taille + filesize($data.$chemin.'/'.$item));
     $nb++;

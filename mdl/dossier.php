@@ -106,7 +106,7 @@ class dossier {
           $items .= '<div class="col-md-6"  style="text-align:right">';//colonne droite
 
           //bouton de partage des photos
-          if($nb_photos >= 4){
+          if($nb_photos >= 1){
             //$items .= '<a class="btn btn-sm btn-primary" href="?page=admin_dl_photos&dl_photos='.$chemin.$ligne.'">Télécharger <i class="fas fa-download"></i></a>';
             $items .= '<button type="button" class="btn btn-success btn-sm"
             data-typepartage="photos"
