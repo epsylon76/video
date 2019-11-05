@@ -5,6 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 
 //conf & send
 $mail = new PHPMailer(); // create a new object
+$mail->CharSet = 'UTF-8';
 $mail->IsSMTP(); // enable SMTP
 $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
 $mail->SMTPAuth = true; // authentication enabled
