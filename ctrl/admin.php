@@ -64,7 +64,7 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
       break;
 
       case 'clear_introuvables':
-      include('ctrl/clear_introuvables');
+      include('ctrl/clear_introuvables.php');
       break;
 
       //renvoi mail
