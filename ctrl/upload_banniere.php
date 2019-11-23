@@ -1,6 +1,9 @@
 <?php
 
-unlink("../vue/img/banniere.mp4");
+if(file_exists("../vue/img/banniere.mp4")){
+  unlink("../vue/img/banniere.mp4");
+}
+
 
 if(isset($_POST)){
   if(isset($_FILES['file'])){

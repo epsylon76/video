@@ -1,7 +1,9 @@
 <?php
 $target_dir = "../vue/img/";
 
-unlink("../vue/img/logo.png");
+if(file_exists($target_dir."logo.png")){
+  unlink($target_dir."logo.png");
+}
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));

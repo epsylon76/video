@@ -1,7 +1,11 @@
 <?php
 $target_dir = "../vue/img/";
 
-unlink("../vue/img/invitation.jpg");
+if(file_exists("../vue/img/invitation.jpg")){
+  unlink("../vue/img/invitation.jpg");
+}
+
+
 $target_file = $target_dir . basename($_FILES["invitation"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
