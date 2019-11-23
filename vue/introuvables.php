@@ -19,7 +19,7 @@ if($introuvable){
   }
 }
 if($introuvable){
-echo '<a href="?action=clear_introuvables" class="btn btn-warning">Effacer tout les partages introuvables</a>';
+echo '<a href="?page=clear_introuvables" class="btn btn-warning">Effacer tout les partages introuvables</a>';
 }
 ?>
 </div>
