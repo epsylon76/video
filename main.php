@@ -1,8 +1,6 @@
 <?php
 session_start();
-#le controlleur principal contient
-#la connexion à la DB
-#le chargement du controlleur
+
 require('vendor/autoload.php');
 
 include_once('./config/config.php');

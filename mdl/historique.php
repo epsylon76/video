@@ -16,6 +16,13 @@ class historique{
     $query->execute();
   }
 
+  function clear_introuvables($admin_login){
+    global $DB_con;
+    $requete="INSERT INTO `historique` (`admin_login`,`partage_chemin`,`date`,`action`,`email`) VALUES ('".$admin_login."', '', NOW(), 'clear_introuvables', '')";
+    $query=$DB_con->prepare($requete);
+    $query->execute();
+  }
+
 
   function admin_login($login){
     global $DB_con;

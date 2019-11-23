@@ -15,6 +15,8 @@ foreach($listefichiers as $fichier){
   }
 }
 
+echo disk_free_space(".");
+
 $percent=100 / $limite;
 $percent = $percent * $taille;
 
@@ -22,6 +24,7 @@ $npstat = $partage->comptenp();
 
 //nombre de clics sur télécharger dans les dernieres 24h
 $clics = $partage->clic_24h();
+$clics_total = $partage->clic_total();
 
 //les partages introuvables
 

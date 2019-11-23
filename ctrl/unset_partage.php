@@ -10,8 +10,8 @@ $historique->unset_partage($_SESSION['login'],$infos['chemin'],$infos['email']);
 $partage->unset_partage($id); //défaire le partage
 
 
-if(isset($_GET['retour']) && $_GET['retour'] == 'stats'){
-  header('Location: ./?page=stats');
+if(isset($_GET['retour']) && $_GET['retour'] == 'introuvables'){
+  header('Location: ./?page=introuvables');
 }else{
   header('Location: ./?page=liste');
 }

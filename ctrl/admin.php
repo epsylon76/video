@@ -63,6 +63,10 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
       include('ctrl/unset_partage.php');
       break;
 
+      case 'clear_introuvables':
+      include('ctrl/clear_introuvables');
+      break;
+
       //renvoi mail
       case "renvoi_mail":
       include('ctrl/renvoi_mail.php');
@@ -83,6 +87,10 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
 
       case "users":
       include('ctrl/users.php');
+      break;
+
+      case 'introuvables':
+      include('ctrl/introuvables.php');
       break;
 
     }

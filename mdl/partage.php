@@ -142,6 +142,17 @@ class partage {
     return $clics;
   }
 
+  function clic_total(){
+    global $DB_con;
+    $clics= $DB_con->prepare(
+      "SELECT COUNT('id') FROM `historique`
+      WHERE `action` LIKE '%dl_%' ");
+    $clics->execute();
+    $clics = $clics->fetch();
+    $clics = $clics[0];
+    return $clics;
+  }
+
   function introuvables($data){
     global $DB_con;
     $requete="SELECT * from `partage`";

@@ -25,32 +25,14 @@
       Nombre partages "NP jour même" : <?php echo $npstat['npjour']; ?><br>
       Nombre partages "NP Post-jour" : <?php echo $npstat['nppost']; ?><br>
       Nombre de téléchargements en 24h : <?php echo $clics; ?><br>
+      Nombre de téléchargements Total : <?php echo $clics_total; ?><br>
     </div>
 
   </div>
 
   <br>
+<a class="btn btn-primary" href="?page=introuvables">Partages introuvables</a>
 
-  <?php
-  if($introuvable){
-    echo '<h5>Partages introuvables</h5>';
-    foreach($introuvable as $ligne){
-      ?>
-
-      <div class="row">
-        <div class="col">
-          <?php echo $ligne['id']; ?>
-          &nbsp;
-          <?php echo $ligne['chemin']; ?>
-          &nbsp;
-          <a href="?page=unset_partage&id=<?php echo $ligne['id']; ?>&retour=stats"><i class="fas fa-trash-alt" style="color:red;"></i></a>
-        </div>
-      </div>
-
-      <?php
-    }
-  }
-  ?>
 
 
 
