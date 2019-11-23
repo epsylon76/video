@@ -1,4 +1,19 @@
 <?php
+
+
+function HumanSize($Bytes)
+{
+  $Type=array("", "Ko", "Ko", "Go", "To", "Po");
+  $Index=0;
+  while($Bytes>=1024)
+  {
+    $Bytes/=1024;
+    $Index++;
+  }
+  return("".floor($Bytes)." ".$Type[$Index]);
+}
+
+
 include('vue/nav.php');
 $dossier = new dossier();
 $partage = new partage();
@@ -15,7 +30,19 @@ foreach($listefichiers as $fichier){
   }
 }
 
-echo disk_free_space(".");
+$free = disk_free_space(".");
+$free = HumanSize($free);
+
+$dirs = scandir('data/');
+$i=0;
+foreach($dirs as $dir){
+  if($dir != '.' && $dir != '..'){
+  $freedata[$i]['nom'] =  $dir;
+  $calc = disk_free_space('data/'.$dir);
+  $freedata[$i]['free'] = HumanSize($calc);
+  $i++;
+}
+}
 
 $percent=100 / $limite;
 $percent = $percent * $taille;

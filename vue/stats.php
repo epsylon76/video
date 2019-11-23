@@ -1,6 +1,20 @@
-
 <div class="container">
   <h1>Statistiques</h1>
+
+  <div class="row">
+    <div class="col">
+      Espace libre sur le disque : <?php echo $free; ?>
+    </div>
+  </div>
+<?php
+foreach($freedata as $undata){
+  ?>
+  <div class="row">
+    <div class="col">
+      Espace libre sur <?php echo $undata['nom'];?> : <?php echo $undata['free']; ?>
+    </div>
+  </div>
+<?php } ?>
   <div class="row">
 
     <div class="col">
@@ -31,7 +45,7 @@
   </div>
 
   <br>
-<a class="btn btn-primary" href="?page=introuvables">Partages introuvables</a>
+  <a class="btn btn-primary" href="?page=introuvables">Partages introuvables</a>
 
 
 

@@ -20,6 +20,8 @@ if($introuvable){
 }
 if($introuvable){
 echo '<a href="?page=clear_introuvables" class="btn btn-warning">Effacer tout les partages introuvables</a>';
+}else{
+  echo '<br><br><h4>Il n\'y a pas de partages introuvables actuellement';
 }
 ?>
 </div>
