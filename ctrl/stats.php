@@ -12,26 +12,28 @@ function HumanSize($Bytes)
   }
   return("".floor($Bytes)." ".$Type[$Index]);
 }
-
+$octetstogigaoctets = (1024*1024*1024);
 
 include('vue/nav.php');
 $dossier = new dossier();
 $partage = new partage();
-$limite = 100000;
+$freedisk = disk_free_space(".");
+$limite = floor($freedisk / $octetstogigaoctets);
 $percent = 0;
 
 $zip_folder="./zip/";
 $listefichiers = scandir($zip_folder);
 $taille = 0;
+
 foreach($listefichiers as $fichier){
   if($fichier != '.' && $fichier != '..' && $fichier != '.placeholder'){
-    $temp = floor(filesize($data.'../zip/'.$fichier) / 1048576);
+    $temp = filesize($data.'../zip/'.$fichier);
     $taille = $taille + $temp;
   }
 }
+$taille = floor($taille / 1000000000);
 
-$free = disk_free_space(".");
-$free = HumanSize($free);
+$free = HumanSize($freedisk);
 
 $dirs = scandir('data/');
 $i=0;

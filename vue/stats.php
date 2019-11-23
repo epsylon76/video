@@ -18,7 +18,7 @@ foreach($freedata as $undata){
   <div class="row">
 
     <div class="col">
-      Taille du dossier ZIP : <?php echo $taille.' Mo'; ?>
+      Taille du dossier ZIP : <?php echo $taille.' Go'; ?> , limite : <?php echo $limite;?> Go
     </div>
 
     <div class="col">
