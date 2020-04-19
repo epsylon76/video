@@ -3,7 +3,7 @@
 
   <div class="row">
     <div class="col">
-      Espace libre sur le disque : <?php echo $free; ?>
+      Espace libre sur le serveur : <?php echo $free; ?>
     </div>
   </div>
 <?php
