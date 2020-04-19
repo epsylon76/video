@@ -1,12 +1,16 @@
 <!doctype html>
 <html lang="fr">
+
 <head>
   <meta charset="utf-8">
 
 
   <title><?php echo $params['page_titre']; ?></title>
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
   <script src="https://kit.fontawesome.com/8068a2cc9a.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 
@@ -17,18 +21,23 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-  <script type="text/javascript" src="includes/js/flot/jquery.flot.js"></script>
-  <script type="text/javascript" src="includes/js/flot/jquery.flot.time.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
-
-  <link rel="stylesheet" type="text/css" href="includes/css/loading.css"/>
-  <link rel="stylesheet" type="text/css" href="includes/css/loading-btn.css"/>
-
-
+  <link rel="stylesheet" type="text/css" href="includes/css/loading.css" />
+  <link rel="stylesheet" type="text/css" href="includes/css/loading-btn.css" />
+  <?php
+  $url_domaine = "http://" . $params['url_domaine'];
+  $image_domaine = "http://" . $params['url_domaine'] . "/img/logo.png";
+  ?>
+  <meta property="og:url" content="<?php echo $url_domaine; ?>" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mes Vidéos et Photos" />
+  <meta property="og:description" content="Mon espace de partage vidéo et photos" />
+  <meta property="og:image" content="<?php echo $image_domaine; ?>" />
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 </head>
+
 <body style="background-color:<?php echo $params['couleur_fond']; ?>">

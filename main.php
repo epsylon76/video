@@ -62,3 +62,5 @@ if (isset($_SESSION['login'])){//MODE ADMIN
     include('./ctrl/accueil.php');
   }
 }
+?>
+<script src="includes/js/general.js"></script>

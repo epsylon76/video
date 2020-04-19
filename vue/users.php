@@ -19,7 +19,7 @@ foreach($liste_admins as $un_admin){
   echo ' ';
   echo $time->format('H:m');
   echo '</td><td>';
-  echo '<input type="text" name="psw"></input>';
+  echo '<input type="password" name="psw"></input>';
   echo '</td><td>';
   echo '<input type="submit" />';
   echo '</td></tr>';
