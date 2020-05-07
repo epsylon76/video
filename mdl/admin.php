@@ -13,6 +13,15 @@ class admin{
     if($res == 1){return true;}else{return false;}
   }
 
+  function ch_psw($login, $pass){
+    global $DB_con;
+    $requete=$DB_con->prepare("UPDATE `admin` SET `pass`= :pass WHERE `login` = :login");
+    $requete->bindParam(':login', $login);
+    $pass = sha1($pass);
+    $requete->bindParam(':pass', $pass);
+    $requete->execute();
+  }
+
   function check_login_crypt($login,$pass){
     global $DB_con;
     $requete="SELECT * from `admin` where `login` = '".$login."' AND `pass` = '".$pass."'";

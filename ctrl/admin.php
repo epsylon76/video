@@ -93,6 +93,10 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
       include('ctrl/introuvables.php');
       break;
 
+      case "change_psw":
+        include 'ctrl/change_psw.php';
+      break;
+
     }
 
 
