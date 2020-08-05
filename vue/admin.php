@@ -66,18 +66,22 @@
 
 <script>
 $('#partageModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var type = button.data('typepartage') // Extract info from data-* attributes
-  var chemin = button.data('chemin')
-  var retour = button.data('retour')
+  $('#email').focus();
+  var button = $(event.relatedTarget); // Button that triggered the modal
+  var type = button.data('typepartage'); // Extract info from data-* attributes
+  var chemin = button.data('chemin');
+  var retour = button.data('retour');
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var modal = $(this)
-  modal.find('.modal-title').text('Partage de type ' + type)
-  modal.find('#hiddenchemin').val(chemin)
-  modal.find('#hiddenretour').val(retour)
-  modal.find('#hiddentype').val(type)
-  //modal.find('.modal-body input').val(type)
-  modal.find('.modal-body #chemin').text(chemin)
-})
+  var modal = $(this);
+  modal.find('.modal-title').text('Partage de type ' + type);
+  modal.find('#hiddenchemin').val(chemin);
+  modal.find('#hiddenretour').val(retour);
+  modal.find('#hiddentype').val(type);
+  //modal.find('.modal-body input').val(type);
+  modal.find('.modal-body #chemin').text(chemin);
+});
+ 
+
+  
 </script>
