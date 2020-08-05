@@ -35,7 +35,7 @@
           <!-- hidden -->
           <div class="form-group">
             <label for="email" class="col-form-label">Email :&nbsp;</label>
-            <input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">
+            <input type="email" class="form-control form-control-sm" id="email" name="email" required size="30" autofocus>
           </div>
 
           <div class="form-group">
