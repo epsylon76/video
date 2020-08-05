@@ -67,7 +67,7 @@
 <script>
 $('#partageModal').on('show.bs.modal', function (event) {
   console.log('modal opened');
-  document.getElementById('email') .focus();
+
   var button = $(event.relatedTarget); // Button that triggered the modal
   var type = button.data('typepartage'); // Extract info from data-* attributes
   var chemin = button.data('chemin');
@@ -81,6 +81,10 @@ $('#partageModal').on('show.bs.modal', function (event) {
   modal.find('#hiddentype').val(type);
   //modal.find('.modal-body input').val(type);
   modal.find('.modal-body #chemin').text(chemin);
+});
+  
+  $('#partageModal').on('shown.bs.modal', function () {
+  $('#email').focus();
 });
  
 //$('.clickpartage').click(function(){
