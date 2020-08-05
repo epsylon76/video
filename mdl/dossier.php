@@ -108,7 +108,7 @@ class dossier {
           //bouton de partage des photos
           if($nb_photos >= 1){
             //$items .= '<a class="btn btn-sm btn-primary" href="?page=admin_dl_photos&dl_photos='.$chemin.$ligne.'">Télécharger <i class="fas fa-download"></i></a>';
-            $items .= '<button type="button" class="btn btn-success btn-sm"
+            $items .= '<button type="button" class="btn btn-success btn-sm clickpartage"
             data-typepartage="photos"
             data-chemin="'.$chemin.$ligne.'"
             data-retour="'.$chemin.'"
@@ -123,7 +123,7 @@ class dossier {
           //bouton de partage des dossiers zip
           if($nb_sous_dossiers <= 4 && $params['partage_dossier']==true){
 
-            $items .= '<button type="button" class="btn btn-danger btn-sm"
+            $items .= '<button type="button" class="btn btn-danger btn-sm  clickpartage"
             data-typepartage="dossier"
             data-chemin="'.$chemin.$ligne.'"
             data-retour="'.$chemin.'"
@@ -162,7 +162,7 @@ class dossier {
         //colonne droite
         $items .= '<div class="col-md-6" style="text-align:right">';
 
-        $items .= '<button type="button" class="btn btn-primary btn-sm"
+        $items .= '<button type="button" class="btn btn-primary btn-sm  clickpartage"
         data-typepartage="video"
         data-chemin="'.$chemin.$ligne.'"
         data-retour="'.$chemin.'"
