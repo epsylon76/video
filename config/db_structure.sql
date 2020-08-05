@@ -1,7 +1,10 @@
--- Adminer 4.1.0 MySQL dump
+
+-- Adminer 4.7.6 MySQL dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
@@ -41,7 +44,11 @@ CREATE TABLE `parametres` (
   `url_domaine` varchar(500) NOT NULL,
   `analytics` varchar(2000) NOT NULL,
   `partage_dossier` tinyint(4) NOT NULL,
-  `net_iface` varchar(10) NOT NULL,
+  `texte_espace` text NOT NULL,
+  `partage_fb` varchar(400) NOT NULL,
+  `partage_twitter` varchar(400) NOT NULL,
+  `titre_invitation` varchar(400) NOT NULL,
+  `url_invitation` varchar(400) NOT NULL,
   PRIMARY KEY (`id_params`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -56,8 +63,9 @@ CREATE TABLE `partage` (
   `date` datetime NOT NULL,
   `admin_login` varchar(50) NOT NULL,
   `np_post` tinyint(1) NOT NULL DEFAULT '0',
+  `date_click` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
--- 2019-02-01 07:22:34
+-- 2020-08-05 15:01:48
