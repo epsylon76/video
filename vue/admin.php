@@ -66,6 +66,7 @@
 
 <script>
 $('#partageModal').on('show.bs.modal', function (event) {
+  console.log('modal opened');
   $('#email').focus();
   var button = $(event.relatedTarget); // Button that triggered the modal
   var type = button.data('typepartage'); // Extract info from data-* attributes
