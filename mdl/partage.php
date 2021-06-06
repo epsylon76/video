@@ -5,8 +5,10 @@ class partage {
   function check_cle_email($cle, $email){
     //vérifie lors de l'accès si l'email a la bonne clé
     global $DB_con;
-    $requete="SELECT * from `partage` where `email` = '".$email."' AND `cle` = '".$cle."'";
+    $requete="SELECT * from `partage` where `email` = :email AND `cle` = :cle";
     $query=$DB_con->prepare($requete);
+    $query->bindParam(':cle', $cle);
+    $query->bindParam(':email', $email);
     $query->execute();
     $res=$query->rowCount();
     if($res >= 1){return true;}else{return false;}
@@ -15,8 +17,10 @@ class partage {
   function check_partage($cle,$id){
     //vérifie que le partage demandé a bien la bonne clé (empeche de mettre un id au hasard)
     global $DB_con;
-    $requete="SELECT * from `partage` where `id` = '".$id."' AND `cle` = '".$cle."'";
+    $requete="SELECT * from `partage` where `id` = :id AND `cle` = :cle";
     $query=$DB_con->prepare($requete);
+    $query->bindParam(':cle', $cle);
+    $query->bindParam(':id', $id);
     $query->execute();
     $res=$query->rowCount();
     if($res >= 1){return true;}else{return false;}
@@ -24,8 +28,9 @@ class partage {
 
   function liste_partages($cle){
     global $DB_con;
-    $requete="SELECT `id`,`chemin`,`type_partage` from `partage` where `cle` = '".$cle."'";
+    $requete="SELECT `id`,`chemin`,`type_partage` from `partage` where `cle` = :cle";
     $query=$DB_con->prepare($requete);
+    $query->bindParam(':cle', $cle);
     $query->execute();
     $results = $query->fetchAll();
     return $results;
@@ -33,9 +38,9 @@ class partage {
 
   function nb_partages($chemin){
     global $DB_con;
-    $chemin = $DB_con->quote($chemin);
-    $requete="SELECT * from `partage` where `chemin` = ".$chemin;
+    $requete="SELECT * from `partage` where `chemin` = :chemin";
     $query=$DB_con->prepare($requete);
+    $query->bindParam(':chemin', $chemin);
     $query->execute();
     $res=$query->rowCount();
     return $res;
@@ -45,8 +50,14 @@ class partage {
     global $DB_con;
     $cle = $email.'42';
     $cle = sha1($cle);
-    $requete="INSERT INTO `partage` (`chemin`,`email`,`cle`,`date`,`type_partage`,`admin_login`,`np_post`) VALUES ('".$chemin."', '".$email."', '".$cle."', NOW(), '".$type_partage."', '".$admin_login."', '".$np_post."')";
+    $requete="INSERT INTO `partage` (`chemin`,`email`,`cle`,`date`,`type_partage`,`admin_login`,`np_post`) VALUES (:chemin, :email, :cle, NOW(), :type_partage, :admin_login, :np_post)";
     $query=$DB_con->prepare($requete);
+    $query->bindParam(':chemin', $chemin);
+    $query->bindParam(':email', $email);
+    $query->bindParam(':cle', $cle);
+    $query->bindParam(':type_partage', $type_partage);
+    $query->bindParam(':admin_login', $admin_login);
+    $query->bindParam(':np_post', $np_post);
     $query->execute();
     $return['id'] = $DB_con->lastInsertId();
     $return['cle'] = $cle;
@@ -55,15 +66,17 @@ class partage {
 
   function unset_partage($id){
     global $DB_con;
-    $requete="DELETE FROM `partage`  WHERE `id` = '".$id."'";
+    $requete="DELETE FROM `partage`  WHERE `id` = :id";
     $query=$DB_con->prepare($requete);
+    $query->bindParam(':id', $id);
     $query->execute();
   }
 
   function get_partage($id){
     global $DB_con;
-    $requete="SELECT * from `partage` where `id` = '".$id."'";
+    $requete="SELECT * from `partage` where `id` = :id";
     $query=$DB_con->prepare($requete);
+    $query->bindParam(':id', $id);
     $query->execute();
     $result = $query->fetch();
     return $result;
@@ -71,8 +84,9 @@ class partage {
 
   function get_type_partage($id){
     global $DB_con;
-    $requete="SELECT `type_partage` from `partage` where `id` = '".$id."'";
+    $requete="SELECT `type_partage` from `partage` where `id` = :id";
     $query=$DB_con->prepare($requete);
+    $query->bindParam(':id', $id);
     $query->execute();
     $result = $query->fetch();
     return $result['type_partage'];
@@ -80,8 +94,9 @@ class partage {
 
   function cle_from_email($email){
     global $DB_con;
-    $requete="SELECT `cle` from `partage` where `email` = '".$email."'";
+    $requete="SELECT `cle` from `partage` where `email` = :email";
     $query=$DB_con->prepare($requete);
+    $query->bindParam(':email', $email);
     $query->execute();
     $cle = $query->fetch();
     $cle = $cle[0];
@@ -90,8 +105,9 @@ class partage {
 
   function last_partage($email){
     global $DB_con;
-    $requete="SELECT MAX(`date`) from `partage` where `email` = '".$email."'";
+    $requete="SELECT MAX(`date`) from `partage` where `email` = :email";
     $query=$DB_con->prepare($requete);
+    $query->bindParam(':email', $email);
     $query->execute();
     $last = $query->fetch();
     $last = $last[0];

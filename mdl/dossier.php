@@ -90,6 +90,7 @@ class dossier {
           //clean les url
           $ligneurl = urlencode($ligne);
           $cheminurl = urlencode($chemin);
+          
 
           //calcul du nombre de sous dossiers
           $nb_sous_dossiers = $this->nb_sous_dossiers($data.$chemin.$ligne);
@@ -149,7 +150,7 @@ class dossier {
         //clean les url
         $ligneurl = urlencode($ligne);
         $cheminurl = urlencode($chemin);
-
+        //echo $chemin.$ligne.'<br>';
         //si partage vidéo
         $items .= '<li class="list-group-item">';
         $items .= '<div class="row justify-content-between">';//ligne
