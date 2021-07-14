@@ -123,22 +123,30 @@ class partage {
     return $hours;
   }
 
-  function comptenp(){
+  function comptenp($annee){
+
     global $DB_con;
-    $requete="SELECT COUNT(np_post) from `partage` where `np_post` = 1";
+    $requete="SELECT COUNT(np_post) from `partage` where `np_post` = :type AND YEAR(`date`) = :annee";
     $query=$DB_con->prepare($requete);
+    $query->bindParam(':annee', $annee);
+
+    //prevues
+    $type = 1;
+    $query->bindParam(':type', $type);
     $query->execute();
     $stat = $query->fetch();
     $retour['prevues'] = $stat[0];
 
-    $requete="SELECT COUNT(np_post) from `partage` where `np_post` = 2";
-    $query=$DB_con->prepare($requete);
+    //np jour meme
+    $type = 2;
+    $query->bindParam(':type', $type);
     $query->execute();
     $stat = $query->fetch();
     $retour['npjour'] = $stat[0];
 
-    $requete="SELECT COUNT(np_post) from `partage` where `np_post` = 3";
-    $query=$DB_con->prepare($requete);
+    //np post
+    $type = 3;
+    $query->bindParam(':type', $type);
     $query->execute();
     $stat = $query->fetch();
     $retour['nppost'] = $stat[0];
