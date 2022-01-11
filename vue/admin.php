@@ -37,7 +37,7 @@
             <label for="email" class="col-form-label">Email :&nbsp;</label>
             <input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">
           </div>
-
+<!--
           <div class="form-group">
             <div class="custom-control custom-radio custom-control-inline">
               <input type="radio" id="np_post_status_normal" name="np_post_status" class="custom-control-input" value="1" checked>
@@ -52,7 +52,7 @@
               <label class="custom-control-label" for="np_post_status_np_post">NP Vente POST RDV</label>
             </div>
           </div>
-
+-->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
