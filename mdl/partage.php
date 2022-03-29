@@ -50,8 +50,9 @@ class partage {
     global $DB_con;
     $cle = $email.'42';
     $cle = sha1($cle);
-    $date = date('Y-m-d h:i:s');
-    $requete="INSERT INTO `partage` (`chemin`,`email`,`cle`,`date`,`type_partage`,`admin_login`,`np_post`) VALUES (:chemin, :email, :cle, NOW(), :type_partage, :admin_login, :np_post)";
+    $now = date('Y-m-d h:i:s');
+    $date = date('Y-m-d');
+    $requete="INSERT INTO `partage` (`chemin`,`email`,`cle`,`date`,`type_partage`,`admin_login`,`np_post`,`date_click`) VALUES (:chemin, :email, :cle, :now, :type_partage, :admin_login, :np_post, :date)";
     $query=$DB_con->prepare($requete);
     $query->bindParam(':chemin', $chemin);
     $query->bindParam(':email', $email);
@@ -59,6 +60,8 @@ class partage {
     $query->bindParam(':type_partage', $type_partage);
     $query->bindParam(':admin_login', $admin_login);
     $query->bindParam(':np_post', $np_post);
+    $query->bindParam(':date', $date);
+    $query->bindParam(':now', $now);
     $query->execute();
     $return['id'] = $DB_con->lastInsertId();
     $return['cle'] = $cle;
