@@ -55,17 +55,33 @@
     <h5>Objet Email</h5>
     <input type="text" name="email_sujet" id="email_sujet" value="<?php echo $params['email_sujet']; ?>"  size="100"></input>
 
-    <h5>Corps Email</h5>
+    <h5>Paragraphe 1</h5>
     <textarea name="email_corps" id="email_corps"><?php echo $params['email_corps']; ?></textarea>
 
     <h5>Texte bouton</h5>
     <input type="text" name="email_texte_bouton" id="email_texte_bouton" value="<?php echo $params['email_texte_bouton']; ?>" size="30"></input>
 
-    <h5>Corps Email 2 (après bouton)</h5>
+    <h5>Paragraphe 2 (après bouton)</h5>
     <textarea name="email_corps_2" id="email_corps_2"><?php echo $params['email_corps_2']; ?></textarea>
 
-    <h5>footer email</h5>
+    <h5>Footer</h5>
     <textarea name="email_footer" id="email_footer"><?php echo $params['email_footer']; ?></textarea>
+    
+    
+    <hr>
+    <h2 class="text-center">Email Alternatif</h2>
+    <p>Le texte bouton et le footer sont les mêmes que défini au dessus</p>
+
+    <h5>Objet Email Alternatif</h5>
+    <input type="text" name="email_sujet_alt" id="email_sujet_alt" value="<?php echo $params['email_sujet_alt']; ?>"  size="100"></input>
+
+    <h5>Paragraphe 1 Email Alternatif</h5>
+    <textarea name="email_corps_alt" id="email_corps_alt"><?php echo $params['email_corps_alt']; ?></textarea>
+
+    <h5>Paragraphe 2 Email Alternatif (après bouton)</h5>
+    <textarea name="email_corps_2_alt" id="email_corps_2_alt"><?php echo $params['email_corps_2_alt']; ?></textarea>
+
+
     <hr>
     <h2 class="text-center">Code Tracking analytics</h2>
     <textarea name="analytics" id="analytics" style="width:100%; height:200px;"><?php echo $params['analytics']; ?></textarea>
@@ -134,6 +150,22 @@ ClassicEditor
 <script>
 ClassicEditor
 .create( document.querySelector( '#email_corps_2' ) )
+.catch( error => {
+  console.error( error );
+} );
+</script>
+
+<script>
+ClassicEditor
+.create( document.querySelector( '#email_corps_alt' ) )
+.catch( error => {
+  console.error( error );
+} );
+</script>
+
+<script>
+ClassicEditor
+.create( document.querySelector( '#email_corps_2_alt' ) )
 .catch( error => {
   console.error( error );
 } );

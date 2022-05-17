@@ -46,20 +46,20 @@ class partage {
     return $res;
   }
 
-  function set_partage($chemin,$email,$type_partage,$admin_login,$np_post){
+  function set_partage($chemin,$email,$type_partage,$admin_login,$email_type){
     global $DB_con;
     $cle = $email.'42';
     $cle = sha1($cle);
     $now = date('Y-m-d h:i:s');
     $date = date('Y-m-d');
-    $requete="INSERT INTO `partage` (`chemin`,`email`,`cle`,`date`,`type_partage`,`admin_login`,`np_post`,`date_click`) VALUES (:chemin, :email, :cle, :now, :type_partage, :admin_login, :np_post, :date)";
+    $requete="INSERT INTO `partage` (`chemin`,`email`,`cle`,`date`,`type_partage`,`admin_login`,`email_type`,`date_click`) VALUES (:chemin, :email, :cle, :now, :type_partage, :admin_login, :email_type, :date)";
     $query=$DB_con->prepare($requete);
     $query->bindParam(':chemin', $chemin);
     $query->bindParam(':email', $email);
     $query->bindParam(':cle', $cle);
     $query->bindParam(':type_partage', $type_partage);
     $query->bindParam(':admin_login', $admin_login);
-    $query->bindParam(':np_post', $np_post);
+    $query->bindParam(':email_type', $email_type);
     $query->bindParam(':date', $date);
     $query->bindParam(':now', $now);
     $query->execute();

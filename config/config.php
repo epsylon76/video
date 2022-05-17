@@ -5,75 +5,57 @@ include_once('dbconn.php');
 //fonctions des Paramètres
 function set_params($input){
   global $DB_con;
+  $set_params = $DB_con->prepare("UPDATE `parametres` SET
+                                            `page_titre` = :page_titre,
+                                            `accueil_texte` = :accueil_texte,
+                                            `email_expediteur` = :email_expediteur,
+                                            `email_sujet` = :email_sujet,
+                                            `email_sujet_alt` = :email_sujet_alt,
+                                            `email_corps` = :email_corps,
+                                            `email_corps_alt` = :email_corps_alt,
+                                            `email_texte_bouton` = :email_texte_bouton,
+                                            `email_corps_2` = :email_corps_2,
+                                            `email_corps_2_alt` = :email_corps_2_alt,
+                                            `email_footer` = :email_footer,
+                                            `couleur_fond` = :couleur_fond,
+                                            `dossier_data` = :dossier_data,
+                                            `url_domaine` = :url_domaine,
+                                            `analytics` = :analytics,
+                                            `partage_dossier` = :partage_dossier,
+                                            `texte_espace` = :texte_espace,
+                                            `partage_fb` = :partage_fb,
+                                            `partage_twitter` = :partage_twitter,
+                                            `titre_invitation` = :titre_invitation,
+                                            `url_invitation` = :url_invitation
+                                            WHERE 1");
+  $set_params->bindParam('page_titre', $input['page_titre']);
+  $set_params->bindParam('accueil_texte', $input['accueil_texte']);
+  $set_params->bindParam('email_expediteur', $input['email_expediteur']);
+  $set_params->bindParam('email_sujet', $input['email_sujet']);
+  $set_params->bindParam('email_sujet_alt', $input['email_sujet_alt']);
+  $set_params->bindParam('email_corps', $input['email_corps']);
+  $set_params->bindParam('email_corps_alt', $input['email_corps_alt']);
+  $set_params->bindParam('email_texte_bouton', $input['email_texte_bouton']);
+  $set_params->bindParam('email_corps_2', $input['email_corps_2']);
+  $set_params->bindParam('email_corps_2_alt', $input['email_corps_2_alt']);
+  $set_params->bindParam('email_footer', $input['email_footer']);
+  $set_params->bindParam('couleur_fond', $input['couleur_fond']);
+  $set_params->bindParam('dossier_data', $input['dossier_data']);
+  $set_params->bindParam('url_domaine', $input['url_domaine']);
+  $set_params->bindParam('analytics', $input['analytics']);
+  $set_params->bindParam('partage_dossier', $input['partage_dossier']);
+  $set_params->bindParam('texte_espace', $input['texte_espace']);
+  $set_params->bindParam('partage_fb', $input['partage_fb']);
+  $set_params->bindParam('partage_twitter', $input['partage_twitter']);
+  $set_params->bindParam('titre_invitation', $input['titre_invitation']);
+  $set_params->bindParam('url_invitation', $input['url_invitation']);
 
-  $page_titre = $DB_con->quote($input['page_titre']);
-  $accueil_texte = $DB_con->quote($input['accueil_texte']);
-  $email_expediteur = $DB_con->quote($input['email_expediteur']);
-  $email_sujet = $DB_con->quote($input['email_sujet']);
-  $email_corps = $DB_con->quote($input['email_corps']);
-  $email_texte_bouton = $DB_con->quote($input['email_texte_bouton']);
-  $email_corps_2 = $DB_con->quote($input['email_corps_2']);
-  $email_footer = $DB_con->quote($input['email_footer']);
-  $couleur_fond = $DB_con->quote($input['couleur_fond']);
-  $dossier_data = $DB_con->quote($input['dossier_data']);
-  $url_domaine = $DB_con->quote($input['url_domaine']);
-  $analytics = $DB_con->quote($input['analytics']);
-  $partage_dossier = $DB_con->quote($input['partage_dossier']);
-  $texte_espace = $DB_con->quote($input['texte_espace']);
-  $partage_fb = $DB_con->quote($input['partage_fb']);
-  $partage_twitter = $DB_con->quote($input['partage_twitter']);
-  $titre_invitation = $DB_con->quote($input['titre_invitation']);
-  $url_invitation = $DB_con->quote($input['url_invitation']);
-
-
-  $set_params = "INSERT INTO `parametres` ( `page_titre`,
-                                            `accueil_texte`,
-                                            `email_expediteur`,
-                                            `email_sujet`,
-                                            `email_corps`,
-                                            `email_texte_bouton`,
-                                            `email_corps_2`,
-                                            `email_footer`,
-                                            `couleur_fond`,
-                                            `dossier_data`,
-                                            `url_domaine`,
-                                            `analytics`,
-                                            `partage_dossier`,
-
-                                            `texte_espace`,
-                                            `partage_fb`,
-                                            `partage_twitter`,
-                                            `titre_invitation`,
-                                            `url_invitation`
-                                            )
-  VALUES (                                ".$page_titre.",
-                                          ".$accueil_texte.",
-                                          ".$email_expediteur.",
-                                          ".$email_sujet.",
-                                          ".$email_corps.",
-                                          ".$email_texte_bouton.",
-                                          ".$email_corps_2.",
-                                          ".$email_footer.",
-                                          ".$couleur_fond.",
-                                          ".$dossier_data.",
-                                          ".$url_domaine.",
-                                          ".$analytics.",
-                                          ".$partage_dossier.",
-                                          ".$texte_espace.",
-                                          ".$partage_fb.",
-                                          ".$partage_twitter.",
-                                          ".$titre_invitation.",
-                                          ".$url_invitation."
-                                        )";
-  $query=$DB_con->prepare($set_params);
-  $query->execute();
+  $set_params->execute();
 }
 
 function get_params(){
   global $DB_con;
-  $lecture_params = "SELECT * FROM `parametres`
-  ORDER BY `id_params` DESC
-  LIMIT 1";
+  $lecture_params = "SELECT * FROM `parametres` ";
 
   $query=$DB_con->prepare($lecture_params);
   $query->execute();

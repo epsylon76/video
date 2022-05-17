@@ -40,16 +40,12 @@
 
           <div class="form-group">
             <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="np_post_status_normal" name="np_post_status" class="custom-control-input" value="1" checked>
-              <label class="custom-control-label" for="np_post_status_normal">Prevue</label>
+              <input type="radio" id="email_normal" name="email_type" class="custom-control-input" value="1" checked>
+              <label class="custom-control-label" for="email_normal">Normal</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="np_post_status_np_jour" name="np_post_status" class="custom-control-input" value="2">
-              <label class="custom-control-label" for="np_post_status_np_jour">NP Jour même</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="np_post_status_np_post" name="np_post_status" class="custom-control-input" value="3">
-              <label class="custom-control-label" for="np_post_status_np_post">NP Vente POST RDV</label>
+              <input type="radio" id="email_alternatif" name="email_type" class="custom-control-input" value="2">
+              <label class="custom-control-label" for="email_alternatif">Alternatif</label>
             </div>
           </div>
 

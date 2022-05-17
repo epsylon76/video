@@ -2,6 +2,14 @@
 iconv_set_encoding("internal_encoding", "UTF-8");
 //ici on prépare le mail html en l'insérant dans une variable
 
+if(isset($email_type) && $email_type == 2){
+  $corps1 = $params['email_corps_alt'];
+  $corps2 = $params['email_corps_2_alt'];
+}else{
+  $corps1 = $params['email_corps'];
+  $corps2 = $params['email_corps_2'];
+}
+
 $corps ='<!doctype html>
 <html>
   <head>
@@ -308,7 +316,7 @@ $corps ='<!doctype html>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                      '.$params['email_corps'].'
+                      '.$corps1.'
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -324,7 +332,7 @@ $corps ='<!doctype html>
                             </tr>
                           </tbody>
                         </table>
-                        '.$params['email_corps_2'].'
+                        '.$corps2.'
                       </td>
                     </tr>
                   </table>
