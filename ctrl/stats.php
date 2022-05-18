@@ -51,8 +51,7 @@ $percent = $percent * $taille;
 
 $annee = date('Y');
 $anneeB = $annee-1;
-$npstatB = $partage->comptenp($anneeB);
-$npstat = $partage->comptenp($annee);
+
 
 //nombre de clics sur télécharger dans les dernieres 24h
 $clics = $partage->clic_24h();

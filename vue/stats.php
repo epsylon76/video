@@ -35,14 +35,6 @@ foreach($freedata as $undata){
   <div class="row">
 
     <div class="col">
-      <h4>Envois <?php echo $anneeB; ?></h4>
-      Nombre partages "Prévue" : <?php echo $npstatB['prevues']; ?><br>
-      Nombre partages "NP jour même" : <?php echo $npstatB['npjour']; ?><br>
-      Nombre partages "NP Post-jour" : <?php echo $npstatB['nppost']; ?><br>
-      <h4>Envois <?php echo $annee; ?></h4>
-      Nombre partages "Prévue" : <?php echo $npstat['prevues']; ?><br>
-      Nombre partages "NP jour même" : <?php echo $npstat['npjour']; ?><br>
-      Nombre partages "NP Post-jour" : <?php echo $npstat['nppost']; ?><br>
       <h4>Téléchargements</h4>
       Nombre de téléchargements en 24h : <?php echo $clics; ?><br>
       Nombre de téléchargements Total : <?php echo $clics_total; ?><br>
