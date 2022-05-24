@@ -267,26 +267,29 @@ class dossier
 
     $retour .= '</ol>';
 
-    //précédent, suivant
-    $retour .= '<div class="text-right">';
-    $liste_up = scandir($data . $chemin . '/../');
-    array_shift($liste_up); //retrait .
-    array_shift($liste_up); //retrait ..
+    if ($chemin != '/') {
+      //précédent, suivant
+      $retour .= '<div class="text-right">';
+      $liste_up = scandir($data . $chemin . '/../');
+      array_shift($liste_up); //retrait .
+      array_shift($liste_up); //retrait ..
 
-    //place de notre dossier dans la liste du parent
-    $i = array_search($ligne, $liste_up); //le dernier = actuel
-    //précédent
-    if ($i >= 1) {
-      $precedent = str_replace($ligne, '', $lien) . $liste_up[$i - 1];
-      $retour .= '<a href="?page=dossiers&chemin='.urlencode($precedent).'/" class="btn btn-secondary"><-</a> ';
+      //place de notre dossier dans la liste du parent
+      $i = array_search($ligne, $liste_up); //le dernier = actuel
+      //précédent
+      if ($i >= 1) {
+        $precedent = str_replace($ligne, '', $lien) . $liste_up[$i - 1];
+        $retour .= '<a href="?page=dossiers&chemin=' . urlencode($precedent) . '/" class="btn btn-secondary"><-</a> ';
+      }
+      //suivant
+      if (isset($liste_up[$i + 1])) {
+        $suivant = str_replace($ligne, '', $lien) . $liste_up[$i + 1];
+        $retour .= '<a href="?page=dossiers&chemin=' . urlencode($suivant) . '/" class="btn btn-secondary">-></a>';
+      }
+      $retour .= '</div>';
     }
-    //suivant
-    if (isset($liste_up[$i + 1])) {
-      $suivant = str_replace($ligne, '', $lien) . $liste_up[$i + 1];
-      $retour .= '<a href="?page=dossiers&chemin='.urlencode($suivant).'/" class="btn btn-secondary">-></a>';
-    }
-    
-    $retour .= '</div>';
+
+
     $retour .= '</nav>';
     return $retour;
   }
