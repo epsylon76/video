@@ -4,6 +4,8 @@ session_start();
 require('vendor/autoload.php');
 
 include_once('./config/config.php');
+include_once('./config/fonctions.php');
+
 //parametres titre, email....
 $params = get_params();
 $data = $params['dossier_data'];

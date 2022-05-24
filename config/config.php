@@ -55,8 +55,7 @@ function set_params($input){
 
 function get_params(){
   global $DB_con;
-  $lecture_params = "SELECT * FROM `parametres` ";
-
+  $lecture_params = "SELECT * FROM `parametres` WHERE 1 ORDER BY `id_params` DESC LIMIT 1";
   $query=$DB_con->prepare($lecture_params);
   $query->execute();
   $params = $query->fetch();

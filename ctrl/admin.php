@@ -21,7 +21,6 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
       $dossier = new dossier();
 
       $listefichiers = $dossier->contenu_dossier($chemin,$data);
-
       $breadcrumb = $dossier->breadcrumb($chemin);
 
       include('vue/nav.php');
