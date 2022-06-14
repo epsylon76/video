@@ -1,6 +1,5 @@
 <?php
-iconv_set_encoding("internal_encoding", "UTF-8");
-//ici on prépare le mail html en l'insérant dans une variable
+
 
 if(isset($email_type) && $email_type == 2){
   $corps1 = $params['email_corps_alt'];

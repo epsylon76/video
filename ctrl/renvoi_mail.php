@@ -8,8 +8,10 @@ $cle = $partage->cle_from_email($email);
 
 include('ctrl/sendemail.php');
 
-if(isset($_SESSION['login'])){
-  header('Location: ./?page=liste');
-}else{
-  header('Location: ./');
+if ($_SESSION['login'] != 'johan') {
+  if (isset($_SESSION['login'])) {
+    header('Location: ./?page=liste');
+  } else {
+    header('Location: ./');
+  }
 }

@@ -49,9 +49,6 @@
     <hr>
     <h2 class="text-center">Email</h2>
 
-    <h5>Email expediteur</h5>
-    <input type="text" name="email_expediteur" id="email_expediteur" value="<?php echo $params['email_expediteur']; ?>" size="50"></input>
-
     <h5>Objet Email</h5>
     <input type="text" name="email_sujet" id="email_sujet" value="<?php echo $params['email_sujet']; ?>"  size="100"></input>
 
