@@ -10,9 +10,7 @@ if (isset($email_type) && $email_type == 2) {
 }
 
 
-$mail->SMTPDebug  = 0; //debug
 $mail->Subject = utf8_decode($sujet);
 $mail->Body = $corps;
-$mail->SetFrom($params['email_expediteur']);
 $mail->AddAddress($email);
 $mail->Send();
