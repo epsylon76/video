@@ -8,7 +8,6 @@ function set_params($input){
   $set_params = $DB_con->prepare("UPDATE `parametres` SET
                                             `page_titre` = :page_titre,
                                             `accueil_texte` = :accueil_texte,
-                                            `email_expediteur` = :email_expediteur,
                                             `email_sujet` = :email_sujet,
                                             `email_sujet_alt` = :email_sujet_alt,
                                             `email_corps` = :email_corps,
@@ -30,7 +29,6 @@ function set_params($input){
                                             WHERE 1");
   $set_params->bindParam('page_titre', $input['page_titre']);
   $set_params->bindParam('accueil_texte', $input['accueil_texte']);
-  $set_params->bindParam('email_expediteur', $input['email_expediteur']);
   $set_params->bindParam('email_sujet', $input['email_sujet']);
   $set_params->bindParam('email_sujet_alt', $input['email_sujet_alt']);
   $set_params->bindParam('email_corps', $input['email_corps']);
