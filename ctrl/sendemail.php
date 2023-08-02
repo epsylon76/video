@@ -1,7 +1,7 @@
 <?php
 
-include('./config/mail_config.php');
-include('./config/email_template.php');
+include('config/mail_config.php');
+include('config/email_template.php');
 
 if (isset($email_type) && $email_type == 2) {
     $sujet = $params['email_sujet_alt'];
@@ -10,7 +10,7 @@ if (isset($email_type) && $email_type == 2) {
 }
 
 
-$mail->Subject = utf8_decode($sujet);
+$mail->Subject = $sujet;
 $mail->Body = $corps;
 $mail->AddAddress($email);
 $mail->Send();

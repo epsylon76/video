@@ -172,4 +172,18 @@ class partage {
     return $introuvable;
   }
 
+
+  function get_partage_date_unique($date){
+    global $DB_con;
+    $date1 = $date.' 00:00:00';
+    $date2 = $date.' 23:59:59';
+    $requete="SELECT * from `partage` where `date` BETWEEN :date1 AND :date2 GROUP BY `email`";
+    $query=$DB_con->prepare($requete);
+    $query->bindParam(':date1', $date1);
+    $query->bindParam(':date2', $date2);
+    $query->execute();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
 }//class partage

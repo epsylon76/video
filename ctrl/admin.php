@@ -71,6 +71,11 @@ if(isset($_SESSION['login']) && isset($_SESSION['pass'])){
       include('ctrl/renvoi_mail.php');
       break;
 
+      //renvoi date
+      case "renvoi_date":
+        include('ctrl/renvoi_date.php');
+        break;
+
 
       case "parametres":
       include('ctrl/parametres.php');

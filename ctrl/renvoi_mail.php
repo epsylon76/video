@@ -1,17 +1,8 @@
 <?php
 // $_GET['email']
 $email = $_GET['email'];
-
 $partage = new partage();
-
 $cle = $partage->cle_from_email($email);
-
 include('ctrl/sendemail.php');
+header('Location: ./?page=liste');
 
-if ($_SESSION['login'] != 'johan') {
-  if (isset($_SESSION['login'])) {
-    header('Location: ./?page=liste');
-  } else {
-    header('Location: ./');
-  }
-}
