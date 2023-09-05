@@ -1,10 +1,11 @@
 <?php
 session_start();
 
-require('vendor/autoload.php');
-
 include_once('./config/config.php');
 include_once('./config/fonctions.php');
+require('./vendor/phpmailer/phpmailer/src/Exception.php');
+require('./vendor/phpmailer/phpmailer/src/PHPMailer.php');
+require('./vendor/phpmailer/phpmailer/src/SMTP.php');
 
 //parametres titre, email....
 $params = get_params();

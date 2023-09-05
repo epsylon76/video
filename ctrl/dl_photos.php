@@ -1,36 +1,33 @@
 <?php
 ini_set('max_execution_time', 300);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 $folder = $partage->get_partage($_GET['dl_photos']);
 
 $folder = $folder['chemin'];
 //on retire le dernier slash de data
-$data=rtrim($data, '/');
+$data = rtrim($data, '/');
 
 //on concatene
-$folder=$data.$folder.'/';
+$folder = $data . $folder . '/';
 
 
-$i=0;
-if ($handle = opendir($folder)) {
-    while (false !== ($entry = readdir($handle))) {
-        if ($entry != "." && $entry != ".." && $entry != "Thumbs.db") {
-            $liste[$i]=$entry;
-            $i++;
-        }
-    }
-    closedir($handle);
+$zipname = $_GET['cle'].$_GET['dl_photos'].'.zip';
+$zipPath = './zip/'.$zipname;
+//VERIFIER S'il n'existe pas déjà
+if(!file_exists($zipPath)){
+
+//SINON le créer
+$commande = "7z a -mcp /var/www/html/zip/".$zipname." '".$folder."*'";
+echo $commande;
+$locale = 'fr_FR.UTF-8';
+setlocale(LC_ALL, $locale);
+putenv('LC_ALL='.$locale);
+shell_exec($commande);
+
+sleep(10);
+
 }
 
-use ZipStream\ZipStream;
-# Autoload the dependencies
-require './vendor/autoload.php';
-
-# create a new zipstream object
-$zip = new ZipStream('photos.zip'); // à changer
-
-foreach($liste as $file){
-  $zip->addFileFromPath($file, $folder.$file);
-}
-
-# finish the zip stream
-$zip->finish();
+header('location:/zip/'.$zipname);

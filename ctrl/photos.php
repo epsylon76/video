@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_GET['id']) && $partage->check_partage($_GET['cle'], $_GET['id'])){
+if(isset($_GET['id']) && $partage->check_partage($_GET['cle'], $_GET['id'])){ // Mode client
   //retrouver le chemin via l'id
   $infos = $partage->get_partage($_GET['id']);
   $chemin = $infos['chemin'];
@@ -11,6 +11,8 @@ else{ //mode admin
   $mode = "admin";
 }
 
+
+//calcul de la taille
 $dossier = new dossier($data,$chemin);
 $listefichiers = $dossier->contenu_dossier($chemin,$data);
 $taille = 0;
@@ -27,7 +29,7 @@ foreach ($listefichiers as $item) {
 //fin ops
 include('vue/photos.php');
 
-//ajout du script DL si user
+//ajout du script DL si user qui track le nombre de clic
 if(isset($_GET['id'])){
   $action = 'dl_photos';
   include('./scripts/script_button_dl.php');
