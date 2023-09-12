@@ -2,34 +2,30 @@
   <h1>Statistiques</h1>
 
   <div class="row">
-    <div class="col">
-      Espace libre sur le serveur : <?php echo $free; ?>
-    </div>
-  </div>
-<?php
-foreach($freedata as $undata){
-  ?>
-  <div class="row">
-    <div class="col">
-      Espace libre sur <?php echo $undata['nom'];?> : <?php echo $undata['free']; ?>
-    </div>
-  </div>
-<?php } ?>
-  <div class="row">
-
-    <div class="col">
-      Taille du dossier ZIP : <?php echo $taille.' Go'; ?> , limite : <?php echo $limite;?> Go
+    <div class="col-3">
+      Espace libre dossier Zip : <?php echo $free; ?>
     </div>
 
-    <div class="col">
-      <div class="progress">
-        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar"  style="width: <?php echo $percent; ?>%" aria-valuenow="<?php echo $taille; ?>" aria-valuemin="0" aria-valuemax="100000"><?php echo floor($percent).' %'; ?></div>
+    <div class="col-5">
+      <div class="progress" style="border:1px solid black;">
+        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $percent; ?>%;"><?php echo floor($percent) . ' %'; ?></div>
       </div>
     </div>
-
-
   </div>
 
+
+  <div class="row">
+    <div class="col">
+      Taille du dossier Zip : <?php echo $zipfoldersize; ?>
+    </div>
+    <div class="col">
+      <?php
+      if ($nbSupprimable >= 1) {
+      ?>
+        <a class="btn btn-danger" href="?page=suppr_zip">supprimer les zip > 3 Semaines (<?php echo $nbSupprimable; ?>)</a>
+      <?php } ?>
+    </div>
+  </div>
 
 
   <div class="row">

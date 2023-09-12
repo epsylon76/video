@@ -1,3 +1,15 @@
+<style>
+table{
+  border:1px solid black;
+  border-collapse: collapse;
+  margin:10px;
+}
+td{
+  border:1px solid black;
+  padding:5px;
+}
+</style>
+
 <div class="container">
 <table>
   <thead>

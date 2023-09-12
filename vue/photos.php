@@ -30,6 +30,8 @@
 
 <script>
   $("#dl_button").click(function(){
-    $('#dl_button').text('')
+    $('#dl_button').removeClass('btn-success');
+    $('#dl_button').addClass('btn-warning');
+    $('#dl_button').text('Création du fichier...');
   })
 </script>

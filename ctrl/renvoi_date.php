@@ -18,3 +18,4 @@ foreach ($res as $un) {
     $mail->Send();
     echo $email . '<br>';
 }
+

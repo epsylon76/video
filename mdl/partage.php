@@ -50,7 +50,7 @@ class partage {
     global $DB_con;
     $cle = $email.'42';
     $cle = sha1($cle);
-    $now = date('Y-m-d h:i:s');
+    $now = date('Y-m-d H:i:s');
     $date = date('Y-m-d');
     $requete="INSERT INTO `partage` (`chemin`,`email`,`cle`,`date`,`type_partage`,`admin_login`,`email_type`,`date_click`) VALUES (:chemin, :email, :cle, :now, :type_partage, :admin_login, :email_type, :date)";
     $query=$DB_con->prepare($requete);
