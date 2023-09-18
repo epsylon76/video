@@ -13,6 +13,7 @@
       if($ligne['action'] == "set_partage"){$couleur = "alert-success"; $icone = '<i class="fas fa-share-alt"></i>';}
       if($ligne['action'] == "unset_partage"){$couleur = "alert-danger"; $icone = '<i class="fas fa-trash"></i>';}
       if($ligne['action'] == "login_admin"){$couleur = "alert-warning"; $icone = '<i class="fas fa-sign-in-alt"></i>';}
+      if($ligne['action'] == "clear_introuvables"){$couleur = "alert-warning"; $icone = '<i class="fas fa-trash"></i>'; $ligne['partage_chemin'] = 'Effacement des partages introuvables';}
 
 
       echo '<div class="alert '.$couleur.'" role="alert">';

@@ -1,35 +1,36 @@
 <?php
 ini_set('max_execution_time', 300);
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 $folder = $_GET['dl_photos'];
+
 //on retire le dernier slash de data
-$data=rtrim($data, '/');
+$folder = rtrim($folder, '/');
 
 //on concatene
-$folder=$data.$folder.'/';
+$folder = $data . $folder . '/';
 
+echo 'dossier : '.$folder;
 
-$i=0;
-if ($handle = opendir($folder)) {
-    while (false !== ($entry = readdir($handle))) {
-        if ($entry != "." && $entry != "..") {
-            $liste[$i]=$entry;
-            $i++;
-        }
-    }
-    closedir($handle);
+$zipname = 'photos.zip';
+$zipPath = './zip/'.$zipname;
+//VERIFIER S'il existe pas déjà, le supprimer avant
+if(file_exists($zipPath)){
+unlink($zipPath);
 }
 
-use ZipStream\ZipStream;
-# Autoload the dependencies
-require './vendor/autoload.php';
 
-# create a new zipstream object
-$zip = new ZipStream('photos.zip'); // à changer
+//SINON le créer
+$commande = "7z a -mcp /var/www/html/zip/".$zipname." '".$folder."*'";
+echo $commande;
+$locale = 'fr_FR.UTF-8';
+setlocale(LC_ALL, $locale);
+putenv('LC_ALL='.$locale);
+shell_exec($commande);
 
-foreach($liste as $file){
-  $zip->addFileFromPath($file, $folder.$file);
-}
+sleep(10);
 
-# finish the zip stream
-$zip->finish();
+
+header('location:/zip/'.$zipname);
+
