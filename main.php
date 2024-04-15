@@ -28,14 +28,16 @@ if(isset($_GET['action']) && $_GET['action']=="deco"){
 }
 
 //accès via clé detruit la session avant toutes
-if(isset($_GET['cle'])) {unset($_SESSION['login']);session_destroy();}
+if(isset($_GET['cle'])) {
+  unset($_SESSION['login']);
+  session_destroy();
+}
 //
 
 
 
 if (isset($_SESSION['login'])){//MODE ADMIN
   include('./ctrl/admin.php');
-
 }else{ //MODE CLIENT
   if(isset($_GET['cle'])) {
 

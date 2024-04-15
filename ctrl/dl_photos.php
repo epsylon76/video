@@ -14,12 +14,12 @@ $folder = $data . $folder . '/';
 
 
 $zipname = $_GET['cle'].$_GET['dl_photos'].'.zip';
-$zipPath = './zip/'.$zipname;
-//VERIFIER S'il n'existe pas déjà
-if(!file_exists($zipPath)){
 
+$zipCheck = './zip/'.$zipname;
+//VERIFIER S'il n'existe pas déjà
+if(!file_exists($zipCheck)){
 //SINON le créer
-$commande = "7z a -mcp /var/www/html/zip/".$zipname." '".$folder."*'";
+$commande = "7z a -mcp ".$zipCheck." '".$folder."*'";
 echo $commande;
 $locale = 'fr_FR.UTF-8';
 setlocale(LC_ALL, $locale);
