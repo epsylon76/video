@@ -2,3 +2,6 @@ zip/*.zip
 data
 config/dbconn.php
 config/mail_config.php
+vue/img/invitation.jpg
+vue/img/logo.png
+vue/img/banniere.mp4
