@@ -59,6 +59,7 @@
   </div>
 </div>
 
+<script src="includes/js/simpleslider.min.js">
 
 <script>
 $('#partageModal').on('show.bs.modal', function (event) {
@@ -83,8 +84,14 @@ $('#partageModal').on('show.bs.modal', function (event) {
   $('#email').focus();
 });
  
-//$('.clickpartage').click(function(){
-//  $('#email').focus();
-//});
+
+simpleslider.getSlider({
+  container: document.getElementById('slider-photo'),
+  init: -100, 
+  show: 0,
+  end: 100,
+  unit: '%'
+});
+
   
 </script>

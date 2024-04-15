@@ -210,6 +210,15 @@ class dossier
     if ($compteur_images > 2 && $nb_sous_dossiers == 0) { //mode dossier photos
       $retour .= '<h3> Photos </h3>';
       $retour .= 'Il y a <strong>&nbsp;' . $compteur_images . '</strong>&nbsp;photos dans ce dossier&nbsp;<a class="btn btn-sm btn-primary" href="?page=admin_dl_photos&dl_photos=' . $chemin . '">Télécharger <i class="fas fa-download"></i></a>';
+      $retour .= '<div id="slider-photo">';
+
+      foreach($listefichiers as $ligne) {
+        $url = "/data" . $chemin . $ligne;
+        $retour .= '<img src="' .$url .'">';
+      }
+
+      $retour .= "</div>";
+
     }
 
     //rendu de la liste
