@@ -17,7 +17,7 @@
 
   <div class="text-center" style="margin-top:50px; margin-bottom:50px;">
 
-    <a class="btn btn-primary btn-lg justify-content-center" style="font-size: 16px;"id="dl_button" href="?cle=<?php echo $_GET['cle'] ?>&dl_photos=<?php echo $_GET['id']; ?>">
+    <a class="btn btn-primary btn-sm d-flex justify-content-start" style="font-size: 16px;"id="dl_button" href="?cle=<?php echo $_GET['cle'] ?>&dl_photos=<?php echo $_GET['id']; ?>">
         <i class="fas fa-download"></i> Télécharger toutes les photos
     </a>
 
