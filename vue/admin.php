@@ -59,7 +59,10 @@
   </div>
 </div>
 
-<script src="includes/js/simpleslider.min.js">
+<!-- Lazy slick -->
+<link rel="stylesheet" type="text/css" href="./includes/js/slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="./includes/js/slick/slick.css"/>
+<script type="text/javascript" src="./includes/js/slick/slick.min.js"></script>
 
 <script>
 $('#partageModal').on('show.bs.modal', function (event) {
@@ -83,14 +86,15 @@ $('#partageModal').on('show.bs.modal', function (event) {
   $('#partageModal').on('shown.bs.modal', function () {
   $('#email').focus();
 });
- 
 
-simpleslider.getSlider({
-  container: document.getElementById('slider-photo'),
-  init: -100, 
-  show: 0,
-  end: 100,
-  unit: '%'
+
+$('.slider-photo').slick({
+  lazyLoad: 'ondemand',
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  fade: true,
+  dots: false
+
 });
 
   
