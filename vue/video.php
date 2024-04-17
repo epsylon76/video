@@ -1,22 +1,28 @@
 <?php echo $params['analytics']; //analytics seulement sur la vue client ?>
 
+<link href="./includes/css/video.css" rel="stylesheet">
+
 <div class="container">
-	<h1>Vidéo</h1>
+	<h1 style="display:flex; justify-content:center; font-size:2rem;"> <?php echo $nom_fichier; ?></h1>
 
-
-	<p><strong>Nom</strong> : <?php echo $nom_fichier; ?></p>
-	<p>N'oubliez pas de <strong>sauvegarder la vidéo</strong></p>
-	<p>Taille du fichier : <?php echo $taille_fichier; ?></p>
-	<div class="text-center" style="margin-top:50px; margin-bottom:50px;">
-		<a class="btn btn-primary btn-lg" id="dl_button" href="<?php echo $chemin ?>" download="<?php echo $nom_fichier; ?>" ><i class="fas fa-download"></i>&nbsp;Télécharger la vidéo</a>
+	<div class="video-wrapper">
+		<video controls>
+			<source src="<?php echo $chemin; ?>" type="video/mp4" />
+		</video>
 	</div>
-	<br>
-	<?php  if(isset($_GET['id'])){ ?>
-		<a class="btn btn-success" href="?cle=<?php echo $_GET['cle'] ?>"><i class="fas fa-arrow-left">&nbsp;</i>retour</a>
-	<?php } ?>
+
+	<div style="margin-top: 20px;">
+		<p>N'oubliez pas de <strong>sauvegarder la vidéo</strong></p>
+		<p><strong>Nom</strong> : <?php echo $nom_fichier; ?></p>
+		<p><strong>Taille du fichier :</strong> <?php echo $taille_fichier; ?></p>
+		<div style="display: flex; justify-content:center;">
+			<a class="btn btn-primary" style="font-size:14;" href="<?php echo $chemin; ?>" download="<?php echo $nom_fichier; ?>"><i class="fas fa-download"></i> Télécharger la vidéo</a>
+		</div>
+	</div>
+
+	<div>
+		<?php if (isset($_GET['id'])) { ?>
+			<a class="btn btn-success" href="?cle=<?php echo $_GET['cle']; ?>"><i class="fas fa-arrow-left"></i> Retour</a>
+		<?php } ?>
+	</div>
 </div>
-<style>
-body{
-  background-color:white!important;
-}
-</style>

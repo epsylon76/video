@@ -1,27 +1,18 @@
 <?php echo $params['analytics']; //analytics seulement sur la vue client 
 ?>
 
+<link href="./includes/css/video.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="./includes/js/slick/slick-theme.css"/>
 <link rel="stylesheet" type="text/css" href="./includes/js/slick/slick.css"/>
 <script type="text/javascript" src="./includes/js/slick/slick.min.js"></script>
 
 
 <div class="container">
+  <h1 style="margin-top: 10px;  display:flex; justify-content:center; font-size:2rem;">Vos Photos</h1>
 
-  <h1>Vos Photos</h1>
+  <div class="text-center">
 
-  <p>Vos photos vont être rassemblées dans un dossier zip et le Téléchargement commencera</p>
-  <p><strong>Date</strong> : <?php echo date('d/m/Y', $date); ?></p>
-  <p><strong>Nombre de photos</strong> : <?php echo $nb; ?> </p>
-  <p><strong>Taille</strong> : <?php echo number_format($taille / 1048576, 2); ?> Mo</p>
-
-  <div class="text-center" style="margin-top:50px; margin-bottom:50px;">
-
-    <a class="btn btn-primary btn-sm d-flex justify-content-start" style="font-size: 16px;"id="dl_button" href="?cle=<?php echo $_GET['cle'] ?>&dl_photos=<?php echo $_GET['id']; ?>">
-        <i class="fas fa-download"></i> Télécharger toutes les photos
-    </a>
-
-    <div style="margin-top: 50px;" class="d-flex justify-content-start"><p>Voici un apercu de vos photo: </p></div>
+    <div style="margin-top: 10px;" class="d-flex justify-content-start"><p>Voici un apercu de vos photo: </p></div>
       <div class="d-flex justify-content-center">
         <div class="slider-photo" style="width: 75%; heigth:75%;">
 
@@ -46,10 +37,30 @@
       </div>
     </div> 
 
+
+    <div style="margin-top: 20px;">
+    <p>Vos photos vont être rassemblées dans un dossier zip et le Téléchargement commencera</p>
+
+    <div>
+      <p><strong>Date</strong> : <?php echo date('d/m/Y', $date); ?></p>
+      <p><strong>Nombre de photos</strong> : <?php echo $nb; ?> </p>
+      <p><strong>Taille</strong> : <?php echo number_format($taille / 1048576, 2); ?> Mo</p>
+
+      <div style="display: flex; justify-content:center;">
+       <a class="btn btn-primary" style="font-size:14;" id="dl_button" href="?cle=<?php echo $_GET['cle'] ?>&dl_photos=<?php echo $_GET['id']; ?>">
+            <i class="fas fa-download"></i> Télécharger toutes les photos
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div>
     <?php if (isset($_GET['id'])) { ?>
       <a class="btn btn-success" href="?cle=<?php echo $_GET['cle'] ?>"><i class="fas fa-arrow-left">&nbsp;</i>retour</a>
     <?php } ?>
-
+    </div>
+    
   </div>
 
 
@@ -57,7 +68,7 @@
 
 <style>
   body {
-    background-color: white !important;
+    background-color: #fffffd !important;
   }
 </style>
 
