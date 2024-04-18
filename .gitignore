@@ -3,5 +3,5 @@ data
 config/dbconn.php
 config/mail_config.php
 vue/img/banniere.mp4
-vue/img/logo.png
-vue/img/invitation.jpg
+vue/img/*.png
+vue/img/*.jpg
