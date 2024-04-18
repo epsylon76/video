@@ -18,13 +18,8 @@
           <a class="nav-link" href="?page=liste">Partages</a>
         </li>
         <li class="nav-item">
-          <div id="loader-stats" class="spinner-border text-primary spinner-border-sm" role="status" style="margin-top:10px;display:none">
-            <span class="sr-only">Loading...</span>
-          </div>
-          <a class="nav-link float-right" href="?page=stats" id="bouton-stats">Stats</a>
-
+          <a class="nav-link" href="?page=stats" id="bouton-stats">Stats</a>
         </li>
-
       </ul>
       <span class="nav-link" style="color:white">
         <?php echo $_SESSION['login']; ?>
