@@ -3,7 +3,7 @@ ini_set('max_execution_time', 300);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-$folder = $partage->get_partage($_GET['dl_photos']);
+$folder = $partage->get_partage($uri[1]);
 
 $folder = $folder['chemin'];
 //on retire le dernier slash de data
@@ -13,7 +13,7 @@ $data = rtrim($data, '/');
 $folder = $data . $folder . '/';
 
 
-$zipname = $_GET['cle'].$_GET['dl_photos'].'.zip';
+$zipname = $uri[2].$uri[1].'.zip';
 
 $zipCheck = './zip/'.$zipname;
 //VERIFIER S'il n'existe pas déjà

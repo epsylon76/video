@@ -1,19 +1,25 @@
 <?php
 
-if(isset($_GET['id']) && $partage->check_partage($_GET['cle'], $_GET['id'])){ // Mode client
+if(isset($uri[2]) && $partage->check_partage($uri[1], $uri[2])){ // Mode client
   //retrouver le chemin via l'id
-  $infos = $partage->get_partage($_GET['id']);
+  $infos = $partage->get_partage($uri[2]);
   $chemin = $infos['chemin'];
   $email = $infos['email'];
 }
 else{ //mode admin
-  $chemin = $_GET['photos'];
+  $slices = array_slice($uri, 2);
+  $chemin = '';
+  foreach($slices as $u){
+    $chemin .= $u.'/';
+  }
+  $chemin = rtrim('/data'.$chemin, '/');
+  $chemin = urldecode($chemin);
   $mode = "admin";
 }
 
 
 //calcul de la taille
-$dossier = new dossier($data,$chemin);
+
 $listefichiers = $dossier->contenu_dossier($chemin,$data);
 $taille = 0;
 $date ='';
@@ -30,7 +36,7 @@ foreach ($listefichiers as $item) {
 include('vue/photos.php');
 
 //ajout du script DL si user qui track le nombre de clic
-if(isset($_GET['id'])){
+if(isset($uri[2])){
   $action = 'dl_photos';
   include('./scripts/script_button_dl.php');
 }

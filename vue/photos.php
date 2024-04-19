@@ -1,10 +1,10 @@
 <?php echo $params['analytics']; //analytics seulement sur la vue client 
 ?>
 
-<link href="./includes/css/photos.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="./includes/js/slick/slick-theme.css" />
-<link rel="stylesheet" type="text/css" href="./includes/js/slick/slick.css" />
-<script type="text/javascript" src="./includes/js/slick/slick.min.js"></script>
+<link href="/includes/css/photos.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/includes/js/slick/slick-theme.css" />
+<link rel="stylesheet" type="text/css" href="/includes/js/slick/slick.css" />
+<script type="text/javascript" src="/includes/js/slick/slick.min.js"></script>
 
 
 <div class="container">
@@ -18,7 +18,7 @@
 
         <?php
 
-        $folder = $partage->get_partage($_GET['id']);
+        $folder = $partage->get_partage($uri[2]);
 
         $chemin = $folder['chemin'];
 
@@ -47,7 +47,7 @@
       <p><strong>Taille</strong> : <?php echo number_format($taille / 1048576, 2); ?> Mo</p>
 
       <div style="display: flex; justify-content:center;">
-        <a class="btn btn-primary" style="font-size:14;" id="dl_button" href="?cle=<?php echo $_GET['cle'] ?>&dl_photos=<?php echo $_GET['id']; ?>">
+        <a class="btn btn-primary" style="font-size:14;" id="dl_button" href="/cle/<?php echo $uri[1] ?>/dl">
           <i class="fas fa-download"></i> Télécharger toutes les photos
         </a>
       </div>
@@ -59,8 +59,8 @@
   </div>
 
   <div>
-    <?php if (isset($_GET['id'])) { ?>
-      <a class="btn btn-success" href="?cle=<?php echo $_GET['cle'] ?>" style="margin-top:20px;"><i class="fas fa-arrow-left">&nbsp;</i>retour</a>
+    <?php if (isset($uri[1])) { ?>
+      <a class="btn btn-success" href="/cle/<?php echo $uri[1] ?>" style="margin-top:20px;"><i class="fas fa-arrow-left">&nbsp;</i>retour</a>
     <?php } ?>
   </div>
 

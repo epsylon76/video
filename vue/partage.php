@@ -41,7 +41,7 @@
 
             echo '<div class="row" style="display: flex;  justify-content: space-between;">';
             echo '<span style="overflow:hidden">';
-            echo '<a href=?cle=' . $_GET['cle'] . '&id=' . $ligne['id'] . '>';
+            echo '<a href=/cle/' . $uri[1] . '/' . $ligne['id'] . '>';
 
             if ($ligne['type_partage'] == "video") {
               $icone = '<i class="fas fa-video icone_ligne"></i>&nbsp;';

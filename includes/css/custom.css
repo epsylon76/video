@@ -73,3 +73,21 @@ h2, h1{
 	height:auto;
 	font-size: 6pt;
 }
+
+
+
+.slick-prev::before, .slick-next::before {
+  font-size:40px!important;
+}
+.slick-prev, .slick-next{
+  
+  width:40px!important;
+  height:40px!important;
+}
+
+.slick-prev{
+  left:-45px!important;
+}
+.slick-next{
+  right:-45px!important;
+}

@@ -3,9 +3,9 @@ ini_set('max_execution_time', 1000);
 ini_set('memory_limit', '20000000M'); //à modifier
 
 
-$zip_name=$_GET['dl_dossier']."_dossier.zip";
+$zip_name=$uri[1]."_dossier.zip";
 
-$folder = $partage->get_partage($_GET['dl_dossier']);
+$folder = $partage->get_partage($uri[1]);
 
 $folder = $folder['chemin'];
 

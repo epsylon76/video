@@ -27,7 +27,7 @@
       </div>
       <div class="modal-body">
         <div id="loginform">
-          <form action="./" method="post">
+          <form action="/actions/login_admin" method="post">
             <div class="form-group">
               <label for="login">Utilisateur</label>
               <input type="text" class="form-control" id="login" name="login">

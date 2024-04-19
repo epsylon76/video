@@ -60,9 +60,9 @@
 </div>
 
 <!-- Lazy slick -->
-<link rel="stylesheet" type="text/css" href="./includes/js/slick/slick-theme.css"/>
-<link rel="stylesheet" type="text/css" href="./includes/js/slick/slick.css"/>
-<script type="text/javascript" src="./includes/js/slick/slick.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/includes/js/slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="/includes/js/slick/slick.css"/>
+<script type="text/javascript" src="/includes/js/slick/slick.min.js"></script>
 
 <script>
 $('#partageModal').on('show.bs.modal', function (event) {

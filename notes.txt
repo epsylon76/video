@@ -1,0 +1,10 @@
+/cle/ ->[0]
+/cle/hash ->[1]
+/cle/hash/ -> liste partage
+/cle/hash/id/ -> [2] on affiche ce partage
+/cle/hash/id/dl -> [3] on download ce partage
+
+Exemple video.ulm76.fr/cle/f37da851c59b21e47213d50e25fb301a5ef529a3
+
+/admin/dossiers/2024/08/24/01/Pupin johan/
+/

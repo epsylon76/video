@@ -55,4 +55,14 @@ class admin{
     $requete->execute();
   }
 
+  function add_user($login, $pass){
+    global $DB_con;
+    $requete=$DB_con->prepare("INSERT INTO `admin` (`login`, `pass`) VALUES(:login, :pass)");
+    $pass = sha1($pass);
+    $requete->bindParam(':login', $login);
+    $requete->bindParam(':pass', $pass);
+    $requete->execute();
+  }
+
+
 }

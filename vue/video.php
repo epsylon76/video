@@ -1,12 +1,12 @@
 <?php echo $params['analytics']; //analytics seulement sur la vue client ?>
 
-<link href="./includes/css/video.css" rel="stylesheet">
+<link href="/includes/css/video.css" rel="stylesheet">
 
 <div class="container">
 	<h1 style="display:flex; justify-content:center; font-size:2rem;"> <?php echo $nom_fichier; ?></h1>
 
 	<div class="video-wrapper">
-		<video controls>
+		<video id="id-video" controls preload="none">
 			<source src="<?php echo $chemin; ?>" type="video/mp4" />
 		</video>
 	</div>
@@ -20,8 +20,21 @@
 	</div>
 
 	<div>
-		<?php if (isset($_GET['id'])) { ?>
-			<a class="btn btn-success" href="?cle=<?php echo $_GET['cle']; ?>"><i class="fas fa-arrow-left"></i> Retour</a>
+		<?php if ($mode == "user") { ?>
+			<a class="btn btn-success" href="/cle/<?php echo $uri[1]; ?>"><i class="fas fa-arrow-left"></i> Retour</a>
 		<?php } ?>
 	</div>
 </div>
+
+<script>
+document.getElementById('id-video').addEventListener('play', function() {
+
+    let videoSource = document.getElementById('id-video').querySelector('source');
+    let videoUrl = videoSource.getAttribute('src'); 
+	
+	console.log(videoUrl);
+	
+});
+
+
+</script>

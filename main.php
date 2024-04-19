@@ -3,9 +3,9 @@ session_start();
 
 include_once('./config/config.php');
 include_once('./config/fonctions.php');
-require('./vendor/phpmailer/phpmailer/src/Exception.php');
-require('./vendor/phpmailer/phpmailer/src/PHPMailer.php');
-require('./vendor/phpmailer/phpmailer/src/SMTP.php');
+//require('./vendor/phpmailer/phpmailer/src/Exception.php');
+//require('./vendor/phpmailer/phpmailer/src/PHPMailer.php');
+//require('./vendor/phpmailer/phpmailer/src/SMTP.php');
 
 //parametres titre, email....
 $params = get_params();
@@ -16,56 +16,38 @@ include_once('./mdl/dossier.php');
 include_once('./mdl/partage.php');
 include_once('./mdl/historique.php');
 
+//instancier les objets
+$admin = new admin();
+$dossier = new dossier();
+$partage = new partage();
+$historique = new historique();
 
-if(!isset($_GET['dl_photos']) && !isset($_GET['dl_dossier']) ){
-  include_once('./vue/head.php'); //ne pas afficher sur dl_photos car casse le stream
-}
 
-
-
+/* à refaire
 if(isset($_GET['action']) && $_GET['action']=="deco"){
   include('./ctrl/deconnecter.php');
 }
+*/
 
-//accès via clé detruit la session avant toutes
-if(isset($_GET['cle'])) {
-  unset($_SESSION['login']);
-  session_destroy();
+
+//ROUTAGE
+$uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+
+//3 cas : admin, cle, rien(login), actions !
+
+if($uri[0] == 'admin'){
+  include 'routeur_admin.php';
 }
-//
-
-
-
-if (isset($_SESSION['login'])){//MODE ADMIN
-  include('./ctrl/admin.php');
-}else{ //MODE CLIENT
-  if(isset($_GET['cle'])) {
-
-    $partage = new partage();
-
-    if(isset($_GET['id']))
-    {  //on accède à un partage en particulier
-      //on détermine si ce sont des photos ou une vidéo
-
-      if($partage->get_type_partage($_GET['id']) == "video"){
-        include('./ctrl/video.php');
-      }elseif($partage->get_type_partage($_GET['id']) == "photos"){
-        include('./ctrl/photos.php');
-      }elseif($partage->get_type_partage($_GET['id']) == "dossier"){
-        include('./ctrl/dossier_zip.php');//on lance le téléchargement du zip dossier --> passer par une page explicative
-      }
-
-    }elseif(isset($_GET['dl_photos'])){//on lance le téléchargement du zip photos
-      include('./ctrl/dl_photos.php');
-    }elseif(isset($_GET['dl_dossier'])){//on lance le téléchargement du zip dossier
-        include('./ctrl/dl_dossier_zip.php');
-    }else{ // on accède à la liste des partages
-      include('./ctrl/partage.php');
-    }
-
-  }else{ // pas d'url avec cle
-    include('./ctrl/accueil.php');
-  }
+elseif($uri[0] == 'cle'){
+  include 'vue/head.php';
+  include 'routeur_client.php';
 }
+elseif($uri[0] == ''){
+  include 'vue/head.php';
+  include 'vue/accueil.php';
+}elseif($uri[0] == 'actions'){
+  include 'routeur_actions.php';
+}
+
 ?>
-<script src="includes/js/general.js"></script>
+

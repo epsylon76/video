@@ -2,11 +2,16 @@
 table{
   border:1px solid black;
   border-collapse: collapse;
-  margin:10px;
+  margin: 10px auto;
 }
 td{
   border:1px solid black;
   padding:5px;
+}
+
+.container{
+  margin: 0 auto; 
+    text-align: center;
 }
 </style>
 
@@ -40,8 +45,30 @@ foreach($liste_admins as $un_admin){
   echo '</td></tr>';
 }
 
+echo '</table>';
 
 
 
+if(isset($_GET['new_login']) && isset($_GET['new_password'])){
+    include_once('./ctrl/set_user.php');
+}
 ?>
+
+<form action="?page=users" method="post" class="">
+    <table style="margin-top: 50px;">
+        <tr>
+            <td>login:</td>
+            <td><input type="text" name="new_login" required="required"></td>
+        </tr>
+        <tr>
+            <td>mot de passe:</td>
+            <td><input type="password" name="new_password" required="required"></td>
+        </tr>
+    </table>
+    <button class="btn btn-secondary" style="font-size: 14px;" type="submit">
+        Ajouter utilisateur
+    </button>
+</form>
+
+
 </div><!-- container -->
