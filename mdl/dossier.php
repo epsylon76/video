@@ -78,8 +78,11 @@ class dossier
       global $partage;
       
       $type = $this->infos_fichier($data, $chemin, $ligne);
-      
+
+      //
       //TYPE DOSSIER
+      //
+
       if ($type[0] == 'dir' || $type[0] == 'link') {
         #différentes conditions pour le type $dossier
         switch ($ligne) {
@@ -101,7 +104,7 @@ class dossier
               $nb_photos = $this->detect_photos($data . $chemin . $ligne);
               
               
-              if ($nb_photos >= 1) { //dossier de photos
+              if ($nb_photos >= 2) { //dossier de photos
                 
                 $items .= '<li class="list-group-item">';
                 $items .= '<div class=" row justify-content-between">'; //ligne
@@ -172,7 +175,11 @@ class dossier
           } //fin type dossier
           elseif ($type[1] == 'mp4' || $type[1] == 'MP4' || $type[1] == 'mkv' || $type[1] == 'MKV' || $type[1] == 'avi' || $type[1] == 'AVI') {
             
+            //
             //type VIDEO
+            //
+
+
             
             //echo $chemin.$ligne.'<br>';
             //si partage vidéo

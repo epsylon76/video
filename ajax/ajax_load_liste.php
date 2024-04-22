@@ -20,9 +20,14 @@ foreach ($results as $ligne) {
 
   if ($ligne['type_partage'] == "video") {
     $icone = '<i class="fas fa-video"></i>&nbsp;';
-  } elseif ($ligne['type_partage'] == "photos") {
+    $link = '<a href="/admin/video/' . $ligne['chemin'] . '/">';
+
+  } 
+  elseif ($ligne['type_partage'] == "photos") {
     $icone = '<i class="fas fa-camera"></i>&nbsp;';
-  } elseif ($ligne['type_partage'] == "dossier") {
+    $link = '<a href="/admin/dossiers/' . $ligne['chemin'] . '/">';
+  } 
+  elseif ($ligne['type_partage'] == "dossier") {
     $icone = '<i class="fas fa-file-archive"></i>&nbsp;';
   }
 
@@ -50,11 +55,11 @@ foreach ($results as $ligne) {
   }
 
   $items[$i][2] = $icone;
-  $items[$i][2] .= '<a href="?page=dossiers&chemin=' . $url . '/">';
+  $items[$i][2] .= $link;
   $items[$i][2] .= $ligne['chemin'] . '</a>';
 
   //  $items[$i][3] = $date_creation;
-  $items[$i][3] = '<a href="?cle=' . $ligne['cle'] . '">' . $ligne['email'] . '</a>';
+  $items[$i][3] = '<a href="/cle/' . $ligne['cle'] . '">' . $ligne['email'] . '</a>';
   $items[$i][4] = $ligne['admin_login'];
   $items[$i][5] = '<a href="?page=renvoi_mail&email=' . $ligne['email'] . '"><i class="fas fa-reply-all"></i></a>&nbsp;&nbsp;<a href="?page=unset_partage&id=' . $ligne['id'] . '"><i class="fas fa-trash-alt" style="color:red;"></i></a>';
   $i++;

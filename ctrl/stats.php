@@ -14,7 +14,6 @@ function HumanSize($Bytes)
 }
 $octetstogigaoctets = (1024*1024*1024);
 
-include('vue/nav.php');
 $dossier = new dossier();
 
 $partage = new partage();

@@ -32,21 +32,54 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
             break;
             
             
-            case "video":
-                include('vue/head.php');
-                include('vue/nav.php');
-                include('ctrl/video.php');
-                break;
-                
-                case "photos":
-                    include('vue/head.php');
-                    include('vue/nav.php');
-                    include('ctrl/photos.php');
-                    break;
-                }
-                
-            }else{
-                //renvoi au login
-                header('location:/');
+        case "video":
+            include('vue/head.php');
+            include('vue/nav.php');
+            include('ctrl/video.php');
+            break;
+            
+        case "photos":
+            include('vue/head.php');
+            include('vue/nav.php');
+            include('ctrl/photos.php');
+            break;
+
+        case "historique": 
+            include('vue/head.php');
+            include('ctrl/historique.php');
+            break;
+
+        case "partage": 
+            include('vue/head.php');
+            include('vue/nav.php');
+            include('vue/liste_partage.php');
+            // include('ctrl/liste_partage.php');
+            break;
+
+        case "stats": 
+            include('vue/head.php');
+            include('vue/nav.php');
+            include('ctrl/stats.php');
+            break;
+
+        case "parametres":
+            include('vue/head.php');
+            include('vue/nav.php');
+                  
+            if (isset($uri[2]) && $uri[2] == 'users'){ //bien ça !
+                include('ctrl/users.php');
             }
+            else{
+                include('ctrl/parametres.php');
+            }
+
+            break;
+        
+           
+    }
+                
+}else{
+    //renvoi au login
+    header('location:/');
+}
             

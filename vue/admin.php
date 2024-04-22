@@ -27,7 +27,7 @@
       <div class="modal-body">
         <div id="chemin" style="font-weight:800;"></div>
         <br>
-        <form action="?page=set_partage" method="post" class="form-inline">
+        <form action="/actions/set_partage" method="post" class="form-inline">
           <!-- hidden -->
           <input type="hidden" name="chemin" id="hiddenchemin">
           <input type="hidden" name="chemin_retour" id="hiddenretour">
@@ -65,22 +65,18 @@
 <script type="text/javascript" src="/includes/js/slick/slick.min.js"></script>
 
 <script>
-$('#partageModal').on('show.bs.modal', function (event) {
-  console.log('modal opened');
-
-  var button = $(event.relatedTarget); // Button that triggered the modal
-  var type = button.data('typepartage'); // Extract info from data-* attributes
-  var chemin = button.data('chemin');
-  var retour = button.data('retour');
+$('.clickpartage').click(function () {
+  var type = $(this).data('typepartage'); // Extract info from data-* attributes
+  var chemin = $(this).data('chemin');
+  var retour = $(this).data('retour');
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this);
-  modal.find('.modal-title').text('Partage de type ' + type);
-  modal.find('#hiddenchemin').val(chemin);
-  modal.find('#hiddenretour').val(retour);
-  modal.find('#hiddentype').val(type);
-  //modal.find('.modal-body input').val(type);
-  modal.find('.modal-body #chemin').text(chemin);
+  $('.modal-title').text('Partage de type ' + type);
+  $('#hiddenchemin').val(chemin);
+  $('#hiddenretour').val(retour);
+  $('#hiddentype').val(type);
+  $('.modal-body #chemin').text(chemin);
 });
   
   $('#partageModal').on('shown.bs.modal', function () {
