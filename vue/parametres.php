@@ -4,7 +4,7 @@
   <a href="/admin/parametres/users/">Gestion Utilisateurs</a>
 
 
-  <form action="./?page=parametres" method="post" >
+  <form action="/admin/parametres/" method="post" >
 
     <h2 class="text-center">Core</h2>
     <h5>Dossier data</h5>
@@ -109,7 +109,7 @@
   <h2 class="text-center">Logo principal</h2>
   <img src="/vue/img/logo.png" id="logo" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px;"/>
 
-  <form action="/ctrl/upload_logo.php" method="post" enctype="multipart/form-data">
+  <form action="/admin/action/uploadLogo/" method="post" enctype="multipart/form-data">
     Selectionnez un logo au <u>format PNG</u>:
     <input type="file" name="fileToUpload" id="fileToUpload">
     <input type="submit" value="Envoyer logo" name="submit">
@@ -118,7 +118,7 @@
   <h2 class="text-center">Image Encart invitation (Espace de téléchargement)</h2>
   <img src="/vue/img/invitation.jpg" id="invitation" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px; max-width:300px;"/>
 
-  <form action="/ctrl/upload_invitation.php" method="post" enctype="multipart/form-data">
+  <form action="/admin/action/uploadInvitation/" method="post" enctype="multipart/form-data">
     Selectionnez une image au <u>format JPG</u> :
     <input type="file" name="invitation" id="invitation">
     <input type="submit" value="Envoyer Image" name="submit">
@@ -126,7 +126,7 @@
 
   <h2 class="text-center">Bannière vidéo (Espace de téléchargement)</h2>
   <div style="width: 300px; height: 150px;" data-vide-bg="vue/img/video" data-vide-options="loop: true, muted: true"></div>
-  <form action="/ctrl/upload_banniere.php" method="post" enctype="multipart/form-data">
+  <form action="/admin/action/uploadBanniere/" method="post" enctype="multipart/form-data">
     Selectionnez une vidéo au <u>format mp4</u> :
     <input type="file" name="file" id="banniere">
     <input type="submit" value="Envoyer Vidéo" name="submit">

@@ -1,7 +1,5 @@
 <?php
 
-$partage = new partage();
-
 $res = $partage->get_partage_date_unique($_POST['date']);
 
 

@@ -11,7 +11,7 @@ if($introuvable){
         &nbsp;
         <?php echo $ligne['chemin']; ?>
         &nbsp;
-        <a href="?page=unset_partage&id=<?php echo $ligne['id']; ?>&retour=introuvables"><i class="fas fa-trash-alt" style="color:red;"></i></a>
+        <a href="/admin/action/unsetPartage/<?php echo $ligne['id']; ?>"><i class="fas fa-trash-alt" style="color:red;"></i></a>
       </div>
     </div>
 
@@ -19,7 +19,7 @@ if($introuvable){
   }
 }
 if($introuvable){
-echo '<a href="?page=clear_introuvables" class="btn btn-warning">Effacer tout les partages introuvables</a>';
+echo '<a href="/admin/action/clearIntrouvables/" class="btn btn-warning">Effacer tout les partages introuvables</a>';
 }else{
   echo '<br><br><h4>Il n\'y a pas de partages introuvables actuellement';
 }

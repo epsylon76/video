@@ -28,7 +28,7 @@ td{
 foreach($liste_admins as $un_admin){
   echo '<tr>';
   echo '<td>';
-  echo '<form action="?page=change_psw" method="post">';
+  echo '<form action="/admin/action/changePsw" method="post">';
   echo '<input type="hidden" name="login" value="'.$un_admin['login'].'">';
   echo $un_admin['login'];
   echo '</td><td>';
@@ -40,7 +40,7 @@ foreach($liste_admins as $un_admin){
   echo '</td><td>';
   echo '<input type="password" name="psw"></input>';
   echo '</td><td>';
-  echo '<input type="submit" />';
+  echo '<button type="submit">Valider</button>';
   echo '</form>';
   echo '</td></tr>';
 }
@@ -48,26 +48,22 @@ foreach($liste_admins as $un_admin){
 echo '</table>';
 
 
-
-if(isset($_GET['new_login']) && isset($_GET['new_password'])){
-    include_once('./ctrl/set_user.php');
-}
 ?>
 
-<form action="?page=users" method="post" class="">
-    <table style="margin-top: 50px;">
-        <tr>
-            <td>login:</td>
-            <td><input type="text" name="new_login" required="required"></td>
-        </tr>
-        <tr>
-            <td>mot de passe:</td>
-            <td><input type="password" name="new_password" required="required"></td>
-        </tr>
-    </table>
-    <button class="btn btn-secondary" style="font-size: 14px;" type="submit">
-        Ajouter utilisateur
-    </button>
+<form action="/admin/action/addUser" method="post">
+  <table style="margin-top: 50px;">
+    <tr>
+        <td>login:</td>
+        <td><input type="text" name="new_login" required="required"></td>
+    </tr>
+    <tr>
+        <td>mot de passe:</td>
+        <td><input type="password" name="new_password" required="required"></td>
+    </tr>
+  </table>
+  <button class="btn btn-secondary" style="font-size: 14px;" type="submit">
+      Ajouter utilisateur
+  </button>
 </form>
 
 

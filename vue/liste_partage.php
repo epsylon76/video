@@ -19,7 +19,7 @@
   </table>
 
   <h3>Renvoi par date</h3>
-  <form action="?page=renvoi_date" method="post">
+  <form action="/admin/action/renvoiDate/" method="post">
 
     <div class="row">
       <div class="col-6">

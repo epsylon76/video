@@ -3,7 +3,8 @@ ini_set('max_execution_time', 300);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-$folder = $_GET['dl_photos'];
+// $folder = $_GET['dl_photos'];
+$folder = array_slice($uri, 2);
 
 //on retire le dernier slash de data
 $folder = rtrim($folder, '/');

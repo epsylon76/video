@@ -20,4 +20,4 @@ foreach (new RecursiveIteratorIterator($it) as $file) {
   }
 }
 
-header('location: ?page=stats');
+header('location: /admin/stats/');

@@ -1,5 +1,7 @@
 <?php
 
-$admin->add_user($_GET['new_login'], $_GET['new_password']);
+if(isset($_POST['new_login']) && isset($_POST['new_password'])){
 
-header('location/?page=users');
+    $admin->add_user($_POST['new_login'],$_POST['new_password']);
+}
+header('location: /admin/parametres/users/');

@@ -229,7 +229,7 @@ class dossier
         
         if ($compteur_images > 2 && $nb_sous_dossiers == 0) { //mode dossier photos, on va afficher le bouton de téléchargement et le diaporama
           $retour .= '<h3> Photos </h3>';
-          $retour .= 'Il y a <strong>&nbsp;' . $compteur_images . '</strong>&nbsp;photos dans ce dossier&nbsp;<a class="btn btn-sm btn-primary" href="?page=admin_dl_photos&dl_photos=' . $chemin . '">Télécharger <i class="fas fa-download"></i></a>';
+          $retour .= 'Il y a <strong>&nbsp;' . $compteur_images . '</strong>&nbsp;photos dans ce dossier&nbsp;<a class="btn btn-sm btn-primary" href="/admin/action/adminDlPhotos' . $chemin . '">Télécharger <i class="fas fa-download"></i></a>';
           $retour .= '<div style="margin-top: 50px;" class="d-flex justify-content-start"></div>';
           $retour .= '<div class="d-flex justify-content-center">';    
           $retour .= '<div class="slider-photo" style="width: 75%; heigth:75%;>';

@@ -36,7 +36,7 @@ if(isset($_POST)){
 
       if (move_uploaded_file($_FILES['file']["tmp_name"], '../vue/img/banniere.mp4')) {
         echo "Le fichier a été envoyé.";
-        header('location: ../?page=parametres');
+        header('location: /admin/parametres/');
       } else {
         echo "Not uploaded because of error #".$_FILES["file"]["error"];
         /*
