@@ -15,7 +15,7 @@
 		<p>N'oubliez pas de <strong>sauvegarder la vidéo</strong></p>
 		<p><strong>Taille du fichier :</strong> <?php echo $taille_fichier; ?></p>
 		<div style="display: flex; justify-content:center;">
-			<a class="btn btn-primary" style="font-size:14;" href="<?php echo $chemin; ?>" download="<?php echo $nom_fichier; ?>"><i class="fas fa-download"></i> Télécharger la vidéo</a>
+			<a id="bouton-dl" class="btn btn-primary" style="font-size:14;" href="<?php echo $chemin; ?>" download="<?php echo $nom_fichier; ?>"><i class="fas fa-download"></i> Télécharger la vidéo</a>
 		</div>
 	</div>
 

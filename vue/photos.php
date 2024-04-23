@@ -17,7 +17,7 @@ if(!isset($_SESSION['login'])){
 
 
 <div class="d-flex justify-content-center">
-<div class="slider-photo" style="width: 75%; heigth:75%;">
+<div class="slider-photo" style="width: 75%;">
 
 <?php
 
@@ -50,7 +50,7 @@ foreach ($listefichiers as $ligne) {
 <p><strong>Taille</strong> : <?php echo number_format($taille / 1048576, 2); ?> Mo</p>
 
 <div style="display: flex; justify-content:center;">
-<a class="btn btn-primary" style="font-size:14;" id="dl_button" href="/cle/<?php echo $uri[1] ?>/dl">
+<a class="btn btn-primary" style="font-size:14;" id="dl_button" href="/cle/<?php echo $uri[1] ?>/<?php echo $id_partage;?>/dl">
 <i class="fas fa-download"></i> Télécharger toutes les photos
 </a>
 </div>

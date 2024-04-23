@@ -1,8 +1,9 @@
 <?php
 
 if(isset($uri[2]) && $partage->check_partage($uri[1], $uri[2])){ // Mode client
+  $id_partage = $uri[2];
   //retrouver le chemin via l'id
-  $infos = $partage->get_partage($uri[2]);
+  $infos = $partage->get_partage($id_partage);
   $chemin = $infos['chemin'];
   $email = $infos['email'];
 }
@@ -37,6 +38,18 @@ include('vue/photos.php');
 
 //ajout du script DL si user qui track le nombre de clic
 if(isset($uri[2])){
-  $action = 'dl_photos';
-  include('./scripts/script_button_dl.php');
+  ?>
+  <script>
+    $("#bouton-dl").click(function() {
+      console.log('eventdl');
+      $.ajax({
+        url: '/ajax/clic_dl.php',
+        type: 'GET',
+        data: 'chemin=<?php echo $chemin; ?>&email=<?php echo $email ?>&action=dl_photos',
+        dataType: 'html'
+      });
+
+    });
+  </script>
+<?php
 }

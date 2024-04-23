@@ -11,7 +11,7 @@ else{
 
     if(isset($uri[3]) && $uri[3] == 'dl'){
       // action de téléchargement 
-      include('ctrl/dl_photos.php');
+      include('ctrl/actions/dl_photos.php');
     }
     else{
       $getPartage = $partage->get_type_partage($uri[2]);

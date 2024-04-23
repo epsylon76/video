@@ -1,5 +1,5 @@
-<?php echo $params['analytics']; //analytics seulement sur la vue client 
-
+<?php 
+echo $params['analytics']; //analytics seulement sur la vue client 
 ?>
 
 
@@ -16,7 +16,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div style="width: 100%; height: 22vw;" data-vide-bg="vue/img/banniere" data-vide-options="loop: true, muted: true, position: 0% 50%">
+<div style="width: 100%; height: 22vw;" data-vide-bg="/vue/img/banniere" data-vide-options="loop: true, muted: true, position: 0% 50%">
   <h1 style="text-align:center; text-transform:uppercase; color:white; font-size:4vw; font-weight:800; margin-top:0; padding-top:8vw">votre espace vidéo et photos</h1>
 </div>
 
@@ -72,7 +72,7 @@
         <div class=" alert alert-secondary">
           <div class="row">
             <div class="col-sm-3">
-              <img src="vue/img/logo.png" style="width:100px; height:100px">
+              <img src="/vue/img/logo.png" style="width:100px; height:100px">
             </div>
             <div class="col-sm-9">
               <?php echo $params['texte_espace']; ?>
@@ -97,7 +97,7 @@
       }
       ?>
       <h4 style="text-transform:uppercase"><?php echo $params['titre_invitation']; ?></h4>
-      <a href="https://<?php echo $params['url_invitation']; ?>"><img src="vue/img/invitation.jpg" style="max-width:300px;"></a>
+      <a href="https://<?php echo $params['url_invitation']; ?>"><img src="/vue/img/invitation.jpg" style="max-width:300px;"></a>
     </div>
   </div>
 </div>
@@ -129,4 +129,4 @@
   }
 </style>
 
-<script src="./includes/js/jquery.vide.min.js"></script>
+<script src="/includes/js/jquery.vide.min.js"></script> <!-- Jquery vidéo de fond -->

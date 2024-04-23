@@ -22,12 +22,10 @@ $dossier = new dossier();
 $partage = new partage();
 $historique = new historique();
 
-
-/* à refaire
-if(isset($_GET['action']) && $_GET['action']=="deco"){
-  include('./ctrl/deconnecter.php');
+//Anciens liens : redirection
+if (isset($_GET['cle']) && !empty($_GET['cle'])) {
+  header('location:/cle/' . $_GET['cle']);
 }
-*/
 
 
 //ROUTAGE
@@ -35,19 +33,14 @@ $uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
 
 //3 cas : admin, cle, rien(login), actions !
 
-if($uri[0] == 'admin'){
+if ($uri[0] == 'admin') {
   include 'routeur_admin.php';
-}
-elseif($uri[0] == 'cle'){
+} elseif ($uri[0] == 'cle') {
   include 'vue/head.php';
   include 'routeur_client.php';
-}
-elseif($uri[0] == ''){
+} elseif ($uri[0] == '') {
   include 'vue/head.php';
   include 'vue/accueil.php';
-}elseif($uri[0] == 'actions'){
+} elseif ($uri[0] == 'actions') {
   include 'routeur_actions.php';
 }
-
-?>
-
