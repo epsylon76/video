@@ -323,7 +323,7 @@ $corps ='<!doctype html>
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="http://'.$params['url_domaine'].'?cle='.$cle.'" target="_blank">'.$params['email_texte_bouton'].'</a> </td>
+                                      <td> <a href="http://'.$params['url_domaine'].'/cle/'.$cle.'" target="_blank">'.$params['email_texte_bouton'].'</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>

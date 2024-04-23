@@ -1,8 +1,5 @@
 <?php
 
-$partage = new partage();
-$historique = new historique();
-
 $hours = $partage->last_partage($_POST['email']); //heures depuis le dernier partage
 
 if (!isset($_POST['email']) && !isset($_POST['chemin'])) {
@@ -22,8 +19,14 @@ if (!isset($_POST['email']) && !isset($_POST['chemin'])) {
   //si le dernier partage a été fait il y a moins de 6h
   if ($hours >= 6) {
     //envoi du mail si la différence est de un jour
-    include('ctrl/sendemail.php');
+    include('ctrl/actions/sendemail.php');
+  }
+
+  if(false){ //DEBUG
+    include('ctrl/actions/sendemail.php');
   }
 }
-
-header('Location: ./?page=dossiers&chemin=' . $chemin_retour);
+if($chemin_retour == '/'){
+  $chemin_retour = '';
+}
+header('Location:/admin/dossiers/' . $chemin_retour);
