@@ -12,5 +12,5 @@ if (isset($email_type) && $email_type == 2) {
 
 $mail->Subject = $sujet;
 $mail->Body = $corps;
-$mail->AddAddress($email);
+$mail->AddAddress($uri[3]);
 $mail->Send();
