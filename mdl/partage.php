@@ -86,6 +86,16 @@ class partage {
     return $result;
   }
 
+  function get_cle_with_chemin($chemin){
+    global $DB_con;
+    $requete="SELECT `cle` from `partage` where `chemin` = :chemin";
+    $query=$DB_con->prepare($requete);
+    $query->bindParam(':chemin', $chemin);
+    $query->execute();
+    $result = $query->fetch();
+    return $result;
+  }
+
   function get_type_partage($id){
     global $DB_con;
     $requete="SELECT `type_partage` from `partage` where `id` = :id";

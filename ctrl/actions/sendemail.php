@@ -1,5 +1,4 @@
 <?php
-
 include('config/mail_config.php');
 include('config/email_template.php');
 
@@ -12,5 +11,5 @@ if (isset($email_type) && $email_type == 2) {
 
 $mail->Subject = $sujet;
 $mail->Body = $corps;
-$mail->AddAddress($uri[3]);
+$mail->AddAddress($mailto); //$mailto doit etre défini lors de l'inclusion de ce fichier
 $mail->Send();

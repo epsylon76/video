@@ -97,12 +97,13 @@ class dossier
               default:
               
           
-              
+
               //calcul du nombre de sous dossiers
               $nb_sous_dossiers = $this->nb_sous_dossiers($data . $chemin . $ligne);
               //calcul du nombre de Photos
               $nb_photos = $this->detect_photos($data . $chemin . $ligne);
               
+              $cle = $partage->get_cle_with_chemin('/'.$chemin.$ligne);
               
               if ($nb_photos >= 2) { //dossier de photos
                 
@@ -110,6 +111,7 @@ class dossier
                 $items .= '<div class=" row justify-content-between">'; //ligne
                 $items .= '<div class="col-md-6">'; //colonne 4
                 $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="/admin/dossiers/' . $chemin . $ligne . '/">' . $ligne . '</a>';
+                // $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="/cle/' . $cle[0]. '/">' . $ligne . '</a>';
                 if ($partage->nb_partages($chemin . $ligne) >= 1) {
                   $badge_color = "badge-success";
                 } else {

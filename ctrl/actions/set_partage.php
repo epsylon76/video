@@ -6,6 +6,7 @@ if (!isset($_POST['email']) && !isset($_POST['chemin'])) {
   //rejeter
 } else {
   $email = $_POST['email'];
+  $mailto = $email;//poursendemail
   $chemin = $_POST['chemin'];
   $chemin_retour = $_POST['chemin_retour'];
   $type_partage = $_POST['type_partage'];
@@ -29,4 +30,4 @@ if (!isset($_POST['email']) && !isset($_POST['chemin'])) {
 if($chemin_retour == '/'){
   $chemin_retour = '';
 }
-header('Location:/admin/dossiers/' . $chemin_retour);
+//header('Location:/admin/dossiers/' . $chemin_retour);
