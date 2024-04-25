@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-include_once('./config/config.php');
-include_once('./config/fonctions.php');
+include_once('config/config.php');
+include_once('config/fonctions.php');
 //require('./vendor/phpmailer/phpmailer/src/Exception.php');
 //require('./vendor/phpmailer/phpmailer/src/PHPMailer.php');
 //require('./vendor/phpmailer/phpmailer/src/SMTP.php');

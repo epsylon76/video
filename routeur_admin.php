@@ -23,7 +23,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
             }
 
             $listefichiers = $dossier->contenu_dossier($chemin, $data);
-            $breadcrumb = $dossier->breadcrumb($chemin);
+            $breadcrumb = breadcrumb($chemin);
             include('vue/head.php');
             include('vue/nav.php');
             include('vue/admin.php');

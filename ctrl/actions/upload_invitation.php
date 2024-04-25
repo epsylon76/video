@@ -1,8 +1,8 @@
 <?php
-$target_dir = "../vue/img/";
+$target_dir = "vue/img/";
 
-if(file_exists("../vue/img/invitation.jpg")){
-  unlink("../vue/img/invitation.jpg");
+if(file_exists($target_dir."invitation.jpg")){
+  unlink($target_dir."invitation.jpg");
 }
 
 

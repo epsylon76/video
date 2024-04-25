@@ -30,4 +30,4 @@ if (!isset($_POST['email']) && !isset($_POST['chemin'])) {
 if($chemin_retour == '/'){
   $chemin_retour = '';
 }
-//header('Location:/admin/dossiers/' . $chemin_retour);
+header('Location:/admin/dossiers/' . $chemin_retour);

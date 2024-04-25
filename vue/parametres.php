@@ -4,7 +4,7 @@
   <a href="/admin/parametres/users/">Gestion Utilisateurs</a>
 
 
-  <form action="/admin/parametres/" method="post" >
+  <form action="/admin/parametres/" method="post">
 
     <h2 class="text-center">Core</h2>
     <h5>Dossier data</h5>
@@ -24,7 +24,7 @@
     <input type="text" name="page_titre" value="<?php echo $params['page_titre']; ?>"></input>
 
     <h5>Texte d'accueil</h5>
-    <textarea name="accueil_texte" id="accueil_texte" ><?php echo $params['accueil_texte']; ?></textarea>
+    <textarea name="accueil_texte" id="accueil_texte"><?php echo $params['accueil_texte']; ?></textarea>
 
     <hr>
     <h2 class="text-center">Espace de Téléchargement</h2>
@@ -50,7 +50,7 @@
     <h2 class="text-center">Email</h2>
 
     <h5>Objet Email</h5>
-    <input type="text" name="email_sujet" id="email_sujet" value="<?php echo $params['email_sujet']; ?>"  size="100"></input>
+    <input type="text" name="email_sujet" id="email_sujet" value="<?php echo $params['email_sujet']; ?>" size="100"></input>
 
     <h5>Paragraphe 1</h5>
     <textarea name="email_corps" id="email_corps"><?php echo $params['email_corps']; ?></textarea>
@@ -63,14 +63,14 @@
 
     <h5>Footer</h5>
     <textarea name="email_footer" id="email_footer"><?php echo $params['email_footer']; ?></textarea>
-    
-    
+
+
     <hr>
     <h2 class="text-center">Email Alternatif</h2>
     <p>Le texte bouton et le footer sont les mêmes que défini au dessus</p>
 
     <h5>Objet Email Alternatif</h5>
-    <input type="text" name="email_sujet_alt" id="email_sujet_alt" value="<?php echo $params['email_sujet_alt']; ?>"  size="100"></input>
+    <input type="text" name="email_sujet_alt" id="email_sujet_alt" value="<?php echo $params['email_sujet_alt']; ?>" size="100"></input>
 
     <h5>Paragraphe 1 Email Alternatif</h5>
     <textarea name="email_corps_alt" id="email_corps_alt"><?php echo $params['email_corps_alt']; ?></textarea>
@@ -86,20 +86,25 @@
     <h3>Activer partage dossier zip</h3>
 
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="partage_dossier" id="inlineRadio1" value="1" <?php if($params['partage_dossier']){echo "checked";} ?>>
+      <input class="form-check-input" type="radio" name="partage_dossier" id="inlineRadio1" value="1" <?php if ($params['partage_dossier']) {
+                                                                                                        echo "checked";
+                                                                                                      } ?>>
       <label class="form-check-label" for="inlineRadio1">activer</label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="partage_dossier" id="inlineRadio2" value="0" <?php if(!$params['partage_dossier']){echo "checked";} ?>>
+      <input class="form-check-input" type="radio" name="partage_dossier" id="inlineRadio2" value="0" <?php if (!$params['partage_dossier']) {
+                                                                                                        echo "checked";
+                                                                                                      } ?>>
       <label class="form-check-label" for="inlineRadio2">désactiver</label>
     </div>
-    <br/>
+    <br />
 
-<br><br><br>
-    <input type="submit" class="btn btn-success btn-lg" value="Enregistrer les paramètres"/>
+    <br><br><br>
+    <input type="submit" class="btn btn-success btn-lg" value="Enregistrer les paramètres" />
   </form>
   <br><br><br>
-  <hr><hr>
+  <hr>
+  <hr>
   <br><br><br>
   <h1 class="text-center">MEDIAS</h1>
 
@@ -107,7 +112,7 @@
 
 
   <h2 class="text-center">Logo principal</h2>
-  <img src="/vue/img/logo.png" id="logo" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px;"/>
+  <img src="/vue/img/logo.png" id="logo" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px;" />
 
   <form action="/admin/action/uploadLogo/" method="post" enctype="multipart/form-data">
     Selectionnez un logo au <u>format PNG</u>:
@@ -116,7 +121,7 @@
   </form>
 
   <h2 class="text-center">Image Encart invitation (Espace de téléchargement)</h2>
-  <img src="/vue/img/invitation.jpg" id="invitation" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px; max-width:300px;"/>
+  <img src="/vue/img/invitation.jpg" id="invitation" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px; max-width:300px;" />
 
   <form action="/admin/action/uploadInvitation/" method="post" enctype="multipart/form-data">
     Selectionnez une image au <u>format JPG</u> :
@@ -125,7 +130,11 @@
   </form>
 
   <h2 class="text-center">Bannière vidéo (Espace de téléchargement)</h2>
-  <div style="width: 300px; height: 150px;" data-vide-bg="vue/img/video" data-vide-options="loop: true, muted: true"></div>
+  <?php if (file_exists('vue/img/banniere.mp4')) { ?>
+    <video style="width: 1000px;" loop muted controls autoplay>
+      <source src="/vue/img/banniere.mp4" type="video/mp4" />
+    </video>
+  <?php } ?>
   <form action="/admin/action/uploadBanniere/" method="post" enctype="multipart/form-data">
     Selectionnez une vidéo au <u>format mp4</u> :
     <input type="file" name="file" id="banniere">
@@ -137,63 +146,63 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
 
 <script>
-ClassicEditor
-.create( document.querySelector( '#email_corps' ) )
-.catch( error => {
-  console.error( error );
-} );
+  ClassicEditor
+    .create(document.querySelector('#email_corps'))
+    .catch(error => {
+      console.error(error);
+    });
 </script>
 
 <script>
-ClassicEditor
-.create( document.querySelector( '#email_corps_2' ) )
-.catch( error => {
-  console.error( error );
-} );
+  ClassicEditor
+    .create(document.querySelector('#email_corps_2'))
+    .catch(error => {
+      console.error(error);
+    });
 </script>
 
 <script>
-ClassicEditor
-.create( document.querySelector( '#email_corps_alt' ) )
-.catch( error => {
-  console.error( error );
-} );
+  ClassicEditor
+    .create(document.querySelector('#email_corps_alt'))
+    .catch(error => {
+      console.error(error);
+    });
 </script>
 
 <script>
-ClassicEditor
-.create( document.querySelector( '#email_corps_2_alt' ) )
-.catch( error => {
-  console.error( error );
-} );
+  ClassicEditor
+    .create(document.querySelector('#email_corps_2_alt'))
+    .catch(error => {
+      console.error(error);
+    });
 </script>
 
 <script>
-ClassicEditor
-.create( document.querySelector( '#email_footer' ) )
-.catch( error => {
-  console.error( error );
-} );
+  ClassicEditor
+    .create(document.querySelector('#email_footer'))
+    .catch(error => {
+      console.error(error);
+    });
 </script>
 
 <script>
-ClassicEditor
-.create( document.querySelector( '#accueil_texte' ) )
-.catch( error => {
-  console.error( error );
-} );
+  ClassicEditor
+    .create(document.querySelector('#accueil_texte'))
+    .catch(error => {
+      console.error(error);
+    });
 </script>
 
 <script>
-ClassicEditor
-.create( document.querySelector( '#texte_espace' ) )
-.catch( error => {
-  console.error( error );
-} );
+  ClassicEditor
+    .create(document.querySelector('#texte_espace'))
+    .catch(error => {
+      console.error(error);
+    });
 </script>
 
 <style>
-hr{
-  border-top:4px solid black;
-}
+  hr {
+    border-top: 4px solid black;
+  }
 </style>

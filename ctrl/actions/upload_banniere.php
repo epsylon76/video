@@ -1,7 +1,8 @@
 <?php
+$target_dir = "vue/img/";
 
-if(file_exists("../vue/img/banniere.mp4")){
-  unlink("../vue/img/banniere.mp4");
+if(file_exists($target_dir."banniere.mp4")){
+  unlink($target_dir."banniere.mp4");
 }
 
 
@@ -34,7 +35,7 @@ if(isset($_POST)){
     //print_r($file_tmp); exit;
     if(empty($errors)==true){
 
-      if (move_uploaded_file($_FILES['file']["tmp_name"], '../vue/img/banniere.mp4')) {
+      if (move_uploaded_file($_FILES['file']["tmp_name"], $target_dir.'banniere.mp4')) {
         echo "Le fichier a été envoyé.";
         header('location: /admin/parametres/');
       } else {
