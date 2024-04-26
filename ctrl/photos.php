@@ -23,8 +23,6 @@ else{ //mode admin
 
 //calcul de la taille
 
-// pr('chemin:' .$chemin);
-// pr('data:' .$data);
 $listefichiers = $dossier->contenu_dossier($chemin,$data);
 $taille = 0;
 $date ='';

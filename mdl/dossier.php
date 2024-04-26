@@ -6,6 +6,7 @@ class dossier
   function contenu_dossier($chemin, $data)
   {
     $listefichiers = preg_grep('/^([^.])/', scandir($data . $chemin)); //exclut les fichiers commençant par un point
+    $listefichiers = array_diff($listefichiers, ['Thumbs.db']); //retirer Thumbs.db
     natsort($listefichiers);
     return $listefichiers;
   }

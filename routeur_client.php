@@ -10,7 +10,7 @@ else{
     // il y a un id
 
     if(isset($uri[3]) && $uri[3] == 'dl'){
-      // action de téléchargement 
+      // action de téléchargement des photos
       include('ctrl/actions/dl_photos.php');
     }
     else{
