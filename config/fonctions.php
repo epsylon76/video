@@ -50,12 +50,12 @@ function breadcrumb($chemin)
     //précédent
     if ($i >= 1) {
       $precedent = str_replace($ligne, '', $lien) . $liste_up[$i - 1];
-      $retour .= '<a href="/admin/dossiers' . urlencode($precedent) . '/" class="btn btn-secondary"><-</a> ';
+      $retour .= '<a href="/admin/dossiers' . $precedent . '/" class="btn btn-secondary"><-</a> ';
     }
     //suivant
     if (isset($liste_up[$i + 1])) {
       $suivant = str_replace($ligne, '', $lien) . $liste_up[$i + 1];
-      $retour .= '<a href="/admin/dossiers' . urlencode($suivant) . '/" class="btn btn-secondary">-></a>';
+      $retour .= '<a href="/admin/dossiers' . $suivant . '/" class="btn btn-secondary">-></a>';
     }
     $retour .= '</div>';
   }

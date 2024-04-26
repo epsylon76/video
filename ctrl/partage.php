@@ -2,6 +2,12 @@
 //PAGE CLIENT
 include('vue/head.php');
 
-$liste = $partage->liste_partages($uri[1]);
+if(isset($uri[1])){
+    $liste = $partage->liste_partages($uri[1]);
+}
+else{
+    $liste = [];
+}
+
 
 include('vue/partage.php');

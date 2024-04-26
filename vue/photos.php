@@ -10,7 +10,12 @@ if(!isset($_SESSION['login'])){
 <script type="text/javascript" src="/includes/js/slick/slick.min.js"></script>
 
 
-<div class="container">
+<!-- si c'est un client ajouter la div  sinon l'enlever -->
+<?php if($mode == 'client') { 
+  echo '<div class="container">';
+}
+?>
+
 <h1 style="margin-top: 10px;  display:flex; justify-content:center; font-size:2rem;">Vos Photos</h1>
 
 <div class="text-center">
@@ -23,13 +28,13 @@ if(!isset($_SESSION['login'])){
 
 $folder = $partage->get_partage($uri[2]);
 
-$chemin = $folder['chemin'];
+// $chemin = $folder['chemin'];
 
 $listefichiers = $dossier->contenu_dossier($chemin, $data);
 
 foreach ($listefichiers as $ligne) {
   
-  $url = "/data" . $chemin . "/" . $ligne;
+  $url = "/data/" . $chemin . "/" . $ligne;
   
   echo '<img class="img-fluid" data-lazy="' . $url . '">';
 }
@@ -38,8 +43,11 @@ foreach ($listefichiers as $ligne) {
 
 </div>
 </div>
-</div>
 
+<?php if($mode == 'client') { 
+  echo '</div>';
+}
+?>
 
 <div style="margin-top: 20px;">
 
@@ -62,9 +70,26 @@ foreach ($listefichiers as $ligne) {
 </div>
 
 <div>
-<?php if (isset($uri[1])) { ?>
-  <a class="btn btn-success" href="/cle/<?php echo $uri[1] ?>" style="margin-top:20px;"><i class="fas fa-arrow-left">&nbsp;</i>retour</a>
-  <?php } ?>
+<?php if (isset($uri[1])) { 
+  if($mode == 'client'){
+    echo '<a class="btn btn-success" href="/cle/'. $uri[1] . '" style="margin-top:20px;"><i class="fas fa-arrow-left">&nbsp;</i>retour</a>';
+  }else{
+
+    $slice = array_slice($uri, 0, count($uri) -1);
+
+    $url = '';
+    foreach ($slice as $u) {
+        $url .= $u . '/';
+    }
+
+    echo 
+    '<div style="display:flex;justify-content:flex-start; width:79.16px;"
+      <a style="display:flex; align-items:center;justify-content:center;" class="btn btn-success" href="/'. $url .'" style="margin-top:20px;">
+        <i style="display:flex; align-items:center;justify-content:center;" class="fas fa-arrow-left">&nbsp;</i>retour
+      </a>';
+  }
+  
+  } ?>
   </div>
   
   </div>

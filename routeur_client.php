@@ -1,6 +1,6 @@
 <?php
 
-if($uri[1] == ''){
+if(isset($uri[1]) && $uri[1] == ''){
   // renvoie vers une page oopsss
 }
 else{

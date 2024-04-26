@@ -13,7 +13,7 @@ if (isset($uri[2]) && $partage->check_partage($uri[1], $uri[2])) { //mode utilis
   foreach ($slices as $u) {
     $chemin .= $u . '/';
   }
-  $chemin = rtrim('/data' . $chemin, '/');
+  $chemin = rtrim('/data/' . $chemin, '/');
   $chemin = urldecode($chemin);
   $mode = "admin";
   $filePathSystem = $data . ltrim($chemin, '/data/');

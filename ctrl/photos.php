@@ -6,6 +6,7 @@ if(isset($uri[2]) && $partage->check_partage($uri[1], $uri[2])){ // Mode client
   $infos = $partage->get_partage($id_partage);
   $chemin = $infos['chemin'];
   $email = $infos['email'];
+  $mode = 'client';
 }
 else{ //mode admin
   $slices = array_slice($uri, 2);
@@ -13,7 +14,8 @@ else{ //mode admin
   foreach($slices as $u){
     $chemin .= $u.'/';
   }
-  $chemin = rtrim('/data'.$chemin, '/');
+  // $chemin = rtrim('/data'.$chemin, '/');
+  $chemin = rtrim($chemin, '/');
   $chemin = urldecode($chemin);
   $mode = "admin";
 }
@@ -21,6 +23,8 @@ else{ //mode admin
 
 //calcul de la taille
 
+// pr('chemin:' .$chemin);
+// pr('data:' .$data);
 $listefichiers = $dossier->contenu_dossier($chemin,$data);
 $taille = 0;
 $date ='';

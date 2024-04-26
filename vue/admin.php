@@ -2,8 +2,8 @@
 <main role="main" class="container">
   <div class="row">
 
-    <h1>Navigation dans les dossiers</h1>
-    <p>
+  <h1 style="padding-left:18px;">Navigation dans les dossiers</h1>
+    <p  style="padding-left:18px;">
       Le partage fonctionne par nom de dossier, si les noms des dossiers sont modifiés le partage devient inaccessible<br>
     </p>
 
