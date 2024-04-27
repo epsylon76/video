@@ -31,14 +31,16 @@ include('./vue/video.php');
 //ajout du script DL si user
 if (isset($uri[2])) { //mode user
 ?>
+<!-- <script type="text/javascript" src="./includes/js/dl_video_photos.js"></script> -->
+
   <script>
     $("#bouton-dl").click(function() {
-      console.log('eventdl');
+      var email = $(this).data('email');
+      var chemin = $(this).data('chemin');
       $.ajax({
         url: '/ajax/clic_dl.php',
-        type: 'GET',
-        data: 'chemin=<?php echo $chemin; ?>&email=<?php echo $email ?>&action=dl_video',
-        dataType: 'html'
+        type: 'POST',
+        data: {'chemin' : chemin, 'email' : email, 'action' : 'dl_video'}
       });
     });
   </script>

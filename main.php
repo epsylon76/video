@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+include_once('ctrl/update.php');
 include_once('config/config.php');
 include_once('config/fonctions.php');
 //require('./vendor/phpmailer/phpmailer/src/Exception.php');
@@ -15,12 +16,14 @@ include_once('./mdl/admin.php');
 include_once('./mdl/dossier.php');
 include_once('./mdl/partage.php');
 include_once('./mdl/historique.php');
+include_once('./mdl/stats.php');
 
 //instancier les objets
 $admin = new admin();
 $dossier = new dossier();
 $partage = new partage();
 $historique = new historique();
+$stats = new stats();
 
 //Anciens liens : redirection
 if (isset($_GET['cle']) && !empty($_GET['cle'])) {

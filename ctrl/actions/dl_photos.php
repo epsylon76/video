@@ -3,11 +3,15 @@ ini_set('max_execution_time', 300);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+// include_once('ctrl/photos.php');
 
 if ($uri[0] == 'cle') { //mode client
     $folder = $partage->get_partage($uri[2]);
     $folder = $folder['chemin'];
     $zipname = $uri[2] . $uri[1] . '.zip';
+
+    // ajoute le téléchargement dans la base de donné 
+    $stats->set_stats('téléchargement_photos', date("Y-m-d H:i:s"), $_SESSION['taille']);
 } else {
     $slices = array_slice($uri, 3);
     $chemin = '';

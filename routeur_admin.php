@@ -77,7 +77,11 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
             }
 
             break;
-
+        case "test":
+            include('vue/head.php');
+            include('vue/nav.php');
+            include('ctrl/stats_bande_passante.php');
+            break;
 
         case "action":
             switch ($uri[2]) {
