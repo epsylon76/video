@@ -51,7 +51,6 @@ if (!isset($_SESSION['login'])) {
 
 
     <div>
-      <p><strong>Date</strong> : <?php echo date('d/m/Y', $date); ?></p>
       <p><strong>Nombre de photos</strong> : <?php echo $nb; ?> </p>
       <p><strong>Taille</strong> : <?php echo number_format($taille / 1048576, 2); ?> Mo</p>
 
