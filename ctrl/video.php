@@ -38,23 +38,21 @@ if (isset($uri[2])) { //mode user
   APPELER FICHIER PHP COMME DANS video_photos.js
    -->
   <script>
-  $(document).ready(function(){
-    var video = document.getElementById("id-video");
-    var source = document.getElementById("id-source");
-    var chemin = source.src;
+  // $(document).ready(function(){
+  //   var video = document.getElementById("id-video");
+  //   var source = document.getElementById("id-source");
+  //   var chemin = source.src;
 
-    $(video).on('play', function() {
-        $.ajax({
-            type: 'HEAD',
-            url: chemin,
-            success: function(data, textStatus, jqXHR){
-              <?php $stats->set_stats('téléchargement_videos', date("Y-m-d H:i:s"), "' + videoSize + '"); ?>
-                var videoSize = jqXHR.getResponseHeader('Content-Length');
-                console.log(videoSize / 1000000 + " Mo");
-            }
-        });
-    });
-  });
+  //   $(video).on('play', function() {
+  //       $.ajax({
+  //           type: 'HEAD',
+  //           url: chemin,
+  //           success: function(data, textStatus, jqXHR){
+              
+  //           }
+  //       });
+  //   });
+  // });
   </script>
 
 <?php

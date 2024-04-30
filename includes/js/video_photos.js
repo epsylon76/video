@@ -8,3 +8,14 @@ $("#bouton-dl").click(function() {
       data: {'chemin' : chemin, 'email' : email, 'taille' : taille ,'action' : 'dl_video'}
     });
   });
+
+
+$('#id-video').on('play', function() {
+  var chemin = $(this).data('chemin');
+  console.log('test');
+    $.ajax({
+      url: '/ajax/play_video.php',
+      type: 'POST',
+      data: {'chemin' : chemin ,'action' : 'play_videos'},
+    });
+});

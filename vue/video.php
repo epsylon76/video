@@ -6,7 +6,7 @@
 	<h1 style="display:flex; justify-content:center; font-size:2rem;"> <?php echo $nom_fichier; ?></h1>
 
 	<div class="video-wrapper">
-		<video id="id-video" controls preload="none">
+		<video id="id-video" data-chemin="<?php echo $chemin?>" controls preload="none">
 			<source id="id-source" src="<?php echo $chemin; ?>" type="video/mp4" />
 		</video>
 	</div>
