@@ -20,9 +20,8 @@ if (!isset($_SESSION['login'])) {
 
 <div class="text-center">
 
-
   <div class="d-flex justify-content-center">
-    <div class="slider-photo" style="width: 75%;">
+    <div data-chemin="<?php echo $chemin?>" data-data="<?php echo $data ?>" class="slider-photo" style="width: 75%;">
 
       <?php
 
@@ -59,13 +58,13 @@ if (!isset($_SESSION['login'])) {
         <?php
         if ($mode == 'client') {
         ?>
-          <a class="btn btn-primary" style="font-size:14;" id="dl_button" data-taille="<?php echo $taille ?>" data-chemin="<?php echo $chemin; ?>" data-email="<?php echo $email; ?>" href="/cle/<?php echo $uri[1] ?>/<?php echo $id_partage; ?>/dl/<?php echo $taille?>">
+          <a class="btn btn-primary" style="font-size:14;" id="bouton-dl" data-taille="<?php echo $taille ?>" data-chemin="<?php echo $chemin; ?>" data-email="<?php echo $email; ?>" data-action="dl_photos" href="/cle/<?php echo $uri[1] ?>/<?php echo $id_partage; ?>/dl/<?php echo $taille?>">
             <i class="fas fa-download"></i> Télécharger toutes les photos
           </a>
         <?php
         } else { // mode admin
         ?>
-          <a class="btn btn-primary" style="font-size:14;" id="dl_button" href="/admin/action/dlPhotos/<?php echo $chemin; ?>">
+          <a class="btn btn-primary" style="font-size:14;" href="/admin/action/dlPhotos/<?php echo $chemin; ?>">
             <i class="fas fa-download"></i> Télécharger toutes les photos
           </a>
         <?php
@@ -110,10 +109,10 @@ if (!isset($_SESSION['login'])) {
 
 
 <script>
-  $("#dl_button").click(function() {
-    $('#dl_button').removeClass('btn-success');
-    $('#dl_button').addClass('btn-warning');
-    $('#dl_button').text('Création du fichier...');
+  $("#bouton-dl").click(function() {
+    $('#bouton-dl').removeClass('btn-success');
+    $('#bouton-dl').addClass('btn-warning');
+    $('#bouton-dl').text('Création du fichier...');
   })
 
 
@@ -123,7 +122,8 @@ if (!isset($_SESSION['login'])) {
     slidesToShow: 1,
     slidesToScroll: 1,
     fade: true,
-    dots: false
+    dots: false,
+    speed: 400,
 
   });
 </script>

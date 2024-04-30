@@ -1,22 +1,9 @@
 <?php
 
 
-function HumanSize($Bytes)
-{
-  $Type=array("", "Ko", "Ko", "Go", "To", "Po");
-  $Index=0;
-  while($Bytes>=1000)
-  {
-    $Bytes/=1000;
-    $Index++;
-  }
-  return("".floor($Bytes)." ".$Type[$Index]);
-}
+
 $octetstogigaoctets = (1024*1024*1024);
 
-$dossier = new dossier();
-
-$partage = new partage();
 $totaldisk = disk_total_space('.');
 $freedisk = disk_free_space('.');
 $occupied = $totaldisk - $freedisk;
