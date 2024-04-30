@@ -59,7 +59,7 @@ if (!isset($_SESSION['login'])) {
         <?php
         if ($mode == 'client') {
         ?>
-          <a class="btn btn-primary" style="font-size:14;" id="dl_button" href="/cle/<?php echo $uri[1] ?>/<?php echo $id_partage; ?>/dl">
+          <a class="btn btn-primary" style="font-size:14;" id="dl_button" data-taille="<?php echo $taille ?>" data-chemin="<?php echo $chemin; ?>" data-email="<?php echo $email; ?>" href="/cle/<?php echo $uri[1] ?>/<?php echo $id_partage; ?>/dl/<?php echo $taille?>">
             <i class="fas fa-download"></i> Télécharger toutes les photos
           </a>
         <?php

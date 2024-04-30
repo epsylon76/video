@@ -7,15 +7,15 @@
 
 	<div class="video-wrapper">
 		<video id="id-video" controls preload="none">
-			<source src="<?php echo $chemin; ?>" type="video/mp4" />
+			<source id="id-source" src="<?php echo $chemin; ?>" type="video/mp4" />
 		</video>
 	</div>
 
 	<div style="margin-top: 20px;">
 		<p>N'oubliez pas de <strong>sauvegarder la vidéo</strong></p>
-		<p><strong>Taille du fichier :</strong> <?php echo $taille_fichier; ?></p>
+		<p><strong>Taille du fichier :</strong> <?php echo HumanSize($taille_fichier); ?></p>
 		<div style="display: flex; justify-content:center;">
-			<a id="bouton-dl" class="btn btn-primary" style="font-size:14;" data-chemin="<?php echo $chemin; ?>" data-email="<?php echo $email; ?>" href="<?php echo $chemin; ?>" download="<?php echo $nom_fichier; ?>"><i class="fas fa-download"></i> Télécharger la vidéo</a>
+			<a id="bouton-dl" class="btn btn-primary" style="font-size:14;" data-taille="<?php echo $taille_fichier ?>" data-chemin="<?php echo $chemin; ?>" data-email="<?php echo $email; ?>" href="<?php echo $chemin; ?>" download="<?php echo $nom_fichier; ?>"><i class="fas fa-download"></i> Télécharger la vidéo</a>
 		</div>
 	</div>
 
@@ -27,14 +27,6 @@
 </div>
 
 <script>
-document.getElementById('id-video').addEventListener('play', function() {
-
-    let videoSource = document.getElementById('id-video').querySelector('source');
-    let videoUrl = videoSource.getAttribute('src'); 
-	
-	console.log(videoUrl);
-	
-});
 
 
 </script>

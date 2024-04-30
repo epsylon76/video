@@ -27,11 +27,24 @@ $listefichiers = $dossier->contenu_dossier($chemin,$data);
 $taille = 0;
 $nb = 0;
 foreach ($listefichiers as $item) {
+  
+
   if($item != '.' && $item != '..' && $item != 'Thumbs.db'){
     $taille = ($taille + filesize($data.$chemin.'/'.$item));
     $nb++;
   }
 }
+
+// foreach ($listefichiers as $item) {
+//   $tmp1 = strrchr($item, '(');
+//   $res1 = substr($tmp1, 1, strpos($tmp1, ')') -1);
+//   pr ($res1);
+
+//   if(strpos($items, $res1)){
+//     echo filesize($data.$chemin.'/'.$item);
+//   }
+// }
+
 
 //fin ops
 include('vue/photos.php');
@@ -39,17 +52,6 @@ include('vue/photos.php');
 //ajout du script DL si user qui track le nombre de clic
 if(isset($uri[2])){
   ?>
-  <script>
-    $("#bouton-dl").click(function() {
-      console.log('eventdl');
-      $.ajax({
-        url: '/ajax/clic_dl.php',
-        type: 'GET',
-        data: 'chemin=<?php echo $chemin; ?>&email=<?php echo $email ?>&action=dl_photos',
-        dataType: 'html'
-      });
-
-    });
-  </script>
+    <script type="text/javascript" src="/includes/js/video_photos.js"></script>
 <?php
 }

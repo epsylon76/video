@@ -129,7 +129,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
                     include('ctrl/actions/upload_logo.php');
                     break;
 
-                case "dlPhotos":   // mettre dl_photos et admin_dl_photos ensemble 
+                case "dlPhotos":
                     include('ctrl/actions/dl_photos.php');
                     break;
 

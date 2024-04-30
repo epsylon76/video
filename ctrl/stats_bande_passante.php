@@ -1,6 +1,6 @@
 <?php
 
-$test = $stats->calcul_moyenne();
+$test = $stats->calcul_taille_by_period();
 
 if(!empty($test))
 {
