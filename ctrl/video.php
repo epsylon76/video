@@ -3,7 +3,8 @@
 if (isset($uri[2]) && $partage->check_partage($uri[1], $uri[2])) { //mode utilisateur
   //retrouver le chemin via l'id
   $infos = $partage->get_partage($uri[2]);
-  $chemin = '/data' . $infos['chemin'];
+  $chemin = '/data/' . $infos['chemin'];
+  $chemin = str_replace('//', '/', $chemin); //prends en compte tout les cas
   $email = $infos['email'];
   $mode = "user";
   $taille_fichier = filesize($data . $infos['chemin']); //diff
