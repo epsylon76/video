@@ -11,7 +11,7 @@ if ($uri[0] == 'cle') { //mode client
     $zipname = $uri[2] . $uri[1] . '.zip';
 
     // ajoute le téléchargement dans la base de donné 
-    $stats->set_stats('téléchargement_photos', date("Y-m-d H:i:s"), $uri[4]);
+    $stats->set_stats('dl_photos', date("Y-m-d H:i:s"), $uri[4]);
 } else {
     $slices = array_slice($uri, 3);
     $chemin = '';

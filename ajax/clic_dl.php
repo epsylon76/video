@@ -7,4 +7,4 @@ $query=$DB_con->prepare($requete);
 $query->execute();
 
 $stats = new stats();
-$stats->set_stats('téléchargement_videos', date("Y-m-d H:i:s"), $data['taille']);
+$stats->set_stats('dl_video', date("Y-m-d H:i:s"), $data['taille']);

@@ -16,6 +16,8 @@ if (isset($uri[2]) && $partage->check_partage($uri[1], $uri[2])) { //mode utilis
   }
   $chemin = str_replace('//', '/', $chemin); //prends en compte tout les cas
   $chemin = urldecode($chemin);
+  $chemin = '/data/'.$chemin;
+  $chemin = rtrim($chemin, '/');
   $mode = "admin";
   $filePathSystem = $data . ltrim($chemin, '/data/');
   $taille_fichier = filesize($filePathSystem); //diff
