@@ -14,7 +14,6 @@ else{ //mode admin
   foreach($slices as $u){
     $chemin .= $u.'/';
   }
-  // $chemin = rtrim('/data'.$chemin, '/');
   $chemin = rtrim($chemin, '/');
   $chemin = urldecode($chemin);
   $mode = "admin";
@@ -35,17 +34,6 @@ foreach ($listefichiers as $item) {
   }
 }
 
-// foreach ($listefichiers as $item) {
-//   $tmp1 = strrchr($item, '(');
-//   $res1 = substr($tmp1, 1, strpos($tmp1, ')') -1);
-//   pr ($res1);
-
-//   if(strpos($items, $res1)){
-//     echo filesize($data.$chemin.'/'.$item);
-//   }
-// }
-
-
 //fin ops
 include('vue/photos.php');
 
@@ -55,3 +43,4 @@ if(isset($uri[2])){
     <script type="text/javascript" src="/includes/js/video_photos.js"></script>
 <?php
 }
+?>

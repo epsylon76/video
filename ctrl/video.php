@@ -35,27 +35,5 @@ include('./vue/video.php');
 if (isset($uri[2])) { //mode user
 ?>
   <script type="text/javascript" src="/includes/js/video_photos.js"></script>
-
-  <!-- 
-  APPELER FICHIER PHP COMME DANS video_photos.js
-   -->
-  <script>
-  // $(document).ready(function(){
-  //   var video = document.getElementById("id-video");
-  //   var source = document.getElementById("id-source");
-  //   var chemin = source.src;
-
-  //   $(video).on('play', function() {
-  //       $.ajax({
-  //           type: 'HEAD',
-  //           url: chemin,
-  //           success: function(data, textStatus, jqXHR){
-              
-  //           }
-  //       });
-  //   });
-  // });
-  </script>
-
 <?php
 }
