@@ -61,6 +61,11 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
 
             if (isset($uri[2]) && $uri[2] == 'introuvables'){
                 include('ctrl/introuvables.php');
+            }
+            elseif(isset($uri[2]) && $uri[2] == 'bandePassante'){
+                include('ctrl/bande_passante.php');
+                break;
+            
             } else {
                 include('ctrl/stats.php');
             }
@@ -77,10 +82,11 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
             }
 
             break;
+
         case "test":
             include('vue/head.php');
             include('vue/nav.php');
-            include('ctrl/stats_bande_passante.php');
+            include('ctrl/bande_passante.php');
             break;
 
         case "action":

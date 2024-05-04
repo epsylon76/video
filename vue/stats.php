@@ -41,6 +41,10 @@
   <br>
   <a class="btn btn-primary" href="/admin/stats/introuvables/">Partages introuvables</a>
 
+  <br>
+  <a class="btn btn-primary" href="/admin/stats/bandePassante/" style="margin-top:25px;">Bande passante</a>
+
+ 
 
 
 
