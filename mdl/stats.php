@@ -29,12 +29,12 @@ class stats
     function get_stats($date_debut, $date_fin)
     {
         global $DB_con;
-        $requete = "SELECT * FROM `bande_passante` WHERE heure BETWEEN :date_debut AND :date_fin ORDER BY heure";
+        $requete = "SELECT `type`, SUM(`taille`) as 'volume' FROM `bande_passante` WHERE `heure` BETWEEN :date_debut AND :date_fin GROUP BY `type`";
         $query = $DB_con->prepare($requete);
         $query->bindParam(':date_debut', $date_debut);
         $query->bindParam(':date_fin', $date_fin);
         $query->execute();
-        $results = $query->fetchAll();
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     }
 
@@ -47,9 +47,4 @@ class stats
         $results = $query->fetchAll();
         return $results;
     }
-
-    
 }
-
-
-?>
