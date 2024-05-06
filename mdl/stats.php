@@ -29,7 +29,7 @@ class stats
     function get_stats($date_debut, $date_fin)
     {
         global $DB_con;
-        $requete = "SELECT `type`, SUM(`taille`) as 'volume' FROM `bande_passante` WHERE `heure` BETWEEN :date_debut AND :date_fin GROUP BY `type`";
+        $requete = "SELECT `type`, SUM(`taille`) as 'volume' FROM `bande_passante` WHERE `heure` BETWEEN :date_debut AND :date_fin GROUP BY `type` ORDER BY `heure` ASC";
         $query = $DB_con->prepare($requete);
         $query->bindParam(':date_debut', $date_debut);
         $query->bindParam(':date_fin', $date_fin);

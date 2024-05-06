@@ -16,7 +16,11 @@
     $(document).ready(function() {
         //recuperer l'état initial du bouton
         var state = $('#convert').data('state');
-        var maChart;
+        var maChart; // déclarer la variable avant pour la rendre disponible globalement
+
+        //
+        // Partie initialisation
+        //
 
         function initChart(data) {
             maChart = new Chart(
@@ -65,15 +69,7 @@
                 });
         }
 
-        function updateChart(newdata) {
-            console.log(newdata);
-            maChart.data.datasets[0].data = newdata.map(row => row.dl_video);
-            maChart.data.datasets[1].data = newdata.map(row => row.play_videos);
-            maChart.data.datasets[2].data = newdata.map(row => row.defile_photo);
-            maChart.data.datasets[3].data = newdata.map(row => row.dl_photos);
-            maChart.update();
-        }
-
+        
         $.ajax({
             url: '/ajax/ajax_chart.php',
             type: 'POST',
@@ -85,6 +81,20 @@
                 initChart(response);
             },
         });
+
+        //
+        // Partie mise à jour
+        //
+
+        function updateChart(newdata) {
+            console.log(newdata);
+            maChart.data.datasets[0].data = newdata.map(row => row.dl_video); //chaque dataset = un type
+            maChart.data.datasets[1].data = newdata.map(row => row.play_videos);
+            maChart.data.datasets[2].data = newdata.map(row => row.defile_photo);
+            maChart.data.datasets[3].data = newdata.map(row => row.dl_photos);
+            maChart.update();
+        }
+
 
         $('#convert').on('click', function() {
             var btn = $(this);
@@ -101,6 +111,8 @@
                 btn.text('En Mbps');
             }
 
+            //On rtécupère les nouvelles données
+            
             $.ajax({
                 url: '/ajax/ajax_chart.php',
                 type: 'POST',
