@@ -7,6 +7,14 @@
         <canvas id="chart"></canvas>
     </div>
 
+    <div>
+        <button type="button" id="btn_heure1" class="btn btn-secondary btn_heure" data-heure="6">6H</button>
+        <button type="button" id="btn_heure2" class="btn btn-secondary btn_heure" data-heure="12">12H</button>
+        <button type="button" id="btn_heure3" class="btn btn-secondary btn_heure" data-heure="24">24H</button>
+    </div>
+
+    <br>
+
     <button type="button" id="convert" class="btn btn-secondary" data-state="mbps">En Mbps</button>
 </div>
 
@@ -92,6 +100,7 @@
             maChart.data.datasets[1].data = newdata.map(row => row.play_videos);
             maChart.data.datasets[2].data = newdata.map(row => row.defile_photo);
             maChart.data.datasets[3].data = newdata.map(row => row.dl_photos);
+            maChart.data.labels = newdata.map(row => row.periode);
             maChart.update();
         }
 
@@ -118,6 +127,57 @@
                 type: 'POST',
                 data: {
                     'state': state
+                },
+                dataType: 'json',
+                success: function(response) {
+                    updateChart(response);
+                }
+            });
+        });
+
+
+
+        $('#btn_heure1').on('click', function() {
+            var heure = $('#btn_heure1').data('heure');
+            var state = $('#convert').data('state');
+            
+            $.ajax({
+                url: '/ajax/ajax_chart.php',
+                type: 'POST',
+                data: {
+                    'heure': heure ,'state' : state
+                },
+                dataType: 'json',
+                success: function(response) {
+                    updateChart(response);
+                }
+            });
+        });
+        $('#btn_heure2').on('click', function() { 
+            var heure = $('#btn_heure2').data('heure');
+            var state = $('#convert').data('state');
+        
+            $.ajax({
+                url: '/ajax/ajax_chart.php',
+                type: 'POST',
+                data: {
+                    'heure': heure, 'state' : state
+                },
+                dataType: 'json',
+                success: function(response) {
+                    updateChart(response);
+                }
+            });
+        });
+        $('#btn_heure3').on('click', function() {
+            var heure = $('#btn_heure3').data('heure');
+            var state = $('#convert').data('state');
+            
+            $.ajax({
+                url: '/ajax/ajax_chart.php',
+                type: 'POST',
+                data: {
+                    'heure': heure, 'state' : state
                 },
                 dataType: 'json',
                 success: function(response) {

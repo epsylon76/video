@@ -7,7 +7,15 @@ $stats = new stats();
 // $calcul_taille = $stats->calcul_taille_by_period(10);
 
 //intervalle souhaité en h, on peut les changer !
-$intervalle = 12;
+
+if(isset($_POST['heure'])){
+    $intervalle = $_POST['heure'];
+}
+else{
+    $intervalle = 12;
+}
+
+
 
 //Date de fin du graphique -> Maintenant
 $origine = new DateTime(); //crée un objet PHP dateTime à l'instant T
