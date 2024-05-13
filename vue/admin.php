@@ -93,5 +93,26 @@ $('.slider-photo').slick({
 
 });
 
-  
+
+// activé quand on sort du focus de l'input
+$('#input_tag').on('blur', function() {
+
+  var contenu = $('#input_tag').val();
+  var type = $('#input_tag').data('type');
+  var nom_dossier = $('#input_tag').data('nom_dossier');
+
+  $.ajax({
+    url: '/ajax/ajax_tag.php',
+    type: 'POST',
+    data : { 
+      'contenu' : contenu ,
+      'nom_dossier': nom_dossier,
+      'type' : type
+    },
+    success: function(response) {
+        console.log(response);
+    }
+  });
+
+});
 </script>

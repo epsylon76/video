@@ -86,7 +86,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
         case "test":
             include('vue/head.php');
             include('vue/nav.php');
-            include('ctrl/bande_passante.php');
+            include('ctrl/tag.php');
             break;
 
         case "action":

@@ -89,20 +89,8 @@ class dossier
 
       if ($type[0] == 'dir' || $type[0] == 'link') {
         #différentes conditions pour le type $dossier
-        switch ($ligne) {
-          case '..':
-            //rien
-            break;
-
-          case '.':
-            //rien
-            break;
-
-          default:
-
-
-
-            //calcul du nombre de sous dossiers
+        if($ligne != '..' && $ligne != '.'){
+             //calcul du nombre de sous dossiers
             $nb_sous_dossiers = $this->nb_sous_dossiers($data . $chemin . $ligne);
             //calcul du nombre de Photos
             $nb_photos = $this->detect_photos($data . $chemin . $ligne);
@@ -112,75 +100,64 @@ class dossier
             if ($nb_photos >= 2) { //dossier de photos
 
               $items .= '<li class="list-group-item">';
-              $items .= '<div class=" row justify-content-between">'; //ligne
-              $items .= '<div class="col-md-6">'; //colonne 4
+              $items .= '<div class="d-flex justify-content-between">'; //ligne justifiée
+
+              $items .= '<div  class="col-6">'; //une div pour la justification
               $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="/admin/dossiers/' . $chemin . $ligne . '/">' . $ligne . '</a>';
-              // if (is_bool($cle)) {
-              //   $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="/admin/dossiers/' . $chemin . $ligne . '/">' . $ligne . '</a>';
-              // } else {
-              //   $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="/cle/' . $cle[0] . '/">' . $ligne . '</a>';
-              // }
+              $items .= '<input id="input_tag" data-nom_dossier="' . $chemin . $ligne . '" data-type="fichier" type="text" class="form-control" style="display:inline-block;">';
+              $items .= '</div>';
+
 
               if ($partage->nb_partages($chemin . $ligne) >= 1) {
                 $badge_color = "badge-success";
               } else {
                 $badge_color = "badge-warning";
               }
-              $items .= '</div>'; //fin colonne gauche
-
-              $items .= '<div class="col-md-6"  style="text-align:right">'; //colonne droite
 
               //bouton de partage des photos
 
-              //$items .= '<a class="btn btn-sm btn-primary" href="?page=admin_dl_photos&dl_photos='.$chemin.$ligne.'">Télécharger <i class="fas fa-download"></i></a>';
-              $items .= '<button type="button" class="btn btn-success btn-sm clickpartage"
-                data-typepartage="photos"
-                data-chemin="' . $chemin . $ligne . '"
-                data-retour="' . $chemin . '"
-                data-toggle="modal"
-                data-target="#partageModal">
+              $items .= '<button type="button" class="btn btn-success btn-sm clickpartage" data-typepartage="photos" data-chemin="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-toggle="modal" data-target="#partageModal" >
                 <i class="fas fa-camera"></i>
                 &nbsp;Partager&nbsp;&nbsp;
                 <span class="badge ' . $badge_color . '">' . $partage->nb_partages($chemin . $ligne) . '</span>
                 </button>';
+
+
             } else { //juste un dossier
 
               $items .= '<li class="list-group-item">';
-              $items .= '<div class=" row justify-content-between">'; //ligne
-              $items .= '<div class="col-md-6">'; //colonne 4
+              $items .= '<div class="d-flex justify-content-between">'; //ligne justifiée
+
+              $items .= '<div>'; //une div pour la justification
               $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="/admin/dossiers/' . $chemin . $ligne . '/">' . $ligne . '</a>';
+              $items .= '</div>';
+              $items .= '<div>'; //une div pour la justification
+              $items .= '<input id="input_tag" data-nom_dossier="' . $chemin . $ligne . '" data-type="dossier" type="text" class="form-control" >';
+              $items .= '</div>';
+
               if ($partage->nb_partages($chemin . $ligne) >= 1) {
                 $badge_color = "badge-success";
               } else {
                 $badge_color = "badge-warning";
               }
-              $items .= '</div>'; //fin colonne gauche
-
-              $items .= '<div class="col-md-6"  style="text-align:right">'; //colonne droite
-
-              //bouton de partage des photos
 
               //bouton de partage des dossiers zip
               if ($nb_sous_dossiers <= 4 && $params['partage_dossier'] == true) {
-
-                $items .= '<button type="button" class="btn btn-danger btn-sm  clickpartage"
-                  data-typepartage="dossier"
-                  data-chemin="' . $chemin . $ligne . '"
-                  data-retour="' . $chemin . '"
-                  data-toggle="modal"
-                  data-target="#partageModal">
-                  <i class="fas fa-folder-plus"></i>
+                $items .= '<button type="button" class="btn btn-danger btn-sm  clickpartage"  data-typepartage="dossier" data-chemin="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-toggle="modal" data-target="#partageModal">
+                <i class="fas fa-folder-plus"></i>
                   &nbsp;Partager&nbsp;&nbsp;
                   <span class="badge ' . $badge_color . '">' . $partage->nb_partages($chemin . $ligne) . '</span>
                   </button>';
+              } else {
+                $items .= '<div>'; //une div pour remplacer le vide
+                $items .= '</div>';
               }
             }
 
-            $items .= '</div>'; //col droite
             $items .= '</div>'; //row
-            $items .= '</li>';
-            break;
-        }
+            $items .= '</li>' ;
+        } //fin if $ligne != '..' && $ligne != '.'
+
       } //fin type dossier
       elseif ($type[1] == 'mp4' || $type[1] == 'MP4' || $type[1] == 'mkv' || $type[1] == 'MKV' || $type[1] == 'avi' || $type[1] == 'AVI') {
 
@@ -193,19 +170,21 @@ class dossier
         //echo $chemin.$ligne.'<br>';
         //si partage vidéo
         $items .= '<li class="list-group-item">';
-        $items .= '<div class="row justify-content-between">'; //ligne
-        //colonne gauche
-        $items .= '<div class="col-md-6">';
+        $items .= '<div class="d-flex justify-content-between">'; //ligne
+
+        $items .= '<div>';
         $items .= '<i class="fas fa-video"></i>&nbsp;<a href="/admin/video/' . $chemin . $ligne . '">' . $ligne . '</a>';
+        $items .= '&nbsp;<input id="input_tag" data-nom_dossier="' . $chemin . $ligne . '" data-type="fichier" type="text" style="background: transparent;border:1px solid grey;border-radius:5px;">';
+        $items .= '</div>';
+
+
+
         if ($partage->nb_partages($chemin . $ligne) >= 1) {
           $badge_color = "badge-success";
         } else {
           $badge_color = "badge-warning";
         }
-        $items .= '</div>';
 
-        //colonne droite
-        $items .= '<div class="col-md-6" style="text-align:right">';
 
         $items .= '<button type="button" class="btn btn-primary btn-sm  clickpartage"
             data-typepartage="video"
@@ -217,8 +196,7 @@ class dossier
             &nbsp;Partager&nbsp;&nbsp;
             <span class="badge ' . $badge_color . '">' . $partage->nb_partages($chemin . $ligne) . '</span>
             </button>';
-        $items .= '</div>';
-        $items .= '</div>';
+
         $items .= '</li>';
       } elseif ($type[1] == 'jpg' || $type[1] == 'JPG') {
         $compteur_images++; //si photo on compte mais on affiche pas
@@ -238,20 +216,8 @@ class dossier
     // FIN DU  "for each" (on a fini d'itérer les fichiers contenu dans le chemin en cours)
     //
 
-    if ($compteur_images > 2 && $nb_sous_dossiers == 0) { //mode dossier photos, on va afficher le bouton de téléchargement et le diaporama
-    //   $retour .= '<h3> Photos </h3>';
-    //   $retour .= 'Il y a <strong>&nbsp;' . $compteur_images . '</strong>&nbsp;photos dans ce dossier&nbsp;<a class="btn btn-sm btn-primary" href="/admin/action/adminDlPhotos' . $chemin . '">Télécharger <i class="fas fa-download"></i></a>';
-    //   $retour .= '<div style="margin-top: 50px;" class="d-flex justify-content-start"></div>';
-    //   $retour .= '<div class="d-flex justify-content-center">';
-    //   $retour .= '<div class="slider-photo" style="width: 75%; heigth:75%;>';
-
-    //   foreach ($listefichiers as $ligne) {
-    //     $url = "/data/" . $chemin . $ligne;
-    //     $retour .= '<img class="img-fluid" data-lazy="' . $url . '">';
-    //   }
-
-    //   $retour .= "</div>";
-    //   $retour .= "</div>";
+    if ($compteur_images > 2 && $nb_sous_dossiers == 0) {
+      //mode dossier photos, on va afficher le bouton de téléchargement et le diaporama
       include('ctrl/photos.php');
     }
 

@@ -17,6 +17,7 @@ include_once('./mdl/dossier.php');
 include_once('./mdl/partage.php');
 include_once('./mdl/historique.php');
 include_once('./mdl/stats.php');
+include_once('./mdl/tag.php');
 
 //instancier les objets
 $admin = new admin();
@@ -24,6 +25,7 @@ $dossier = new dossier();
 $partage = new partage();
 $historique = new historique();
 $stats = new stats();
+$tag = new tag();
 
 //Anciens liens : redirection
 if (isset($_GET['cle']) && !empty($_GET['cle'])) {

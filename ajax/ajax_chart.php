@@ -54,7 +54,7 @@ while($origine->format('Y-m-d H:i:s') >= $before){
             }elseif($_POST['state'] == 'mbps'){
                 // 10 minutes = 600secondes
                 // 1 octet = 8 bits
-                // 1 Giga = 1 milliard
+                // 1 Mega = 1 million
                 $data[$i][$b['type']] = ($b['volume'] * 8 / 1000000 / 600);
             }
         }    
