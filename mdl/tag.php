@@ -28,7 +28,7 @@ class tag{
             $query->bindParam(':id_chemin', $id_chemin);
             $query->execute();
         }else{
-            echo "Ce tag existe deja pour ce chemin";
+            echo "Ce tag existe deja pour ce chemin, $id_chemin";
         }
        
     }
@@ -37,6 +37,26 @@ class tag{
         global $DB_con;
         $requete = "SELECT * FROM tag t JOIN chemin c ON t.id_chemin = c.id_chemin";
         $query = $DB_con->prepare($requete);
+        $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    }
+
+    function delete_tag($nom_tag, $nom_chemin){
+        global $DB_con;
+        $requete = "DELETE FROM tag WHERE nom_tag = :nom_tag AND id_chemin = (SELECT id_chemin FROM chemin WHERE nom_chemin = :nom_chemin)";
+        $query = $DB_con->prepare($requete);
+        $query->bindParam(':nom_tag', $nom_tag);
+        $query->bindParam(':nom_chemin', $nom_chemin);
+        $query->execute();
+    }
+    
+
+    function get_tag_from_chemin($nom_chemin){
+        global $DB_con;
+        $requete = "SELECT * FROM tag t JOIN chemin c ON t.id_chemin = c.id_chemin WHERE c.nom_chemin = :nom_chemin";
+        $query = $DB_con->prepare($requete);
+        $query->bindParam(':nom_chemin', $nom_chemin);
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
         return $results;
@@ -85,7 +105,9 @@ class tag{
         $query->bindParam(':nom_tag', $nom_tag);
         $query->bindParam(':id_chemin', $id_chemin);
         $query->execute();
+    
         $results = $query->fetchColumn();
+        
         return ($results > 0);
     }
     

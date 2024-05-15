@@ -9,5 +9,12 @@ switch($uri[1]){
         case 'set_partage':
             include 'ctrl/actions/set_partage.php';
             break;
+        
+
+        case 'setTag':
+            include 'ctrl/actions/set_tag.php';
+            break;
+        
         }
+
         

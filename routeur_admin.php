@@ -138,8 +138,10 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
                 case "dlPhotos":
                     include('ctrl/actions/dl_photos.php');
                     break;
+                
+                }
 
-            }
+            
     }
 } else {
     //renvoi au login
