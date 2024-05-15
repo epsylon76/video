@@ -67,11 +67,13 @@ class dossier
     global $params;
     global $uri;
     global $dossier;
+    global $tag;
 
     $retour = '';
     $compteur_images = 0;
     $items = '';
     $nb_sous_dossiers = 0;
+    $id_btn_tag = 1; //identifiant bouton de tag
     #en cas de retour à la racine on retire le trailing slash
     if ($chemin == '//') {
       $chemin = '/';
@@ -104,7 +106,15 @@ class dossier
 
               $items .= '<div  class="col-6">'; //une div pour la justification
               $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="/admin/dossiers/' . $chemin . $ligne . '/">' . $ligne . '</a>';
-              $items .= '<input id="input_tag" data-nom_dossier="' . $chemin . $ligne . '" data-type="fichier" type="text" class="form-control" style="display:inline-block;">';
+              $items .= '<button type="button" style="margin-left: 10px; font-size:10px;" class="btn btn-light btn-sm clicktag" data-id_btn_tag="'.$id_btn_tag.'" data-nom_dossier="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-type="fichier" data-toggle="modal" data-target="#tagModal">#</button>';        
+              
+              // Label pour afficher les tags
+              $items .= '<label for="text" style="margin-left: 10px;" data-space="non" data-chemin="'.$chemin . $ligne.'" class="col-form-label label_tag" ><small id="id_small_tag_'.$id_btn_tag.'">';
+              foreach($tag->get_tag_from_chemin($chemin . $ligne) as $tags){
+                $items .= $tags['nom_tag'] . ' ';
+              }
+              $items.= '</small></label>';
+              
               $items .= '</div>';
 
 
@@ -122,7 +132,7 @@ class dossier
                 <span class="badge ' . $badge_color . '">' . $partage->nb_partages($chemin . $ligne) . '</span>
                 </button>';
 
-
+              $id_btn_tag++;
             } else { //juste un dossier
 
               $items .= '<li class="list-group-item">';
@@ -130,9 +140,18 @@ class dossier
 
               $items .= '<div>'; //une div pour la justification
               $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="/admin/dossiers/' . $chemin . $ligne . '/">' . $ligne . '</a>';
+              $items .= '<button type="button" style="margin-left: 10px; font-size:10px;" class="btn btn-light btn-sm clicktag" data-id_btn_tag="'.$id_btn_tag.'"  data-nom_dossier="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-type="fichier" data-toggle="modal" data-target="#tagModal">#</button>';
+
+              // Label pour afficher les tags
+              $items .= '<label for="text" style="margin-left: 10px;" data-chemin="'.$chemin . $ligne.'" class="col-form-label label_tag"><small id="id_small_tag_'.$id_btn_tag.'">';
+              foreach($tag->get_tag_from_chemin($chemin . $ligne) as $tags){
+                $items .= $tags['nom_tag'] . ' ';
+              }
+              $items.= '</small></label>';
+              
+              
               $items .= '</div>';
               $items .= '<div>'; //une div pour la justification
-              $items .= '<input id="input_tag" data-nom_dossier="' . $chemin . $ligne . '" data-type="dossier" type="text" class="form-control" >';
               $items .= '</div>';
 
               if ($partage->nb_partages($chemin . $ligne) >= 1) {
@@ -152,6 +171,8 @@ class dossier
                 $items .= '<div>'; //une div pour remplacer le vide
                 $items .= '</div>';
               }
+
+              $id_btn_tag++;
             }
 
             $items .= '</div>'; //row
@@ -174,10 +195,16 @@ class dossier
 
         $items .= '<div>';
         $items .= '<i class="fas fa-video"></i>&nbsp;<a href="/admin/video/' . $chemin . $ligne . '">' . $ligne . '</a>';
-        $items .= '&nbsp;<input id="input_tag" data-nom_dossier="' . $chemin . $ligne . '" data-type="fichier" type="text" style="background: transparent;border:1px solid grey;border-radius:5px;">';
+        $items .= '<button type="button" id="btn_tag" style="margin-left: 10px; font-size:10px;" class="btn btn-light btn-sm clicktag"  data-id_btn_tag="'.$id_btn_tag.'" data-nom_dossier="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-type="fichier" data-toggle="modal" data-target="#tagModal">#</button>';
+
+        // Label pour afficher les tags
+        $items .= '<label for="text" style="margin-left: 10px;" data-space="non" data-chemin="'.$chemin . $ligne.'" class="col-form-label label_tag"><small id="id_small_tag_'.$id_btn_tag.'">';
+        foreach($tag->get_tag_from_chemin($chemin . $ligne) as $tags){
+          $items .= $tags['nom_tag'] . ' ';
+        }
+        $items.= '</small></label>';
+
         $items .= '</div>';
-
-
 
         if ($partage->nb_partages($chemin . $ligne) >= 1) {
           $badge_color = "badge-success";
@@ -198,6 +225,7 @@ class dossier
             </button>';
 
         $items .= '</li>';
+        $id_btn_tag++;
       } elseif ($type[1] == 'jpg' || $type[1] == 'JPG') {
         $compteur_images++; //si photo on compte mais on affiche pas
       } elseif ($ligne != '.DS_Store' && $ligne != '._.DS_Store' && $ligne != 'Thumbs.db') {

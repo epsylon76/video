@@ -7,6 +7,6 @@
 
 
 
-pr($tag->get_tag());
+pr($tag->get_tag_from_chemin('test'));
 
 ?>

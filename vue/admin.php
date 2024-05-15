@@ -59,18 +59,63 @@
   </div>
 </div>
 
+
+
+
+<div class="modal fade" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nouveau Partage</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="chemin" style="font-weight:800;"></div>
+        <br>
+        <form action="/actions/setTag" method="post" class="form-inline">
+          <!-- hidden -->
+          <input type="hidden" name="nom_dossier" id="hiddenNomDossier">
+          <input type="hidden" name="retour" id="hiddenCheminRetour">
+          <input type="hidden" name="type" id="hiddenTypeFichier">
+          <input type="hidden" name="tag" id="hiddenTagLabel">
+          <!-- hidden -->
+          <div class="form-group">
+            <label for="text" class="col-form-label">Tag :&nbsp;</label>
+            <input id="input_tag" type="text" name="liste_tag" class="form-control">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          <button type="submit" id="enregistrer_tag" class="btn btn-success">Enregistrer</button>
+        </div>
+        </form>
+    </div>
+  </div>
+</div>
+
 <!-- Lazy slick -->
 <link rel="stylesheet" type="text/css" href="/includes/js/slick/slick-theme.css"/>
 <link rel="stylesheet" type="text/css" href="/includes/js/slick/slick.css"/>
 <script type="text/javascript" src="/includes/js/slick/slick.min.js"></script>
 
 <script>
+$('.slider-photo').slick({
+  lazyLoad: 'ondemand',
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  fade: true,
+  dots: false
+
+});
+
+
 $('.clickpartage').click(function () {
   var type = $(this).data('typepartage'); // Extract info from data-* attributes
   var chemin = $(this).data('chemin');
   var retour = $(this).data('retour');
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this);
   $('.modal-title').text('Partage de type ' + type);
   $('#hiddenchemin').val(chemin);
@@ -84,35 +129,32 @@ $('.clickpartage').click(function () {
 });
 
 
-$('.slider-photo').slick({
-  lazyLoad: 'ondemand',
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  fade: true,
-  dots: false
+$('.clicktag').click(function () {
+  var type = $(this).data('type');
+  var nom_dossier = $(this).data('nom_dossier');
+  var retour = $(this).data('retour');
+  var cheminLabel = $('.label_tag').data('chemin');
+  var idBtn = $(this).data('id_btn_tag');
+
+  var contenu = $('#id_small_tag_' + idBtn).text();
+  console.log(contenu);
+
+  // var selecteur = '.label_tag'+nom_dossier; //on utilisera plutot var selecteur = $(this).data('chemin');
+  // var valeur = $(selecteur.replaceAll('/', '-')).text();
+  // console.log(valeur);
+
+  // $('#input_tag').val(valeur);
+
+  var modal = $(this);
+  $('.modal-title').text('Tag du ' + type + ' ' + nom_dossier);
+  $('#hiddenNomDossier').val(nom_dossier);
+  $('#hiddenCheminRetour').val(retour);
+  $('#hiddenTypeFichier').val(type);
+  // $('#hiddenTagLabel').val(valeur);
 
 });
-
-
-// activé quand on sort du focus de l'input
-$('#input_tag').on('blur', function() {
-
-  var contenu = $('#input_tag').val();
-  var type = $('#input_tag').data('type');
-  var nom_dossier = $('#input_tag').data('nom_dossier');
-
-  $.ajax({
-    url: '/ajax/ajax_tag.php',
-    type: 'POST',
-    data : { 
-      'contenu' : contenu ,
-      'nom_dossier': nom_dossier,
-      'type' : type
-    },
-    success: function(response) {
-        console.log(response);
-    }
-  });
-
+  
+  $('#tagModal').on('shown.bs.modal', function () {
+  $('#input_tag').focus();
 });
 </script>
