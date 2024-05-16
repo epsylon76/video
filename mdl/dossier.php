@@ -138,7 +138,7 @@ class dossier
               $items .= '<li class="list-group-item">';
               $items .= '<div class="d-flex justify-content-between">'; //ligne justifiée
 
-              $items .= '<div>'; //une div pour la justification
+              $items .= '<div class="col-6">'; //une div pour la justification
               $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="/admin/dossiers/' . $chemin . $ligne . '/">' . $ligne . '</a>';
               $items .= '<button type="button" style="margin-left: 10px; font-size:10px;" class="btn btn-light btn-sm clicktag" data-id_btn_tag="'.$id_btn_tag.'"  data-nom_dossier="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-type="fichier" data-toggle="modal" data-target="#tagModal">#</button>';
 
@@ -193,7 +193,7 @@ class dossier
         $items .= '<li class="list-group-item">';
         $items .= '<div class="d-flex justify-content-between">'; //ligne
 
-        $items .= '<div>';
+        $items .= '<div class="col-6">';
         $items .= '<i class="fas fa-video"></i>&nbsp;<a href="/admin/video/' . $chemin . $ligne . '">' . $ligne . '</a>';
         $items .= '<button type="button" id="btn_tag" style="margin-left: 10px; font-size:10px;" class="btn btn-light btn-sm clicktag"  data-id_btn_tag="'.$id_btn_tag.'" data-nom_dossier="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-type="fichier" data-toggle="modal" data-target="#tagModal">#</button>';
 

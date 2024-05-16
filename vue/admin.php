@@ -66,7 +66,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nouveau Partage</h5>
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -74,7 +74,7 @@
       <div class="modal-body">
         <div id="chemin" style="font-weight:800;"></div>
         <br>
-        <form action="/actions/setTag" method="post" class="form-inline">
+        <form action="/actions/setTag" method="post">
           <!-- hidden -->
           <input type="hidden" name="nom_dossier" id="hiddenNomDossier">
           <input type="hidden" name="retour" id="hiddenCheminRetour">
@@ -82,13 +82,12 @@
           <input type="hidden" name="tag" id="hiddenTagLabel">
           <!-- hidden -->
           <div class="form-group">
-            <label for="text" class="col-form-label">Tag :&nbsp;</label>
+            <label for="input_tag" class="col-form-label">Tag(s) :&nbsp;</label>
             <input id="input_tag" type="text" name="liste_tag" class="form-control">
           </div>
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
           <button type="submit" id="enregistrer_tag" class="btn btn-success">Enregistrer</button>
         </div>
         </form>
@@ -137,20 +136,15 @@ $('.clicktag').click(function () {
   var idBtn = $(this).data('id_btn_tag');
 
   var contenu = $('#id_small_tag_' + idBtn).text();
-  console.log(contenu);
 
-  // var selecteur = '.label_tag'+nom_dossier; //on utilisera plutot var selecteur = $(this).data('chemin');
-  // var valeur = $(selecteur.replaceAll('/', '-')).text();
-  // console.log(valeur);
-
-  // $('#input_tag').val(valeur);
+  $('#input_tag').val(contenu);
 
   var modal = $(this);
-  $('.modal-title').text('Tag du ' + type + ' ' + nom_dossier);
+  $('.modal-title').text('Tag(s) du ' + type + ' ' + nom_dossier);
   $('#hiddenNomDossier').val(nom_dossier);
   $('#hiddenCheminRetour').val(retour);
   $('#hiddenTypeFichier').val(type);
-  // $('#hiddenTagLabel').val(valeur);
+  $('#hiddenTagLabel').val(contenu);
 
 });
   

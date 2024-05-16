@@ -15,20 +15,20 @@ $tab_tagInput = explode(' ', preg_replace('/\s+/', ' ', ltrim(rtrim($tagInput)))
 $tab_tagLabel = explode(' ', preg_replace('/\s+/', ' ', ltrim(rtrim($tagLabel))));
 
 
+$tag->delete_tag_by_chemin($nom_dossier);
+
 // mettre les tags dans la base de donné 
 foreach ($tab_tagInput as $tagInput) {
-    if($tagInput != ' ' || $tagInput != ''){
-        $tag->set_tag($nom_dossier, $tagInput, $type);
-    }
+    $tag->set_tag($nom_dossier, $tagInput, $type);
 }
 
 // enlever les tags de la base de donné si tag enlevé de l'input
-foreach ($tab_tagLabel as $tagLabel) {
-    if (!in_array($tagLabel, $tab_tagInput)) {
-        echo $tagLabel;
-        $tag->delete_tag($tagLabel, $nom_dossier);
-    }
-}
+// foreach ($tab_tagLabel as $tagLabel) {
+//     if (!in_array($tagLabel, $tab_tagInput)) {
+//         // echo $tagLabel;
+//         $tag->delete_tag($tagLabel, $nom_dossier);
+//     }
+// }
 
 
 if($retour == '/'){

@@ -20,6 +20,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/admin/stats/" id="bouton-stats">Stats</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/tags/" id="bouton-tags">Tags</a>
+        </li>
       </ul>
       <span class="nav-link" style="color:white">
         <?php echo $_SESSION['login']; ?>

@@ -2,9 +2,9 @@
 
 function pr($data)
 {
-    echo "<pre>";
-    print_r($data); // or var_dump($data);
-    echo "</pre>";
+  echo "<pre>";
+  print_r($data); // or var_dump($data);
+  echo "</pre>";
 }
 
 function HumanSize($Bytes)
@@ -20,7 +20,7 @@ function HumanSize($Bytes)
 
 function breadcrumb($chemin)
 {
-  global $data;
+  global $data, $dossier;
   $lien = '';
   $retour = '<nav aria-label="breadcrumb" class="d-flex justify-content-between align-items-center">
       <ol class="breadcrumb">';
@@ -37,7 +37,7 @@ function breadcrumb($chemin)
 
   $retour .= '</ol>';
 
-  if ($chemin != '/') {
+  if ($chemin != '/' && $chemin != '') {
     //précédent, suivant
     $retour .= '<div class="text-right">';
     $to_scan = urldecode($data . $chemin . '/../');
@@ -48,14 +48,22 @@ function breadcrumb($chemin)
     //place de notre dossier dans la liste du parent
     $i = array_search($ligne, $liste_up); //le dernier = actuel
     //précédent
+
     if ($i >= 1) {
-      $precedent = str_replace($ligne, '', $lien) . $liste_up[$i - 1];
-      $retour .= '<a href="/admin/dossiers' . $precedent . '/" class="btn btn-secondary"><-</a> ';
+      $testextension = pathinfo($data . $liste_up[$i]);
+      if (!isset($testextension['extension'])) {
+        $precedent = str_replace($ligne, '', $lien) . $liste_up[$i - 1];
+        $retour .= '<a href="/admin/dossiers' . $precedent . '/" class="btn btn-secondary"><i class="fas fa-arrow-left"></i></a> ';
+      }
     }
     //suivant
+
     if (isset($liste_up[$i + 1])) {
-      $suivant = str_replace($ligne, '', $lien) . $liste_up[$i + 1];
-      $retour .= '<a href="/admin/dossiers' . $suivant . '/" class="btn btn-secondary">-></a>';
+      $testextension = pathinfo($data . $liste_up[$i + 1]);
+      if (!isset($testextension['extension'])) {
+        $suivant = str_replace($ligne, '', $lien) . $liste_up[$i + 1];
+        $retour .= '<a href="/admin/dossiers' . $suivant . '/" class="btn btn-secondary"><i class="fas fa-arrow-right"></i></a>';
+      }
     }
     $retour .= '</div>';
   }
