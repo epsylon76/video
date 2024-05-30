@@ -1,12 +1,14 @@
 <?php
 session_start();
 
+
 include_once('ctrl/update.php');
 include_once('config/config.php');
 include_once('config/fonctions.php');
 //require('./vendor/phpmailer/phpmailer/src/Exception.php');
 //require('./vendor/phpmailer/phpmailer/src/PHPMailer.php');
 //require('./vendor/phpmailer/phpmailer/src/SMTP.php');
+
 
 //parametres titre, email....
 $params = get_params();
@@ -46,6 +48,6 @@ if ($uri[0] == 'admin') {
 } elseif ($uri[0] == '') {
   include 'vue/head.php';
   include 'vue/accueil.php';
-} elseif ($uri[0] == 'actions') {
+}elseif ($uri[0] == 'actions') {
   include 'routeur_actions.php';
 }

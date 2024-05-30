@@ -8,9 +8,6 @@ $createBandePassanteTable = "CREATE TABLE IF NOT EXISTS bande_passante(
                 taille int NOT NULL
                 )";
 
-//
-// J'ai inversé les deux requetes, sinon la création de la clé étrangère ne pouvait pas fonctionner
-//
 
 $createCheminTable = "CREATE TABLE IF NOT EXISTS chemin (
     id_chemin int auto_increment primary key,

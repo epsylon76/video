@@ -64,7 +64,7 @@ if (!isset($_SESSION['login'])) {
         <?php
         } else { // mode admin
         ?>
-          <a class="btn btn-primary" style="font-size:14;" href="/admin/action/dlPhotos/<?php echo $chemin; ?>">
+          <a class="btn btn-primary" style="font-size:14;" href="/actions/dlPhotos/<?php echo $chemin; ?>">
             <i class="fas fa-download"></i> Télécharger toutes les photos
           </a>
         <?php

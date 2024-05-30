@@ -12,7 +12,7 @@ $retour = $_POST['retour'];
 $tagLabel = $_POST['tag'];
 
 $tab_tagInput = explode(' ', preg_replace('/\s+/', ' ', ltrim(rtrim($tagInput))));
-$tab_tagLabel = explode(' ', preg_replace('/\s+/', ' ', ltrim(rtrim($tagLabel))));
+// $tab_tagLabel = explode(' ', preg_replace('/\s+/', ' ', ltrim(rtrim($tagLabel))));
 
 
 $tag->delete_tag_by_chemin($nom_dossier);
