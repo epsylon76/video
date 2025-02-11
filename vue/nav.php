@@ -12,6 +12,9 @@
           <a class="nav-link" href="/admin/dossiers/">Dossiers</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/admin/envois/">Envois</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/admin/historique/">Historique</a>
         </li>
         <li class="nav-item">

@@ -4,9 +4,7 @@ session_start();
 include_once('ctrl/update.php');
 include_once('config/config.php');
 include_once('config/fonctions.php');
-//require('./vendor/phpmailer/phpmailer/src/Exception.php');
-//require('./vendor/phpmailer/phpmailer/src/PHPMailer.php');
-//require('./vendor/phpmailer/phpmailer/src/SMTP.php');
+
 
 //parametres titre, email....
 $params = get_params();
@@ -18,6 +16,7 @@ include_once('./mdl/partage.php');
 include_once('./mdl/historique.php');
 include_once('./mdl/stats.php');
 include_once('./mdl/tag.php');
+include_once('./mdl/file_attente.php');
 
 //instancier les objets
 $admin = new admin();
@@ -26,6 +25,7 @@ $partage = new partage();
 $historique = new historique();
 $stats = new stats();
 $tag = new tag();
+$file_attente = new file_attente();
 
 //Anciens liens : redirection
 if (isset($_GET['cle']) && !empty($_GET['cle'])) {

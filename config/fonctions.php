@@ -1,5 +1,6 @@
 <?php
 
+
 function pr($data)
 {
   echo "<pre>";
@@ -71,4 +72,11 @@ function breadcrumb($chemin)
 
   $retour .= '</nav>';
   return $retour;
+}
+
+
+function datetime_unix_humain($date_unix)
+{
+    $date = new DateTime($date_unix);
+    return ($date->format('d/m/Y H:m'));
 }

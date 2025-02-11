@@ -104,7 +104,7 @@ class dossier
               $items .= '<li class="list-group-item">';
               $items .= '<div class="d-flex justify-content-between">'; //ligne justifiée
 
-              $items .= '<div  class="col-6">'; //une div pour la justification
+              $items .= '<div class="col-6">'; //une div pour la justification
               $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="/admin/dossiers/' . $chemin . $ligne . '/">' . $ligne . '</a>';
               $items .= '<button type="button" style="margin-left: 10px; font-size:10px;" class="btn btn-light btn-sm clicktag" data-id_btn_tag="'.$id_btn_tag.'" data-nom_dossier="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-type="fichier" data-toggle="modal" data-target="#tagModal">#</button>';        
               
@@ -231,8 +231,8 @@ class dossier
       } elseif ($ligne != '.DS_Store' && $ligne != '._.DS_Store' && $ligne != 'Thumbs.db') {
         //autre fichier
         $items .= '<li class="list-group-item">';
-        $items .= '<div class="row justify-content-between">'; //ligne
-        $items .= '<div class="col-md-6">'; //colonne droite
+        $items .= '<div class="d-flex justify-content-between">'; //ligne
+        $items .= '<div class="col-6">'; //colonne droite
         $items .= '<i class="fas fa-file"></i>&nbsp;' . $ligne;
         $items .= '&nbsp;<a href="./data' . $chemin . $ligne . '">‌‌<i class="fas fa-file-download"></i></a>';
         $items .= '</div>';

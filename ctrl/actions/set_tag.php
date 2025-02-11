@@ -1,8 +1,5 @@
 <?php
-include_once('./mdl/tag.php');
-include('./config/dbconn.php');
-
-
+include_once('/mdl/tag.php');
 $tag = new tag();
 
 $nom_dossier = $_POST['nom_dossier'];
@@ -17,19 +14,10 @@ $tab_tagLabel = explode(' ', preg_replace('/\s+/', ' ', ltrim(rtrim($tagLabel)))
 
 $tag->delete_tag_by_chemin($nom_dossier);
 
-// mettre les tags dans la base de donné 
+// mettre les tags dans la base de données
 foreach ($tab_tagInput as $tagInput) {
     $tag->set_tag($nom_dossier, $tagInput, $type);
 }
-
-// enlever les tags de la base de donné si tag enlevé de l'input
-// foreach ($tab_tagLabel as $tagLabel) {
-//     if (!in_array($tagLabel, $tab_tagInput)) {
-//         // echo $tagLabel;
-//         $tag->delete_tag($tagLabel, $nom_dossier);
-//     }
-// }
-
 
 if($retour == '/'){
     $retour = '';

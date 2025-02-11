@@ -74,6 +74,13 @@ h2, h1{
 	font-size: 6pt;
 }
 
+.bordered-black{
+  border:3px solid black;
+  border-radius:10px;
+  margin:5px;
+  padding:15px;
+}
+
 
 
 .slick-prev::before, .slick-next::before {
