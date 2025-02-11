@@ -22,7 +22,7 @@
       <?php
       if ($nbSupprimable >= 1) {
       ?>
-        <a class="btn btn-danger" href="/admin/action/supprZip/">supprimer les zip > 3 Semaines (<?php echo $nbSupprimable; ?>)</a>
+        <a class="btn btn-danger" href="/actions/supprZip/">supprimer les zip > 3 Semaines (<?php echo $nbSupprimable; ?>)</a>
        <?php } ?>
     </div>
   </div>
@@ -40,10 +40,6 @@
 
   <br>
   <a class="btn btn-primary" href="/admin/stats/introuvables/">Partages introuvables</a>
-
-  <!-- <br>
-  <a class="btn btn-primary" href="/admin/stats/bandePassante/" style="margin-top:25px;">Bande passante</a> -->
-
 
   <?php include('./ctrl/bande_passante.php')?>
  

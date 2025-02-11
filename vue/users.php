@@ -28,7 +28,7 @@ td{
 foreach($liste_admins as $un_admin){
   echo '<tr>';
   echo '<td>';
-  echo '<form action="/admin/action/changePsw" method="post">';
+  echo '<form action="/actions/changePsw" method="post">';
   echo '<input type="hidden" name="login" value="'.$un_admin['login'].'">';
   echo $un_admin['login'];
   echo '</td><td>';
@@ -50,7 +50,7 @@ echo '</table>';
 
 ?>
 
-<form action="/admin/action/addUser" method="post">
+<form action="/actions/addUser" method="post">
   <table style="margin-top: 50px;">
     <tr>
         <td>login:</td>

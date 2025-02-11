@@ -114,7 +114,7 @@
   <h2 class="text-center">Logo principal</h2>
   <img src="/vue/img/logo.png" id="logo" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px;" />
 
-  <form action="/admin/action/uploadLogo/" method="post" enctype="multipart/form-data">
+  <form action="/actions/uploadLogo/" method="post" enctype="multipart/form-data">
     Selectionnez un logo au <u>format PNG</u>:
     <input type="file" name="fileToUpload" id="fileToUpload">
     <input type="submit" value="Envoyer logo" name="submit">
@@ -123,7 +123,7 @@
   <h2 class="text-center">Image Encart invitation (Espace de téléchargement)</h2>
   <img src="/vue/img/invitation.jpg" id="invitation" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px; max-width:300px;" />
 
-  <form action="/admin/action/uploadInvitation/" method="post" enctype="multipart/form-data">
+  <form action="/actions/uploadInvitation/" method="post" enctype="multipart/form-data">
     Selectionnez une image au <u>format JPG</u> :
     <input type="file" name="invitation" id="invitation">
     <input type="submit" value="Envoyer Image" name="submit">
@@ -135,7 +135,7 @@
       <source src="/vue/img/banniere.mp4" type="video/mp4" />
     </video>
   <?php } ?>
-  <form action="/admin/action/uploadBanniere/" method="post" enctype="multipart/form-data">
+  <form action="/actions/uploadBanniere/" method="post" enctype="multipart/form-data">
     Selectionnez une vidéo au <u>format mp4</u> :
     <input type="file" name="file" id="banniere">
     <input type="submit" value="Envoyer Vidéo" name="submit">

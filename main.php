@@ -1,9 +1,11 @@
 <?php
 session_start();
 
+
 include_once('ctrl/update.php');
 include_once('config/config.php');
 include_once('config/fonctions.php');
+
 
 
 //parametres titre, email....
@@ -46,6 +48,6 @@ if ($uri[0] == 'admin') {
 } elseif ($uri[0] == '') {
   include 'vue/head.php';
   include 'vue/accueil.php';
-} elseif ($uri[0] == 'actions') {
+}elseif ($uri[0] == 'actions') {
   include 'routeur_actions.php';
 }

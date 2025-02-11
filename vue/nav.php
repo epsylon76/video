@@ -32,6 +32,6 @@
       </span>
       <a class="nav-link btn btn-warning btn-sm" href="/admin/parametres/"><i class="fas fa-cog"></i></a>
       &nbsp;
-      <a class="nav-link btn btn-danger btn-sm" href="/admin/action/deconnecter"><i class="fas fa-power-off"></i></a>
+      <a class="nav-link btn btn-danger btn-sm" href="/actions/deconnecter"><i class="fas fa-power-off"></i></a>
     </div>
   </nav>

@@ -102,6 +102,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
             }
 
             break;
+<<<<<<< HEAD
 
         case "action":
             switch ($uri[2]) {
@@ -153,6 +154,9 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
                     include('ctrl/actions/dl_photos.php');
                     break;
             }
+=======
+            
+>>>>>>> 049c1762ff20936ba80d2fdb912c040e3ee1436f
     }
 } else {
     //renvoi au login

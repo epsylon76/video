@@ -102,6 +102,8 @@ class tag{
         $query = $DB_con->prepare($requete);
         $query->bindParam(':nom_chemin', $nom_chemin);
         $query->execute();
+
+        $this->delete_chemin_if_no_tags($nom_chemin);
     }
     
     
