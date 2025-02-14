@@ -50,10 +50,9 @@
         "url": "/ajax/ajax_load_file.php",
         "type": "POST"
       },
+      "columnDefs" : [{"targets":1, "type":"date-euro"}],
       "ordering": true,
-      "order": [
-        [0, 'desc']
-      ],
+      "order": [1, 'desc'],
 
       language: {
         processing: "Traitement en cours...",

@@ -102,61 +102,23 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
             }
 
             break;
-<<<<<<< HEAD
 
-        case "action":
-            switch ($uri[2]) {
-                case "deconnecter":
-                    include('ctrl/actions/deconnecter.php');
-                    break;
 
-                case "addUser":
-                    include('ctrl/actions/set_user.php');
-                    break;
+        case "captures":
+            include('vue/head.php');
+            include('vue/nav.php');
 
-                case "changePsw":
-                    include('ctrl/actions/change_psw.php');
-                    break;
-
-                case "renvoiMail":
-                    include('ctrl/actions/renvoi_mail.php');
-                    break;
-
-                case "renvoiDate":
-                    include('ctrl/actions/renvoi_date.php');
-                    break;
-
-                case "supprZip":
-                    include('ctrl/actions/suppr_zip.php');
-                    break;
-
-                case "unsetPartage":
-                    include('ctrl/actions/unset_partage.php');
-                    break;
-
-                case "clearIntrouvables":
-                    include('ctrl/actions/clear_introuvables.php');
-                    break;
-
-                case "uploadBanniere":
-                    include('ctrl/actions/upload_banniere.php');
-                    break;
-
-                case "uploadInvitation":
-                    include('ctrl/actions/upload_invitation.php');
-                    break;
-
-                case "uploadLogo":
-                    include('ctrl/actions/upload_logo.php');
-                    break;
-
-                case "dlPhotos":
-                    include('ctrl/actions/dl_photos.php');
-                    break;
+            $chemin = '';
+            for ($i = 2; isset($uri[$i]); $i++) {
+                $chemin .= $uri[$i];
+                if(isset($uri[$i+1])){
+                    $chemin .= '/';
+                }
             }
-=======
-            
->>>>>>> 049c1762ff20936ba80d2fdb912c040e3ee1436f
+            include 'ctrl/captures.php';
+            include 'vue/captures.php';
+            include 'vue/footer.php';
+            break;
     }
 } else {
     //renvoi au login

@@ -61,7 +61,7 @@ foreach ($results as $ligne) {
   //  $items[$i][3] = $date_creation;
   $items[$i][3] = '<a href="/cle/' . $ligne['cle'] . '">' . $ligne['email'] . '</a>';
   $items[$i][4] = $ligne['admin_login'];
-  $items[$i][5] = '<a href="/actions/renvoiMail/' . $ligne['email'] . '"><i class="fas fa-reply-all"></i></a>&nbsp;&nbsp;<a href="/actions/unsetPartage/' . $ligne['id'] . '"><i class="fas fa-trash-alt" style="color:red;"></i></a>';
+  $items[$i][5] = '<a href="/actions/renvoiMail/' . $ligne['id'] . '"><i class="fas fa-reply-all"></i></a>&nbsp;&nbsp;<a href="/actions/unsetPartage/' . $ligne['id'] . '"><i class="fas fa-trash-alt" style="color:red;"></i></a>';
   $i++;
 }
 $data = array("data" => $items); // l'array doit etre un array data []: puis les données

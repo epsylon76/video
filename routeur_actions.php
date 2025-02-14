@@ -76,5 +76,9 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
         case 'renvoi_bulk':
             include 'ctrl/actions/renvoi_bulk.php';
             break;
+
+        case 'do_captures':
+            include 'ctrl/actions/do_captures.php';
+            break;
     }
 }

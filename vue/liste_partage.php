@@ -7,29 +7,12 @@
         <th>ID</th>
         <th>date partage</th>
         <th>chemin</th>
-        <!--  <th>date fichier</th> -->
         <th>email</th>
         <th>admin</th>
         <th>actions</th>
       </tr>
     </thead>
   </table>
-
-  <h3>Renvoi par date</h3>
-  <form action="/actions/renvoiDate/" method="post">
-
-    <div class="row">
-      <div class="col-6">
-        <input type="date" class="form-control" name="date" />
-      </div>
-      <div class="col-6">
-        <input type="submit" value="envoyer">
-      </div>
-    </div>
-    <div class="row">
-      <h5 style="color:red;"><b>Attention la date est celle du PARTAGE et pas la date de SAUT</b></h5>
-    </div>
-  </form>
 </div>
 
 <script>

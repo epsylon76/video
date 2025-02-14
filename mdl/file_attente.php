@@ -12,6 +12,7 @@ class file_attente
         $query->execute();
     }
 
+
     function liste()
     {
         global $DB_con;
@@ -35,7 +36,7 @@ class file_attente
     {
         global $DB_con;
         if ($type == 'immediat') {
-            $one = $DB_con->prepare("SELECT COUNT(*) FROM `file_attente` WHERE `done` = '0000-00-00 00:00:00' AND `immediat` = 1");
+            $one = $DB_con->prepare("SELECT COUNT(*) FROM `file_attente` WHERE `done` = '0000-00-00 00:00:00' AND `immediat` = 1 ORDER BY");
         } elseif ($type == 'programme') {
             $one = $DB_con->prepare("SELECT COUNT(*) FROM `file_attente` WHERE `done` = '0000-00-00 00:00:00' AND `immediat` = 0");
         } elseif ($type == 'all') {
@@ -61,5 +62,12 @@ class file_attente
                 $upd->execute();
             }
         }
+    }
+
+    function remove_partage($id_partage){
+        global $DB_con;
+        $query = $DB_con->prepare("DELETE FROM `file_attente` WHERE `id_partage` = :id_partage");
+        $query->bindParam(':id_partage', $id_partage);
+        $query->execute();
     }
 }
