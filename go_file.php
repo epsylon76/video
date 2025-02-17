@@ -5,9 +5,13 @@ $params = get_params();
 include_once('mdl/file_attente.php');
 $file_attente = new file_attente();
 
+include 'config/fonctions.php';
 
+
+echo date('Y-m-d H:i:s');
 //envois immediats
 $res = $file_attente->one_file('1');
+
 if ($res) {
     $cle = $res['cle'];
     $mailto = $res['email'];
@@ -35,7 +39,9 @@ if ($res) {
 }
 
 //envois différés
+
 if (($params['depart_file'] <= date('Y-m-d H:i:s')) && $params['file_termine'] == 0) {
+
     $res = $file_attente->one_file('0');
     if ($res) {
         $cle = $res['cle'];

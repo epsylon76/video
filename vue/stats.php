@@ -16,14 +16,12 @@
 
   <div class="row">
     <div class="col">
-      Taille du dossier Zip : <?php echo $zipfoldersize; ?>
+      Taille du Contenu Zip : <?php echo $zipfoldersize; ?>
     </div>
     <div class="col">
-      <?php
-      if ($nbSupprimable >= 1) {
-      ?>
-        <a class="btn btn-danger" href="/actions/supprZip/">supprimer les zip > 3 Semaines (<?php echo $nbSupprimable; ?>)</a>
-       <?php } ?>
+
+    <a class="btn btn-danger" href="/actions/supprZip/">Vider le dossier Zip</a>
+
     </div>
   </div>
 

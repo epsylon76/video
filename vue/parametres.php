@@ -1,11 +1,17 @@
 <div class="container" style="margin-top:30px;">
   <h1>Paramètres</h1>
 
-  <a href="/admin/parametres/users/">Gestion Utilisateurs</a>
+  <a class="btn btn-info" href="/admin/parametres/users/">Gestion Utilisateurs</a>
+
+  <h2>Checks permissions</h2>
+  <h6>Dossier data : <?php echo is_writable('data') ? 'OK' : 'NOK'; ?></h6>
+  <h6>Dossier zip : <?php echo is_writable('zip') ? 'OK' : 'NOK'; ?></h6>
+  <h6>Dossier img : <?php echo is_writable('vue/img') ? 'OK' : 'NOK'; ?></h6>
+  <h6>Executable captures.sh : <?php echo is_executable('scripts/captures.sh') ? 'OK' : 'NOK'; ?></h6>
 
 
   <form action="/admin/parametres/" method="post">
-
+    <input type="hidden" name="depart_file" value="<?php echo $params['depart_file']; ?>" />
     <h2 class="text-center">Core</h2>
     <h5>Dossier data</h5>
     <input type="text" name="dossier_data" size="70" value="<?php echo $params['dossier_data']; ?>"></input>

@@ -21,7 +21,6 @@ $anneeB = $annee-1;
 //
 
 $zipfoldersize = 0;
-$nbSupprimable = 0;
 $zipfolder = './zip/';
 
 // Construct the iterator
@@ -31,9 +30,6 @@ $it = new RecursiveDirectoryIterator($zipfolder);
 foreach(new RecursiveIteratorIterator($it) as $file) {
     if ($file->getExtension() == 'zip') {
       $zipfoldersize += filesize($file);
-        if (time()-filemtime($file) > 1814400) {    //PLUS ANCIEN
-            $nbSupprimable++;
-          } 
     }
 }
 

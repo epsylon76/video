@@ -32,17 +32,19 @@ echo $params['analytics']; //analytics seulement sur la vue client
         </div>
           <div class="row">
             <h3>Liste des partages</h3>
-            <div style="margin-top:4px; margin-left:20px" class="fb-share-button" data-href="<?php echo $url_domaine.'/?cle='.$_GET['cle']; ?>" data-layout="button_count">
+            <div style="margin-top:4px; margin-left:20px" class="fb-share-button" data-href="<?php echo $url_domaine.'/?cle='.$uri[1]; ?>" data-layout="button_count">
             </div>
           </div>
           <?php
 
           foreach ($liste as $ligne) {
 
-            echo '<div class="row" style="display: flex;  justify-content: space-between;">';
-            echo '<span style="overflow:hidden">';
-            echo '<a href=/cle/' . $uri[1] . '/' . $ligne['id'] . '>';
+            echo '<a href=/cle/' . $uri[1] . '/' . $ligne['id'] . ' class="row" style="display: flex;  justify-content: space-between;">';
 
+         
+        
+
+            echo '<div>';
             if ($ligne['type_partage'] == "video") {
               $icone = '<i class="fas fa-video icone_ligne"></i>&nbsp;';
             } elseif ($ligne['type_partage'] == "photos") {
@@ -50,17 +52,16 @@ echo $params['analytics']; //analytics seulement sur la vue client
             } elseif ($ligne['type_partage'] == "dossier") {
               $icone = '<i class="fas fa-file-archive icone_ligne"></i>&nbsp;';
             }
-
             echo $icone;
+            echo '<span style="padding-bottom: 30px; vertical-align: middle;">'.basename($ligne['chemin']).'</span>';
+            echo '</div>';
 
-            echo basename($ligne['chemin']);
+        
+            echo '<i class="fa fa-download icone_dl" aria-hidden="true"></i>';
+            
+     
 
-
-            echo '</span>';
-
-            echo '<span><i class="fa fa-download icone_dl" aria-hidden="true"></i></div></a>';
-
-            echo '</span>';
+            echo '</a>';
           }
           ?>
 

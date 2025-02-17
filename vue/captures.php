@@ -4,6 +4,10 @@
     </div>
     <form action="/actions/do_captures" method="post">
         <?php
+         if(!is_executable('scripts/captures.sh')){
+            echo '<h1 style="color:red;">Script non executable !</h1>';
+        }
+
         foreach ($video_array as $key => $vid) {
             $urlvid = str_replace($data, '', $vid);
         ?>

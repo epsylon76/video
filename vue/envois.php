@@ -1,5 +1,7 @@
 <div class="container">
+
   <h2>Paramétrage des envois</h2>
+  <h6>Heure système : <?php echo date('d/m/Y H:i');?></h6>
   <h5>Début des envois</h5>
   <form action="/actions/set_envois" method="post">
     <input type="datetime-local" style="<?php echo $style; ?>" value="<?php echo $params['depart_file']; ?>" name="depart_file"></input>&nbsp;<input type="submit" value="modifier" required></input>
