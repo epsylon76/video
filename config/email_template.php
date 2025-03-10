@@ -57,16 +57,16 @@ $corps ='<!doctype html>
         display: block;
         Margin: 0 auto !important;
         /* makes it centered */
-        max-width: 580px;
+        max-width: 780px;
         padding: 10px;
-        width: 580px;
+        width: 780px;
       }
       /* This should also be a block element, so that it will fill 100% of the .container */
       .content {
         box-sizing: border-box;
         display: block;
         Margin: 0 auto;
-        max-width: 580px;
+        max-width: 780px;
         padding: 10px;
       }
       /* -------------------------------------
@@ -314,23 +314,22 @@ $corps ='<!doctype html>
                 <td class="wrapper">
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                      <td>
+                      <td style="text-align:center">
+                        <img src="http://'.$params['url_domaine'].'/vue/img/logo.png" style="width:100px; margin:0 auto; "/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>                      
                       '.$corps1.'
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                          <tbody>
-                            <tr>
-                              <td align="left">
-                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                  <tbody>
-                                    <tr>
-                                      <td> <a href="http://'.$params['url_domaine'].'/cle/'.$cle.'" target="_blank">'.$params['email_texte_bouton'].'</a> </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="btn btn-primary" style="text-align:center">                       
+                        <a href="http://'.$params['url_domaine'].'/cle/'.$cle.'" target="_blank">'.$params['email_texte_bouton'].'</a> </td>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
                         '.$corps2.'
                       </td>
                     </tr>
