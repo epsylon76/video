@@ -1,6 +1,8 @@
 <?php
 //vérification du login
 
+
+
 if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login_crypt($_SESSION['login'], $_SESSION['pass'])) {
 
     if (!isset($uri[1])) {

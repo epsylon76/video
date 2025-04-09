@@ -17,7 +17,7 @@ if (!isset($_POST['email']) && !isset($_POST['chemin'])) {
 
   $retour = $partage->set_partage($chemin, $email, $type_partage, $_SESSION['login'], $email_type, $immediat);
 
-  $cle = $retour['cle'];
+
   //ajout à l'historique ($id_admin,$id_partage,$action)
   $historique->set_partage($_SESSION['login'], $chemin, $email);
 

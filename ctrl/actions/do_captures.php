@@ -24,7 +24,7 @@ $video_array = glob(dirname($_POST['file']) . '/{*.mp4,*.MP4}', GLOB_BRACE);
 foreach ($video_array as $key => $vid) {
     $urlvid = str_replace($data, '', $vid);
     //Commande avec sortie dans le néant et en tache de fond
-    $command = '/var/www/html/scripts/captures.sh "' . $vid . '" ' . $cadence . ' "' . $dest . '" '.$key.' > /dev/null 2>/dev/null &'; 
+    $command = __DIR__.'/../../scripts/captures.sh "' . $vid . '" ' . $cadence . ' "' . $dest . '" '.$key.' > /dev/null 2>/dev/null &'; 
    
     echo '<br/>'.$command;
     $output = shell_exec($command); //Arguments passés sont  $1; $2; $3 dans le script Shell

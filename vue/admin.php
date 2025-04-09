@@ -26,7 +26,7 @@
       <div class="modal-body">
         <div id="chemin" style="font-weight:800;"></div>
         <br>
-        <form action="/actions/set_partage" method="post" >
+        <form action="/actions/set_partage" method="post">
           <!-- hidden -->
           <input type="hidden" name="chemin" id="hiddenchemin">
           <input type="hidden" name="chemin_retour" id="hiddenretour">
@@ -34,36 +34,40 @@
           <!-- hidden -->
           <div class="form-group">
             <label for="email" class="col-form-label">Email :&nbsp;</label>
-            <input type="email" class="form-control form-control-sm" id="email" name="email" required size="30">
+            <input id="ChampEmail" type="email" class="form-control form-control-sm" id="email" name="email" required size="30">
           </div>
+          <div id="AvertissementDejaPartage" style="color:red;font-weight:bold;display:none">Partage déjà fait avec cet email, utiliser le bouton de renvoi dans "Partages"</div>
 
-          <div class="form-group">
-            <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="email_normal" name="email_type" class="custom-control-input" value="1" checked>
-              <label class="custom-control-label" for="email_normal">Normal</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="email_alternatif" name="email_type" class="custom-control-input" value="2">
-              <label class="custom-control-label" for="email_alternatif">Alternatif</label>
-            </div>
-          </div>
-          <h5>Délai d'envoi</h5>
-          <div class="form-group">
-            <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="delai_attente" name="immediat" class="custom-control-input" value="0" checked>
-              <label class="custom-control-label" for="delai_attente">File d'attente</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="delai_immediat" name="immediat" class="custom-control-input" value="1">
-              <label class="custom-control-label" for="delai_immediat">Immédiat</label>
-            </div>
-          </div>
+          <div id="SelecteursTypes">
 
+            <div class="form-group">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="email_normal" name="email_type" class="custom-control-input" value="1" checked>
+                <label class="custom-control-label" for="email_normal">Normal</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="email_alternatif" name="email_type" class="custom-control-input" value="2">
+                <label class="custom-control-label" for="email_alternatif">Alternatif</label>
+              </div>
+            </div>
+            <h5>Délai d'envoi</h5>
+            <div class="form-group">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="delai_attente" name="immediat" class="custom-control-input" value="0" checked>
+                <label class="custom-control-label" for="delai_attente">File d'attente</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="delai_immediat" name="immediat" class="custom-control-input" value="1">
+                <label class="custom-control-label" for="delai_immediat">Immédiat</label>
+              </div>
+            </div>
+
+          </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="submit" class="btn btn-success">Partager</button>
+        <button id="BoutonPartager" type="submit" class="btn btn-success">Partager</button>
       </div>
       </form>
     </div>
@@ -72,7 +76,7 @@
 
 
 
-
+<!-- Modal TAG -->
 <div class="modal fade" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -145,7 +149,6 @@
     var retour = $(this).data('retour');
     var cheminLabel = $('.label_tag').data('chemin');
     var idBtn = $(this).data('id_btn_tag');
-
     var contenu = $('#id_small_tag_' + idBtn).text();
 
     $('#input_tag').val(contenu);
@@ -162,4 +165,30 @@
   $('#tagModal').on('shown.bs.modal', function() {
     $('#input_tag').focus();
   });
+
+  //TEST si l'email a déjà été utilisé
+  $('#ChampEmail').keyup(function() {
+    var value = $(this).val();
+    var chemin = $('#hiddenchemin').val();
+    $.ajax({
+      url: '/ajax/check_deja_partage.php',
+      type: 'POST',
+      data: {
+        'email': value,
+        'chemin': chemin
+      },
+      datatype: 'json',
+      success: function(result) {
+        if (result == 'true') {
+          $('#BoutonPartager').attr('disabled', true);
+          $('#AvertissementDejaPartage').fadeIn();
+          $('#SelecteursTypes').fadeOut();
+        } else {
+          $('#BoutonPartager').attr('disabled', false);
+          $('#AvertissementDejaPartage').fadeOut();
+          $('#SelecteursTypes').fadeIn();
+        }
+      }
+    });
+  })
 </script>
