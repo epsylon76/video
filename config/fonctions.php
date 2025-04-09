@@ -78,5 +78,5 @@ function breadcrumb($chemin)
 function datetime_unix_humain($date_unix)
 {
     $date = new DateTime($date_unix);
-    return ($date->format('d/m/Y H:m'));
+    return ($date->format('d/m/Y H:i'));
 }
