@@ -4,7 +4,7 @@
   <h6>Heure système : <?php echo date('d/m/Y H:i');?></h6>
   <h5>Début des envois</h5>
   <form action="/actions/set_envois" method="post">
-    <input type="datetime-local" style="<?php echo $style; ?>" value="<?php echo $params['depart_file']; ?>" name="depart_file"></input>&nbsp;<input type="submit" value="modifier" required></input>
+    <input type="datetime-local" style="<?php echo $style; ?> width:300px; border:4px solid black; border-radius:5px; height:60px; font-size:25px; font-weight:bold;" value="<?php echo $params['depart_file']; ?>" name="depart_file"></input>&nbsp;<input class="btn btn-warning" type="submit" value="Enregistrer la programmation" required></input>
   </form>
   <br />
   <small style="background-color:orange; padding:10px; border-radius:5px;margin:5px;;">Programmé</small>
