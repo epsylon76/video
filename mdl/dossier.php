@@ -160,14 +160,19 @@ class dossier
 
             //bouton de partage des dossiers zip
             if ($nb_sous_dossiers <= 4 && $params['partage_dossier'] == true) {
-              $items .= '<button type="button" class="btn btn-danger btn-sm  clickpartage"  data-typepartage="dossier" data-chemin="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-toggle="modal" data-target="#partageModal">
-                <i class="fas fa-folder-plus"></i>
-                  &nbsp;Partager&nbsp;&nbsp;
-                  <span class="badge ' . $badge_color . '">' . $partage->nb_partages($chemin . $ligne) . '</span>
-                  </button>';
+              $items .= '<button type="button" class="btn btn-danger btn-sm  clickpartage"  data-typepartage="rushs" data-chemin="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-toggle="modal" data-target="#partageModal">';
+              $items .= '<i class="fas fa-folder-plus"></i>';
+              $items .= '&nbsp;Partager&nbsp;&nbsp;';
+              $items .= '<span class="badge ' . $badge_color . '">' . $partage->nb_partages($chemin . $ligne) . '</span>';
+              $items .= ' </button>';
             } else { // un dossier vide ou avec autre chose. regarder s'il s'appelle "rush" ou "rushs"
               if (strtolower($ligne) == "rush" || strtolower($ligne) == "rushs") {
-                $items .= '<div><a href="/admin/captures/'.$chemin.$ligne.'" class="btn btn-sm btn-info">C</a>'; 
+                $items .= '<div>';
+                $items .= '<a href="/admin/captures/' . $chemin . $ligne . '" class="btn btn-sm btn-info"><i class="fa-solid fa-images"></i></a>';  //captures photos
+                $items .= '&nbsp;<button type="button" class="btn btn-danger btn-sm  clickpartage"  data-typepartage="rushs" data-chemin="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-toggle="modal" data-target="#partageModal">';
+                $items .= '<i class="fa-regular fa-window-restore"></i>';
+                $items .= '&nbsp;Partager&nbsp;&nbsp;';
+                $items .= ' </button>';
                 $items .= '</div>';
               } else {
                 $items .= '<div>'; //une div pour remplacer le vide
@@ -231,7 +236,7 @@ class dossier
         $items .= '<div class="d-flex justify-content-between">'; //ligne
         $items .= '<div class="col-6">'; //colonne droite
         $items .= '<i class="fas fa-file"></i>&nbsp;' . $ligne;
-        $items .= '&nbsp;<a href="./data' . $chemin . $ligne . '">‌‌<i class="fas fa-file-download"></i></a>';
+        $items .= '&nbsp;<a href="/data/' . $chemin . $ligne . '">‌‌<i class="fas fa-file-download"></i></a>';
         $items .= '</div>';
         $items .= '</div>';
         $items .= '</li>';
