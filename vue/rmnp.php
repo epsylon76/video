@@ -32,6 +32,8 @@
     <div class="row">
         <div class="col-12">
             <h1> ReMarketing Non Prévues </h1>
+            <br>
+            <h3><?php echo $chemin;?></h3>
         </div>
     </div>
 

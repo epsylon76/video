@@ -5,3 +5,5 @@ config/mail_config.php
 vue/img/banniere.mp4
 vue/img/*.png
 vue/img/*.jpg
+captures/*.jpg
+validated_captures/*
