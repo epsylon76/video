@@ -121,6 +121,24 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
             include 'vue/captures.php';
             include 'vue/footer.php';
             break;
+
+
+        case "rmnp":
+            include('vue/head.php');
+            include('vue/nav.php');
+
+            $chemin = '';
+            for ($i = 2; isset($uri[$i]); $i++) {
+                $chemin .= $uri[$i];
+                if(isset($uri[$i+1])){
+                    $chemin .= '/';
+                }
+            }
+            include 'ctrl/rmnp.php';
+            include 'vue/rmnp.php';
+            include 'vue/footer.php';
+            break;
+
     }
 } else {
     //renvoi au login

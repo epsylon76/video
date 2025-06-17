@@ -166,9 +166,12 @@ class dossier
               $items .= '<span class="badge ' . $badge_color . '">' . $partage->nb_partages($chemin . $ligne) . '</span>';
               $items .= ' </button>';
             } else { // un dossier vide ou avec autre chose. regarder s'il s'appelle "rush" ou "rushs"
-              if (strtolower($ligne) == "rush" || strtolower($ligne) == "rushs") {
+              if (strtolower($ligne) == "rush" || strtolower($ligne) == "rushs") {       
                 $items .= '<div>';
-                $items .= '<a href="/admin/captures/' . $chemin . $ligne . '" class="btn btn-sm btn-info"><i class="fa-solid fa-images"></i></a>';  //captures photos
+                //bouton RM NP
+                $items .= '<a href="/admin/rmnp/' . $chemin . $ligne . '" class="btn btn-sm btn-warning"><i class="fa-solid fa-search-dollar"></i></a>';  //captures photos
+                 //bouton captures photos
+                $items .= '&nbsp;<a href="/admin/captures/' . $chemin . $ligne . '" class="btn btn-sm btn-info"><i class="fa-solid fa-images"></i></a>';  //captures photos
                 $items .= '&nbsp;<button type="button" class="btn btn-danger btn-sm  clickpartage"  data-typepartage="rushs" data-chemin="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-toggle="modal" data-target="#partageModal">';
                 $items .= '<i class="fa-regular fa-window-restore"></i>';
                 $items .= '&nbsp;Partager&nbsp;&nbsp;';

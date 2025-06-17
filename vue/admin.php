@@ -162,9 +162,6 @@
 
   });
 
-  $('#tagModal').on('shown.bs.modal', function() {
-    $('#input_tag').focus();
-  });
 
   //TEST si l'email a déjà été utilisé
   $('#ChampEmail').keyup(function() {
