@@ -1,5 +1,5 @@
-zip/*.zip
-data
+zip/*
+data/*
 config/dbconn.php
 config/mail_config.php
 vue/img/banniere.mp4
