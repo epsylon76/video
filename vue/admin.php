@@ -1,110 +1,126 @@
-<main role="main" class="container">
+<style>
+  /* Supprime le soulignement des liens de dossiers */
+  .dossier-link {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.2s ease-in-out;
+    display: block;
+    padding: 8px;
+    border-radius: 5px;
+  }
+
+  /* Effet au survol pour simuler une sélection */
+  .dossier-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #0d6efd;
+    /* Le bleu primaire de Bootstrap 5 */
+  }
+
+  /* Style pour l'icône à côté du nom */
+  .dossier-link i {
+    margin-right: 10px;
+    color: #ffca28;
+    /* Couleur "Dossier" classique */
+  }
+</style>
+
+<main role="main" class="container mt-4">
   <div class="row">
-
-    <h1 style="padding-left:18px;">Navigation dans les dossiers</h1>
-    <p style="padding-left:18px;">
-      Le partage fonctionne par nom de dossier, si les noms des dossiers sont modifiés le partage devient inaccessible<br>
-    </p>
-
+    <div class="col-12 px-3">
+      <h1>Navigation dans les dossiers</h1>
+      <p class="text-muted">
+        Le partage fonctionne par nom de dossier. Si les noms des dossiers sont modifiés, le partage devient inaccessible.
+      </p>
+    </div>
   </div>
 
   <?php echo $breadcrumb; ?>
 
-  <p class="lead"><?php echo $dossier->affiche_contenu($listefichiers); ?></p>
+  <div class="lead">
+    <?php echo $dossier->affiche_contenu($listefichiers); ?>
+  </div>
+</main>
 
-</main><!-- /.container -->
-
-<div class="modal fade" id="partageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="partageModal" tabindex="-1" aria-labelledby="partageModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nouveau Partage</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div id="chemin" style="font-weight:800;"></div>
-        <br>
-        <form action="/actions/set_partage" method="post">
-          <!-- hidden -->
+      <form action="/actions/set_partage" method="post">
+        <div class="modal-header">
+          <h5 class="modal-title" id="partageModalLabel">Nouveau Partage</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-dark">
+          <div id="chemin" class="fw-bold mb-3"></div>
+
           <input type="hidden" name="chemin" id="hiddenchemin">
           <input type="hidden" name="chemin_retour" id="hiddenretour">
           <input type="hidden" name="type_partage" id="hiddentype">
-          <!-- hidden -->
-          <div class="form-group">
-            <label for="email" class="col-form-label">Email :&nbsp;</label>
-            <input id="ChampEmail" type="email" class="form-control form-control-sm" id="email" name="email" required size="30">
+
+          <div class="mb-3">
+            <label for="ChampEmail" class="form-label">Email :</label>
+            <input id="ChampEmail" type="email" class="form-control" name="email" required>
+            <div id="AvertissementDejaPartage" class="form-text text-danger fw-bold" style="display:none">
+              Partage déjà fait avec cet email, utiliser le bouton de renvoi dans "Partages".
+            </div>
           </div>
-          <div id="AvertissementDejaPartage" style="color:red;font-weight:bold;display:none">Partage déjà fait avec cet email, utiliser le bouton de renvoi dans "Partages"</div>
 
           <div id="SelecteursTypes">
-
-            <div class="form-group">
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="email_normal" name="email_type" class="custom-control-input" value="1" checked>
-                <label class="custom-control-label" for="email_normal">Normal</label>
+            <label class="form-label d-block">Type d'email</label>
+            <div class="mb-3">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="email_type" id="email_normal" value="1" checked>
+                <label class="form-check-label" for="email_normal">Normal</label>
               </div>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="email_alternatif" name="email_type" class="custom-control-input" value="2">
-                <label class="custom-control-label" for="email_alternatif">Alternatif</label>
-              </div>
-            </div>
-            <h5>Délai d'envoi</h5>
-            <div class="form-group">
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="delai_attente" name="immediat" class="custom-control-input" value="0" checked>
-                <label class="custom-control-label" for="delai_attente">File d'attente</label>
-              </div>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="delai_immediat" name="immediat" class="custom-control-input" value="1">
-                <label class="custom-control-label" for="delai_immediat">Immédiat</label>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="email_type" id="email_alternatif" value="2">
+                <label class="form-check-label" for="email_alternatif">Alternatif</label>
               </div>
             </div>
 
+            <h5 class="mt-4">Délai d'envoi</h5>
+            <div class="mb-3">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="immediat" id="delai_attente" value="0" checked>
+                <label class="form-check-label" for="delai_attente">File d'attente</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="immediat" id="delai_immediat" value="1">
+                <label class="form-check-label" for="delai_immediat">Immédiat</label>
+              </div>
+            </div>
           </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button id="BoutonPartager" type="submit" class="btn btn-success">Partager</button>
-      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button id="BoutonPartager" type="submit" class="btn btn-success">Partager</button>
+        </div>
       </form>
     </div>
   </div>
 </div>
 
-
-
-<!-- Modal TAG -->
-<div class="modal fade" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="tagModal" tabindex="-1" aria-labelledby="tagModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div id="chemin" style="font-weight:800;"></div>
-        <br>
-        <form action="/actions/setTag" method="post">
-          <!-- hidden -->
+      <form action="/actions/setTag" method="post">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tagModalLabel">Gestion des Tags</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-dark">
           <input type="hidden" name="nom_dossier" id="hiddenNomDossier">
           <input type="hidden" name="retour" id="hiddenCheminRetour">
           <input type="hidden" name="type" id="hiddenTypeFichier">
           <input type="hidden" name="tag" id="hiddenTagLabel">
-          <!-- hidden -->
-          <div class="form-group">
-            <label for="input_tag" class="col-form-label">Tag(s) :&nbsp;</label>
+
+          <div class="mb-3">
+            <label for="input_tag" class="form-label text-dark">Tag(s) :</label>
             <input id="input_tag" type="text" name="liste_tag" class="form-control">
           </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="submit" id="enregistrer_tag" class="btn btn-success">Enregistrer</button>
-      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" id="enregistrer_tag" class="btn btn-success">Enregistrer</button>
+        </div>
       </form>
     </div>
   </div>

@@ -61,206 +61,141 @@ class dossier
 
   function affiche_contenu($listefichiers)
   {
-
     global $data;
     global $chemin;
     global $params;
     global $uri;
     global $dossier;
     global $tag;
+    global $partage;
 
     $retour = '';
     $compteur_images = 0;
     $items = '';
-    $nb_sous_dossiers = 0;
-    $id_btn_tag = 1; //identifiant bouton de tag
-    #en cas de retour à la racine on retire le trailing slash
-    if ($chemin == '//') {
-      $chemin = '/';
+    $nb_sous_dossiers_total = 0;
+    $id_btn_tag = 1;
+
+    // Nettoyage et sécurité du chemin
+    if ($chemin == '//' || $chemin == '') {
+      $chemin = '';
+    } else {
+      // On s'assure que le chemin finit par un slash s'il n'est pas vide
+      $chemin = rtrim($chemin, '/') . '/';
     }
 
     foreach ($listefichiers as $ligne) {
-
-      global $partage;
+      // On ignore les dossiers système et fichiers cachés
+      if ($ligne == '..' || $ligne == '.' || strpos($ligne, '.') === 0) {
+        continue;
+      }
 
       $type = $this->infos_fichier($data, $chemin, $ligne);
 
-      //
-      //TYPE DOSSIER
-      //
-
+      // --- CAS : DOSSIER (DIR) OU LIEN SYMBOLIQUE (LINK) ---
       if ($type[0] == 'dir' || $type[0] == 'link') {
-        #différentes conditions pour le type $dossier
-        if ($ligne != '..' && $ligne != '.') {
-          //calcul du nombre de sous dossiers
-          $nb_sous_dossiers = $this->nb_sous_dossiers($data . $chemin . $ligne);
-          //calcul du nombre de Photos
-          $nb_photos = $this->detect_photos($data . $chemin . $ligne);
 
-          if ($nb_photos >= 2) { //dossier de photos
+        $nb_sous_dossiers = $this->nb_sous_dossiers($data . $chemin . $ligne);
+        $nb_photos = $this->detect_photos($data . $chemin . $ligne);
+        $nb_partages_count = $partage->nb_partages($chemin . $ligne);
 
-            $items .= '<li class="list-group-item">';
-            $items .= '<div class="d-flex justify-content-between">'; //ligne justifiée
+        // Couleur du badge de partage
+        $badge_color = ($nb_partages_count >= 1) ? "text-bg-success" : "text-bg-warning";
 
-            $items .= '<div class="col-6">'; //une div pour la justification
-            $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="/admin/dossiers/' . $chemin . $ligne . '/">' . $ligne . '</a>';
-            $items .= '<button type="button" style="margin-left: 10px; font-size:10px;" class="btn btn-light btn-sm clicktag" data-id_btn_tag="' . $id_btn_tag . '" data-nom_dossier="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-type="fichier" data-toggle="modal" data-target="#tagModal">#</button>';
+        $items .= '<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3 border-bottom">';
 
-            // Label pour afficher les tags
-            $items .= '<label for="text" style="margin-left: 10px;" data-space="non" data-chemin="' . $chemin . $ligne . '" class="col-form-label label_tag" ><small id="id_small_tag_' . $id_btn_tag . '">';
-            foreach ($tag->get_tag_from_chemin($chemin . $ligne) as $tags) {
-              $items .= $tags['nom_tag'] . ' ';
-            }
-            $items .= '</small></label>';
+        // GAUCHE : Icône + Lien + Tags
+        $items .= '<div class="d-flex align-items-center flex-grow-1 overflow-hidden">';
+        $items .= '<i class="fas fa-folder text-warning fa-lg me-3"></i>';
+        $items .= '<div class="text-truncate">';
+        $items .= '<a href="/admin/dossiers/' . $chemin . $ligne . '/" class="text-decoration-none text-dark fw-bold h6 mb-0">' . $ligne . '</a>';
 
-            $items .= '</div>';
-
-
-            if ($partage->nb_partages($chemin . $ligne) >= 1) {
-              $badge_color = "badge-success";
-            } else {
-              $badge_color = "badge-warning";
-            }
-
-            //bouton de partage des photos
-
-            $items .= '<button type="button" class="btn btn-success btn-sm clickpartage" data-typepartage="photos" data-chemin="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-toggle="modal" data-target="#partageModal" >
-                <i class="fas fa-camera"></i>
-                &nbsp;Partager&nbsp;&nbsp;
-                <span class="badge ' . $badge_color . '">' . $partage->nb_partages($chemin . $ligne) . '</span>
-                </button>';
-
-            $id_btn_tag++;
-          } else { //juste un dossier
-
-            $items .= '<li class="list-group-item">';
-            $items .= '<div class="d-flex justify-content-between">'; //ligne justifiée
-
-            $items .= '<div class="col-6">'; //une div pour la justification
-            $items .= '<i class="fas fa-folder"></i>&nbsp;<a href="/admin/dossiers/' . $chemin . $ligne . '/">' . $ligne . '</a>';
-            $items .= '<button type="button" style="margin-left: 10px; font-size:10px;" class="btn btn-light btn-sm clicktag" data-id_btn_tag="' . $id_btn_tag . '"  data-nom_dossier="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-type="fichier" data-toggle="modal" data-target="#tagModal">#</button>';
-
-            // Label pour afficher les tags
-            $items .= '<label for="text" style="margin-left: 10px;" data-chemin="' . $chemin . $ligne . '" class="col-form-label label_tag"><small id="id_small_tag_' . $id_btn_tag . '">';
-            foreach ($tag->get_tag_from_chemin($chemin . $ligne) as $tags) {
-              $items .= $tags['nom_tag'] . ' ';
-            }
-            $items .= '</small></label>';
-
-
-            $items .= '</div>';
-            $items .= '<div>'; //une div pour la justification
-            $items .= '</div>';
-
-            if ($partage->nb_partages($chemin . $ligne) >= 1) {
-              $badge_color = "badge-success";
-            } else {
-              $badge_color = "badge-warning";
-            }
-
-            //bouton de partage des dossiers zip
-            if ($nb_sous_dossiers <= 4 && $params['partage_dossier'] == true) {
-              $items .= '<button type="button" class="btn btn-danger btn-sm  clickpartage"  data-typepartage="rushs" data-chemin="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-toggle="modal" data-target="#partageModal">';
-              $items .= '<i class="fas fa-folder-plus"></i>';
-              $items .= '&nbsp;Partager&nbsp;&nbsp;';
-              $items .= '<span class="badge ' . $badge_color . '">' . $partage->nb_partages($chemin . $ligne) . '</span>';
-              $items .= ' </button>';
-            } else { // un dossier vide ou avec autre chose. regarder s'il s'appelle "rush" ou "rushs"
-              if (strtolower($ligne) == "rush" || strtolower($ligne) == "rushs") {       
-                $items .= '<div>';
-                //bouton RM NP
-                $items .= '<a href="/admin/rmnp/' . $chemin . $ligne . '" class="btn btn-sm btn-warning"><i class="fa-solid fa-search-dollar"></i></a>';  //captures photos
-                 //bouton captures photos
-                $items .= '&nbsp;<a href="/admin/captures/' . $chemin . $ligne . '" class="btn btn-sm btn-info"><i class="fa-solid fa-images"></i></a>';  //captures photos
-                $items .= '&nbsp;<button type="button" class="btn btn-danger btn-sm  clickpartage"  data-typepartage="rushs" data-chemin="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-toggle="modal" data-target="#partageModal">';
-                $items .= '<i class="fa-regular fa-window-restore"></i>';
-                $items .= '&nbsp;Partager&nbsp;&nbsp;';
-                $items .= ' </button>';
-                $items .= '</div>';
-              } else {
-                $items .= '<div>'; //une div pour remplacer le vide
-                $items .= '</div>';
-              }
-            }
-
-            $id_btn_tag++;
-          }
-
-          $items .= '</div>'; //row
-          $items .= '</li>';
-        } //fin if $ligne != '..' && $ligne != '.'
-
-      } //fin type dossier
-      elseif ($type[1] == 'mp4' || $type[1] == 'MP4' || $type[1] == 'mkv' || $type[1] == 'MKV' || $type[1] == 'avi' || $type[1] == 'AVI') {
-
-        //
-        //type VIDEO
-        //
-
-
-
-        //echo $chemin.$ligne.'<br>';
-        //si partage vidéo
-        $items .= '<li class="list-group-item">';
-        $items .= '<div class="d-flex justify-content-between">'; //ligne
-
-        $items .= '<div class="col-6">';
-        $items .= '<i class="fas fa-video"></i>&nbsp;<a href="/admin/video/' . $chemin . $ligne . '">' . $ligne . '</a>';
-        $items .= '<button type="button" id="btn_tag" style="margin-left: 10px; font-size:10px;" class="btn btn-light btn-sm clicktag"  data-id_btn_tag="' . $id_btn_tag . '" data-nom_dossier="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-type="fichier" data-toggle="modal" data-target="#tagModal">#</button>';
-
-        // Label pour afficher les tags
-        $items .= '<label for="text" style="margin-left: 10px;" data-space="non" data-chemin="' . $chemin . $ligne . '" class="col-form-label label_tag"><small id="id_small_tag_' . $id_btn_tag . '">';
+        // Affichage des tags (en dessous ou à côté sur mobile)
+        $items .= '<div class="d-flex align-items-center mt-1">';
+        $items .= '<button type="button" class="btn btn-outline-secondary btn-sm me-2 py-0 px-1 clicktag" style="font-size:10px;" data-id_btn_tag="' . $id_btn_tag . '" data-nom_dossier="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-type="fichier" data-bs-toggle="modal" data-bs-target="#tagModal">#</button>';
+        $items .= '<small id="id_small_tag_' . $id_btn_tag . '" class="text-muted label_tag" data-chemin="' . $chemin . $ligne . '">';
         foreach ($tag->get_tag_from_chemin($chemin . $ligne) as $tags) {
-          $items .= $tags['nom_tag'] . ' ';
+          $items .= '<span class="badge border text-dark fw-normal me-1" style="font-size:11px;">' . htmlspecialchars($tags['nom_tag']) . '</span>';
         }
-        $items .= '</small></label>';
+        $items .= '</small></div></div></div>';
 
-        $items .= '</div>';
+        // DROITE : Boutons d'action
+        $items .= '<div class="ms-3 d-flex gap-2">';
 
-        if ($partage->nb_partages($chemin . $ligne) >= 1) {
-          $badge_color = "badge-success";
+        if ($nb_photos >= 2) {
+          // Dossier Photo détecté
+          $items .= '<button type="button" class="btn btn-sm btn-success rounded-pill px-3 clickpartage" data-typepartage="photos" data-chemin="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-bs-toggle="modal" data-bs-target="#partageModal">';
+          $items .= '<i class="fas fa-camera me-1"></i> Partager <span class="badge rounded-pill bg-white text-dark ms-1">' . $nb_partages_count . '</span>';
+          $items .= '</button>';
         } else {
-          $badge_color = "badge-warning";
+          // Dossier Rush ou Standard
+          $items .= '<div class="btn-group">';
+          if (strtolower($ligne) == "rush" || strtolower($ligne) == "rushs") {
+           
+            $items .= '<a href="/admin/captures/' . $chemin . $ligne . '" class="btn btn-sm btn-outline-secondary" title="Captures"><i class="fa-solid fa-images"></i></a>';
+          }
+          $items .= '<button type="button" class="btn btn-sm btn-danger px-3 clickpartage" data-typepartage="rushs" data-chemin="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-bs-toggle="modal" data-bs-target="#partageModal">';
+          $items .= '<i class="fas fa-share-nodes me-1"></i> Partager <span class="badge rounded-pill bg-white text-dark ms-1">' . $nb_partages_count . '</span>';
+          $items .= '</button>';
+          $items .= '</div>';
         }
+        $items .= '</div>';
+        $items .= '</li>';
 
+        $id_btn_tag++;
+      }
 
-        $items .= '<span><button type="button" class="btn btn-primary btn-sm clickpartage" data-typepartage="video" data-chemin="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-toggle="modal" data-target="#partageModal">
-        <i class="fas fa-video"></i>&nbsp;Partager&nbsp;&nbsp;<span class="badge ' . $badge_color . '">' . $partage->nb_partages($chemin . $ligne) . '</span></button>';
+      // --- CAS : VIDÉO (MP4, MKV, AVI) ---
+      elseif (in_array(strtolower($type[1] ?? ''), ['mp4', 'mkv', 'avi'])) {
+        $nb_partages_count = $partage->nb_partages($chemin . $ligne);
 
+        $items .= '<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3 border-bottom">';
+        $items .= '<div class="d-flex align-items-center flex-grow-1 overflow-hidden">';
+        $items .= '<i class="fas fa-play-circle text-primary fa-lg me-3"></i>';
+        $items .= '<div class="text-truncate">';
+        $items .= '<a href="/admin/video/' . $chemin . $ligne . '" class="text-decoration-none text-dark fw-bold h6 mb-0">' . $ligne . '</a>';
+        $items .= '<div class="mt-1">';
+        $items .= '<button type="button" class="btn btn-outline-secondary btn-sm me-2 py-0 px-1 clicktag" style="font-size:10px;" data-id_btn_tag="' . $id_btn_tag . '" data-nom_dossier="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-type="fichier" data-bs-toggle="modal" data-bs-target="#tagModal">#</button>';
+        $items .= '<small id="id_small_tag_' . $id_btn_tag . '" class="text-muted">';
+        foreach ($tag->get_tag_from_chemin($chemin . $ligne) as $tags) {
+          $items .= '<span class="badge border text-dark fw-normal me-1">' . htmlspecialchars($tags['nom_tag']) . '</span>';
+        }
+        $items .= '</small></div></div></div>';
 
+        $items .= '<button type="button" class="btn btn-sm btn-primary rounded-pill px-3 clickpartage" data-typepartage="video" data-chemin="' . $chemin . $ligne . '" data-retour="' . $chemin . '" data-bs-toggle="modal" data-bs-target="#partageModal">';
+        $items .= '<i class="fas fa-video me-1"></i> Partager <span class="badge rounded-pill bg-white text-dark ms-1">' . $nb_partages_count . '</span>';
+        $items .= '</button>';
 
         $items .= '</li>';
         $id_btn_tag++;
-      } elseif ($type[1] == 'jpg' || $type[1] == 'JPG') {
-        $compteur_images++; //si photo on compte mais on affiche pas
-      } elseif ($ligne != '.DS_Store' && $ligne != '._.DS_Store' && $ligne != 'Thumbs.db') {
-        //autre fichier
-        $items .= '<li class="list-group-item">';
-        $items .= '<div class="d-flex justify-content-between">'; //ligne
-        $items .= '<div class="col-6">'; //colonne droite
-        $items .= '<i class="fas fa-file"></i>&nbsp;' . $ligne;
-        $items .= '&nbsp;<a href="/data/' . $chemin . $ligne . '">‌‌<i class="fas fa-file-download"></i></a>';
-        $items .= '</div>';
-        $items .= '</div>';
-        $items .= '</li>';
+      }
+
+      // --- CAS : COMPTEUR PHOTOS (Pour déclencher la galerie) ---
+      elseif (isset($type[1]) && strtolower($type[1]) == 'jpg') {
+        $compteur_images++;
       }
     }
-    // 
-    // FIN DU  "for each" (on a fini d'itérer les fichiers contenu dans le chemin en cours)
-    //
 
-    if ($compteur_images > 2 && $nb_sous_dossiers == 0) {
-      //mode dossier photos, on va afficher le bouton de téléchargement et le diaporama
-      include('ctrl/photos.php');
+    // --- CONSTRUCTION DU RETOUR ---
+
+    // 1. Liste des fichiers/dossiers
+    if ($items != '') {
+      $retour .= '<div class="bg-white rounded-4 shadow-sm border overflow-hidden">';
+      $retour .= '<ul class="list-group list-group-flush">';
+      $retour .= $items;
+      $retour .= '</ul></div>';
     }
 
+    // 2. Si c'est un dossier de photos (Album), on affiche un appel à l'action élégant
+    if ($compteur_images > 2) {
+      $retour .= '<div class="mt-4 p-4 text-center bg-dark text-white rounded-4 shadow-lg">';
+      $retour .= '<i class="fas fa-images fa-3x mb-3 text-warning"></i>';
+      $retour .= '<h4>Cet emplacement contient ' . $compteur_images . ' photos</h4>';
+      $retour .= '<p class="text-secondary">Vous pouvez visionner l\'album complet en mode galerie.</p>';
+      $retour .= '<a href="/admin/photos/' . rtrim($chemin, '/') . '" class="btn btn-warning fw-bold px-4 py-2 mt-2">';
+      $retour .= '<i class="fas fa-eye me-2"></i> Visionner l\'album';
+      $retour .= '</a></div>';
+    }
 
-    //rendu de la liste
-    $retour .= '<ul class="list-group list-group-flush">';
-    $retour .= $items;
-    $retour .= '</ul>';
     return $retour;
-  } //fin affiche contenu
-
-
+  }
 }

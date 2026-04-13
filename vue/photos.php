@@ -1,129 +1,192 @@
 <?php
 if (!isset($_SESSION['login'])) {
-  echo $params['analytics']; //analytics seulement sur la vue client 
+  echo $params['analytics']; 
+}
+
+/**
+ * LOGIQUE DE NAVIGATION
+ */
+if ($mode != 'client') {
+    $segments = $uri;
+    $retour_segments = $segments;
+    array_pop($retour_segments);
+    foreach ($retour_segments as $key => $value) {
+        if ($value == 'photos') $retour_segments[$key] = 'dossiers';
+    }
+    $url_retour = '/' . implode('/', $retour_segments);
+    $breadcrumb_items = array_filter($segments, function($v) { return $v !== 'photos'; });
+} else {
+    $url_retour = '/cle/' . ($uri[1] ?? '');
+    $breadcrumb_items = ['Abeille', 'Album Photos'];
 }
 ?>
 
-<link href="/includes/css/photos.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/includes/js/slick/slick-theme.css" />
-<link rel="stylesheet" type="text/css" href="/includes/js/slick/slick.css" />
-<script type="text/javascript" src="/includes/js/slick/slick.min.js"></script>
+<style>
+    :root {
+        --glass: rgba(255, 255, 255, 0.03);
+        --glass-border: rgba(255, 255, 255, 0.1);
+    }
 
+    /* Grille de photos moderne */
+    .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px 0;
+    }
 
-<!-- si c'est un client ajouter la div  sinon l'enlever -->
-<?php if ($mode == 'client') {
-  echo '<div class="container">';
-}
-?>
+    .photo-item {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        aspect-ratio: 3/2;
+        cursor: pointer;
+        background: #1a1a1a;
+        transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
 
-<h1 style="margin-top: 10px;  display:flex; justify-content:center; font-size:2rem;">Vos Photos</h1>
+    .photo-item:hover {
+        transform: scale(1.02);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
 
-<div class="text-center">
+    .photo-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.3s;
+    }
 
-  <div class="d-flex justify-content-center">
-    <div data-chemin="<?php echo $chemin?>" data-data="<?php echo $data ?>" class="slider-photo" style="width: 75%;">
+    /* Barre d'actions flottante */
+    .floating-header {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 15px 25px;
+        border: 1px solid rgba(0,0,0,0.05);
+        position: sticky;
+        top: 20px;
+        z-index: 1000;
+        margin-bottom: 40px;
+    }
 
-      <?php
+    .btn-dl-modern {
+        background: #000;
+        color: #fff;
+        border-radius: 12px;
+        padding: 10px 24px;
+        font-weight: 700;
+        transition: all 0.3s;
+        border: none;
+    }
 
-      $folder = $partage->get_partage($uri[2]);
+    .btn-dl-modern:hover {
+        background: #333;
+        transform: translateY(-2px);
+        color: #fff;
+    }
 
-      // $chemin = $folder['chemin'];
+    /* Overlay de visualisation plein écran (Remplace Slick) */
+    .fullscreen-viewer {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.95);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+    }
 
-      $listefichiers = $dossier->contenu_dossier($chemin, $data);
+    .viewer-content img {
+        max-height: 90vh;
+        max-width: 90vw;
+        border-radius: 8px;
+        box-shadow: 0 0 50px rgba(0,0,0,1);
+    }
 
-      foreach ($listefichiers as $ligne) {
-        $url = "/data/" . $chemin . "/" . $ligne;
-        echo '<img class="img-fluid" data-lazy="' . $url . '">';
-      }
+    .close-viewer {
+        position: absolute;
+        top: 30px; right: 30px;
+        color: #fff; font-size: 2rem; cursor: pointer;
+    }
+</style>
 
-      ?>
-
-    </div>
-  </div>
-
-  <?php if ($mode == 'client') {
-    echo '</div>';
-  }
-  ?>
-
-  <div style="margin-top: 20px;">
-
-
-    <div>
-      <p><strong>Nombre de photos</strong> : <?php echo $nb; ?> </p>
-      <p><strong>Taille</strong> : <?php echo number_format($taille / 1048576, 2); ?> Mo</p>
-
-      <div style="display: flex; justify-content:center;">
-
-        <?php
-        if ($mode == 'client') {
-        ?>
-          <a class="btn btn-primary" style="font-size:14;" id="bouton-dl" data-taille="<?php echo $taille ?>" data-chemin="<?php echo $chemin; ?>" data-email="<?php echo $email; ?>" data-action="dl_photos" href="/cle/<?php echo $uri[1] ?>/<?php echo $id_partage; ?>/dl/<?php echo $taille?>">
-            <i class="fas fa-download"></i> Télécharger toutes les photos
-          </a>
-        <?php
-        } else { // mode admin
-        ?>
-          <a class="btn btn-primary" style="font-size:14;" href="/actions/dlPhotos/<?php echo $chemin; ?>">
-            <i class="fas fa-download"></i> Télécharger toutes les photos
-          </a>
-        <?php
-        }
-        ?>
-      </div>
-      <div style="display: flex; justify-content:center;">
-        <small>Vos photos vont être rassemblées dans un dossier zip et le Téléchargement commencera</small>
-      </div>
-    </div>
-
-  </div>
-
-  <div>
-    <?php if (isset($uri[1])) {
-      if ($mode == 'client') {
-        echo '<a class="btn btn-success" href="/cle/' . $uri[1] . '" style="margin-top:20px;"><i class="fas fa-arrow-left">&nbsp;</i>retour</a>';
-      } else {
-
-        $slice = array_slice($uri, 0, count($uri) - 1);
-
-        $url = '';
-        foreach ($slice as $u) {
-          $url .= $u . '/';
-        }
-    ?>
-        <div style="display:flex;justify-content:flex-start; width:79.16px;">
-          <a class="btn btn-success" href="/<?php echo $url; ?>" style="margin-top:20px;">
-            <i class="fas fa-arrow-left">&nbsp;</i>retour
-          </a>
+<div class="container-fluid px-md-5 py-4">
+    
+    <div class="floating-header shadow-sm d-flex justify-content-between align-items-center">
+        <div>
+            <nav aria-label="breadcrumb" class="d-none d-md-block">
+                <ol class="breadcrumb mb-0">
+                    <?php foreach ($breadcrumb_items as $index => $item): ?>
+                        <li class="breadcrumb-item <?php echo ($index === array_key_last($breadcrumb_items)) ? 'active fw-bold' : ''; ?>">
+                            <?php echo htmlspecialchars(urldecode($item)); ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+            </nav>
+            <h4 class="mb-0 fw-black mt-1">Album HD <span class="badge bg-light text-dark border ms-2" style="font-size: 0.8rem; vertical-align: middle;"><?php echo $nb; ?> clichés</span></h4>
         </div>
-    <?php
-      }
-    } ?>
 
+        <div class="d-flex gap-3 align-items-center">
+            <a href="<?php echo $url_retour; ?>" class="text-dark text-decoration-none fw-bold me-3 d-none d-sm-block">
+                <i class="fas fa-times me-2"></i> Fermer
+            </a>
+            <?php if ($mode == 'client'): ?>
+                <a id="bouton-dl" class="btn-dl-modern" 
+                   data-taille="<?php echo $taille ?>" data-chemin="<?php echo $chemin; ?>" 
+                   data-email="<?php echo $email; ?>" data-action="dl_photos" 
+                   href="/cle/<?php echo $uri[1] ?>/<?php echo $id_partage; ?>/dl/<?php echo $taille?>">
+                    <i class="fas fa-arrow-down me-2"></i> Télécharger tout
+                </a>
+            <?php else: ?>
+                <a class="btn-dl-modern" href="/actions/dlPhotos/<?php echo $chemin; ?>">
+                    <i class="fas fa-shield-halved me-2"></i> ZIP Admin
+                </a>
+            <?php endif; ?>
+        </div>
+    </div>
 
-  </div>
+    <div class="photo-grid">
+        <?php
+        $listefichiers = $dossier->contenu_dossier($chemin, $data);
+        foreach ($listefichiers as $index => $ligne) {
+            $url = "/data/" . $chemin . "/" . $ligne;
+            echo '
+            <div class="photo-item" onclick="openViewer(\''.$url.'\')">
+                <img src="'.$url.'" loading="lazy" alt="Photo Abeille">
+            </div>';
+        }
+        ?>
+    </div>
 
+</div>
 
-</div> <!--container -->
-
-
+<div id="viewer" class="fullscreen-viewer">
+    <span class="close-viewer" onclick="closeViewer()">&times;</span>
+    <div class="viewer-content">
+        <img id="viewer-img" src="" alt="Zoom Photo">
+    </div>
+</div>
 
 <script>
-  $("#bouton-dl").click(function() {
-    $('#bouton-dl').removeClass('btn-success');
-    $('#bouton-dl').addClass('btn-warning');
-    $('#bouton-dl').text('Création du fichier...');
-  })
+    function openViewer(url) {
+        document.getElementById('viewer-img').src = url;
+        document.getElementById('viewer').style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Bloque le scroll
+    }
 
+    function closeViewer() {
+        document.getElementById('viewer').style.display = 'none';
+        document.body.style.overflow = 'auto'; // Libère le scroll
+    }
 
+    // Fermeture avec la touche Échap
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "Escape") closeViewer();
+    });
 
-  $('.slider-photo').slick({
-    lazyLoad: 'ondemand',
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    fade: true,
-    dots: false,
-    speed: 400,
-
-  });
+    // Animation au téléchargement
+    $("#bouton-dl").click(function() {
+        $(this).html('<i class="fas fa-circle-notch fa-spin me-2"></i> Création du ZIP...');
+    });
 </script>

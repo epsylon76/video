@@ -1,214 +1,252 @@
-<div class="container" style="margin-top:30px;">
-  <h1>Paramètres</h1>
+<div class="container-fluid px-md-5 py-4">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-cog me-2"></i>Paramètres Système</h1>
+    <div>
+      <a class="btn btn-primary shadow-sm rounded-pill" href="/admin/parametres/users/">
+        <i class="fas fa-users-cog me-1"></i> Gestion Utilisateurs
+      </a>
+    </div>
+  </div>
 
-  <a class="btn btn-info" href="/admin/parametres/users/">Gestion Utilisateurs</a>
+  <div class="row mb-4">
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Permissions Dossiers</div>
+              <div class="small font-weight-bold">
+                Data: <?php echo is_writable('data') ? '<span class="text-success">OK</span>' : '<span class="text-danger">NOK</span>'; ?> |
+                Zip: <?php echo is_writable('zip') ? '<span class="text-success">OK</span>' : '<span class="text-danger">NOK</span>'; ?>
+              </div>
+            </div>
+            <div class="col-auto"><i class="fas fa-folder-open fa-2x text-gray-300"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-info shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Base de données</div>
+              <a href="/config/adminsql.php?db=abeille&username=abeille&server=localhost" class="btn btn-sm btn-outline-info">Accès SQL Admin</a>
+            </div>
+            <div class="col-auto"><i class="fas fa-database fa-2x text-gray-300"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <h2>Checks permissions</h2>
-  <h6>Dossier data : <?php echo is_writable('data') ? 'OK' : 'NOK'; ?></h6>
-  <h6>Dossier zip : <?php echo is_writable('zip') ? 'OK' : 'NOK'; ?></h6>
-  <h6>Dossier img : <?php echo is_writable('vue/img') ? 'OK' : 'NOK'; ?></h6>
-  <h6>Executable captures.sh : <?php echo is_executable('scripts/captures.sh') ? 'OK' : 'NOK'; ?></h6>
-
+  <ul class="nav nav-pills mb-4 bg-white p-2 rounded shadow-sm" id="configTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="core-tab" data-bs-toggle="pill" data-bs-target="#core" type="button">⚙️ Core & Design</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="content-tab" data-bs-toggle="pill" data-bs-target="#content" type="button">📝 Contenus & Accueil</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="email-tab" data-bs-toggle="pill" data-bs-target="#email" type="button">📧 Emails Configuration</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="medias-tab" data-bs-toggle="pill" data-bs-target="#medias" type="button">🖼️ Médias & Uploads</button>
+    </li>
+  </ul>
 
   <form action="/admin/parametres/" method="post">
-    <input type="hidden" name="depart_file" value="<?php echo $params['depart_file']; ?>" />
-    <h2 class="text-center">Core</h2>
-    <h5>Dossier data</h5>
-    <input type="text" name="dossier_data" size="70" value="<?php echo $params['dossier_data']; ?>"></input>
+    <div class="tab-content" id="configTabsContent">
 
-    <h5>Url site</h5>
-    <input type="text" name="url_domaine" size="100" value="<?php echo $params['url_domaine']; ?>"></input>
+      <div class="tab-pane fade show active" id="core" role="tabpanel">
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-header bg-white py-3">
+            <h5>Configuration Serveur</h5>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Dossier Data (chemin absolu)</label>
+                <input type="text" name="dossier_data" class="form-control" value="<?php echo $params['dossier_data']; ?>">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-bold">URL du domaine</label>
+                <input type="text" name="url_domaine" class="form-control" value="<?php echo $params['url_domaine']; ?>">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label fw-bold d-block">Couleur thème principal</label>
+                <input type="color" name="couleur_fond" class="form-control form-control-color w-100" value="<?php echo $params['couleur_fond']; ?>" style="height: 45px;">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label fw-bold d-block">Partage Dossier Zip</label>
+                <div class="btn-group w-100" role="group">
+                  <input type="radio" class="btn-check" name="partage_dossier" id="zip_on" value="1" <?php echo $params['partage_dossier'] ? 'checked' : ''; ?>>
+                  <label class="btn btn-outline-success" for="zip_on">Activer</label>
+                  <input type="radio" class="btn-check" name="partage_dossier" id="zip_off" value="0" <?php echo !$params['partage_dossier'] ? 'checked' : ''; ?>>
+                  <label class="btn btn-outline-danger" for="zip_off">Désactiver</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <hr>
-    <h2 class="text-center">Design</h2>
-    <h5>couleur fond</h5>
-    <input type="color" name="couleur_fond" style="height:50px; width:50px; border:3px solid black; border-radius:10px;" value="<?php echo $params['couleur_fond']; ?>"></input>
+      <div class="tab-pane fade" id="content" role="tabpanel">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <div class="mb-4">
+              <label class="form-label fw-bold">Titre du site (Balise Title)</label>
+              <input type="text" name="page_titre" class="form-control" value="<?php echo $params['page_titre']; ?>">
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-bold">Texte d'accueil (Landing Page)</label>
+              <textarea name="accueil_texte" class="ck-editor-instance" id="accueil_texte"><?php echo $params['accueil_texte']; ?></textarea>
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-bold">Texte d'introduction (Espace Client)</label>
+              <textarea name="texte_espace" class="ck-editor-instance" id="texte_espace"><?php echo $params['texte_espace']; ?></textarea>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="form-label fw-bold"><i class="fab fa-facebook text-primary me-1"></i> Lien Facebook</label>
+                <input type="text" name="partage_fb" class="form-control" value="<?php echo $params['partage_fb']; ?>" placeholder="Laisser vide pour désactiver">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-bold"><i class="fab fa-twitter text-info me-1"></i> Lien Twitter</label>
+                <input type="text" name="partage_twitter" class="form-control" value="<?php echo $params['partage_twitter']; ?>" placeholder="Laisser vide pour désactiver">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <hr>
-    <h2 class="text-center">Accueil</h2>
-    <h5>Titre Site</h5>
-    <input type="text" name="page_titre" value="<?php echo $params['page_titre']; ?>"></input>
+      <div class="tab-pane fade" id="email" role="tabpanel">
+        <div class="accordion shadow-sm" id="accordionEmail">
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#emailStandard">Email Standard</button></h2>
+            <div id="emailStandard" class="accordion-collapse collapse show" data-bs-parent="#accordionEmail">
+              <div class="accordion-body">
+                <div class="mb-3">
+                  <label class="form-label fw-bold">Objet de l'email</label>
+                  <input type="text" name="email_sujet" class="form-control" value="<?php echo $params['email_sujet']; ?>">
+                </div>
+                <textarea name="email_corps" class="ck-editor-instance"><?php echo $params['email_corps']; ?></textarea>
+                <div class="my-3 p-3 bg-light rounded border text-center">
+                  <label class="fw-bold d-block mb-2">Bouton de téléchargement</label>
+                  <input type="text" name="email_texte_bouton" class="form-control w-50 mx-auto" value="<?php echo $params['email_texte_bouton']; ?>">
+                </div>
+                <textarea name="email_corps_2" class="ck-editor-instance"><?php echo $params['email_corps_2']; ?></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item mt-3 shadow-sm border-top">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#emailAlt">Email Alternatif (Relance)</button></h2>
+            <div id="emailAlt" class="accordion-collapse collapse" data-bs-parent="#accordionEmail">
+              <div class="accordion-body">
+                <div class="mb-3">
+                  <label class="form-label fw-bold">Objet Alternatif</label>
+                  <input type="text" name="email_sujet_alt" class="form-control" value="<?php echo $params['email_sujet_alt']; ?>">
+                </div>
+                <textarea name="email_corps_alt" class="ck-editor-instance"><?php echo $params['email_corps_alt']; ?></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <h5>Texte d'accueil</h5>
-    <textarea name="accueil_texte" id="accueil_texte"><?php echo $params['accueil_texte']; ?></textarea>
-
-    <hr>
-    <h2 class="text-center">Espace de Téléchargement</h2>
-
-    <h5>Texte Accueil</h5>
-    <textarea name="texte_espace" id="texte_espace"><?php echo $params['texte_espace']; ?></textarea>
-    <br>
-    <h5>boutons de partage sociaux</h5>
-
-    <p><u>Laisser vide pour désactiver</u></p>
-
-    Facebook : <input type="text" name="partage_fb" value="<?php echo $params['partage_fb']; ?>" style="width:500px;"></input><br>
-    Twitter : <input type="text" name="partage_twitter" value="<?php echo $params['partage_twitter']; ?>" style="width:500px;"></input><br>
-    <br>
-    <h5>Titre invitation autre site</h5>
-    <input type="text" name="titre_invitation" value="<?php echo $params['titre_invitation']; ?>" style="width:500px;"></input>
-    <h5>Lien invitation autre site</h5>
-    https://
-    <input type="text" name="url_invitation" value="<?php echo $params['url_invitation']; ?>" style="width:500px;"></input>
-
-
-    <hr>
-    <h2 class="text-center">Email</h2>
-
-    <h5>Objet Email</h5>
-    <input type="text" name="email_sujet" id="email_sujet" value="<?php echo $params['email_sujet']; ?>" size="100"></input>
-
-    <h5>Paragraphe 1</h5>
-    <textarea name="email_corps" id="email_corps"><?php echo $params['email_corps']; ?></textarea>
-
-    <h5>Texte bouton</h5>
-    <input type="text" name="email_texte_bouton" id="email_texte_bouton" value="<?php echo $params['email_texte_bouton']; ?>" size="30"></input>
-
-    <h5>Paragraphe 2 (après bouton)</h5>
-    <textarea name="email_corps_2" id="email_corps_2"><?php echo $params['email_corps_2']; ?></textarea>
-
-    <h5>Footer</h5>
-    <textarea name="email_footer" id="email_footer"><?php echo $params['email_footer']; ?></textarea>
-
-
-    <hr>
-    <h2 class="text-center">Email Alternatif</h2>
-    <p>Le texte bouton et le footer sont les mêmes que défini au dessus</p>
-
-    <h5>Objet Email Alternatif</h5>
-    <input type="text" name="email_sujet_alt" id="email_sujet_alt" value="<?php echo $params['email_sujet_alt']; ?>" size="100"></input>
-
-    <h5>Paragraphe 1 Email Alternatif</h5>
-    <textarea name="email_corps_alt" id="email_corps_alt"><?php echo $params['email_corps_alt']; ?></textarea>
-
-    <h5>Paragraphe 2 Email Alternatif (après bouton)</h5>
-    <textarea name="email_corps_2_alt" id="email_corps_2_alt"><?php echo $params['email_corps_2_alt']; ?></textarea>
-
-
-    <hr>
-    <h2 class="text-center">Code Tracking analytics</h2>
-    <textarea name="analytics" id="analytics" style="width:100%; height:200px;"><?php echo $params['analytics']; ?></textarea>
-
-    <h3>Activer partage dossier zip</h3>
-
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="partage_dossier" id="inlineRadio1" value="1" <?php if ($params['partage_dossier']) {
-                                                                                                        echo "checked";
-                                                                                                      } ?>>
-      <label class="form-check-label" for="inlineRadio1">activer</label>
+      <div class="tab-pane fade" id="medias" role="tabpanel">
+        <div class="alert alert-info">Poids max autorisé : <strong><?php echo $max_upload ?></strong></div>
+        <div class="row g-4 text-center">
+          <div class="col-md-4">
+            <div class="card h-100 p-3 shadow-sm">
+              <h6>Logo Principal</h6>
+              <div class="bg-dark p-3 rounded mb-3"><img src="/vue/img/logo.png" style="max-height:80px;"></div>
+              <button type="button" class="btn btn-sm btn-outline-primary" onclick="document.getElementById('uploadLogo').click()">Changer logo</button>
+            </div>
+          </div>
+          <div class="col-md-8">
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="partage_dossier" id="inlineRadio2" value="0" <?php if (!$params['partage_dossier']) {
-                                                                                                        echo "checked";
-                                                                                                      } ?>>
-      <label class="form-check-label" for="inlineRadio2">désactiver</label>
-    </div>
-    <br />
-
-    <br><br><br>
-    <input type="submit" class="btn btn-success btn-lg" value="Enregistrer les paramètres" />
-  </form>
-  <br><br><br>
-  <hr>
-  <hr>
-  <br><br><br>
-  <h1 class="text-center">MEDIAS</h1>
-
-  <h3>MAX UPLOAD : <?php echo $max_upload ?></h3>
-
-
-  <h2 class="text-center">Logo principal</h2>
-  <img src="/vue/img/logo.png" id="logo" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px;" />
-
-  <form action="/actions/uploadLogo/" method="post" enctype="multipart/form-data">
-    Selectionnez un logo au <u>format PNG</u>:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Envoyer logo" name="submit">
-  </form>
-
-  <h2 class="text-center">Image Encart invitation (Espace de téléchargement)</h2>
-  <img src="/vue/img/invitation.jpg" id="invitation" style="border: 3px solid black; border-radius:10px; padding:30px; margin:10px; max-width:300px;" />
-
-  <form action="/actions/uploadInvitation/" method="post" enctype="multipart/form-data">
-    Selectionnez une image au <u>format JPG</u> :
-    <input type="file" name="invitation" id="invitation">
-    <input type="submit" value="Envoyer Image" name="submit">
-  </form>
-
-  <h2 class="text-center">Bannière vidéo (Espace de téléchargement)</h2>
-  <?php if (file_exists('vue/img/banniere.mp4')) { ?>
-    <video style="width: 1000px;" loop muted controls autoplay>
-      <source src="/vue/img/banniere.mp4" type="video/mp4" />
-    </video>
-  <?php } ?>
-  <form action="/actions/uploadBanniere/" method="post" enctype="multipart/form-data">
-    Selectionnez une vidéo au <u>format mp4</u> :
-    <input type="file" name="file" id="banniere">
-    <input type="submit" value="Envoyer Vidéo" name="submit">
-  </form>
 
 </div>
 
-<script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
+<div class="sticky-bottom bg-white p-3 mt-5 border-top shadow text-center">
+  <button type="submit" class="btn btn-success btn-lg px-5 rounded-pill shadow-lg">
+    <i class="fas fa-save me-2"></i> Enregistrer tous les paramètres
+  </button>
+</div>
+</form>
 
-<script>
-  ClassicEditor
-    .create(document.querySelector('#email_corps'))
-    .catch(error => {
-      console.error(error);
-    });
-</script>
-
-<script>
-  ClassicEditor
-    .create(document.querySelector('#email_corps_2'))
-    .catch(error => {
-      console.error(error);
-    });
-</script>
-
-<script>
-  ClassicEditor
-    .create(document.querySelector('#email_corps_alt'))
-    .catch(error => {
-      console.error(error);
-    });
-</script>
-
-<script>
-  ClassicEditor
-    .create(document.querySelector('#email_corps_2_alt'))
-    .catch(error => {
-      console.error(error);
-    });
-</script>
-
-<script>
-  ClassicEditor
-    .create(document.querySelector('#email_footer'))
-    .catch(error => {
-      console.error(error);
-    });
-</script>
-
-<script>
-  ClassicEditor
-    .create(document.querySelector('#accueil_texte'))
-    .catch(error => {
-      console.error(error);
-    });
-</script>
-
-<script>
-  ClassicEditor
-    .create(document.querySelector('#texte_espace'))
-    .catch(error => {
-      console.error(error);
-    });
-</script>
+<form id="uploadLogoForm" action="/actions/uploadLogo/" method="post" enctype="multipart/form-data" class="d-none">
+  <input type="file" name="fileToUpload" id="uploadLogo" onchange="this.form.submit()">
+</form>
+</div>
 
 <style>
-  hr {
-    border-top: 4px solid black;
+  body {
+    background-color: #f4f7f6;
+  }
+
+  .card {
+    border-radius: 12px;
+  }
+
+  .nav-pills .nav-link {
+    color: #555;
+    font-weight: 500;
+  }
+
+  .nav-pills .nav-link.active {
+    background-color: var(--bs-primary);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .ck-editor__editable {
+    min-height: 200px;
+  }
+
+  .sticky-bottom {
+    z-index: 1000;
+  }
+
+  .border-left-primary {
+    border-left: 0.25rem solid #4e73df !important;
+  }
+
+  .border-left-info {
+    border-left: 0.25rem solid #36b9cc !important;
   }
 </style>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Initialise tous les éditeurs d'un coup
+    const editors = document.querySelectorAll('.ck-editor-instance');
+    editors.forEach(editor => {
+      ClassicEditor
+        .create(editor, {
+          toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo']
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    });
+
+    // Gestion de l'onglet actif après rechargement (facultatif)
+    const activeTab = localStorage.getItem('activeTab');
+    if (activeTab) {
+      const tabTrigger = new bootstrap.Tab(document.querySelector(`#${activeTab}`));
+      tabTrigger.show();
+    }
+
+    const tabLinks = document.querySelectorAll('button[data-bs-toggle="pill"]');
+    tabLinks.forEach(link => {
+      link.addEventListener('shown.bs.tab', (e) => {
+        localStorage.setItem('activeTab', e.target.id);
+      });
+    });
+  });
+</script>

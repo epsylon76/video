@@ -1,10 +1,8 @@
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-  background-color:#8cb3d9;
   color:black;
   font-family: Raleway;
-
 }
 
 .footer {
@@ -97,4 +95,79 @@ h2, h1{
 }
 .slick-next{
   right:-45px!important;
+}
+
+
+/* --- Hero Section --- */
+.hero-section {
+    height: 45vh; /* Plus grand pour plus d'impact */
+    min-height: 300px;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Voile pour lisibilité du titre */
+    backdrop-filter: blur(2px);
+}
+
+.tracking-wider { letter-spacing: 2px; }
+
+/* --- List Group --- */
+.transition-all { transition: all 0.25s ease; }
+
+.list-group-item-action:hover {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+}
+
+.item-icon-wrapper {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f2f5;
+    border-radius: 12px;
+    font-size: 1.4rem;
+}
+
+.download-btn-circle {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e9ecef;
+    border-radius: 50%;
+    color: #495057;
+    transition: 0.2s;
+}
+
+.list-group-item-action:hover .download-btn-circle {
+    background: var(--bs-primary);
+    color: white;
+}
+
+/* --- Social Links --- */
+.social-link {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.social-link.fb { background: #1877f2; }
+.social-link.tw { background: #1da1f2; }
+.social-link:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); color: white; }
+
+.transition-zoom:hover img {
+    transform: scale(1.03);
+    transition: 0.4s ease;
 }

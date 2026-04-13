@@ -97,7 +97,8 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
             include('vue/nav.php');
 
             if (isset($uri[2])) {
-                include('ctrl/tag.php');
+                include('vue/tag.php');
+
             } else {
                 include('ctrl/liste_tag.php');
                 include('vue/liste_tag.php');

@@ -26,7 +26,6 @@ if ($uri[0] == 'cle') { // mode client
     if (isset($stats) && method_exists($stats, 'set_stats')) {
         $stats->set_stats('dl_photos', date("Y-m-d H:i:s"), $uri[4] ?? 'unknown_user');
     }
-
 } else { // admin mode or other
     $slices = array_slice($uri, 2);
     $chemin = '';
@@ -81,38 +80,50 @@ if (!empty($folder)) { // prevents zipping from root
     // --- END OF DIRECTORY CREATION ---
 
 
-    if (!file_exists($zipCheck) || $uri[0] != 'cle') { // Create if not exists OR in admin mode (overwrite)
-        // Find the full path to 7z. Run `which 7z` on your server terminal.
-        $path_to_7z = '/usr/bin/7z'; // IMPORTANT: VERIFY THIS PATH ON YOUR SERVER!
+    if (!file_exists($zipCheck) || $uri[0] != 'cle') { // Créer si le fichier n'existe pas OU si nous sommes en mode admin (écraser)
 
-        // Construct the 7z command safely using escapeshellarg
-        // This command will zip the *contents* of $full_source_folder_path
+        // Vérifier si le fichier existe et si nous sommes en mode admin.
+        // Si c'est le cas, supprimer le fichier zip existant.
+        if (file_exists($zipCheck) && $uri[0] != 'cle') {
+            echo "Mode administrateur détecté. Suppression du fichier zip existant : " . htmlspecialchars($zipCheck) . "<br>";
+            if (!unlink($zipCheck)) {
+                // Enregistrer une erreur si la suppression échoue
+                error_log("Échec de la suppression du fichier zip existant : " . $zipCheck);
+                die("Impossible de supprimer l'ancien fichier zip. Veuillez vérifier les permissions du fichier.");
+            }
+        }
+
+        // Trouver le chemin complet de 7z. Exécutez `which 7z` sur votre terminal serveur.
+        $path_to_7z = '/usr/bin/7z'; // IMPORTANT : VÉRIFIEZ CE CHEMIN SUR VOTRE SERVEUR !
+
+        // Construire la commande 7z de manière sécurisée en utilisant escapeshellarg
+        // Cette commande va zipper le *contenu* du dossier $full_source_folder_path
         $command = $path_to_7z . " a -mcp " . escapeshellarg($zipCheck) . " " . escapeshellarg($full_source_folder_path . '*');
 
-        echo "Executing 7z command: " . htmlspecialchars($command) . "<br>";
+        echo "Exécution de la commande 7z : " . htmlspecialchars($command) . "<br>";
 
-        // Set locale for 7z for correct filename handling
+        // Définir la locale pour 7z pour une gestion correcte des noms de fichiers
         $locale = 'fr_FR.UTF-8';
         setlocale(LC_ALL, $locale);
         putenv('LC_ALL=' . $locale);
 
         $output = [];
         $returnValue = null;
-        exec($command, $output, $returnValue); // Use exec to capture output and return value
+        exec($command, $output, $returnValue); // Utiliser exec pour capturer la sortie et la valeur de retour
 
-        echo "7z Command Output:<br>";
+        echo "Sortie de la commande 7z :<br>";
         echo "<pre>" . htmlspecialchars(implode("\n", $output)) . "</pre>";
-        echo "7z Return Value: " . $returnValue . "<br>";
+        echo "Valeur de retour de 7z : " . $returnValue . "<br>";
 
         if ($returnValue === 0) {
-            echo "Zip file created successfully: " . htmlspecialchars($zipCheck) . "<br>";
+            echo "Fichier zip créé avec succès : " . htmlspecialchars($zipCheck) . "<br>";
         } else {
-            echo "ERROR: 7z failed to create zip file. Return code: " . $returnValue . ". See output above for details.<br>";
-            error_log("7z failed. Command: " . $command . " Output: " . implode("\n", $output) . " Return: " . $returnValue);
-            die("Could not create zip file. Please contact support.");
+            echo "ERREUR : 7z n'a pas réussi à créer le fichier zip. Code de retour : " . $returnValue . ". Voir la sortie ci-dessus pour plus de détails.<br>";
+            error_log("7z a échoué. Commande : " . $command . " Sortie : " . implode("\n", $output) . " Retour : " . $returnValue);
+            die("Impossible de créer le fichier zip. Veuillez contacter le support.");
         }
     } else {
-        echo "Zip file already exists and not in admin mode. Skipping 7z creation.<br>";
+        echo "Le fichier zip existe déjà et nous ne sommes pas en mode admin. Création 7z ignorée.<br>";
     }
 } else {
     echo "Folder path is empty. Zip generation prevented.<br>";
@@ -134,5 +145,3 @@ if (file_exists($zipCheck)) {
 } else {
     echo "ERROR: Zip file was not found after creation attempt. Cannot redirect.<br>";
 }
-
-?>

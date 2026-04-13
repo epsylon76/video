@@ -23,54 +23,62 @@ function breadcrumb($chemin)
 {
   global $data, $dossier;
   $lien = '';
-  $retour = '<nav aria-label="breadcrumb" class="d-flex justify-content-between align-items-center">
-      <ol class="breadcrumb">';
+  
+  $retour = '<div class="d-flex justify-content-between align-items-center bg-white p-2 px-3 rounded-3 shadow-sm mb-4 border">
+      <nav aria-label="breadcrumb" class="me-2">
+        <ol class="breadcrumb mb-0 flex-nowrap">';
 
   $bread = trim($chemin, '/');
-  $bread = explode('/', $bread);
+  $bread = ($bread == '') ? [] : explode('/', $bread);
 
-  $retour .= '<li class="breadcrumb-item"><a href="/admin/dossiers/">Racine</a></li>';
+  $retour .= '<li class="breadcrumb-item"><a href="/admin/dossiers/" class="text-muted" title="Retour à la racine"><i class="fas fa-home"></i></a></li>';
 
+  $current_folder = '';
   foreach ($bread as $ligne) {
+    $current_folder = $ligne; 
     $lien  .= '/' . $ligne;
-    $retour .= '<li class="breadcrumb-item"><a href="/admin/dossiers' . $lien . '/">' . $ligne . '</a></li>';
+    
+    $nom_propre = htmlspecialchars($ligne);
+    
+    $retour .= '<li class="breadcrumb-item" title="' . $nom_propre . '">
+                  <a href="/admin/dossiers' . $lien . '/" class="text-decoration-none">' . $nom_propre . '</a>
+                </li>';
   }
 
-  $retour .= '</ol>';
+  $retour .= '</ol></nav>';
 
   if ($chemin != '/' && $chemin != '') {
-    //précédent, suivant
-    $retour .= '<div class="text-right">';
+    $retour .= '<div class="d-flex gap-1 flex-shrink-0">';
+    
     $to_scan = urldecode($data . $chemin . '/../');
     $liste_up = scandir($to_scan);
-    array_shift($liste_up); //retrait .
-    array_shift($liste_up); //retrait ..
+    $liste_up = array_values(array_diff($liste_up, array('.', '..')));
 
-    //place de notre dossier dans la liste du parent
-    $i = array_search($ligne, $liste_up); //le dernier = actuel
-    //précédent
+    $i = array_search($current_folder, $liste_up);
 
-    if ($i >= 1) {
-      $testextension = pathinfo($data . $liste_up[$i]);
-      if (!isset($testextension['extension'])) {
-        $precedent = str_replace($ligne, '', $lien) . $liste_up[$i - 1];
-        $retour .= '<a href="/admin/dossiers' . $precedent . '/" class="btn btn-secondary"><i class="fas fa-arrow-left"></i></a> ';
-      }
+    $prev_btn = '<button class="btn btn-sm btn-light border-0 text-muted" disabled><i class="fas fa-chevron-left fa-xs"></i></button>';
+    if ($i !== false && $i > 0) {
+        $prev_folder = $liste_up[$i - 1];
+        if (!pathinfo($prev_folder, PATHINFO_EXTENSION)) {
+            $precedent = str_replace($current_folder, '', $lien) . $prev_folder;
+            $prev_btn = '<a href="/admin/dossiers' . $precedent . '/" class="btn btn-sm btn-light border shadow-sm px-2" title="Précédent : ' . htmlspecialchars($prev_folder) . '"><i class="fas fa-chevron-left fa-xs text-primary"></i></a>';
+        }
     }
-    //suivant
-
-    if (isset($liste_up[$i + 1])) {
-      $testextension = pathinfo($data . $liste_up[$i + 1]);
-      if (!isset($testextension['extension'])) {
-        $suivant = str_replace($ligne, '', $lien) . $liste_up[$i + 1];
-        $retour .= '<a href="/admin/dossiers' . $suivant . '/" class="btn btn-secondary"><i class="fas fa-arrow-right"></i></a>';
-      }
+    
+    $next_btn = '<button class="btn btn-sm btn-light border-0 text-muted" disabled><i class="fas fa-chevron-right fa-xs"></i></button>';
+    if ($i !== false && isset($liste_up[$i + 1])) {
+        $next_folder = $liste_up[$i + 1];
+        if (!pathinfo($next_folder, PATHINFO_EXTENSION)) {
+            $suivant = str_replace($current_folder, '', $lien) . $next_folder;
+            $next_btn = '<a href="/admin/dossiers' . $suivant . '/" class="btn btn-sm btn-light border shadow-sm px-2" title="Suivant : ' . htmlspecialchars($next_folder) . '"><i class="fas fa-chevron-right fa-xs text-primary"></i></a>';
+        }
     }
+
+    $retour .= $prev_btn . $next_btn;
     $retour .= '</div>';
   }
 
-
-  $retour .= '</nav>';
+  $retour .= '</div>';
   return $retour;
 }
 
