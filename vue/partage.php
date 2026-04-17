@@ -138,7 +138,7 @@
       <div class="col-md-7">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb mb-3">
-            <li class="breadcrumb-item small text-uppercase fw-bold"><a href="#" class="text-white-50 text-decoration-none">Abeille Parachutisme</a></li>
+            <li class="breadcrumb-item small text-uppercase fw-bold"><a href="#" class="text-white-50 text-decoration-none"><?php echo htmlspecialchars($params['page_titre']); ?></a></li>
             <li class="breadcrumb-item small text-uppercase fw-bold active text-white" aria-current="page">Espace téléchargement</li>
           </ol>
         </nav>
