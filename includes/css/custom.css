@@ -1,6 +1,4 @@
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
   color:black;
   font-family: Raleway;
 }
@@ -98,17 +96,71 @@ h2, h1{
 }
 
 
-/* --- Hero Section --- */
-.hero-section {
-    height: 45vh; /* Plus grand pour plus d'impact */
-    min-height: 300px;
+/* --- Hero Accueil --- */
+.hero-accueil {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
-.hero-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Voile pour lisibilité du titre */
-    backdrop-filter: blur(2px);
+.hero-video-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-overlay-dark {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.hero-content-accueil {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  max-width: 700px;
+}
+
+.hero-content-accueil #logo {
+  height: 180px;
+  filter: drop-shadow(0 4px 32px rgba(0,0,0,0.5));
+  margin-bottom: 1.5rem;
+}
+
+.accueil-texte {
+  font-size: 1.15rem;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  line-height: 1.7;
+}
+
+.btn-admin-discret {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  transition: 0.2s;
+  z-index: 1050;
+  cursor: pointer;
+}
+
+.btn-admin-discret:hover {
+  background: rgba(255,255,255,0.25);
+  color: white;
+  border-color: rgba(255,255,255,0.5);
 }
 
 .tracking-wider { letter-spacing: 2px; }
