@@ -1,5 +1,5 @@
 <?php
-$nomTag = urldecode($uri[2]);
+$nomTag = rawurldecode($uri[2]);
 $listeTag = $tag->get_tag_from_nom_tag($nomTag);
 ?>
 
@@ -30,19 +30,19 @@ $listeTag = $tag->get_tag_from_nom_tag($nomTag);
                 // Détermination de l'icône et du lien selon le type
                 if ($type[0] == 'dir' || $type[0] == 'link') { 
                     $icon = '<i class="fas fa-folder fa-lg text-warning me-3"></i>';
-                    $url = '../dossiers/' . $tags["nom_chemin"];
+                    $url = '../dossiers/' . chemin_pour_url($tags["nom_chemin"]);
                     $label = "Dossier";
                 } else {
                     $icon = '<i class="fas fa-video fa-lg text-primary me-3"></i>';
-                    $url = '../video/' . $tags["nom_chemin"];
+                    $url = '../video/' . chemin_pour_url($tags["nom_chemin"]);
                     $label = "Fichier Vidéo";
                 }
             ?>
-                <a href="<?php echo $url; ?>" class="list-group-item list-group-item-action d-flex align-items-center py-3 transition-all">
+                <a href="<?php echo htmlspecialchars($url, ENT_QUOTES, 'UTF-8'); ?>" class="list-group-item list-group-item-action d-flex align-items-center py-3 transition-all">
                     <div class="d-flex align-items-center flex-grow-1">
                         <?php echo $icon; ?>
                         <div class="text-truncate">
-                            <span class="d-block fw-medium text-dark"><?php echo $tags["nom_chemin"]; ?></span>
+                            <span class="d-block fw-medium text-dark"><?php echo htmlspecialchars($tags["nom_chemin"], ENT_QUOTES, 'UTF-8'); ?></span>
                             <small class="text-muted"><?php echo $label; ?></small>
                         </div>
                     </div>

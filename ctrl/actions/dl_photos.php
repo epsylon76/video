@@ -7,20 +7,14 @@ $zipname = 'photos.zip';
 if ($uri[0] == 'cle') { // mode client
     $folder_data = $partage->get_partage($uri[2]);
     if ($folder_data && isset($folder_data['chemin'])) {
-        $folder = $folder_data['chemin'];
+        $folder = chemin_relatif_normalise($folder_data['chemin']);
     } else {
         die("Erreur : dossier introuvable pour la clé " . htmlspecialchars($uri[2]));
     }
     $zipname = $uri[2] . $uri[1] . '/photos.zip';
 
 } else { // mode admin
-    $slices = array_slice($uri, 2);
-    $chemin = '';
-    foreach ($slices as $u) {
-        $chemin .= $u . '/';
-    }
-    $chemin = rtrim($chemin, '/');
-    $chemin = urldecode($chemin);
+    $chemin = chemin_depuis_segments_url(array_slice($uri, 2));
     $folder = $chemin;
 }
 
@@ -29,7 +23,7 @@ if (!isset($data)) {
 }
 
 if (!empty($folder)) {
-    $full_source_folder_path = $data . $folder . '/';
+    $full_source_folder_path = chemin_data_ou_404($data, $folder) . DIRECTORY_SEPARATOR;
     $base_zip_output_dir = $_SERVER['DOCUMENT_ROOT'] . '/zip/';
 
     $target_zip_directory = $base_zip_output_dir . dirname($zipname);

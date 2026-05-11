@@ -33,7 +33,7 @@
         <div class="col-12">
             <h1> ReMarketing Non Prévues </h1>
             <br>
-            <h3><?php echo $chemin;?></h3>
+            <h3><?php echo htmlspecialchars($chemin, ENT_QUOTES, 'UTF-8'); ?></h3>
         </div>
     </div>
 
@@ -86,7 +86,7 @@
                 foreach ($video_array as $key => $vid) {
                     // Ensure $data path is stripped correctly to get web-accessible path
                     // $vid is expected to be the full server path
-                    $cleanVidPath = str_replace($data, '', $vid);
+                    $cleanVidPath = chemin_relatif_normalise(substr($vid, strlen(realpath($data))));
                     $pathSegments = explode('/', $cleanVidPath);
                     $encodedSegments = array_map('rawurlencode', $pathSegments);
                     $finalEncodedSourceUrl = '/data/' . implode('/', $encodedSegments); // Web accessible URL for AJAX

@@ -22,6 +22,7 @@ if (empty($videoUrl)) {
 // Your web server's DocumentRoot is likely /var/www/html/
 // And your videos are served from /var/www/html/data/
 $baseMountPath = '/var/www/html/data'; // !! IMPORTANT: CONFIRM THIS IS YOUR ACTUAL SMB MOUNT POINT !!
+$resolvedBaseMountPath = realpath($baseMountPath);
 
 // Remove the '/data/' prefix from the URL to get the relative path within your data directory
 // Example: "/data/2025/06%20JUIN/video.mp4" becomes "2025/06%20JUIN/video.mp4"
@@ -41,7 +42,7 @@ $videoFilePath = $baseMountPath . '/' . $decodedRelativePath;
 // It returns the absolute canonicalized filesystem path or false on failure.
 $resolvedVideoFilePath = realpath($videoFilePath);
 
-if ($resolvedVideoFilePath === false || !file_exists($resolvedVideoFilePath)) {
+if ($resolvedBaseMountPath === false || $resolvedVideoFilePath === false || !file_exists($resolvedVideoFilePath) || strpos($resolvedVideoFilePath, $resolvedBaseMountPath . DIRECTORY_SEPARATOR) !== 0) {
     // Log detailed error for debugging on the server side
     $debugMessage = 'Video file not found on server. Attempted path: "' . $videoFilePath . '". Resolved path: "' . ($resolvedVideoFilePath === false ? 'false (path not found/accessible)' : $resolvedVideoFilePath) . '".';
     error_log(__FILE__ . ": " . $debugMessage); // Log to PHP error log (e.g., /var/log/apache2/error.log)

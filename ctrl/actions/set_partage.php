@@ -8,21 +8,23 @@ if (!isset($_POST['email']) && !isset($_POST['chemin'])) {
 
 
   $email = $_POST['email'];
-  $chemin = $_POST['chemin'];
-  $chemin_retour = $_POST['chemin_retour'];
+  $chemin = chemin_relatif_normalise($_POST['chemin']);
+  $chemin_retour = chemin_relatif_normalise($_POST['chemin_retour']);
   $type_partage = $_POST['type_partage'];
   $email_type = $_POST['email_type'];
   $immediat = $_POST['immediat'];
+  $chemin_resolu = chemin_data_ou_404($data, $chemin);
 
   //verifier d'abord l'heure du dernier partage sinon celui quon fera immediatement faussera le calcul
   $hours = $partage->last_partage($_POST['email']); //heures depuis le dernier partage
 
   if ($type_partage == 'rushs') {
     $type_partage = 'video';
-    $liste_fichiers = glob($data.$chemin . '/*.mp4');
-    $liste_fichiers = array_merge($liste_fichiers, glob($data.$chemin . '/*.MP4'));
+    $base_resolue = realpath($data);
+    $liste_fichiers = glob($chemin_resolu . '/*.mp4');
+    $liste_fichiers = array_merge($liste_fichiers, glob($chemin_resolu . '/*.MP4'));
     foreach ($liste_fichiers as $un) {
-      $un = str_replace($data, '',$un);
+      $un = chemin_relatif_normalise(substr($un, strlen($base_resolue)));
       //set partage
       $retour = $partage->set_partage($un, $email, $type_partage, $_SESSION['login'], $email_type, $immediat);
         //ajout à l'historique ($id_admin,$id_partage,$action)
@@ -45,4 +47,4 @@ if (!isset($_POST['email']) && !isset($_POST['chemin'])) {
 if ($chemin_retour == '/') {
   $chemin_retour = '';
 }
-header('Location:/admin/dossiers/' . $chemin_retour);
+header('Location:/admin/dossiers/' . chemin_pour_url($chemin_retour));

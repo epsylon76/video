@@ -13,7 +13,7 @@ if ($mode != 'client') {
     foreach ($retour_segments as $key => $value) {
         if ($value == 'photos') $retour_segments[$key] = 'dossiers';
     }
-    $url_retour = '/' . implode('/', $retour_segments);
+    $url_retour = '/' . implode('/', array_map('rawurlencode', array_map('rawurldecode', $retour_segments)));
     $breadcrumb_items = array_filter($segments, function($v) { return $v !== 'photos'; });
 } else {
     $url_retour = '/cle/' . ($uri[1] ?? '');
@@ -128,18 +128,18 @@ if ($mode != 'client') {
         </div>
 
         <div class="d-flex gap-3 align-items-center">
-            <a href="<?php echo $url_retour; ?>" class="text-dark text-decoration-none fw-bold me-3 d-none d-sm-block">
+            <a href="<?php echo htmlspecialchars($url_retour, ENT_QUOTES, 'UTF-8'); ?>" class="text-dark text-decoration-none fw-bold me-3 d-none d-sm-block">
                 <i class="fas fa-times me-2"></i> Fermer
             </a>
             <?php if ($mode == 'client'): ?>
                 <a id="bouton-dl" class="btn-dl-modern" 
-                   data-taille="<?php echo $taille ?>" data-chemin="<?php echo $chemin; ?>" 
-                   data-email="<?php echo $email; ?>" data-action="dl_photos" 
-                   href="/cle/<?php echo $uri[1] ?>/<?php echo $id_partage; ?>/dl/<?php echo $taille?>">
+                   data-taille="<?php echo $taille ?>" data-chemin="<?php echo htmlspecialchars($chemin, ENT_QUOTES, 'UTF-8'); ?>" 
+                   data-email="<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>" data-action="dl_photos" 
+                   href="/cle/<?php echo rawurlencode($uri[1]); ?>/<?php echo rawurlencode($id_partage); ?>/dl/<?php echo rawurlencode($taille); ?>">
                     <i class="fas fa-arrow-down me-2"></i> Télécharger tout
                 </a>
             <?php else: ?>
-                <a class="btn-dl-modern" href="/actions/dlPhotos/<?php echo $chemin; ?>">
+                <a class="btn-dl-modern" href="/actions/dlPhotos/<?php echo chemin_pour_url($chemin); ?>">
                     <i class="fas fa-shield-halved me-2"></i> ZIP Admin
                 </a>
             <?php endif; ?>
@@ -150,10 +150,12 @@ if ($mode != 'client') {
         <?php
         $listefichiers = $dossier->contenu_dossier($chemin, $data);
         foreach ($listefichiers as $index => $ligne) {
-            $url = "/data/" . $chemin . "/" . $ligne;
+            $url = "/data/" . chemin_pour_url($chemin . "/" . $ligne);
+            $url_js = htmlspecialchars(json_encode($url), ENT_QUOTES, 'UTF-8');
+            $url_html = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
             echo '
-            <div class="photo-item" onclick="openViewer(\''.$url.'\')">
-                <img src="'.$url.'" loading="lazy" alt="Photo Abeille">
+            <div class="photo-item" onclick="openViewer('.$url_js.')">
+                <img src="'.$url_html.'" loading="lazy" alt="Photo Abeille">
             </div>';
         }
         ?>

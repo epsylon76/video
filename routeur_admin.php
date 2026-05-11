@@ -16,14 +16,10 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
             if (!isset($uri[2])) {
                 $chemin = "";
             } else {
-                $slices = array_slice($uri, 2);
-                $chemin = '';
-                foreach ($slices as $u) {
-                    $chemin .= $u . '/';
-                }
-                $chemin = urldecode($chemin);
+                $chemin = chemin_depuis_segments_url(array_slice($uri, 2));
             }
 
+            chemin_data_ou_404($data, $chemin);
             $listefichiers = $dossier->contenu_dossier($chemin, $data);
             $breadcrumb = breadcrumb($chemin);
             include('vue/head.php');
@@ -112,12 +108,8 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
             include('vue/nav.php');
 
             $chemin = '';
-            for ($i = 2; isset($uri[$i]); $i++) {
-                $chemin .= $uri[$i];
-                if(isset($uri[$i+1])){
-                    $chemin .= '/';
-                }
-            }
+            $chemin = chemin_depuis_segments_url(array_slice($uri, 2));
+            chemin_data_ou_404($data, $chemin);
             include 'ctrl/captures.php';
             include 'vue/captures.php';
             include 'vue/footer.php';
@@ -129,12 +121,8 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
             include('vue/nav.php');
 
             $chemin = '';
-            for ($i = 2; isset($uri[$i]); $i++) {
-                $chemin .= $uri[$i];
-                if(isset($uri[$i+1])){
-                    $chemin .= '/';
-                }
-            }
+            $chemin = chemin_depuis_segments_url(array_slice($uri, 2));
+            chemin_data_ou_404($data, $chemin);
             include 'ctrl/rmnp.php';
             include 'vue/rmnp.php';
             include 'vue/footer.php';

@@ -3,29 +3,21 @@
 if (isset($uri[2]) && $partage->check_partage($uri[1], $uri[2])) { //mode utilisateur
   //retrouver le chemin via l'id
   $infos = $partage->get_partage($uri[2]);
-  $chemin = '/data/' . $infos['chemin'];
-  $chemin = str_replace('//', '/', $chemin); //prends en compte tout les cas
+  $chemin_relatif = chemin_relatif_normalise($infos['chemin']);
+  $chemin_resolu = chemin_data_ou_404($data, $chemin_relatif);
+  $chemin = '/data/' . chemin_pour_url($chemin_relatif);
   $email = $infos['email'];
   $mode = "user";
-  $taille_fichier = filesize($data . $infos['chemin']); //diff
+  $taille_fichier = filesize($chemin_resolu); //diff
 } else { //mode admin
-  $slices = array_slice($uri, 2);
-  $chemin = '';
-  foreach ($slices as $u) {
-    $chemin .= $u . '/';
-  }
-  $chemin = str_replace('//', '/', $chemin); //prends en compte tout les cas
-  $chemin = urldecode($chemin);
-  $chemin = '/data/'.$chemin;
-  $chemin = rtrim($chemin, '/');
+  $chemin_relatif = chemin_depuis_segments_url(array_slice($uri, 2));
+  $chemin_resolu = chemin_data_ou_404($data, $chemin_relatif);
+  $chemin = '/data/' . chemin_pour_url($chemin_relatif);
   $mode = "admin";
-  $filePathSystem = $data . ltrim($chemin, '/data/');
-  $taille_fichier = filesize($filePathSystem); //diff
+  $taille_fichier = filesize($chemin_resolu); //diff
 }
 
-$nom_fichier = explode("/", $chemin);
-$nom_fichier = array_reverse($nom_fichier);
-$nom_fichier = $nom_fichier[0];
+$nom_fichier = basename($chemin_relatif);
 
 
 

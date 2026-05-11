@@ -9,16 +9,16 @@
         }
 
         foreach ($video_array as $key => $vid) {
-            $urlvid = str_replace($data, '', $vid);
+            $urlvid = chemin_relatif_normalise(substr($vid, strlen(realpath($data))));
         ?>
             <div class="row">
-                <h5><?php echo $key + 1; ?>. <?php echo $urlvid; ?></h5>
+                <h5><?php echo $key + 1; ?>. <?php echo htmlspecialchars($urlvid, ENT_QUOTES, 'UTF-8'); ?></h5>
             </div>
 
         <?php } ?>
 
-        <input type="hidden" name="file" value="<?php echo $vid; ?>">
-        <input type="hidden" name="retour" value="<?php echo $chemin.'/../'; ?>">
+        <input type="hidden" name="file" value="<?php echo htmlspecialchars($vid ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+        <input type="hidden" name="retour" value="<?php echo htmlspecialchars(dirname($chemin), ENT_QUOTES, 'UTF-8'); ?>">
         <div class="row" style="border:3px solid red; padding:10px;">
 
             <div class="col-3">

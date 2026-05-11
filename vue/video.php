@@ -22,7 +22,7 @@ if ($mode != 'client') {
             $retour_segments[$key] = 'dossiers';
         }
     }
-    $url_retour = '/' . implode('/', $retour_segments);
+    $url_retour = '/' . implode('/', array_map('rawurlencode', array_map('rawurldecode', $retour_segments)));
 
     // 2. Pour le Breadcrumb : on crée une liste propre sans le segment 'video'
     $breadcrumb_items = array_filter($segments, function($v) {
@@ -78,7 +78,7 @@ if ($mode != 'client') {
                 <h1 class="h2 fw-bold text-dark mb-0"><?php echo htmlspecialchars($nom_fichier); ?></h1>
             </div>
             
-            <a class="btn btn-outline-secondary px-4 shadow-sm fw-bold" href="<?php echo $url_retour; ?>">
+            <a class="btn btn-outline-secondary px-4 shadow-sm fw-bold" href="<?php echo htmlspecialchars($url_retour, ENT_QUOTES, 'UTF-8'); ?>">
                 <i class="fas fa-arrow-left me-2"></i> Retour au dossier
             </a>
         </div>
@@ -88,7 +88,7 @@ if ($mode != 'client') {
         <div class="col-12">
             <div class="video-display-zone">
                 <video id="id-video" controls preload="auto">
-                    <source id="id-source" src="<?php echo urldecode($chemin); ?>" type="video/mp4" />
+                    <source id="id-source" src="<?php echo htmlspecialchars($chemin, ENT_QUOTES, 'UTF-8'); ?>" type="video/mp4" />
                 </video>
             </div>
         </div>
@@ -114,11 +114,11 @@ if ($mode != 'client') {
                         <a id="bouton-dl"
                             class="btn btn-primary btn-action shadow-sm"
                             data-taille="<?php echo $taille_fichier ?>"
-                            data-chemin="<?php echo $chemin; ?>"
-                            data-email="<?php echo $email ?? ''; ?>"
+                            data-chemin="<?php echo htmlspecialchars($chemin, ENT_QUOTES, 'UTF-8'); ?>"
+                            data-email="<?php echo htmlspecialchars($email ?? '', ENT_QUOTES, 'UTF-8'); ?>"
                             data-action="dl_video"
-                            href="<?php echo $chemin; ?>"
-                            download="<?php echo $nom_fichier; ?>">
+                            href="<?php echo htmlspecialchars($chemin, ENT_QUOTES, 'UTF-8'); ?>"
+                            download="<?php echo htmlspecialchars($nom_fichier, ENT_QUOTES, 'UTF-8'); ?>">
                             <i class="fas fa-download me-2"></i> Télécharger la vidéo
                         </a>
                     </div>

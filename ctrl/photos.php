@@ -4,18 +4,14 @@ if(isset($uri[2]) && $partage->check_partage($uri[1], $uri[2])){ // Mode client
   $id_partage = $uri[2];
   //retrouver le chemin via l'id
   $infos = $partage->get_partage($id_partage);
-  $chemin = $infos['chemin'];
+  $chemin = chemin_relatif_normalise($infos['chemin']);
+  chemin_data_ou_404($data, $chemin);
   $email = $infos['email'];
   $mode = 'client';
 }
 else{ //mode admin
-  $slices = array_slice($uri, 2);
-  $chemin = '';
-  foreach($slices as $u){
-    $chemin .= $u.'/';
-  }
-  $chemin = rtrim($chemin, '/');
-  $chemin = urldecode($chemin);
+  $chemin = chemin_depuis_segments_url(array_slice($uri, 2));
+  chemin_data_ou_404($data, $chemin);
   $mode = "admin";
 }
 
@@ -29,7 +25,7 @@ foreach ($listefichiers as $item) {
   
 
   if($item != '.' && $item != '..' && $item != 'Thumbs.db'){
-    $taille = ($taille + filesize($data.$chemin.'/'.$item));
+    $taille = ($taille + filesize(chemin_data_ou_404($data, $chemin . '/' . $item)));
     $nb++;
   }
 }

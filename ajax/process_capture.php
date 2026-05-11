@@ -42,6 +42,7 @@ error_log("process_capture.php: Inputs validated."); // DEBUG
 // --- Define Server Paths ---
 // !! IMPORTANT: CONFIRM THESE PATHS ON YOUR SERVER !!
 $baseMountPath = '/var/www/html/data';
+$resolvedBaseMountPath = realpath($baseMountPath);
 $outputPathDir = '/var/www/html/captures/'; // Ensure this path ends with a slash
 $captureScriptPath = '/var/www/html/scripts/process_capture.sh';
 
@@ -69,7 +70,7 @@ error_log("process_capture.php: Constructed videoFilePath: " . $videoFilePath); 
 // --- Verify Input Video File Existence and Accessibility ---
 $resolvedVideoFilePath = realpath($videoFilePath);
 
-if ($resolvedVideoFilePath === false || !file_exists($resolvedVideoFilePath)) {
+if ($resolvedBaseMountPath === false || $resolvedVideoFilePath === false || !file_exists($resolvedVideoFilePath) || strpos($resolvedVideoFilePath, $resolvedBaseMountPath . DIRECTORY_SEPARATOR) !== 0) {
     $debugMessage = 'Input video file not found on server or could not be accessed. Attempted path: "' . $videoFilePath . '". Resolved path: "' . ($resolvedVideoFilePath === false ? 'false (path not found/accessible)' : $resolvedVideoFilePath) . '".';
     error_log(__FILE__ . ": " . $debugMessage);
     echo json_encode(['success' => false, 'message' => 'Input video file not found or could not be accessed on the server. Please check server logs for details. (Code: VF-001)']);

@@ -1,5 +1,5 @@
 <?php
-$datachemin = urldecode($data.$chemin);
-$chemin = urldecode($chemin);
+$chemin = chemin_relatif_normalise($chemin);
+$datachemin = chemin_data_ou_404($data, $chemin);
 
-$video_array = glob($data.$chemin.'/{*.mp4,*.MP4}', GLOB_BRACE);
+$video_array = glob($datachemin . '/{*.mp4,*.MP4}', GLOB_BRACE);
