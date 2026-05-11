@@ -49,6 +49,10 @@ if (isset($_SESSION['login']) && isset($_SESSION['pass']) && $admin->check_login
             include('ctrl/actions/clear_introuvables.php');
             break;
 
+        case "scanIntrouvables":
+            include('ctrl/actions/scan_introuvables.php');
+            break;
+
         case "changePsw":
             include('ctrl/actions/change_psw.php');
             break;

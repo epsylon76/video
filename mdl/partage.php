@@ -191,25 +191,74 @@ class partage
   function introuvables($data)
   {
     global $DB_con;
-    $requete = "SELECT * from `partage`";
+    $requete = "SELECT scan.`id_partage` AS `id`, scan.`chemin`, scan.`checked_at`
+      FROM `partage_introuvable_scan` scan
+      INNER JOIN `partage` ON `partage`.`id` = scan.`id_partage`
+      WHERE scan.`introuvable` = 1
+      ORDER BY scan.`checked_at` DESC, scan.`id_partage` DESC";
     $query = $DB_con->prepare($requete);
     $query->execute();
     $results = $query->fetchAll();
-    $i = 0;
-    $introuvable = false;
-    foreach ($results as $ligne) {
-      $date = new DateTime($ligne['date']);
-      $date_aff = $date->format('d/m/Y H:i');
 
-      if (file_exists($data . $ligne['chemin'])) {
-        $exist = true;
-      } else {
-        $introuvable[$i]['id'] = $ligne['id'];
-        $introuvable[$i]['chemin'] = $ligne['chemin'];
-        $i++;
+    if (empty($results)) {
+      return false;
+    }
+
+    return $results;
+  }
+
+  function scan_introuvables($data, $last_id = 0, $limit = 100)
+  {
+    global $DB_con;
+
+    $last_id = max(0, (int) $last_id);
+    $limit = max(1, min(500, (int) $limit));
+
+    $requete = "SELECT `id`, `chemin` FROM `partage`
+      WHERE `id` > :last_id
+      ORDER BY `id` ASC
+      LIMIT " . $limit;
+    $query = $DB_con->prepare($requete);
+    $query->bindParam(':last_id', $last_id, PDO::PARAM_INT);
+    $query->execute();
+    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    $upsert = $DB_con->prepare(
+      "INSERT INTO `partage_introuvable_scan`
+        (`id_partage`, `chemin`, `introuvable`, `checked_at`)
+      VALUES
+        (:id_partage, :chemin, :introuvable, NOW())
+      ON DUPLICATE KEY UPDATE
+        `chemin` = VALUES(`chemin`),
+        `introuvable` = VALUES(`introuvable`),
+        `checked_at` = VALUES(`checked_at`)"
+    );
+
+    $checked = 0;
+    $missing = 0;
+    $next_last_id = $last_id;
+
+    foreach ($results as $ligne) {
+      $next_last_id = (int) $ligne['id'];
+      $is_missing = file_exists($data . $ligne['chemin']) ? 0 : 1;
+
+      $upsert->bindValue(':id_partage', $ligne['id'], PDO::PARAM_INT);
+      $upsert->bindValue(':chemin', $ligne['chemin']);
+      $upsert->bindValue(':introuvable', $is_missing, PDO::PARAM_INT);
+      $upsert->execute();
+
+      $checked++;
+      if ($is_missing) {
+        $missing++;
       }
     }
-    return $introuvable;
+
+    return [
+      'checked' => $checked,
+      'missing' => $missing,
+      'last_id' => $next_last_id,
+      'done' => $checked < $limit
+    ];
   }
 
 
