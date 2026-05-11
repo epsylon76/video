@@ -2,6 +2,15 @@
 
 class stats
 {
+    private function normalized_type_sql()
+    {
+        return "CASE
+            WHEN `type` = 'téléchargement_photos' THEN 'dl_photos'
+            WHEN `type` = 'téléchargement_videos' THEN 'dl_video'
+            ELSE `type`
+        END";
+    }
+
     function set_stats($type, $heure, $taille)
     {
         global $DB_con;
@@ -36,6 +45,201 @@ class stats
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
         return $results;
+    }
+
+    function get_stats_by_period($date_debut, $date_fin, $period_seconds = 600)
+    {
+        global $DB_con;
+        $requete = "SELECT
+                FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`heure`) / :period_seconds_div) * :period_seconds_mul) AS `periode`,
+                `type`,
+                SUM(`taille`) AS `volume`
+            FROM `bande_passante`
+            WHERE `heure` >= :date_debut
+                AND `heure` < :date_fin
+            GROUP BY `periode`, `type`
+            ORDER BY `periode` ASC";
+        $query = $DB_con->prepare($requete);
+        $query->bindValue(':period_seconds_div', (int) $period_seconds, PDO::PARAM_INT);
+        $query->bindValue(':period_seconds_mul', (int) $period_seconds, PDO::PARAM_INT);
+        $query->bindValue(':date_debut', $date_debut);
+        $query->bindValue(':date_fin', $date_fin);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function get_available_types()
+    {
+        global $DB_con;
+        $type_sql = $this->normalized_type_sql();
+        $requete = "SELECT $type_sql AS `type`, COUNT(*) AS `actions`, SUM(`taille`) AS `volume`
+            FROM `bande_passante`
+            GROUP BY $type_sql
+            ORDER BY `volume` DESC";
+        $query = $DB_con->prepare($requete);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function get_stats_by_bucket($date_debut, $date_fin, $bucket, $period_seconds = 600, $types = array())
+    {
+        global $DB_con;
+        $type_sql = $this->normalized_type_sql();
+
+        switch ($bucket) {
+            case 'hour':
+                $period_sql = "DATE_FORMAT(`heure`, '%Y-%m-%d %H:00:00')";
+                break;
+            case 'day':
+                $period_sql = "DATE(`heure`)";
+                break;
+            case 'week':
+                $period_sql = "STR_TO_DATE(CONCAT(YEARWEEK(`heure`, 3), ' Monday'), '%X%V %W')";
+                break;
+            default:
+                $period_sql = "FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`heure`) / :period_seconds_div) * :period_seconds_mul)";
+                break;
+        }
+
+        $where = "`heure` >= :date_debut AND `heure` < :date_fin";
+        $params = array(
+            ':date_debut' => $date_debut,
+            ':date_fin' => $date_fin,
+        );
+
+        if (!empty($types)) {
+            $placeholders = array();
+            foreach (array_values($types) as $index => $type) {
+                $placeholder = ':type_' . $index;
+                $placeholders[] = $placeholder;
+                $params[$placeholder] = $type;
+            }
+            $where .= " AND $type_sql IN (" . implode(',', $placeholders) . ")";
+        }
+
+        $requete = "SELECT
+                $period_sql AS `periode`,
+                $type_sql AS `type`,
+                SUM(`taille`) AS `volume`,
+                COUNT(*) AS `actions`
+            FROM `bande_passante`
+            WHERE $where
+            GROUP BY `periode`, `type`
+            ORDER BY `periode` ASC";
+        $query = $DB_con->prepare($requete);
+        if ($bucket === 'minute') {
+            $query->bindValue(':period_seconds_div', (int) $period_seconds, PDO::PARAM_INT);
+            $query->bindValue(':period_seconds_mul', (int) $period_seconds, PDO::PARAM_INT);
+        }
+        foreach ($params as $placeholder => $value) {
+            $query->bindValue($placeholder, $value);
+        }
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function get_summary($date_debut, $date_fin, $types = array())
+    {
+        global $DB_con;
+        $type_sql = $this->normalized_type_sql();
+        $where = "`heure` >= :date_debut AND `heure` < :date_fin";
+        $params = array(
+            ':date_debut' => $date_debut,
+            ':date_fin' => $date_fin,
+        );
+
+        if (!empty($types)) {
+            $placeholders = array();
+            foreach (array_values($types) as $index => $type) {
+                $placeholder = ':type_' . $index;
+                $placeholders[] = $placeholder;
+                $params[$placeholder] = $type;
+            }
+            $where .= " AND $type_sql IN (" . implode(',', $placeholders) . ")";
+        }
+
+        $requete = "SELECT
+                $type_sql AS `type`,
+                SUM(`taille`) AS `volume`,
+                COUNT(*) AS `actions`
+            FROM `bande_passante`
+            WHERE $where
+            GROUP BY `type`
+            ORDER BY `volume` DESC";
+        $query = $DB_con->prepare($requete);
+        foreach ($params as $placeholder => $value) {
+            $query->bindValue($placeholder, $value);
+        }
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function get_top_days($date_debut, $date_fin, $types = array(), $limit = 10)
+    {
+        global $DB_con;
+        $type_sql = $this->normalized_type_sql();
+        $where = "`heure` >= :date_debut AND `heure` < :date_fin";
+        $params = array(
+            ':date_debut' => $date_debut,
+            ':date_fin' => $date_fin,
+        );
+
+        if (!empty($types)) {
+            $placeholders = array();
+            foreach (array_values($types) as $index => $type) {
+                $placeholder = ':type_' . $index;
+                $placeholders[] = $placeholder;
+                $params[$placeholder] = $type;
+            }
+            $where .= " AND $type_sql IN (" . implode(',', $placeholders) . ")";
+        }
+
+        $requete = "SELECT DATE(`heure`) AS `jour`, SUM(`taille`) AS `volume`, COUNT(*) AS `actions`
+            FROM `bande_passante`
+            WHERE $where
+            GROUP BY DATE(`heure`)
+            ORDER BY `volume` DESC
+            LIMIT :limit";
+        $query = $DB_con->prepare($requete);
+        foreach ($params as $placeholder => $value) {
+            $query->bindValue($placeholder, $value);
+        }
+        $query->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function get_hourly_distribution($date_debut, $date_fin, $types = array())
+    {
+        global $DB_con;
+        $type_sql = $this->normalized_type_sql();
+        $where = "`heure` >= :date_debut AND `heure` < :date_fin";
+        $params = array(
+            ':date_debut' => $date_debut,
+            ':date_fin' => $date_fin,
+        );
+
+        if (!empty($types)) {
+            $placeholders = array();
+            foreach (array_values($types) as $index => $type) {
+                $placeholder = ':type_' . $index;
+                $placeholders[] = $placeholder;
+                $params[$placeholder] = $type;
+            }
+            $where .= " AND $type_sql IN (" . implode(',', $placeholders) . ")";
+        }
+
+        $requete = "SELECT HOUR(`heure`) AS `hour`, SUM(`taille`) AS `volume`, COUNT(*) AS `actions`
+            FROM `bande_passante`
+            WHERE $where
+            GROUP BY HOUR(`heure`)
+            ORDER BY `hour` ASC";
+        $query = $DB_con->prepare($requete);
+        foreach ($params as $placeholder => $value) {
+            $query->bindValue($placeholder, $value);
+        }
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function get_stats2()

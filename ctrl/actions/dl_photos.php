@@ -13,9 +13,6 @@ if ($uri[0] == 'cle') { // mode client
     }
     $zipname = $uri[2] . $uri[1] . '/photos.zip';
 
-    if (isset($stats) && method_exists($stats, 'set_stats')) {
-        $stats->set_stats('dl_photos', date("Y-m-d H:i:s"), $uri[4] ?? 'unknown_user');
-    }
 } else { // mode admin
     $slices = array_slice($uri, 2);
     $chemin = '';
@@ -70,6 +67,10 @@ if (!empty($folder)) {
 }
 
 if (isset($zipCheck) && file_exists($zipCheck)) {
+    if ($uri[0] == 'cle' && isset($stats) && method_exists($stats, 'set_stats')) {
+        $stats->set_stats('dl_photos', date("Y-m-d H:i:s"), filesize($zipCheck));
+    }
+
     $redirect_path = str_replace($base_zip_output_dir, '/zip/', $zipCheck);
     if (substr($redirect_path, 0, 1) !== '/') {
         $redirect_path = '/' . $redirect_path;
